@@ -21,8 +21,9 @@ env:
   WIN64_DIST_DIR: "windows-x64-dist"
   WIN32_DIST_DIR: "windows-i386-dist"
 
-jobs:
-  cleaner:
+jobs:      
+  full_release:
+    #runs-on: ubuntu-latest
     runs-on: self-hosted
     steps:
       - name: Runner workspace path
@@ -30,10 +31,6 @@ jobs:
           echo "Cleaning up previous run"
           rm -rf "${{ github.workspace }}"
 
-  full_release:
-    #runs-on: ubuntu-latest
-    runs-on: self-hosted
-    steps:
       - name: Checkout Q2Pro
         uses: actions/checkout@v3
         with:
