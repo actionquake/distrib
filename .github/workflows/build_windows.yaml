@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: https://github.com/skullernet/q2pro.git
+          repository: skullernet/q2pro
           path: build
 
       - name: Install dependencies
@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: https://github.com/skullernet/q2pro.git
+          repository: skullernet/q2pro
           path: build
 
       - name: Install dependencies
