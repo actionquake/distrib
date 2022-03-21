@@ -13,9 +13,9 @@ env:
   Q2PRO_WORKING_DIR: "q2pro-build"
   TNG_WORKING_DIR: "tng-build"
   CFG_WORKING_DIR: "config"
-  LIN64_DIST_DIR: "linux-x64-dist/action"
-  WIN64_DIST_DIR: "windows-x64-dist/action"
-  WIN32_DIST_DIR: "windows-i386-dist/action"
+  LIN64_DIST_DIR: "linux-x64-dist"
+  WIN64_DIST_DIR: "windows-x64-dist"
+  WIN32_DIST_DIR: "windows-i386-dist"
 
 jobs:
   full_release:
@@ -70,6 +70,8 @@ jobs:
       #     libpng-dev libjpeg-dev zlib1g-dev mesa-common-dev \
       #     libcurl4-gnutls-dev
 
+      # Q2Pro Builds
+
       - name: Build Q2Pro - Linux 64-bit
         working-directory: ${{ env.Q2PRO_WORKING_DIR }}
         run: make strip V=1
@@ -100,6 +102,8 @@ jobs:
       - name: Copy Windows 32-bit Q2Pro artifacts
         run: |
           cp ${{ env.Q2PRO_WORKING_DIR }}/q2pro.exe ${{ env.Q2PRO_WORKING_DIR }}/q2proded.exe ${{ env.WIN32_DIST_DIR }}/
+
+      ## TNG builds
 
       - name: Build TNG - Linux 64-bit
         working-directory: ${{ env.TNG_WORKING_DIR }}/source
