@@ -46,16 +46,12 @@ jobs:
           repository: actionquake/distrib
           path: config
 
-      - name: Copy config build files
-        run: |
-          cp -r config/build/ci/config_linux64 ${Q2PRO_WORKING_DIR}/.config
-
       - name: Build Q2Pro
         working-directory: ${Q2PRO_WORKING_DIR}
         run: make strip V=1
         env:
           CC: "gcc"
-          CONFIG_FILE: ".config"
+          CONFIG_FILE: "../config/build/ci/config_linux64"
 
       - name: Checkout aq2-tng
         uses: actions/checkout@v3
