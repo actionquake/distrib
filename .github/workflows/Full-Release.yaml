@@ -26,10 +26,9 @@ jobs:
     #runs-on: ubuntu-latest
     runs-on: self-hosted
     steps:
-      - name: Runner workspace path
+      - name: Clean working directory
         run: |
-          echo "Cleaning up previous run"
-          rm -rf "${{ github.workspace }}"
+          rm -rf *.*
 
       - name: Checkout Q2Pro
         uses: actions/checkout@v3
