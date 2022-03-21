@@ -25,7 +25,7 @@ Should it be discovered that assets included in this distribution are indeed unl
 ## Directory structure
 ```
 Action Quake/
-    q2pro.exe
+    q2pro executable (Mac, Win, Lin)
     action/
         gamex86_64.dll (Windows 64-bit)
         gamei386.dll (Windows 32-bit)
