@@ -1,0 +1,29 @@
+name: build_mac
+
+on:
+  push:
+    branches: [master, ci]
+  pull_request:
+    branches: [master]
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cc: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt install -y libsdl2-dev libopenal-dev \
+          libpng-dev libjpeg-dev zlib1g-dev mesa-common-dev \
+          libcurl4-gnutls-dev
+
+      - name: Build
+        run: make V=1
+        env:
+          CC: "${{ matrix.cc }}"
+          CONFIG_FILE: ".ci/config_linux"
