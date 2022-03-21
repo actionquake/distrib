@@ -19,6 +19,11 @@ jobs:
           ref: 'bots'
           path: build
 
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: config
+          
       - name: Copy config build files
         run: |
           cp -r config/build/ci/config_windows32 build/source/.config_windows32
