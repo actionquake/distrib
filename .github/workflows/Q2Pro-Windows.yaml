@@ -46,7 +46,7 @@ jobs:
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
-          name: q2pro-win-executables
+          name: q2pro-win
           path: |
             build/q2pro.exe
             build/q2proded.exe

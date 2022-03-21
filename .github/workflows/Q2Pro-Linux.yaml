@@ -13,14 +13,15 @@ jobs:
   linux_build_q2pro:
     #runs-on: ubuntu-latest
     runs-on: self-hosted
-    strategy:
-      matrix:
-        cc: [gcc]
     steps:
       - uses: actions/checkout@v3
         with:
           repository: skullernet/q2pro
           path: build
+
+      - name: Display version info
+        working-directory: build
+        run: bash version.sh
 
       # Self-hosted runner has these
       # - name: Install dependencies
@@ -43,17 +44,13 @@ jobs:
         working-directory: build
         run: make strip V=1
         env:
-          CC: "${{ matrix.cc }}"
+          CC: "gcc"
           CONFIG_FILE: ".config"
-
-      - name: Get version info
-        working-directory: build
-        run: echo "Q2PRO_VERSION=$(bash version.sh | head -n 1)" >> GITHUB_ENV
       
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
-          name: q2pro-lin-${{ env.Q2PRO_VERSION }}
+          name: q2pro-linux
           path: |
             build/q2pro
             build/q2proded
