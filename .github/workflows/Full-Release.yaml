@@ -152,5 +152,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           files: |
-            
+            aq-linux-x64-${{ steps.version.outputs.version }}.tar.gz
+            aq-windows-x64-${{ steps.version.outputs.version }}.zip
+            aq-windows-i386-${{ steps.version.outputs.version }}.zip
 
