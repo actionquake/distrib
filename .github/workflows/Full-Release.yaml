@@ -23,12 +23,13 @@ env:
 
 jobs:
   cleaner:
+    runs-on: self-hosted
     steps:
       - name: Runner workspace path
         run: |
           echo "Cleaning up previous run"
           rm -rf "${{ github.workspace }}"
-          
+
   full_release:
     #runs-on: ubuntu-latest
     runs-on: self-hosted
