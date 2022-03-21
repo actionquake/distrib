@@ -105,26 +105,34 @@ jobs:
       - name: Copy Linux 64-bit TNG artifacts
         run: |
           cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.so ${{ env.CFG_WORKING_DIR }}/dist/action/* ${{ env.LIN64_DIST_DIR }}/action/
-          tar czpf aq-linux-${{ steps.version.outputs.version }}.tar.gz ${{ env.LIN64_DIST_DIR }}
     
-      - name: Build TNG (64-bit)
-        working-directory: build/source
+      - name: Build TNG - Windows 64-bit
+        working-directory: ${{ env.TNG_WORKING_DIR }}/source
         run: make clean && make V=1
         env:
           IFDEF: "WIN64"
 
-      - name: Save Win64 artifact
-        working-directory: build/source
+      - name: Copy Windows 64-bit TNG artifacts
+        working-directory: ${{ env.TNG_WORKING_DIR }}/source
         run: |
-          mkdir dist
-          cp gamex86_64.dll dist/gamex86_64.dll
-          make clean
+          cp ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.dll ${{ env.CFG_WORKING_DIR }}/dist/action/* ${{ env.WIN64_DIST_DIR }}/
 
-      - name: Build TNG (32-bit)
-        working-directory: build/source
-        run: make V=1
+      - name: Build TNG - Windows 32-bit
+        working-directory: ${{ env.TNG_WORKING_DIR }}/source
+        run: make clean && make V=1
         env:
           IFDEF: "WIN32"
+
+      - name: Copy Windows 32-bit TNG artifacts
+        working-directory: ${{ env.TNG_WORKING_DIR }}/source
+        run: |
+          cp ${{ env.TNG_WORKING_DIR }}/source/gamex86.dll ${{ env.CFG_WORKING_DIR }}/dist/action/* ${{ env.WIN32_DIST_DIR }}/
+          
+      - name: Generate dist files
+        run: |
+          tar czpf aq-linux-x64-${{ steps.version.outputs.version }}.tar.gz ${{ env.LIN64_DIST_DIR }}
+          zip -r aq-windows-x64-${{ steps.version.outputs.version }}.tar.gz ${{ env.WIN64_DIST_DIR }}
+          zip -r aq-windows-i386-${{ steps.version.outputs.version }}.tar.gz ${{ env.WIN32_DIST_DIR }}
     
       - name: Create release
         uses: actions/create-release@v1
@@ -139,11 +147,10 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Upload dist tarball to release
-        uses: actions/upload-release-asset@v1
+        uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: aq-linux-dist.tar.gz
-          asset_name: aq-linux-dist.tar.gz
-          asset_content_type: application/gzip
+          files: |
+            
+
