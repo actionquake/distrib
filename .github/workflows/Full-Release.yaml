@@ -72,48 +72,48 @@ jobs:
 
       # Q2Pro Builds
 
-      - name: Build Q2Pro - Linux 64-bit
-        working-directory: ${{ env.Q2PRO_WORKING_DIR }}
-        run: make strip V=1
-        env:
-          CC: "gcc"
-          CONFIG_FILE: "../${{ env.CFG_WORKING_DIR }}/build/ci/config_linux64"
+      # - name: Build Q2Pro - Linux 64-bit
+      #   working-directory: ${{ env.Q2PRO_WORKING_DIR }}
+      #   run: make strip V=1
+      #   env:
+      #     CC: "gcc"
+      #     CONFIG_FILE: "../${{ env.CFG_WORKING_DIR }}/build/ci/config_linux64"
 
-      - name: Copy Linux 64-bit Q2Pro artifacts
-        run: |
-          cp ${{ env.Q2PRO_WORKING_DIR }}/q2pro ${{ env.Q2PRO_WORKING_DIR }}/q2proded ${{ env.LIN64_DIST_DIR }}/
+      # - name: Copy Linux 64-bit Q2Pro artifacts
+      #   run: |
+      #     cp ${{ env.Q2PRO_WORKING_DIR }}/q2pro ${{ env.Q2PRO_WORKING_DIR }}/q2proded ${{ env.LIN64_DIST_DIR }}/
 
-      - name: Build Q2Pro - Windows 64-bit
-        working-directory: ${{ env.Q2PRO_WORKING_DIR }}
-        run: make clean && make strip V=1
-        env:
-          CONFIG_FILE: "../${{ env.CFG_WORKING_DIR }}/build/ci/config_windows64"
+      # - name: Build Q2Pro - Windows 64-bit
+      #   working-directory: ${{ env.Q2PRO_WORKING_DIR }}
+      #   run: make clean && make strip V=1
+      #   env:
+      #     CONFIG_FILE: "../${{ env.CFG_WORKING_DIR }}/build/ci/config_windows64"
 
-      - name: Copy Windows 64-bit Q2Pro artifacts
-        run: |
-          cp ${{ env.Q2PRO_WORKING_DIR }}/q2pro.exe ${{ env.Q2PRO_WORKING_DIR }}/q2proded.exe ${{ env.WIN64_DIST_DIR }}/
+      # - name: Copy Windows 64-bit Q2Pro artifacts
+      #   run: |
+      #     cp ${{ env.Q2PRO_WORKING_DIR }}/q2pro.exe ${{ env.Q2PRO_WORKING_DIR }}/q2proded.exe ${{ env.WIN64_DIST_DIR }}/
 
-      - name: Build Q2Pro - Windows 32-bit
-        working-directory: ${{ env.Q2PRO_WORKING_DIR }}
-        run: make clean && make strip V=1
-        env:
-          CONFIG_FILE: "../${{ env.CFG_WORKING_DIR }}/build/ci/config_windows32"
+      # - name: Build Q2Pro - Windows 32-bit
+      #   working-directory: ${{ env.Q2PRO_WORKING_DIR }}
+      #   run: make clean && make strip V=1
+      #   env:
+      #     CONFIG_FILE: "../${{ env.CFG_WORKING_DIR }}/build/ci/config_windows32"
 
-      - name: Copy Windows 32-bit Q2Pro artifacts
-        run: |
-          cp ${{ env.Q2PRO_WORKING_DIR }}/q2pro.exe ${{ env.Q2PRO_WORKING_DIR }}/q2proded.exe ${{ env.WIN32_DIST_DIR }}/
+      # - name: Copy Windows 32-bit Q2Pro artifacts
+      #   run: |
+      #     cp ${{ env.Q2PRO_WORKING_DIR }}/q2pro.exe ${{ env.Q2PRO_WORKING_DIR }}/q2proded.exe ${{ env.WIN32_DIST_DIR }}/
 
-      ## TNG builds
+      # ## TNG builds
 
-      - name: Build TNG - Linux 64-bit
-        working-directory: ${{ env.TNG_WORKING_DIR }}/source
-        run: make V=1
-        env:
-          CC: "gcc"
+      # - name: Build TNG - Linux 64-bit
+      #   working-directory: ${{ env.TNG_WORKING_DIR }}/source
+      #   run: make V=1
+      #   env:
+      #     CC: "gcc"
 
-      - name: Copy Linux 64-bit TNG artifacts
-        run: |
-          cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.so ${{ env.CFG_WORKING_DIR }}/dist/action/* ${{ env.LIN64_DIST_DIR }}/action/
+      # - name: Copy Linux 64-bit TNG artifacts
+      #   run: |
+      #     cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.so ${{ env.CFG_WORKING_DIR }}/dist/action/* ${{ env.LIN64_DIST_DIR }}/action/
     
       - name: Build TNG - Windows 64-bit
         working-directory: ${{ env.TNG_WORKING_DIR }}/source
