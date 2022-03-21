@@ -23,7 +23,7 @@ jobs:
           path: build
 
       - name: Build TNG
-        working-directory: build
+        working-directory: build/source
         run: make V=1
         env:
           CC: "${{ matrix.cc }}"
