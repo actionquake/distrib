@@ -23,7 +23,7 @@ jobs:
         with:
           repository: actionquake/distrib
           path: config
-          
+
       - name: Copy config build files
         run: |
           cp -r config/build/ci/config_windows32 build/source/.config_windows32
@@ -33,7 +33,7 @@ jobs:
         working-directory: build/source
         run: make V=1
         env:
-          CC: "x86_64-w64-mingw32-gcc"
+          CC: "x86_64-w64-mingw32-gcc -DWIN64"
           STRIP: "x86_64-w64-mingw32-strip"
           WINDRES: "x86_64-w64-mingw32-windres"
           CONFIG_FILE: ".config_windows64"
@@ -49,7 +49,7 @@ jobs:
         working-directory: build/source
         run: make V=1
         env:
-          CC: "i686-w64-mingw32-gcc"
+          CC: "i686-w64-mingw32-gcc -DWIN32"
           STRIP: "i686-w64-mingw32-strip"
           WINDRES: "i686-w64-mingw32-windres"
           CONFIG_FILE: ".config_windows64"
