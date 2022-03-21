@@ -1,4 +1,4 @@
-name: build_linux
+name: build_q2pro_linux
 
 # on:
 #   push:
@@ -7,8 +7,7 @@ name: build_linux
 #     branches: [main]
 
 on:
-  push:
-    branches: [branchthatdoesntexist]
+  workflow_dispatch:
 
 jobs:
   linux_build_q2pro:
