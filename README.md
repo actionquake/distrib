@@ -1,4 +1,5 @@
-[![build_q2pro_linux](https://github.com/actionquake/distrib/actions/workflows/build_q2pro_linux.yaml/badge.svg)](https://github.com/actionquake/distrib/actions/workflows/build_q2pro_linux.yaml) 
+[![Linux Q2Pro (64-bit)](https://github.com/actionquake/distrib/actions/workflows/Q2Pro-Linux.yaml/badge.svg)](https://github.com/actionquake/distrib/actions/workflows/Q2Pro-Linux.yaml) [![Windows Q2Pro (32/64-bit)](https://github.com/actionquake/distrib/actions/workflows/Q2Pro-Windows.yaml/badge.svg)](https://github.com/actionquake/distrib/actions/workflows/Q2Pro-Windows.yaml)
+[![TNG Linux (64-bit)](https://github.com/actionquake/distrib/actions/workflows/TNG-Linux.yaml/badge.svg)](https://github.com/actionquake/distrib/actions/workflows/TNG-Linux.yaml) [![TNG Windows (32/64-bit)](https://github.com/actionquake/distrib/actions/workflows/TNG-Windows.yaml/badge.svg)](https://github.com/actionquake/distrib/actions/workflows/TNG-Windows.yaml)
 
 # Action Quake Base Installation
 
