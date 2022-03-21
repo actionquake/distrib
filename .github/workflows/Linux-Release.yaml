@@ -1,0 +1,95 @@
+name: Linux Release
+
+# on:
+#   push:
+#     branches: [main, ci]
+#   pull_request:
+#     branches: [main]
+
+on:
+  workflow_dispatch:
+
+jobs:
+  linux_build_q2pro:
+    #runs-on: ubuntu-latest
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Q2Pro
+        uses: actions/checkout@v3
+        with:
+          repository: skullernet/q2pro
+          path: q2pro-build
+
+      # - name: Display version info
+      #   working-directory: q2pro-build
+      #   run: bash version.sh
+
+      - name: version
+        run: echo "::set-output name=version::v0.0.1"
+        id: version
+
+      # Self-hosted runner has these
+      # - name: Install dependencies
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt install -y libsdl2-dev libopenal-dev \
+      #     libpng-dev libjpeg-dev zlib1g-dev mesa-common-dev \
+      #     libcurl4-gnutls-dev
+
+      - name: Checkout distrib
+        uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: config
+
+      - name: Copy config build files
+        run: |
+          cp -r config/build/ci/config_linux64 build/.config
+
+      - name: Build Q2Pro
+        working-directory: q2pro-build
+        run: make strip V=1
+        env:
+          CC: "gcc"
+          CONFIG_FILE: ".config"
+
+      - name: Checkout aq2-tng
+        uses: actions/checkout@v3
+        with:
+          repository: aq2-tng/aq2-tng
+          ref: 'bots'
+          path: tng-build
+
+      - name: Build TNG
+        working-directory: tng-build/source
+        run: make V=1
+        env:
+          CC: "gcc"
+    
+      - name: Generate dist directory
+        run: |
+          mkdir -p linux-dist/action
+          cp -r build/q2pro build/q2proded tng-build/source/gamex86_64.so action/* linux-dist/
+          tar czpf aq-linux-dist.tar.gz
+
+      - name: Create release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.version.outputs.version }}
+          tag_name: ${{ github.ref }}
+          #body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload dist tarball to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: aq-linux-dist.tar.gz
+          asset_name: aq-linux-dist.tar.gz
+          asset_content_type: application/gzip
