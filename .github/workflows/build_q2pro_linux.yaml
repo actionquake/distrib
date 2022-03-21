@@ -11,7 +11,8 @@ on:
 
 jobs:
   linux_build_q2pro:
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       matrix:
         cc: [gcc]
@@ -28,15 +29,21 @@ jobs:
           libpng-dev libjpeg-dev zlib1g-dev mesa-common-dev \
           libcurl4-gnutls-dev
 
-      - name: Whereami
-        run: ls -l
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: config
+
+      - name: Copy config build files
+        run: |
+          cp -r config/build/ci/config_linux64 build/.config
 
       - name: Build Q2Pro
         working-directory: build
         run: make V=1
         env:
           CC: "${{ matrix.cc }}"
-          CONFIG_FILE: "ci/config_linux64"
+          CONFIG_FILE: ".config"
       
       - name: Generate archive
         uses: actions/upload-artifact@v3
