@@ -45,11 +45,15 @@ jobs:
         env:
           CC: "${{ matrix.cc }}"
           CONFIG_FILE: ".config"
+
+      - name: Get version info
+        working-directory: build
+        run: "echo Q2PRO_VERSION=$(bash version.sh | tail -n 1)" >> $GITHUB_ENV
       
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
-          name: q2pro-lin-executables
+          name: q2pro-lin-${Q2PRO_VERSION}
           path: |
             build/q2pro
             build/q2proded
