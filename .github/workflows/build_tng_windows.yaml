@@ -19,9 +19,11 @@ jobs:
           ref: 'bots'
           path: build
 
-      - name: Windows TNG IRC removal
-        run: "sed -i 's/tng_irc.o //' build/source/Makefile"
-      
+      - name: Copy config build files
+        run: |
+          cp -r config/build/ci/config_windows32 build/source/.config_windows32
+          cp -r config/build/ci/config_windows64 build/source/.config_windows64
+
       - name: Build TNG (64-bit)
         working-directory: build/source
         run: make V=1
@@ -29,6 +31,7 @@ jobs:
           CC: "x86_64-w64-mingw32-gcc"
           STRIP: "x86_64-w64-mingw32-strip"
           WINDRES: "x86_64-w64-mingw32-windres"
+          CONFIG_FILE: ".config_windows64"
 
       - name: Generate archive
         uses: actions/upload-artifact@v3
@@ -44,6 +47,7 @@ jobs:
           CC: "i686-w64-mingw32-gcc"
           STRIP: "i686-w64-mingw32-strip"
           WINDRES: "i686-w64-mingw32-windres"
+          CONFIG_FILE: ".config_windows64"
 
       - name: Generate archive
         uses: actions/upload-artifact@v3
