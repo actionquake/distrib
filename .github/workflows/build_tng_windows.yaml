@@ -1,4 +1,4 @@
-name: build_tng_linux
+name: build_tng_windows
 
 # on:
 #   push:

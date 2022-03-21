@@ -1,4 +1,4 @@
-name: build_windows
+name: build_q2pro_windows
 
 # on:
 #   push:
