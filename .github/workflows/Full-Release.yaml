@@ -22,6 +22,13 @@ env:
   WIN32_DIST_DIR: "windows-i386-dist"
 
 jobs:
+  cleaner:
+    steps:
+      - name: Runner workspace path
+        run: |
+          echo "Cleaning up previous run"
+          rm -rf "${{ github.workspace }}"
+          
   full_release:
     #runs-on: ubuntu-latest
     runs-on: self-hosted
@@ -48,12 +55,12 @@ jobs:
       - name: Q2Pro version info
         id: q2pro_version
         working-directory: ${{ env.Q2PRO_WORKING_DIR }}
-        run: echo "::set-output name=q2pro_version::$(bash version.sh | head -n 1)"
+        run: echo "::set-output name=q2pro_version::$(bash version.sh | head -n 1 | sed -i 's/~/-//')"
 
       - name: TNG version info
         id: tng_version
         working-directory: ${{ env.TNG_WORKING_DIR }}
-        run: printf "::set-output name=tng_version::$(git show -s --format='%cd' --date=short)~$(git rev-parse --short HEAD)"
+        run: printf "::set-output name=tng_version::$(git show -s --format='%cd' --date=short)-$(git rev-parse --short HEAD)"
 
       - name: Generate dist directory
         run: |
@@ -147,7 +154,7 @@ jobs:
     
       - name: Generate Changelog
         run: |
-          printf "Q2Pro version: ${{ steps.q2pro_version.outputs.q2pro_version }}\nTNG version: ${{ steps.tng_version.outputs.tng_version }}" >> CHANGELOG.md
+          printf "Q2Pro version: ${{ steps.q2pro_version.outputs.q2pro_version }}\nTNG version: ${{ steps.tng_version.outputs.tng_version }}" > CHANGELOG.md
 
       - name: Create release
         uses: actions/create-release@v1
