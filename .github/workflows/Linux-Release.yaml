@@ -68,8 +68,10 @@ jobs:
     
       - name: Generate dist directory
         run: |
+          ls -l
           mkdir -p linux-dist/action
-          cp -r ${Q2PRO_WORKING_DIR}/q2pro ${Q2PRO_WORKING_DIR}/q2proded ${TNG_WORKING_DIR}/source/gamex86_64.so config/action/* linux-dist/
+          cp ${Q2PRO_WORKING_DIR}/q2pro ${Q2PRO_WORKING_DIR}/q2proded linux-dist/
+          cp -r ${TNG_WORKING_DIR}/source/gamex86_64.so config/action/* linux-dist/action/
           tar czpf aq-linux-dist.tar.gz
 
       - name: Create release
