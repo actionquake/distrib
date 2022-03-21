@@ -8,6 +8,10 @@ name: Full Release
 
 on:
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release version tag"
+        required: true
 
 env:
   Q2PRO_WORKING_DIR: "q2pro-build"
@@ -34,7 +38,6 @@ jobs:
           repository: actionquake/distrib
           path: ${{ env.CFG_WORKING_DIR }}
 
-      
       - name: Checkout aq2-tng
         uses: actions/checkout@v3
         with:
@@ -44,12 +47,13 @@ jobs:
 
       - name: Q2Pro version info
         id: q2pro_version
-        working-directory: q2pro-build
-        run: echo "::set-output name=version::$(bash version.sh | head -n 1)"
+        working-directory: ${{ env.Q2PRO_WORKING_DIR }}
+        run: echo "::set-output name=q2pro_version::$(bash version.sh | head -n 1)"
 
-      - name: Release version
-        run: echo "::set-output name=version::v0.0.1"
-        id: version
+      - name: TNG version info
+        id: tng_version
+        working-directory: ${{ env.TNG_WORKING_DIR }}
+        run: printf "::set-output name=tng_version::$(git show -s --format='%cd' --date=short)~$(git rev-parse --short HEAD)"
 
       - name: Generate dist directory
         run: |
@@ -137,35 +141,35 @@ jobs:
           
       - name: Generate dist files
         run: |
-          tar czpf aq-linux-x64-${{ steps.version.outputs.version }}.tar.gz ${{ env.LIN64_DIST_DIR }}
-          zip -r aq-windows-x64-${{ steps.version.outputs.version }}.zip ${{ env.WIN64_DIST_DIR }}
-          zip -r aq-windows-i386-${{ steps.version.outputs.version }}.zip ${{ env.WIN32_DIST_DIR }}
+          tar czpf action_quake-${{ github.event.inputs.release_tag }}-linux-x64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          zip -r action_quake-${{ github.event.inputs.release_tag }}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
+          zip -r action_quake-${{ github.event.inputs.release_tag }}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
     
+      - name: Generate Changelog
+        run: |
+          printf "Q2Pro version: ${{ steps.vars.outputs.q2pro_version }}\nTNG version: ${{ steps.vars.outputs.tng_version }}" >> CHANGELOG.md
+
       - name: Create release
         uses: actions/create-release@v1
         id: create_release
         with:
           draft: false
           prerelease: false
-          release_name: ${{ steps.version.outputs.version }}
-          tag_name: ${{ github.ref }}
-          #body_path: CHANGELOG.md
+          release_name: action_quake-${{ github.event.inputs.release_tag }}
+          tag_name: ${{ github.event.inputs.release_tag }}
+          body_path: CHANGELOG.md
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-      - name: Generate release tag
-        id: tag
-        run: |
-          echo "::set-output name=release_tag::aq-$(date +"%Y.%m.%d_%H-%M")"
-          
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          tag_name: ${{ steps.tag.outputs.release_tag }}
+          body_path: 
+          tag_name: ${{ github.event.inputs.release_tag }}
           files: |
-            aq-linux-x64-${{ steps.version.outputs.version }}.tar.gz
-            aq-windows-x64-${{ steps.version.outputs.version }}.zip
-            aq-windows-i386-${{ steps.version.outputs.version }}.zip
+            action_quake-${{ github.event.inputs.release_tag }}-linux-x64.tar.gz
+            action_quake-${{ github.event.inputs.release_tag }}-windows-x64.zip
+            action_quake-${{ github.event.inputs.release_tag }}-windows-i386.zip
 
