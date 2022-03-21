@@ -51,5 +51,5 @@ jobs:
         with:
           name: q2pro-executables
           path: |
-            q2pro
-            q2proded
+            build/q2pro
+            build/q2proded
