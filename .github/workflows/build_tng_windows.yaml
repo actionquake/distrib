@@ -24,39 +24,34 @@ jobs:
           repository: actionquake/distrib
           path: config
 
-      - name: Copy config build files
+      # This is because the Makefile doesn't recognize mingw on Linux, and we have to append a special flag at the linking step for Windows
+      - name: Rough hack to fix Makefile
         run: |
-          cp -r config/build/ci/config_windows32 build/source/.config_windows32
-          cp -r config/build/ci/config_windows64 build/source/.config_windows64
+          mv build/source/Makefile build/source/Makefile-original
+          cat config/build/ci/tng-windows-append build/source/Makefile-original > build/source/Makefile
 
       - name: Build TNG (64-bit)
         working-directory: build/source
         run: make V=1
         env:
-          CC: "x86_64-w64-mingw32-gcc -DWIN64"
-          STRIP: "x86_64-w64-mingw32-strip"
-          WINDRES: "x86_64-w64-mingw32-windres"
-          CONFIG_FILE: ".config_windows64"
+          IFDEF: "WIN64"
 
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
           name: tng-win-library-64bit
           path: |
-            build/source/gamex*
+            build/source/gamex86_64.dll
 
       - name: Build TNG (32-bit)
         working-directory: build/source
         run: make V=1
         env:
-          CC: "i686-w64-mingw32-gcc -DWIN32"
-          STRIP: "i686-w64-mingw32-strip"
-          WINDRES: "i686-w64-mingw32-windres"
-          CONFIG_FILE: ".config_windows64"
-
+          IFDEF: "WIN32"
+      
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
           name: tng-win-library-32bit
           path: |
-            build/source/gamex*
+            build/source/gamex86.dll

@@ -1,0 +1,7 @@
+ifeq ($(BUILD_TYPE),WIN32)
+    WIN32=yes
+endif
+
+ifeq ($(BUILD_TYPE),WIN64)
+    WIN64=yes
+endif
