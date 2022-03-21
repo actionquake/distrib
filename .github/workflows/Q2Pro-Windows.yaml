@@ -1,0 +1,53 @@
+name: Windows Q2Pro (32/64-bit)
+
+# on:
+#   push:
+#     branches: [main, ci]
+#   pull_request:
+#     branches: [main]
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  windows_build_q2pro:
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        suffix: ["32", "64"]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: skullernet/q2pro
+          path: build
+
+      - name: Install dependencies
+        run: |
+          wget -nv https://github.com/skullernet/q2pro-mgw-sdk/releases/download/2021-09-07/q2pro-mgw-sdk.tar.gz
+          tar xf q2pro-mgw-sdk.tar.gz
+
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: config
+
+      - name: Copy config build files
+        run: |
+          cp -r config/build/ci/config_windows32 build/.config_windows32
+          cp -r config/build/ci/config_windows64 build/.config_windows64
+
+      - name: Build
+        working-directory: build
+        run: make V=1
+        env:
+          CONFIG_FILE: ".config_windows${{ matrix.suffix }}"
+
+      - name: Generate archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: q2pro-win-executables
+          path: |
+            build/q2pro.exe
+            build/q2proded.exe
+
