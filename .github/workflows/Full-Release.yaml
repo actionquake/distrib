@@ -117,7 +117,7 @@ jobs:
 
       - name: Copy Linux 64-bit TNG artifacts
         run: |
-          cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.so ${{ env.CFG_WORKING_DIR }}/dist/action/* ${{ env.LIN64_DIST_DIR }}/action/
+          cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.so ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.LIN64_DIST_DIR }}/action/
     
       - name: Build TNG - Windows 64-bit
         working-directory: ${{ env.TNG_WORKING_DIR }}/source
@@ -127,7 +127,7 @@ jobs:
 
       - name: Copy Windows 64-bit TNG artifacts
         run: |
-          cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.so ${{ env.CFG_WORKING_DIR }}/dist/action/* ${{ env.WIN64_DIST_DIR }}/action/
+          cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.so ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN64_DIST_DIR }}/action/
 
       - name: Build TNG - Windows 32-bit
         working-directory: ${{ env.TNG_WORKING_DIR }}/source
@@ -137,7 +137,7 @@ jobs:
 
       - name: Copy Windows 32-bit TNG artifacts
         run: |
-          cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.so ${{ env.CFG_WORKING_DIR }}/dist/action/* ${{ env.WIN32_DIST_DIR }}/action/
+          cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.so ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN32_DIST_DIR }}/action/
           
       - name: Generate dist files
         run: |
@@ -147,7 +147,7 @@ jobs:
     
       - name: Generate Changelog
         run: |
-          printf "Q2Pro version: ${{ steps.vars.outputs.q2pro_version }}\nTNG version: ${{ steps.vars.outputs.tng_version }}" >> CHANGELOG.md
+          printf "Q2Pro version: ${{ steps.q2pro_version.outputs.q2pro_version }}\nTNG version: ${{ steps.tng_version.outputs.tng_version }}" >> CHANGELOG.md
 
       - name: Create release
         uses: actions/create-release@v1
