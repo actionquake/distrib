@@ -1,10 +1,10 @@
 name: build_linux
 
-on:
-  push:
-    branches: [main, ci]
-  pull_request:
-    branches: [main]
+# on:
+#   push:
+#     branches: [main, ci]
+#   pull_request:
+#     branches: [main]
 
 jobs:
   linux_build_q2pro:
@@ -24,6 +24,9 @@ jobs:
           sudo apt install -y libsdl2-dev libopenal-dev \
           libpng-dev libjpeg-dev zlib1g-dev mesa-common-dev \
           libcurl4-gnutls-dev
+
+      - name: Whereami
+        run: ls -l
 
       - name: Build Q2Pro
         working-directory: build
