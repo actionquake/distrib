@@ -20,7 +20,7 @@ jobs:
           path: build
 
       - name: Windows TNG IRC removal
-        run: "sed -e 's/tng_irc.o //' build/source/Makefile"
+        run: "sed -i 's/tng_irc.o //' build/source/Makefile"
       
       - name: Build TNG (64-bit)
         working-directory: build/source
