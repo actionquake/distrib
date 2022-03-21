@@ -18,6 +18,21 @@ jobs:
           repository: aq2-tng/aq2-tng
           ref: 'bots'
           path: build
+      
+      - name: Build TNG (64-bit)
+        working-directory: build/source
+        run: make V=1
+        env:
+          CC: "x86_64-w64-mingw32-gcc"
+          STRIP: "x86_64-w64-mingw32-strip"
+          WINDRES: "x86_64-w64-mingw32-windres"
+
+      - name: Generate archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: tng-win-library-64bit
+          path: |
+            build/source/gamex*
 
       - name: Build TNG (32-bit)
         working-directory: build/source
@@ -31,20 +46,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: tng-win-library-32bit
-          path: |
-            build/source/gamex*
-
-      - name: Build TNG (64-bit)
-        working-directory: build/source
-        run: make V=1
-        env:
-          CC: "x86_64-w64-mingw32-gcc"
-          STRIP: "x86_64-w64-mingw32-strip"
-          WINDRES: "x86_64-w64-mingw32-windres"
-
-      - name: Generate archive
-        uses: actions/upload-artifact@v3
-        with:
-          name: tng-win-library-64bit
           path: |
             build/source/gamex*
