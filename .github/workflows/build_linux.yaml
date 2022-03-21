@@ -13,7 +13,7 @@ jobs:
       matrix:
         cc: [gcc, clang]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         repository: https://github.com/skullernet/q2pro.git
         with:
           path: build

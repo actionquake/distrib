@@ -13,7 +13,7 @@ jobs:
       matrix:
         suffix: ["32", "64"]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         repository: https://github.com/skullernet/q2pro.git
         with:
           path: build
@@ -37,7 +37,7 @@ jobs:
       matrix:
         suffix: ["32", "64"]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           path: build
 
