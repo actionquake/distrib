@@ -9,6 +9,10 @@ name: Linux Release
 on:
   workflow_dispatch:
 
+env:
+  Q2PRO_WORKING_DIR: "q2pro-build"
+  TNG_WORKING_DIR: "tng-build"
+
 jobs:
   linux_build_q2pro:
     #runs-on: ubuntu-latest
@@ -18,7 +22,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: skullernet/q2pro
-          path: q2pro-build
+          path: ${Q2PRO_WORKING_DIR}
 
       # - name: Display version info
       #   working-directory: q2pro-build
@@ -44,10 +48,10 @@ jobs:
 
       - name: Copy config build files
         run: |
-          cp -r config/build/ci/config_linux64 build/.config
+          cp -r config/build/ci/config_linux64 ${Q2PRO_WORKING_DIR}/.config
 
       - name: Build Q2Pro
-        working-directory: q2pro-build
+        working-directory: ${Q2PRO_WORKING_DIR}
         run: make strip V=1
         env:
           CC: "gcc"
@@ -58,10 +62,10 @@ jobs:
         with:
           repository: aq2-tng/aq2-tng
           ref: 'bots'
-          path: tng-build
+          path: ${TNG_WORKING_DIR}
 
       - name: Build TNG
-        working-directory: tng-build/source
+        working-directory: ${TNG_WORKING_DIR}/source
         run: make V=1
         env:
           CC: "gcc"
@@ -69,7 +73,7 @@ jobs:
       - name: Generate dist directory
         run: |
           mkdir -p linux-dist/action
-          cp -r build/q2pro build/q2proded tng-build/source/gamex86_64.so action/* linux-dist/
+          cp -r ${Q2PRO_WORKING_DIR}/q2pro ${Q2PRO_WORKING_DIR}/q2proded ${TNG_WORKING_DIR}/source/gamex86_64.so config/action/* linux-dist/
           tar czpf aq-linux-dist.tar.gz
 
       - name: Create release
