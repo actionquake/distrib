@@ -1,3 +1,5 @@
+[![build_q2pro_linux](https://github.com/actionquake/distrib/actions/workflows/build_q2pro_linux.yaml/badge.svg)](https://github.com/actionquake/distrib/actions/workflows/build_q2pro_linux.yaml) 
+
 # Action Quake Base Installation
 
 ## License considerations
@@ -12,7 +14,9 @@ Should it be discovered that assets included in this distribution are indeed unl
 
 ## Requirements
 * Latest q2pro built specifically for `action` for 64-bit Mac, 32- and 64-bit Windows, 32- and 64-bit Linux
-* Latest gamex86.dll/.so/.dylib from aq2-tng (bot branch to include LTK) (and 32-bit equivalents for Windows and Linux)
+    * Handled via Github Actions CI
+* Latest dll/so from aq2-tng (bot branch to include LTK) (and 32-bit equivalents for Windows and Linux)
+    * Handled via Github Actions CI
 * aq2config.cfg - Contains reasonable defaults for new players
 * Several maps, but let's identify ones that do not have copyrighted or trademarked materials such as Coca*Cola signs (
     * Optionally, replace copyrighted/trademarked textures with 'safe' ones

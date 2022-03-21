@@ -1,4 +1,4 @@
-name: build_q2pro_windows
+name: Windows Q2Pro (32/64-bit)
 
 # on:
 #   push:

@@ -1,4 +1,4 @@
-name: build_tng_linux
+name: TNG Linux (64-bit)
 
 # on:
 #   push:

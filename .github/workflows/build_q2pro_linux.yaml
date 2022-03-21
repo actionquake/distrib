@@ -1,4 +1,4 @@
-name: build_q2pro_linux
+name: Linux Q2Pro (64-bit)
 
 # on:
 #   push:

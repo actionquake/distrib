@@ -1,4 +1,4 @@
-name: build_tng_windows
+name: TNG Windows (32/64-bit)
 
 # on:
 #   push:
