@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: aq2-tng/aq2-tng
-          branch: 'bots'
+          ref: 'bots'
           path: build
 
       - name: Build TNG
