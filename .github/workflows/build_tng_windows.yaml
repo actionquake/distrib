@@ -12,12 +12,6 @@ on:
 jobs:
   linux:
     runs-on: self-hosted
-    strategy:
-      matrix:
-        cc: [i686-w64-mingw32-gcc, x86_64-w64-mingw32-gcc]
-        strip: [i686-w64-mingw32-strip, x86_64-w64-mingw32-strip]
-        windres: [i686-w64-mingw32-windres, x86_64-w64-mingw32-windres] 
-
     steps:
       - uses: actions/checkout@v3
         with:
@@ -25,17 +19,32 @@ jobs:
           ref: 'bots'
           path: build
 
-      - name: Build TNG
+      - name: Build TNG (32-bit)
         working-directory: build/source
         run: make V=1
         env:
-          CC: "${{ matrix.cc }}"
-          STRIP: "${{ matrix.strip }}"
-          WINDRES: "${{ matrix.windres }}"
+          CC: "i686-w64-mingw32-gcc"
+          STRIP: "i686-w64-mingw32-strip"
+          WINDRES: "i686-w64-mingw32-windres"
 
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
-          name: tng-win-library
+          name: tng-win-library-32bit
+          path: |
+            build/source/gamex*
+
+      - name: Build TNG (64-bit)
+        working-directory: build/source
+        run: make V=1
+        env:
+          CC: "x86_64-w64-mingw32-gcc"
+          STRIP: "x86_64-w64-mingw32-strip"
+          WINDRES: "x86_64-w64-mingw32-windres"
+
+      - name: Generate archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: tng-win-library-64bit
           path: |
             build/source/gamex*
