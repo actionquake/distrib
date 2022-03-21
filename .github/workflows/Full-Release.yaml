@@ -124,6 +124,8 @@ jobs:
       - name: Copy Windows 64-bit TNG artifacts
         working-directory: ${{ env.TNG_WORKING_DIR }}/source
         run: |
+          ls -l
+          ls -l ${{ env.WIN64_DIST_DIR }}
           cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.so ${{ env.CFG_WORKING_DIR }}/dist/action/* ${{ env.WIN64_DIST_DIR }}/action/
 
       - name: Build TNG - Windows 32-bit
