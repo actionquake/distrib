@@ -52,7 +52,6 @@ jobs:
       - name: Save Win32 artifact
         working-directory: build/source
         run: |
-          mkdir dist
           cp gamex86.dll dist/gamex86.dll
       
       - name: Generate archive
