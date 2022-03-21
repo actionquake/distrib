@@ -14,7 +14,10 @@ jobs:
     runs-on: self-hosted
     strategy:
       matrix:
-        cc: [gcc]
+        cc: [i686-w64-mingw32-gcc, x86_64-w64-mingw32-gcc]
+        strip: [i686-w64-mingw32-strip, x86_64-w64-mingw32-strip]
+        windres: [i686-w64-mingw32-windres, x86_64-w64-mingw32-windres] 
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -27,10 +30,12 @@ jobs:
         run: make V=1
         env:
           CC: "${{ matrix.cc }}"
+          STRIP: "${{ matrix.strip }}"
+          WINDRES: "${{ matrix.windres }}"
 
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
-          name: tng-lin-library
+          name: tng-win-library
           path: |
             build/source/gamex*

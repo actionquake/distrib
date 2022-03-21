@@ -49,7 +49,7 @@ jobs:
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
-          name: q2pro-executables
+          name: q2pro-lin-executables
           path: |
             build/q2pro
             build/q2proded
