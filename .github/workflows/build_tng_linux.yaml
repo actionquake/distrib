@@ -6,6 +6,10 @@ name: build_linux
 #   pull_request:
 #     branches: [main]
 
+on:
+  push:
+    branches: [branchthatdoesntexist]
+
 jobs:
   linux:
     runs-on: ubuntu-latest

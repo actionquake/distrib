@@ -6,6 +6,11 @@ name: build_windows
 #   pull_request:
 #     branches: [main]
 
+on:
+  push:
+    branches: [branchthatdoesntexist]
+
+
 jobs:
   mingw:
     runs-on: ubuntu-latest
