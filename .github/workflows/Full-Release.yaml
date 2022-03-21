@@ -153,11 +153,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
+      - name: Generate release tag
+        id: tag
+        run: |
+          echo "::set-output name=release_tag::aq-$(date +"%Y.%m.%d_%H-%M")"
+          
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
+          tag_name: ${{ steps.tag.outputs.release_tag }}
           files: |
             aq-linux-x64-${{ steps.version.outputs.version }}.tar.gz
             aq-windows-x64-${{ steps.version.outputs.version }}.zip
