@@ -70,6 +70,10 @@ jobs:
           mv ${{ env.TNG_WORKING_DIR }}/source/Makefile ${{ env.TNG_WORKING_DIR }}/source/Makefile-original
           cat ${{ env.CFG_WORKING_DIR }}/build/ci/tng-windows-append ${{ env.TNG_WORKING_DIR }}/source/Makefile-original > ${{ env.TNG_WORKING_DIR }}/source/Makefile
 
+      - name: Install Windows/mingw dependencies
+        run: |
+          wget -nv https://github.com/skullernet/q2pro-mgw-sdk/releases/download/2021-09-07/q2pro-mgw-sdk.tar.gz
+          tar xf q2pro-mgw-sdk.tar.gz
       # Self-hosted runner has these
       # - name: Install dependencies
       #   run: |
