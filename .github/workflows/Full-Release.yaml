@@ -18,7 +18,7 @@ env:
   WIN32_DIST_DIR: "windows-i386-dist/action"
 
 jobs:
-  linux_build_q2pro:
+  full_release:
     #runs-on: ubuntu-latest
     runs-on: self-hosted
     steps:
@@ -56,6 +56,11 @@ jobs:
           mkdir -p ${{ env.LIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN32_DIST_DIR }}/action
+      
+      - name: Rough hack to fix Makefile
+        run: |
+          mv ${{ env.TNG_WORKING_DIR }}/source/Makefile ${{ env.TNG_WORKING_DIR }}/source/Makefile-original
+          cat ${{ env.CFG_WORKING_DIR }}/build/ci/tng-windows-append ${{ env.TNG_WORKING_DIR }}/source/Makefile-original > ${{ env.TNG_WORKING_DIR }}/source/Makefile
 
       # Self-hosted runner has these
       # - name: Install dependencies
