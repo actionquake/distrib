@@ -41,7 +41,7 @@ jobs:
 
       - name: Build Q2Pro
         working-directory: build
-        run: make V=1
+        run: make strip V=1
         env:
           CC: "${{ matrix.cc }}"
           CONFIG_FILE: ".config"
