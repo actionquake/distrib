@@ -14,8 +14,8 @@ jobs:
         suffix: ["32", "64"]
     steps:
       - uses: actions/checkout@v3
-        repository: https://github.com/skullernet/q2pro.git
         with:
+          repository: https://github.com/skullernet/q2pro.git
           path: build
 
       - name: Install dependencies
@@ -39,6 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
+          repository: https://github.com/skullernet/q2pro.git
           path: build
 
       - name: Install dependencies

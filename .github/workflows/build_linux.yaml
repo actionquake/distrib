@@ -14,8 +14,8 @@ jobs:
         cc: [gcc, clang]
     steps:
       - uses: actions/checkout@v3
-        repository: https://github.com/skullernet/q2pro.git
         with:
+          repository: https://github.com/skullernet/q2pro.git
           path: build
 
       - name: Install dependencies
