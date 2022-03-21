@@ -17,4 +17,4 @@ jobs:
         uses: actions/download-artifact@v3
 
       - name: Look around
-        run: ls -l
+        run: ls -l build
