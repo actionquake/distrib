@@ -18,6 +18,9 @@ jobs:
           repository: aq2-tng/aq2-tng
           ref: 'bots'
           path: build
+
+      - name: Windows TNG IRC removal
+        run: "sed -e 's/tng_irc.o //' build/source/Makefile"
       
       - name: Build TNG (64-bit)
         working-directory: build/source
