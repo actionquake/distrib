@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: skullernet/q2pro
-          path: ${Q2PRO_WORKING_DIR}
+          path: ${{ env.Q2PRO_WORKING_DIR }}
 
       # - name: Display version info
       #   working-directory: q2pro-build
@@ -47,7 +47,7 @@ jobs:
           path: config
 
       - name: Build Q2Pro
-        working-directory: ${Q2PRO_WORKING_DIR}
+        working-directory: ${{ env.Q2PRO_WORKING_DIR }}
         run: make strip V=1
         env:
           CC: "gcc"
@@ -58,10 +58,10 @@ jobs:
         with:
           repository: aq2-tng/aq2-tng
           ref: 'bots'
-          path: ${TNG_WORKING_DIR}
+          path: ${{ env.TNG_WORKING_DIR }}
 
       - name: Build TNG
-        working-directory: ${TNG_WORKING_DIR}/source
+        working-directory: ${{ env.TNG_WORKING_DIR }}/source
         run: make V=1
         env:
           CC: "gcc"
@@ -70,8 +70,8 @@ jobs:
         run: |
           ls -l
           mkdir -p linux-dist/action
-          cp ${Q2PRO_WORKING_DIR}/q2pro ${Q2PRO_WORKING_DIR}/q2proded linux-dist/
-          cp -r ${TNG_WORKING_DIR}/source/gamex86_64.so config/action/* linux-dist/action/
+          cp ${{ env.Q2PRO_WORKING_DIR }}/q2pro ${{ env.Q2PRO_WORKING_DIR }}/q2proded linux-dist/
+          cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.so config/action/* linux-dist/action/
           tar czpf aq-linux-dist.tar.gz
 
       - name: Create release
