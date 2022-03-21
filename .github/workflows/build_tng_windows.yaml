@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  linux:
+  windows_build_tng:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3

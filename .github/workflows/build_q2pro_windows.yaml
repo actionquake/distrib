@@ -11,7 +11,7 @@ on:
 
 
 jobs:
-  mingw:
+  windows_build_q2pro:
     runs-on: self-hosted
     strategy:
       matrix:

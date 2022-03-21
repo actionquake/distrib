@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  linux:
+  linux_build_tng:
     runs-on: self-hosted
     strategy:
       matrix:
