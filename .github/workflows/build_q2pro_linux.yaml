@@ -22,12 +22,13 @@ jobs:
           repository: skullernet/q2pro
           path: build
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt install -y libsdl2-dev libopenal-dev \
-          libpng-dev libjpeg-dev zlib1g-dev mesa-common-dev \
-          libcurl4-gnutls-dev
+      # Self-hosted runner has these
+      # - name: Install dependencies
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt install -y libsdl2-dev libopenal-dev \
+      #     libpng-dev libjpeg-dev zlib1g-dev mesa-common-dev \
+      #     libcurl4-gnutls-dev
 
       - uses: actions/checkout@v3
         with:
