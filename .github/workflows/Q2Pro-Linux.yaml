@@ -48,7 +48,7 @@ jobs:
 
       - name: Get version info
         working-directory: build
-        run: "echo Q2PRO_VERSION=$(bash version.sh | tail -n 1)" >> $GITHUB_ENV
+        run: Q2PRO_VERSION=$(git rev-list --count HEAD) >> GITHUB_ENV
       
       - name: Generate archive
         uses: actions/upload-artifact@v3
