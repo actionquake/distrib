@@ -71,7 +71,7 @@ jobs:
           ls -l
           mkdir -p linux-dist/action
           cp ${{ env.Q2PRO_WORKING_DIR }}/q2pro ${{ env.Q2PRO_WORKING_DIR }}/q2proded linux-dist/
-          cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.so config/action/* linux-dist/action/
+          cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.so config/dist/action/* linux-dist/action/
           tar czpf aq-linux-dist.tar.gz
 
       - name: Create release
