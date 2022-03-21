@@ -12,9 +12,6 @@ on:
 jobs:
   linux_build_tng:
     runs-on: self-hosted
-    strategy:
-      matrix:
-        cc: [gcc]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -26,11 +23,11 @@ jobs:
         working-directory: build/source
         run: make V=1
         env:
-          CC: "${{ matrix.cc }}"
+          CC: "gcc"
 
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
           name: tng-lin-library
           path: |
-            build/source/gamex*
+            build/source/gamex86_64.so

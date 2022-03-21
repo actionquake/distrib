@@ -36,22 +36,28 @@ jobs:
         env:
           IFDEF: "WIN64"
 
-      - name: Generate archive
-        uses: actions/upload-artifact@v3
-        with:
-          name: tng-win-library-64bit
-          path: |
-            build/source/gamex86_64.dll
+      - name: Save Win64 artifact
+        working-directory: build/source
+        run: |
+          mkdir dist
+          cp gamex86_64.dll dist/gamex86_64.dll
+          make clean
 
       - name: Build TNG (32-bit)
         working-directory: build/source
         run: make V=1
         env:
           IFDEF: "WIN32"
+
+      - name: Save Win32 artifact
+        working-directory: build/source
+        run: |
+          mkdir dist
+          cp gamex86.dll dist/gamex86.dll
       
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
-          name: tng-win-library-32bit
+          name: tng-win-libraries
           path: |
-            build/source/gamex86.dll
+            build/source/dist/*.dll
