@@ -1,0 +1,33 @@
+name: build_linux
+
+on:
+  push:
+    branches: [main, ci]
+  pull_request:
+    branches: [main]
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cc: [gcc]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: aq2-tng/aq2-tng
+          branch: 'bots'
+          path: build
+
+      - name: Build TNG
+        working-directory: build
+        run: make V=1
+        env:
+          CC: "${{ matrix.cc }}"
+
+      - name: Generate archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: tng-library
+          path: |
+            source/gamex*
