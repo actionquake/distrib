@@ -131,8 +131,8 @@ jobs:
       - name: Generate dist files
         run: |
           tar czpf aq-linux-x64-${{ steps.version.outputs.version }}.tar.gz ${{ env.LIN64_DIST_DIR }}
-          zip -r aq-windows-x64-${{ steps.version.outputs.version }}.tar.gz ${{ env.WIN64_DIST_DIR }}
-          zip -r aq-windows-i386-${{ steps.version.outputs.version }}.tar.gz ${{ env.WIN32_DIST_DIR }}
+          zip -r aq-windows-x64-${{ steps.version.outputs.version }}.zip ${{ env.WIN64_DIST_DIR }}
+          zip -r aq-windows-i386-${{ steps.version.outputs.version }}.zip ${{ env.WIN32_DIST_DIR }}
     
       - name: Create release
         uses: actions/create-release@v1
