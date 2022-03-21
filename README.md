@@ -1,4 +1,4 @@
-# Steam Base Installation
+# Action Quake Base Installation
 
 ## License considerations
 Every effort has been made to ensure that no licensed, copyrighted and/or trademarked content exists in this distribution.  We abide by the license imposed by id software upon the Quake II source code, and its application upon the modification 'Action Quake 2' to redistribute the source along with the application stipulated under **TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION**
@@ -19,7 +19,7 @@ Should it be discovered that assets included in this distribution are indeed unl
     * One accepted/approved LTK file per included map, so that new players can fight against bots if they wish, and so that the bots aren't without any pathing
 * Helper script that activates/deactivates content (Python?)
     * Essentially moves files around or renames directories (high def vs. original textures for instance)
-* 'Official' releases via Steam installation done in `pkz` files for game content
+* 'Official' releases via this distribution done in `pkz` files for game content
 
 
 ## Directory structure
