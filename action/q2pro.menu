@@ -1,0 +1,32 @@
+include common.menu
+
+begin game
+    background #0000ff20
+    style --compact
+	action "game mod bindings" pushmenu mod
+    action "browse q2servers.com" pushmenu servers "+http://q2servers.com/?raw=2"
+    action "browse address book" pushmenu servers "favorites://" "file:///servers.lst" "broadcast://"
+    action "browse demos" pushmenu demos
+    action "single player" pushmenu singleplayer
+    action "options" pushmenu options
+    action "disconnect" disconnect
+    action "quit" quit
+end
+
+begin mod
+	title "Game Mod Bindings"
+    bind "open door" opendoor
+	bind "bandage wound" bandage
+    bind "reload weapon" reload
+    bind "change weapon mode" weapon
+    bind "sniper zoom in" "lens in"
+    bind "sniper zoom out" "lens out"
+    bind "drop weapon" "drop weapon"
+    bind "drop item" "drop item"
+    blank
+    bind "unique weapon" "use special"
+    bind "combat knife" "use Combat Knife"
+    bind "mk23 pistol" "use MK23 Pistol"
+    bind "akimbo pistols" "use A 2nd Pistol"
+    bind "m26 grenade" "use M26 Fragmentation Grenade"
+end
