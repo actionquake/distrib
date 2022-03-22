@@ -158,6 +158,12 @@ jobs:
         run: |
           printf "Q2Pro version: ${{ steps.q2pro_version.outputs.q2pro_version }}\nTNG version: ${{ steps.tng_version.outputs.tng_version }}" > CHANGELOG.md
 
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create release
         uses: actions/create-release@v1
         id: create_release
@@ -166,7 +172,8 @@ jobs:
           prerelease: false
           release_name: action_quake-${{ github.event.inputs.release_tag }}
           tag_name: ${{ github.event.inputs.release_tag }}
-          body_path: CHANGELOG.md
+          #body_path: CHANGELOG.md
+          body: ${{steps.github_release.outputs.changelog}}
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
