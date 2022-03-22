@@ -52,7 +52,7 @@ jobs:
       - name: Q2Pro version info
         id: q2pro_version
         working-directory: ${{ env.Q2PRO_WORKING_DIR }}
-        run: echo "::set-output name=q2pro_version::$(bash version.sh | head -n 1 | sed -i 's/~/-//')"
+        run: echo "::set-output name=q2pro_version::$(bash version.sh | head -n 1 | sed 's/~/-/')"
 
       - name: TNG version info
         id: tng_version
