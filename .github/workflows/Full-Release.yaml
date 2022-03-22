@@ -70,6 +70,11 @@ jobs:
           mv ${{ env.TNG_WORKING_DIR }}/source/Makefile ${{ env.TNG_WORKING_DIR }}/source/Makefile-original
           cat ${{ env.CFG_WORKING_DIR }}/build/ci/tng-windows-append ${{ env.TNG_WORKING_DIR }}/source/Makefile-original > ${{ env.TNG_WORKING_DIR }}/source/Makefile
 
+      - name: Set Windows ico file for Q2Pro
+        run: |
+          mv ${{ env.CFG_WORKING_DIR }}/build/aq2pro64.ico ${{ env.Q2PRO_WORKING_DIR }}/src/windows/res/q2pro.ico
+
+
       - name: Install Windows/mingw dependencies
         run: |
           wget -nv https://github.com/skullernet/q2pro-mgw-sdk/releases/download/2021-09-07/q2pro-mgw-sdk.tar.gz
