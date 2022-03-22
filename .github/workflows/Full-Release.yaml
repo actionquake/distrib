@@ -160,9 +160,8 @@ jobs:
 
       - name: Build Changelog
         id: github_release
+        working-directory: ${{ env.CFG_WORKING_DIR }}
         uses: mikepenz/release-changelog-builder-action@v1
-        with:
-          repo: actionquake/distrib
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
