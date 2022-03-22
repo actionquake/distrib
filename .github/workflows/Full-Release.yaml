@@ -161,6 +161,7 @@ jobs:
       - name: Build Changelog
         id: github_release
         uses: mikepenz/release-changelog-builder-action@v1
+        repo: actionquake/distrib
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
