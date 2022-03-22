@@ -74,6 +74,7 @@ jobs:
         run: |
           wget -nv https://github.com/skullernet/q2pro-mgw-sdk/releases/download/2021-09-07/q2pro-mgw-sdk.tar.gz
           tar xf q2pro-mgw-sdk.tar.gz
+
       # Self-hosted runner has these
       # - name: Install dependencies
       #   run: |
@@ -82,7 +83,7 @@ jobs:
       #     libpng-dev libjpeg-dev zlib1g-dev mesa-common-dev \
       #     libcurl4-gnutls-dev
 
-      # Q2Pro Builds
+      ## Q2Pro Builds
 
       - name: Build Q2Pro - Linux 64-bit
         working-directory: ${{ env.Q2PRO_WORKING_DIR }}

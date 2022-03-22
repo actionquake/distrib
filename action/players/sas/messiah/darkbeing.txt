@@ -1,0 +1,10 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ACTION QUAKE2 SKIN : "Dark Being" for the Messiah	       				
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Skin:		Dark Being
+PPM:		Messiah
+Author:		Jon Benson, AKA Vengence
+E-Mail:		<A href="mailto:vengence_will_come@juno.com">vengence_will_come@juno.com</A>
+		
+Files:		ven.pcx, ven_i.pcx
