@@ -158,12 +158,12 @@ jobs:
         run: |
           printf "Q2Pro version: ${{ steps.q2pro_version.outputs.q2pro_version }}\nTNG version: ${{ steps.tng_version.outputs.tng_version }}" > CHANGELOG.md
 
-      - name: Build Changelog
-        id: github_release
-        working-directory: ${{ env.CFG_WORKING_DIR }}
-        uses: mikepenz/release-changelog-builder-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Build Changelog
+      #   id: github_release
+      #   working-directory: ${{ env.CFG_WORKING_DIR }}
+      #   uses: mikepenz/release-changelog-builder-action@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create release
         uses: actions/create-release@v1
