@@ -1,0 +1,117 @@
+/*
+This is example menu definition file for Q2PRO.
+
+File format is line based, whitespace is ignored.  C and C++ style comments are
+supported.  Long lines can be broken into multiple ones by escaping linefeed
+characters with backslashes.
+
+Lines are macro expanded at script load time just as usual console commands.
+Any cvars and macros can be referenced.
+
+Duplicate menu entries override previous ones.  Built-in menus (‘demos’,
+‘servers’ and ‘players’) can not be overridden.  When user presses ESC while
+disconnected, ‘main’ menu is pushed.  When user presses ESC while spawned in
+game, ‘game’ menu is pushed if it is found, otherwise ‘main’ menu is pushed.
+
+Supported keywords and their syntax:
+
+include <filename>
+
+background <color|image>
+font <image>
+cursor <image>
+weapon <model>
+
+color <state> <color>
+
+begin <menuname>
+   title <menutitle>
+   banner <image>
+   background <color|image>
+   plaque <plaque> [logo]
+
+   range <name> <cvar> <min> <max> [step]
+
+   pairs <name> <cvar> <string1> <value1> [...]
+   values <name> <cvar> <string1> [...]
+   strings <name> <cvar> <value1> [...]
+   toggle <name> <cvar> [~][bit]
+
+   bind <name> <command>
+   action <name> <command>
+   bitmap <image> <command>
+   savegame <slot>
+   loadgame <slot>
+   blank
+
+   field [options] <name> <cvar>
+end
+*/
+
+background black
+font conchars
+cursor ch1
+
+color normal #0f90eb64
+color active #0f90ff64
+color selection #0f90eb64
+color disabled #7f7f7f
+
+begin multiplayer
+    banner m_banner_multiplayer
+
+end
+
+begin main
+    title "Main Menu"
+    action "browse q2servers.com for aq2-servers" pushmenu servers "http://q2servers.com/?g=action&raw=1"
+    action "browse address book" pushmenu servers "favorites://" "file:///servers.lst" "broadcast://"
+    action "browse demos" pushmenu demos
+    blank
+    action "settings" pushmenu settings
+    blank
+    action quit quit
+end
+
+begin settings
+    title "Settings"
+    action "To change your settings and bindings" ""
+    blank
+    action "open action/autoexec.cfg " ""
+    action "in your favorit text editor" ""
+    blank
+    action "exit" forcemenuoff
+end
+
+begin game
+    background #0000ff20
+    style --compact
+    
+    action "browse q2servers.com" pushmenu servers "http://q2servers.com/?g=action&raw=1"
+    action "browse address book" pushmenu servers "favorites://" "file:///servers.lst" "broadcast://"
+    action "browse demos" pushmenu demos
+    blank
+    action "disconnect" disconnect
+    action "quit" quit
+end
+
+begin addressbook
+    //title "Address Book"
+    banner m_banner_addressbook
+    field --width 32 --center adr0
+    field --width 32 --center adr1
+    field --width 32 --center adr2
+    field --width 32 --center adr3
+    field --width 32 --center adr4
+    field --width 32 --center adr5
+    field --width 32 --center adr6
+    field --width 32 --center adr7
+    field --width 32 --center adr8
+    field --width 32 --center adr9
+    field --width 32 --center adr10
+    field --width 32 --center adr11
+    field --width 32 --center adr12
+    field --width 32 --center adr13
+    field --width 32 --center adr14
+    field --width 32 --center adr15
+end
