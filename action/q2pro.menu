@@ -8,10 +8,10 @@ characters with backslashes.
 Lines are macro expanded at script load time just as usual console commands.
 Any cvars and macros can be referenced.
 
-Duplicate menu entries override previous ones.  Built-in menus (‘demos’,
-‘servers’ and ‘players’) can not be overridden.  When user presses ESC while
-disconnected, ‘main’ menu is pushed.  When user presses ESC while spawned in
-game, ‘game’ menu is pushed if it is found, otherwise ‘main’ menu is pushed.
+Duplicate menu entries override previous ones.  Built-in menus ('demos',
+'servers' and 'players') can not be overridden.  When user presses ESC while
+disconnected, 'main' menu is pushed.  When user presses ESC while spawned in
+game, 'game' menu is pushed if it is found, otherwise 'main' menu is pushed.
 
 Supported keywords and their syntax:
 
@@ -64,35 +64,29 @@ end
 
 begin main
     title "Main Menu"
-    action "browse q2servers.com for aq2-servers" pushmenu servers "http://q2servers.com/?g=action&raw=1"
+    action "Discord - https://discord.gg/aq2world" ""
+    blank
+    action "browse action quake servers" pushmenu servers "http://q2servers.com/?g=action&raw=1"
     action "browse address book" pushmenu servers "favorites://" "file:///servers.lst" "broadcast://"
     action "browse demos" pushmenu demos
     blank
     action "settings" pushmenu settings
     blank
+    action "disconnect" disconnect
     action quit quit
 end
 
 begin settings
     title "Settings"
-    action "To change your settings and bindings" ""
+    action "Player Setup" pushmenu players
+    action "General Bindings" pushmenu bindings
+    action "Weapon Bindings" pushmenu wbindings
     blank
-    action "open action/autoexec.cfg " ""
-    action "in your favorit text editor" ""
+    action "Video Setup" pushmenu video
+    action "Sound Setup" pushmenu sound
+    action "Mouse Setup" pushmenu mouse
     blank
-    action "exit" forcemenuoff
-end
-
-begin game
-    background #0000ff20
-    style --compact
     
-    action "browse q2servers.com" pushmenu servers "http://q2servers.com/?g=action&raw=1"
-    action "browse address book" pushmenu servers "favorites://" "file:///servers.lst" "broadcast://"
-    action "browse demos" pushmenu demos
-    blank
-    action "disconnect" disconnect
-    action "quit" quit
 end
 
 begin addressbook
@@ -114,4 +108,111 @@ begin addressbook
     field --width 32 --center adr13
     field --width 32 --center adr14
     field --width 32 --center adr15
+end
+
+begin video
+    title "Video Setup"
+    values "fullscreen resolution" vid_fullscreen windowed $vid_modelist
+    field "windowed size" vid_geometry
+    pairs "widescreen mode" cl_adjustfov on 1 off 0
+    pairs "vertical sync" gl_swapinterval on 1 off 0
+    range "gamma" vid_gamma 1.3 0.3
+    range "brightness" gl_brightness 0 0.10
+    field "field of view" fov
+    action --align "apply now" "popmenu; vid_restart; pushmenu settings; pushmenu video"
+    blank
+    pairs "hud scaling" scr_scale auto 0 1x 1 2x 2
+    pairs "menu scaling" ui_scale auto 0 1x 1 2x 2
+    pairs "console scaling" con_scale auto 0 1x 1 2x 2
+    blank
+    pairs "font shadow" gl_fontshadow on 1 off 0
+    blank
+    action "Advanced Video Setup" pushmenu a_video
+end
+
+begin a_video
+    title "Advanced Video Setup"
+    pairs "separate frame rates" al_async yes 1 no 0
+    field "physics frame rate" cl_maxfps
+    field "rendering frame rate" r_maxfps
+    blank
+    toggle "hardware gamma" vid_hwgamma
+    range "lightmap saturation" gl_coloredlightmaps 0 1
+    toggle "override textures" r_override_textures
+    toggle "override models" r_override_models
+    blank
+    action --align "apply now" "popmenu; vid_restart; pushmenu settings; pushmenu video; pushmenu a_video"
+end
+
+begin mouse
+    title "Mouse Setup"
+    pairs "invert mouse" m_pitch "no" "0.022" "yes" "-0.022"
+    range "sensitivity" sensitivity 0.1 10.0
+    toggle "FOV sensitivity scaling" m_autosens
+    blank
+    pairs "crosshair" crosshair "cross" "1" "full cross" "2" "dotted cross" "3" "big cross" "4" "dot" "5" "big dot" "6" "double cross" "11" "double full" "12" "double dotted" "13" "double big" "14" "double dot" "15" "double big dot" "16"
+    range "crosshair red" ch_red 0.0 1.0
+    range "crosshair green" ch_green 0.0 1.0
+    range "crosshair blue" ch_blue 0.0 1.0
+    range "crosshair alpha" ch_alpha 0.0 1.0
+end
+
+begin sound
+    title "Sound Setup"
+    range "effects volume" s_volume 0 1
+    values "ambient sounds" s_ambient "no" "yes" "only player's own"
+    pairs "chat beep" cl_chat_sound \
+        disabled "" \
+        default misc/talk.wav \
+        alternative misc/talk1.wav \
+        misc/talk_user.wav misc/talk_user.wav
+    action --align "test chat beep" "stopsound; popmenu; pushmenu sound; echo playing $cl_chat_sound; play $cl_chat_sound"
+end
+
+begin bindings
+    title "General Bindings"
+    bind "move forward" +forward
+    bind "move backward" +back
+    bind "strafe left" +moveleft
+    bind "strafe right" +moveright
+    bind "jump" +moveup
+    bind "duck" +movedown
+    bind "fire weapon" +attack
+    bind "next weapon" weapnext
+    bind "previous weapon" weapprev
+    bind "walk slowly" +speed
+    blank
+    bind "show scores" cmd help
+    bind "game menu" inven
+    bind "voting menu" menu
+    bind "show stats" stats
+    blank
+    bind "menu up" invprev
+    bind "menu down" invnext
+    bind "menu select" invuse
+    blank
+    bind "world chat" messagemode 
+    bind "team chat" messagemode2
+    blank
+    bind "screenshot" screenshotjpg
+    blank
+    action "Weapon Binds" pushmenu wbindings
+end
+
+begin wbindings
+    title "Weapon Bindings"
+    bind "change weapon mode" weapon
+    bind "sniper zoom" lens
+    bind "drop current weapon" drop weapon
+    blank
+    bind "use Mk23 (Single)" use mk23 pistol
+    bind "use Mk23 (Dual)" use a 2nd pistol
+    bind "use SSG Sniper Rifle" use sniper
+    bind "use MP5/10" use mp5
+    bind "use M4" use m4
+    bind "use Handcannon" use handcannon
+    bind "use M3 Shotgun" use shotgun
+    bind "use throwing knife" use throwing combat knife
+    bind "use slashing knife" use slashing combat knife
+    bind "use grenade" use m26 fragmentation grenade
 end
