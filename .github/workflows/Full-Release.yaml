@@ -72,8 +72,8 @@ jobs:
 
       - name: Set Windows ico file for Q2Pro
         run: |
-          mv ${{ env.CFG_WORKING_DIR }}/build/aq2pro64.ico ${{ env.Q2PRO_WORKING_DIR }}/src/windows/res/q2pro.ico
-
+          mv ${{ env.CFG_WORKING_DIR }}/build/aq2pro.ico ${{ env.Q2PRO_WORKING_DIR }}/src/windows/res/q2pro.ico
+          mv ${{ env.CFG_WORKING_DIR }}/build/aq2proded.ico ${{ env.Q2PRO_WORKING_DIR }}/src/windows/res/q2proded.ico
 
       - name: Install Windows/mingw dependencies
         run: |
