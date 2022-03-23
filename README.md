@@ -10,56 +10,30 @@ Every effort has been made to ensure that no licensed, copyrighted and/or tradem
 
 https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 
-- Quake II source code: https://github.com/skullernet/q2pro
-- Action Quake source code: https://github.com/aq2-tng/aq2-tng
+- Quake II source code: https://github.com/skullernet/q2pro (Game Engine)
+- Quake II 3.14 Demo: http://tastyspleen.net/quake/downloads/q2-314-demo-x86.exe (Demo Content)
+- Action Quake source code: https://github.com/aq2-tng/aq2-tng (Action Quake Content)
 
 Should it be discovered that assets included in this distribution are indeed unlicensed for use, the maintainers of this repository will make expedited and thorough adjustments to the distribution to remove said assets and replaced with appropriate content.  Please leave a message as a Github Issue containing links and refernces to the content, and we will respond as soon as we can.
 
 ## Requirements
-* Latest q2pro built specifically for `action` for 64-bit Mac, 32- and 64-bit Windows, 32- and 64-bit Linux
-    * Handled via Github Actions CI
-* Latest dll/so from aq2-tng (bot branch to include LTK) (and 32-bit equivalents for Windows and Linux)
-    * Handled via Github Actions CI
-* aq2config.cfg - Contains reasonable defaults for new players
-* Several maps, but let's identify ones that do not have copyrighted or trademarked materials such as Coca*Cola signs (
-    * Optionally, replace copyrighted/trademarked textures with 'safe' ones
-    * One accepted/approved LTK file per included map, so that new players can fight against bots if they wish, and so that the bots aren't without any pathing
-* Helper script that activates/deactivates content (Python?)
-    * Essentially moves files around or renames directories (high def vs. original textures for instance)
-* 'Official' releases via this distribution done in `pkz` files for game content
+* A computer built within the last 25 years
+* Windows 98, ME, XP, Vista, 7, 8, 10 and probably 11 are all compatible
+* Mac OS (Intel processors) -- Coming soon?
+* 64-bit Linux with a video card and sound card
+* Essentially, if you are able to run Quake II, you can run Action Quake.  We do not provide direct support for running Quake II as there are over 20 years of forum posts and articles on how to use it, but if you are running into problems with this specific release, contact us
+* If there's a special request for 32-bit Linux, ARM or otherwise, open an Issue!
 
+## Instructions/Installation
+1. Download the latest release for your given system
+1. Extract to anywhere on your machine you would like it to be permanently installed
+1. Open/launch q2pro
+1. Join us in Discord (below for link) and find some people to play with
 
-## Directory structure
-```
-Action Quake/
-    q2pro executable (Mac, Win, Lin)
-    action/
-        gamex86_64.dll (Windows 64-bit)
-        gamei386.dll (Windows 32-bit)
-        gamex86_64.so (Linux and Mac 64-bit)
-        gamei386.so (Linux 32-bit)
-        aq2config.cfg
-        action.ini
-        terrain/
-            <one .ltk file per map included in this release>
-        players/
-            terror/
-                <all terror skins, sounds and content>
-            sas/
-                <all terror skins, sounds and content>
-        sound/
-            click.wav
-            female/
-            male/
-```
+## Contact
+* Github Issues in this repository
+* [Discord](https://discord.gg/aq2world) ask for @Mods
 
-## Identified items that may need replaced
-Any assets that came from Quake II
-* sounds
-    * hurt
-    * falling damage
-* textures
-    * anything from eXuX needs replaced
-* players
-    * male model?
-    * female model?
+## Site Links
+* [AQ2World](https://www.aq2world.com)
+* [AQ2Suomi](https://www.aq2suomi.com)
