@@ -42,6 +42,9 @@ Core functionality
   - [ ] Assets Passed Inspection
   - [ ] LTK file included
 
+##### Demos
+* Include 2-3 demos of good action scenes, jumps and matches
+
 ##### Distribution files
 - [ ] Helper script that activates/deactivates content (Python?)
     * Essentially moves files around or renames directories (high def vs. original textures for instance)
