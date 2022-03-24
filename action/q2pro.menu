@@ -48,7 +48,7 @@ begin <menuname>
 end
 */
 
-background black
+background mainmenu_bkgd
 font conchars
 cursor ch1
 
@@ -64,17 +64,17 @@ end
 
 begin main
     title "Main Menu"
-    action "Discord - https://discord.gg/aq2world" ""
+    action " Discord - https://discord.gg/aq2world" ""
     blank
-    action "browse action quake servers" pushmenu servers "http://q2servers.com/?g=action&raw=1"
-    action "browse address book" pushmenu servers "favorites://" "file:///servers.lst" "broadcast://"
-    action "browse demos" pushmenu demos
-	action "play against bots" pushmenu bots
+    action " browse action quake servers " pushmenu servers "http://q2servers.com/?g=action&raw=1"
+    action " browse address book " pushmenu servers "favorites://" "file:///servers.lst" "broadcast://"
+    action " browse demos " pushmenu demos
+	action " play against bots" pushmenu bots
     blank
-    action "settings" pushmenu settings
+    action " settings" pushmenu settings
     blank
-    action "disconnect" disconnect
-    action quit quit
+    action " disconnect" disconnect
+    action " quit" quit
 end
 
 begin bots
