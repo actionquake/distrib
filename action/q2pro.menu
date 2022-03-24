@@ -69,11 +69,29 @@ begin main
     action "browse action quake servers" pushmenu servers "http://q2servers.com/?g=action&raw=1"
     action "browse address book" pushmenu servers "favorites://" "file:///servers.lst" "broadcast://"
     action "browse demos" pushmenu demos
+	action "play against bots" pushmenu bots
     blank
     action "settings" pushmenu settings
     blank
     action "disconnect" disconnect
     action quit quit
+end
+
+begin bots
+    title "Play with Bots"
+	pairs "map" _gamemap \
+        urbanjungle urbanjungle \
+        passin passin 
+	pairs "teams" _teamplay on 1 off 0
+	blank
+	pairs "spawn with all weapons" _allweapon on 1 off 0
+	pairs "spawn with all items" _allitem on 1 off 0
+	range "time limit" _timelimit 0 30
+	range "frag limit" _fraglimit 0 50
+	blank
+	range "bot skill" _ltk_skill 0 10
+	
+	action "Begin Game" "map credits;hostname "$name Server";deathmatch 1;teamplay $_teamplay;allweapon $_allweapon;allitem $_allitem;timelimit $_timelimit;fraglimit $_fraglimit;ltk_skill $_ltk_skill; map $_gamemap"
 end
 
 begin settings
