@@ -26,9 +26,12 @@ jobs:
     #runs-on: ubuntu-latest
     runs-on: self-hosted
     steps:
-      - name: Clean working directory
+      - name: 'Cleanup build folder'
         run: |
-          rm -rf *.*
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
 
       - name: Checkout Q2Pro
         uses: actions/checkout@v3
