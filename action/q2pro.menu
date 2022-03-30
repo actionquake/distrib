@@ -69,7 +69,11 @@ begin main
     action " browse action quake servers " pushmenu servers "http://q2servers.com/?g=action&raw=1"
     action " browse address book " pushmenu servers "favorites://" "file:///servers.lst" "broadcast://"
     action " browse demos " pushmenu demos
-	action " play against bots" pushmenu bots
+    /* -- Fix local bot spawn, in meantime connect to a server --
+
+	action " play against bots" "connect useast.aq2world.com:27917"
+    */
+
     blank
     action " settings" pushmenu settings
     blank
@@ -90,7 +94,6 @@ begin bots
 	range "frag limit" _fraglimit 0 50
 	blank
 	range "bot skill" _ltk_skill 0 10
-	
 	action "Begin Game" "map credits;hostname "$name Server";deathmatch 1;teamplay $_teamplay;allweapon $_allweapon;allitem $_allitem;timelimit $_timelimit;fraglimit $_fraglimit;ltk_skill $_ltk_skill; map $_gamemap"
 end
 
@@ -99,12 +102,13 @@ begin settings
     action "Player Setup" pushmenu players
     action "General Bindings" pushmenu bindings
     action "Weapon Bindings" pushmenu wbindings
+    action "Game Settings" pushmenu gsettings
+    action "Misc Settings" pushmenu msettings
     blank
     action "Video Setup" pushmenu video
     action "Sound Setup" pushmenu sound
     action "Mouse Setup" pushmenu mouse
     blank
-    
 end
 
 begin addressbook
@@ -150,16 +154,60 @@ end
 
 begin a_video
     title "Advanced Video Setup"
-    pairs "separate frame rates" al_async yes 1 no 0
+    pairs "separate frame rates" cl_async yes 1 no 0
     field "physics frame rate" cl_maxfps
     field "rendering frame rate" r_maxfps
     blank
+    range "particle scale" gl_partscale 0 5
+    toggle "particle style" gl_partstyle
+    pairs "particle shape" circle 0 square 1 full_circle 2
+    range "celshading" gl_celshading 0 4
+    blank
+    pairs "dynamic lightmap" gl_dynamic disabled 0 enabled 1 partial 2
+    range "saturation" gl_saturation 0.0 1.0
+    range "modulation" gl_modulate 0 2
     toggle "hardware gamma" vid_hwgamma
-    range "lightmap saturation" gl_coloredlightmaps 0 1
+    range "lightmap saturation" gl_coloredlightmaps 0.0 1.0
     toggle "override textures" r_override_textures
     toggle "override models" r_override_models
     blank
     action --align "apply now" "popmenu; vid_restart; pushmenu settings; pushmenu video; pushmenu a_video"
+end
+
+begin msettings
+    title "Misc Settings"
+    pairs "gun handedness" cl_gun "do not show" 0 "same as hand" 1 "force right hand" 2 "force left hand" 3
+    pairs "screenshot format" gl_screenshot_format png png jpg jpg tga tga
+    blank
+    toggle "automatic downloads" allow_download on 1 off 0
+    toggle "maps" allow_download_maps on 1 off 0
+    toggle "models" allow_download_models on 1 off 0
+    toggle "sounds" allow_download_sounds on 1 off 0
+    toggle "pics" allow_download_pics on 1 off 0
+    toggle "skins" allow_download_players on 1 off 0
+    toggle "textures" allow_download_textures on 1 off 0
+    blank
+    pairs "display stats" stats_mode disabled 0 "end of round" 1 "end of map" 2
+    toggle "automatic demo recording" autorecord
+end
+
+begin gsettings
+    title "Game Settings and Binds"
+    bind "drop ctf flag" drop flag
+    bind "matchmode ready toggle" ready
+    bind "matchmode lock team" lock
+    bind "matchmode unlock team" unlock
+    blank
+    bind "show stats" stats list
+    bind "screenshot" screenshotjpg
+    bind "restore score on rejoin" ghost
+    blank
+    bind "sniper zoom in" lens in
+    bind "sniper zoom out" lens out
+    bind "flashlight toggle" flashlight
+    blank
+    toggle "auto join same team" on 1 off 0
+    toggle "auto equip same equipment" on 1 off 0
 end
 
 begin mouse
@@ -201,7 +249,7 @@ begin bindings
     bind "walk slowly" +speed
     blank
     bind "show scores" cmd help
-    bind "game menu" inven
+    bind "main menu" inven
     bind "voting menu" menu
     bind "show stats" stats
     blank
@@ -212,9 +260,10 @@ begin bindings
     bind "world chat" messagemode 
     bind "team chat" messagemode2
     blank
-    bind "screenshot" screenshotjpg
+    bind "bandage" bandage
     blank
     action "Weapon Binds" pushmenu wbindings
+    action "Game Settings and Binds" pushmenu gsettings
 end
 
 begin wbindings
@@ -223,6 +272,7 @@ begin wbindings
     bind "sniper zoom" lens
     bind "drop current weapon" drop weapon
     blank
+    bind "use primary weapon" use primary
     bind "use Mk23 (Single)" use mk23 pistol
     bind "use Mk23 (Dual)" use a 2nd pistol
     bind "use SSG Sniper Rifle" use sniper
@@ -233,4 +283,5 @@ begin wbindings
     bind "use throwing knife" use throwing combat knife
     bind "use slashing knife" use slashing combat knife
     bind "use grenade" use m26 fragmentation grenade
+    bind "punch" punch
 end
