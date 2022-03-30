@@ -205,7 +205,6 @@ begin gsettings
     blank
     bind "sniper zoom in" lens in
     bind "sniper zoom out" lens out
-    
     blank
     toggle "auto join same team" on 1 off 0
     toggle "auto equip same equipment" on 1 off 0
@@ -262,6 +261,7 @@ begin bindings
     bind "team chat" messagemode2
     blank
     bind "bandage" bandage
+    bind "open/close door" opendoor
     blank
     action "Weapon Binds" pushmenu wbindings
     action "Game Settings and Binds" pushmenu gsettings
