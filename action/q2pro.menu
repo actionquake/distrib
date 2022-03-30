@@ -69,11 +69,8 @@ begin main
     action " browse action quake servers " pushmenu servers "http://q2servers.com/?g=action&raw=1"
     action " browse address book " pushmenu servers "favorites://" "file:///servers.lst" "broadcast://"
     action " browse demos " pushmenu demos
-    /* -- Fix local bot spawn, in meantime connect to a server --
-
+    /* -- Fix local bot spawn, in meantime connect to a server --    */
 	action " play against bots" "connect useast.aq2world.com:27917"
-    */
-
     blank
     action " settings" pushmenu settings
     blank
@@ -81,6 +78,7 @@ begin main
     action " quit" quit
 end
 
+/* -- Fix local bot spawn
 begin bots
     title "Play with Bots"
 	pairs "map" _gamemap \
@@ -96,6 +94,7 @@ begin bots
 	range "bot skill" _ltk_skill 0 10
 	action "Begin Game" "map credits;hostname "$name Server";deathmatch 1;teamplay $_teamplay;allweapon $_allweapon;allitem $_allitem;timelimit $_timelimit;fraglimit $_fraglimit;ltk_skill $_ltk_skill; map $_gamemap"
 end
+*/
 
 begin settings
     title "Settings"
