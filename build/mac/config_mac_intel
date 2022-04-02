@@ -9,14 +9,15 @@ CONFIG_CLIENT_GTV=y
 CONFIG_PACKETDUP=y
 CONFIG_TESTS=y
 CONFIG_DEBUG=y
-CFLAGS=-Werror
+#CFLAGS=-Werror   # OpenAL-related warnings can be ignored
 CONFIG_GAME_BASE=action
 CPU=x86_64
-# CONFIG_OPENAL=n
-# CONFIG_FIXED_LIBAL=y
-# AL_CFLAGS = -framework OpenAL
-# AL_LIBS = -framework OpenAL
+
+CONFIG_OPENAL=y
+CONFIG_FIXED_LIBAL=y
+AL_CFLAGS = -framework OpenAL
+AL_LIBS = -framework OpenAL
 
 CONFIG_PATH_DATA=.
 CONFIG_PATH_LIB=.
-CONFIG_PATH_HOME=~/Applications/AQ.app/Contents/MacOS/action
+CONFIG_PATH_HOME=~/Applications/AQ.app/Contents/MacOS
