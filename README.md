@@ -14,7 +14,7 @@ https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 - Quake II 3.14 Demo: http://tastyspleen.net/quake/downloads/q2-314-demo-x86.exe (Demo Content)
 - Action Quake source code: https://github.com/aq2-tng/aq2-tng (Action Quake Content)
 
-Should it be discovered that assets included in this distribution are indeed unlicensed for use, the maintainers of this repository will make expedited and thorough adjustments to the distribution to remove said assets and replaced with appropriate content.  Please leave a message as a Github Issue containing links and refernces to the content, and we will respond as soon as we can.
+Should it be discovered that assets included in this distribution are indeed unlicensed for use, the maintainers of this repository will make expedited and thorough adjustments to the distribution to remove said assets and replaced with appropriate content.  Please leave a message as a Github Issue containing links and references to the content, and we will respond as soon as we can.
 
 ## Requirements
 * A computer built within the last 25 years
@@ -28,7 +28,7 @@ Should it be discovered that assets included in this distribution are indeed unl
 1. Download the latest release for your given system
 1. Extract to anywhere on your machine you would like it to be permanently installed
 1. Open/launch q2pro
-1. Join us in Discord (below for link) and find some people to play with
+1. Join us in [Discord](https://discord.gg/aq2world) and find some people to play with
 
 ## Contact
 * Github Issues in this repository
