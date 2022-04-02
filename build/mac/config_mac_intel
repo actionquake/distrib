@@ -19,4 +19,4 @@ CPU=x86_64
 
 CONFIG_PATH_DATA=.
 CONFIG_PATH_LIB=.
-CONFIG_PATH_HOME=.
+CONFIG_PATH_HOME=~/Applications/AQ.app/Contents/MacOS/action

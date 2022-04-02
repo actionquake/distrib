@@ -5,23 +5,23 @@
         <key>CFBundleDevelopmentRegion</key>
         <string>English</string>
         <key>CFBundleDisplayName</key>
-        <string>Q2Pro</string>
+        <string>AQ</string>
         <key>CFBundleExecutable</key>
         <string>q2pro</string>
         <key>CFBundleIconFile</key>
-        <string>quake2.icns</string>
+        <string>AQ.icns</string>
         <key>CFBundleIdentifier</key>
-        <string>org.quetoo.q2pro.launcher</string>
+        <string>org.actionquake.q2pro.launcher</string>
         <key>CFBundleName</key>
-        <string>Q2Pro</string>
+        <string>AQ</string>
         <key>CFBundlePackageType</key>
         <string>APPL</string>
         <key>CFBundleShortVersionString</key>
-        <string>Quetoo.org</string>
+        <string>aq2world.com</string>
         <key>CFBundleSignature</key>
         <string>????</string>
         <key>CFBundleVersion</key>
-        <string>Quetoo.org</string>
+        <string>aq2world.com</string>
         <key>LSMinimumSystemVersion</key>
         <string>10.10</string>
 </dict>
