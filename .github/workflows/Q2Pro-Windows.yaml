@@ -34,8 +34,8 @@ jobs:
 
       - name: Copy config build files
         run: |
-          cp -r config/build/ci/config_windows32 build/.config_windows32
-          cp -r config/build/ci/config_windows64 build/.config_windows64
+          cp -r config/build/windows/config_windows32 build/.config_windows32
+          cp -r config/build/windows/config_windows64 build/.config_windows64
 
       - name: Build
         working-directory: build
