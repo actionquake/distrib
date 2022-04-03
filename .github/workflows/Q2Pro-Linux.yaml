@@ -38,7 +38,7 @@ jobs:
 
       - name: Copy config build files
         run: |
-          cp -r config/build/ci/config_linux64 build/.config
+          cp -r config/build/linux/config_linux64 build/.config
 
       - name: Build Q2Pro
         working-directory: build
