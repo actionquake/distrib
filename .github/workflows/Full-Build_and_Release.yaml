@@ -1,0 +1,200 @@
+name: Full Release
+
+# on:
+#   push:
+#     branches: [main, ci]
+#   pull_request:
+#     branches: [main]
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release version tag"
+        required: true
+
+env:
+  Q2PRO_WORKING_DIR: "q2pro-build"
+  TNG_WORKING_DIR: "tng-build"
+  CFG_WORKING_DIR: "config"
+  LIN64_DIST_DIR: "linux-x64-dist"
+  WIN64_DIST_DIR: "windows-x64-dist"
+  WIN32_DIST_DIR: "windows-i386-dist"
+
+jobs:      
+  full_release:
+    #runs-on: ubuntu-latest
+    runs-on: self-hosted
+    steps:
+      - name: 'Cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
+
+      - name: Checkout Q2Pro
+        uses: actions/checkout@v3
+        with:
+          repository: skullernet/q2pro
+          path: ${{ env.Q2PRO_WORKING_DIR }}
+
+      - name: Checkout distrib
+        uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.CFG_WORKING_DIR }}
+
+      - name: Checkout aq2-tng
+        uses: actions/checkout@v3
+        with:
+          repository: aq2-tng/aq2-tng
+          ref: 'bots'
+          path: ${{ env.TNG_WORKING_DIR }}
+
+      - name: Q2Pro version info
+        id: q2pro_version
+        working-directory: ${{ env.Q2PRO_WORKING_DIR }}
+        run: echo "::set-output name=q2pro_version::$(bash version.sh | head -n 1 | sed 's/~/-/')"
+
+      - name: TNG version info
+        id: tng_version
+        working-directory: ${{ env.TNG_WORKING_DIR }}
+        run: printf "::set-output name=tng_version::$(git show -s --format='%cd' --date=short)-$(git rev-parse --short HEAD)"
+
+      - name: Generate dist directory
+        run: |
+          mkdir -p ${{ env.LIN64_DIST_DIR }}/action
+          mkdir -p ${{ env.WIN64_DIST_DIR }}/action
+          mkdir -p ${{ env.WIN32_DIST_DIR }}/action
+      
+      - name: Rough hack to fix Makefile
+        run: |
+          mv ${{ env.TNG_WORKING_DIR }}/source/Makefile ${{ env.TNG_WORKING_DIR }}/source/Makefile-original
+          cat ${{ env.CFG_WORKING_DIR }}/build/windows/tng-windows-append ${{ env.TNG_WORKING_DIR }}/source/Makefile-original > ${{ env.TNG_WORKING_DIR }}/source/Makefile
+
+      - name: Set Windows ico file for Q2Pro
+        run: |
+          mv ${{ env.CFG_WORKING_DIR }}/build/windows/aq2pro.ico ${{ env.Q2PRO_WORKING_DIR }}/src/windows/res/q2pro.ico
+          mv ${{ env.CFG_WORKING_DIR }}/build/windows/aq2proded.ico ${{ env.Q2PRO_WORKING_DIR }}/src/windows/res/q2proded.ico
+
+      - name: Install Windows/mingw dependencies
+        run: |
+          wget -nv https://github.com/skullernet/q2pro-mgw-sdk/releases/download/2021-09-07/q2pro-mgw-sdk.tar.gz
+          tar xf q2pro-mgw-sdk.tar.gz
+
+      # Self-hosted runner has these
+      # - name: Install dependencies
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt install -y libsdl2-dev libopenal-dev \
+      #     libpng-dev libjpeg-dev zlib1g-dev mesa-common-dev \
+      #     libcurl4-gnutls-dev
+
+      ## Q2Pro Builds
+
+      - name: Build Q2Pro - Linux 64-bit
+        working-directory: ${{ env.Q2PRO_WORKING_DIR }}
+        run: make strip V=1
+        env:
+          CC: "gcc"
+          CONFIG_FILE: "../${{ env.CFG_WORKING_DIR }}/build/linux/config_linux64"
+
+      - name: Copy Linux 64-bit Q2Pro artifacts
+        run: |
+          cp ${{ env.Q2PRO_WORKING_DIR }}/q2pro ${{ env.Q2PRO_WORKING_DIR }}/q2proded ${{ env.LIN64_DIST_DIR }}/
+
+      - name: Build Q2Pro - Windows 64-bit
+        working-directory: ${{ env.Q2PRO_WORKING_DIR }}
+        run: make clean && make strip V=1
+        env:
+          CONFIG_FILE: "../${{ env.CFG_WORKING_DIR }}/build/windows/config_windows64"
+
+      - name: Copy Windows 64-bit Q2Pro artifacts
+        run: |
+          cp ${{ env.Q2PRO_WORKING_DIR }}/q2pro.exe ${{ env.Q2PRO_WORKING_DIR }}/q2proded.exe ${{ env.WIN64_DIST_DIR }}/
+
+      - name: Build Q2Pro - Windows 32-bit
+        working-directory: ${{ env.Q2PRO_WORKING_DIR }}
+        run: make clean && make strip V=1
+        env:
+          CONFIG_FILE: "../${{ env.CFG_WORKING_DIR }}/build/windows/config_windows32"
+
+      - name: Copy Windows 32-bit Q2Pro artifacts
+        run: |
+          cp ${{ env.Q2PRO_WORKING_DIR }}/q2pro.exe ${{ env.Q2PRO_WORKING_DIR }}/q2proded.exe ${{ env.WIN32_DIST_DIR }}/
+
+      ## TNG builds
+
+      - name: Build TNG - Linux 64-bit
+        working-directory: ${{ env.TNG_WORKING_DIR }}/source
+        run: make strip V=1
+        env:
+          CC: "gcc"
+
+      - name: Copy Linux 64-bit TNG artifacts
+        run: |
+          cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.so ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.LIN64_DIST_DIR }}/action/
+    
+      - name: Build TNG - Windows 64-bit
+        working-directory: ${{ env.TNG_WORKING_DIR }}/source
+        run: make clean && make strip V=1
+        env:
+          IFDEF: "WIN64"
+
+      - name: Copy Windows 64-bit TNG artifacts
+        run: |
+          cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86_64.dll ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN64_DIST_DIR }}/action/
+
+      - name: Build TNG - Windows 32-bit
+        working-directory: ${{ env.TNG_WORKING_DIR }}/source
+        run: make clean && make strip V=1
+        env:
+          IFDEF: "WIN32"
+
+      - name: Copy Windows 32-bit TNG artifacts
+        run: |
+          cp -r ${{ env.TNG_WORKING_DIR }}/source/gamex86.dll ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN32_DIST_DIR }}/action/
+          
+      - name: Generate dist files
+        run: |
+          tar czpf action_quake-${{ github.event.inputs.release_tag }}-linux-x64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          zip -r action_quake-${{ github.event.inputs.release_tag }}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
+          zip -r action_quake-${{ github.event.inputs.release_tag }}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
+    
+      - name: Generate Changelog
+        run: |
+          printf "Q2Pro version: ${{ steps.q2pro_version.outputs.q2pro_version }}\nTNG version: ${{ steps.tng_version.outputs.tng_version }}" > CHANGELOG.md
+
+      # - name: Build Changelog
+      #   id: github_release
+      #   working-directory: ${{ env.CFG_WORKING_DIR }}
+      #   uses: mikepenz/release-changelog-builder-action@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: action_quake-${{ github.event.inputs.release_tag }}
+          tag_name: ${{ github.event.inputs.release_tag }}
+          #body_path: CHANGELOG.md
+          body: ${{steps.github_release.outputs.changelog}}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload dist tarball to release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          body_path: 
+          tag_name: ${{ github.event.inputs.release_tag }}
+          files: |
+            action_quake-${{ github.event.inputs.release_tag }}-linux-x64.tar.gz
+            action_quake-${{ github.event.inputs.release_tag }}-windows-x64.zip
+            action_quake-${{ github.event.inputs.release_tag }}-windows-i386.zip
+

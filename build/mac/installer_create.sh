@@ -11,7 +11,7 @@ if [[ -z $1 ]]; then
 fi
 
 if [[ -z ${BUILD_MAKE} ]]; then
-    echo "First argument must be one of [make | build | both]"
+    echo "First argument must be one of [make|build|both]"
     exit 1
 fi
 
@@ -22,7 +22,7 @@ if [[ ${ARCH} -ne "intel" || ${ARCH} -ne "arm" ]]; then
 fi
 
 if [[ -z ${VERSION} && ${BUILD_MAKE} -ne "make" ]]; then
-    echo "No version detected, example suggested value: v0.0.20"
+    echo "No version detected, example suggested value format: v0.0.20"
 fi
 
 echo "Current dir is ${CURRENT_DIR}"
