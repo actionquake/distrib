@@ -14,8 +14,6 @@ on:
         required: true
 
 env:
-  Q2PRO_WORKING_DIR: "q2pro-build"
-  TNG_WORKING_DIR: "tng-build"
   CFG_WORKING_DIR: "config"
   LIN64_DIST_DIR: "linux-x64-dist"
   WIN64_DIST_DIR: "windows-x64-dist"
@@ -23,15 +21,9 @@ env:
 
 jobs:      
   full_release:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+    #runs-on: self-hosted
     steps:
-      - name: 'Cleanup build folder'
-        run: |
-          ls -la ./
-          rm -rf ./* || true
-          rm -rf ./.??* || true
-          ls -la ./
-
       - name: Checkout distrib
         uses: actions/checkout@v3
         with:
