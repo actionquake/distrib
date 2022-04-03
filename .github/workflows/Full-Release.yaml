@@ -128,7 +128,7 @@ jobs:
 
       - name: Build TNG - Linux 64-bit
         working-directory: ${{ env.TNG_WORKING_DIR }}/source
-        run: make V=1
+        run: make strip V=1
         env:
           CC: "gcc"
 
@@ -138,7 +138,7 @@ jobs:
     
       - name: Build TNG - Windows 64-bit
         working-directory: ${{ env.TNG_WORKING_DIR }}/source
-        run: make clean && make V=1
+        run: make clean && make strip V=1
         env:
           IFDEF: "WIN64"
 
@@ -148,7 +148,7 @@ jobs:
 
       - name: Build TNG - Windows 32-bit
         working-directory: ${{ env.TNG_WORKING_DIR }}/source
-        run: make clean && make V=1
+        run: make clean && make strip V=1
         env:
           IFDEF: "WIN32"
 
