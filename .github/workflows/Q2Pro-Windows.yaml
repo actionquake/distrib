@@ -46,7 +46,7 @@ jobs:
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
-          name: q2pro-win-${{ maxtrix.suffix}}
+          name: "q2pro-win-${{ matrix.suffix }}"
           path: |
             build/q2pro.exe
             build/q2proded.exe
