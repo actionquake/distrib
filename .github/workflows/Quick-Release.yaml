@@ -20,7 +20,7 @@ env:
   WIN32_DIST_DIR: "windows-i386-dist"
 
 jobs:      
-  full_release:
+  quick_release:
     runs-on: ubuntu-latest
     #runs-on: self-hosted
     steps:
@@ -40,14 +40,14 @@ jobs:
       - name: Download latest Linux Q2Pro artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: Q2Pro-Linux.yml
+          workflow: Q2Pro-Linux.yaml
           name: q2pro-linux
           path: ${{ env.LIN64_DIST_DIR }}/
 
       - name: Download latest Linux TNG artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: TNG-Linux.yml
+          workflow: TNG-Linux.yaml
           name: tng-lin-library
           path: ${{ env.LIN64_DIST_DIR }}/action/
 
@@ -59,14 +59,14 @@ jobs:
       - name: Download latest Win32 Q2Pro artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: Q2Pro-Windows.yml
+          workflow: Q2Pro-Windows.yaml
           name: q2pro-win-32
           path: ${{ env.WIN32_DIST_DIR }}/
 
       - name: Download latest Win32 TNG artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: TNG-Windows.yml
+          workflow: TNG-Windows.yaml
           name: tng-win-32
           path: ${{ env.WIN32_DIST_DIR }}/action/
 
@@ -78,14 +78,14 @@ jobs:
       - name: Download latest Win64 Q2Pro artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: Q2Pro-Windows.yml
+          workflow: Q2Pro-Windows.yaml
           name: q2pro-win-64
           path: ${{ env.WIN64_DIST_DIR }}/
 
       - name: Download latest Win64 TNG artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: TNG-Windows.yml
+          workflow: TNG-Windows.yaml
           name: tng-win-64
           path: ${{ env.WIN64_DIST_DIR }}/action/
 
