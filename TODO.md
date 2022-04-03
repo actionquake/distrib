@@ -46,9 +46,9 @@ Core functionality
 * Include 2-3 demos of good action scenes, jumps and matches
 
 ##### Distribution files
-- [ ] Helper script that activates/deactivates content (Python?)
-    * Essentially moves files around or renames directories (high def vs. original textures for instance)
 * 'Official' releases via this distribution done in `pkz` files for game content
 
 ##### Identified items that may need replaced
-Any assets that came from Quake II _retail_ (assets from the demo are okay)
+* Any assets that came from Quake II _retail_ (assets from the demo are okay)
+* Fix missing weapon models
+* Fix default model problem on Mac?
