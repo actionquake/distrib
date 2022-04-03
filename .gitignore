@@ -4,4 +4,4 @@ items.txt
 CHANGELOG*
 tmp
 build/mac/AQ_Install/AQ.app/Contents/MacOS/
-AQ.dmg
+*.dmg
