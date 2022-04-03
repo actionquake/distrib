@@ -21,7 +21,7 @@ jobs:
 
       - name: Build TNG
         working-directory: build/source
-        run: make V=1
+        run: make strip V=1
         env:
           CC: "gcc"
 
