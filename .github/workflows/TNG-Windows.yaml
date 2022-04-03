@@ -19,11 +19,6 @@ jobs:
           ref: 'bots'
           path: build
 
-      # - uses: actions/checkout@v3
-      #   with:
-      #     repository: actionquake/distrib
-      #     path: config
-
       # This is because the Makefile doesn't recognize mingw on Linux, and we have to append a special flag at the linking step for Windows
       - name: Rough hack to fix Makefile
         run: |
@@ -56,4 +51,3 @@ jobs:
           name: tng-win-32
           path: |
             build/source/gamex86.dll
-

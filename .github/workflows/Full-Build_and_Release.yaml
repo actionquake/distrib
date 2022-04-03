@@ -1,4 +1,4 @@
-name: Full Release
+name: Full Build and Release
 
 # on:
 #   push:
