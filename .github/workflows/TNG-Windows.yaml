@@ -46,7 +46,7 @@ jobs:
 
       - name: Build TNG (32-bit)
         working-directory: build/source
-        run: make V=1
+        run: make clean && make V=1
         env:
           IFDEF: "WIN32"
 
