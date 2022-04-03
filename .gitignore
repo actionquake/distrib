@@ -6,3 +6,4 @@ tmp
 build/mac/AQ_Install/AQ.app/Contents/MacOS
 *.dmg
 gamex*
+build/mac/q2pro/
