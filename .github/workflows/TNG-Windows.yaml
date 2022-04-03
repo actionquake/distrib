@@ -33,7 +33,7 @@ jobs:
 
       - name: Build TNG (64-bit)
         working-directory: build/source
-        run: make strip V=1
+        run: make V=1
         env:
           IFDEF: "WIN64"
 
@@ -46,7 +46,7 @@ jobs:
 
       - name: Build TNG (32-bit)
         working-directory: build/source
-        run: make strip V=1
+        run: make V=1
         env:
           IFDEF: "WIN32"
 
