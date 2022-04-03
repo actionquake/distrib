@@ -38,12 +38,11 @@ jobs:
           IFDEF: "WIN64"
 
       - name: Generate Win64 archive
-        working-directory: build/source
         uses: actions/upload-artifact@v3
         with:
           name: tng-win-64
           path: |
-            gamex86_64.dll
+            build/source/gamex86_64.dll
 
       - name: Build TNG (32-bit)
         working-directory: build/source
@@ -52,10 +51,9 @@ jobs:
           IFDEF: "WIN32"
 
       - name: Generate Win32 archive
-        working-directory: build/source
         uses: actions/upload-artifact@v3
         with:
           name: tng-win-32
           path: |
-            gamex86.dll
+            build/source/gamex86.dll
 
