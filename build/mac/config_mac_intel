@@ -20,4 +20,4 @@ AL_LIBS = -framework OpenAL
 
 CONFIG_PATH_DATA=.
 CONFIG_PATH_LIB=.
-CONFIG_PATH_HOME=~/Applications/AQ.app/Contents/MacOS
+CONFIG_PATH_HOME=/Applications/AQ.app/Contents/MacOS
