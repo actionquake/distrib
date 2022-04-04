@@ -164,13 +164,13 @@ begin msettings
     pairs "gun handedness" cl_gun "do not show" 0 "same as hand" 1 "force right hand" 2 "force left hand" 3
     pairs "screenshot format" gl_screenshot_format png png jpg jpg tga tga
     blank
-    toggle "automatic downloads" allow_download on 1 off 0
-    toggle "maps" allow_download_maps on 1 off 0
-    toggle "models" allow_download_models on 1 off 0
-    toggle "sounds" allow_download_sounds on 1 off 0
-    toggle "pics" allow_download_pics on 1 off 0
-    toggle "skins" allow_download_players on 1 off 0
-    toggle "textures" allow_download_textures on 1 off 0
+    pairs "automatic downloads" allow_download on 1 off 0
+    pairs "maps" allow_download_maps on 1 off 0
+    pairs "models" allow_download_models on 1 off 0
+    pairs "sounds" allow_download_sounds on 1 off 0
+    pairs "pics" allow_download_pics on 1 off 0
+    pairs "skins" allow_download_players on 1 off 0
+    pairs "textures" allow_download_textures on 1 off 0
     blank
     pairs "display stats" stats_mode disabled 0 "end of round" 1 "end of map" 2
     toggle "automatic demo recording" autorecord
@@ -193,8 +193,8 @@ begin gsettings
     bind "sniper zoom in" lens in
     bind "sniper zoom out" lens out
     blank
-    toggle "auto join same team" on 1 off 0
-    toggle "auto equip same equipment" on 1 off 0
+    pairs "auto join same team" auto_join on 1 off 0
+    pairs "auto equip same equipment" auto_equip on 1 off 0
 end
 
 begin mouse
