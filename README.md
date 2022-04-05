@@ -18,8 +18,9 @@ Should it be discovered that assets included in this distribution are indeed unl
 
 ## Requirements
 * A computer built within the last 25 years
-* Windows 98, ME, XP, Vista, 7, 8, 10 and probably 11 are all compatible
-* Mac OS (Intel processors) -- Coming soon?
+* Windows 98, ME, XP, Vista, 7, 8, 10 and probably 11 are all compatible, 32 and 64-bit
+* Mac OS (Intel processors)
+    * If you want sound (and you do), you need to install [OpenAL](https://formulae.brew.sh/formula/openal-soft) via [Homebrew](https://brew.sh/) or your favorite method of installing these things
 * 64-bit Linux with a video card and sound card
 * Essentially, if you are able to run Quake II, you can run Action Quake.  We do not provide direct support for running Quake II as there are over 20 years of forum posts and articles on how to use it, but if you are running into problems with this specific release, contact us
 * If there's a special request for 32-bit Linux, ARM or otherwise, open an Issue!

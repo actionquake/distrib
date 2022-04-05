@@ -26,7 +26,7 @@ echo "Version: ${VERSION}"
 
 ## Change dynamic lib references manually because Apple is dumb and won't let us static link
 
-#install_name_tool -change /usr/lib/libcurl.4.dylib
+install_name_tool -change /usr/lib/libcurl.4.dylib @executable_path/.lib/libcurl.4.dylib q2probuilds/${ARCH}/q2pro
 install_name_tool -change /System/Library/Frameworks/OpenAL.framework/Versions/A/OpenAL @executable_path/.lib/libopenal.1.21.1.dylib q2probuilds/${ARCH}/q2pro
 install_name_tool -change /usr/local/opt/libpng/lib/libpng16.16.dylib @executable_path/.lib/libpng16.16.dylib q2probuilds/${ARCH}/q2pro
 install_name_tool -change /usr/local/opt/jpeg/lib/libjpeg.9.dylib @executable_path/.lib/libjpeg.9.dylib q2probuilds/${ARCH}/q2pro
