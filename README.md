@@ -26,14 +26,33 @@ Should it be discovered that assets included in this distribution are indeed unl
 * If there's a special request for 32-bit Linux, ARM or otherwise, open an Issue!
 
 ## Instructions/Installation
-1. Download the latest release for your given system
+### Mac (Intel and M1)
+1. Download the .dmg release package for your architecture
+1. Drag AQ to the Applications directory
+1. Double-click `AQ` to launch
+
+### Windows
+1. Download the latest release zip file
 1. Extract to anywhere on your machine you would like it to be permanently installed
-1. Open/launch q2pro
+1. Open/launch `q2pro.exe`
+
+### Linux
+1. Download the latest release tarball file
+1. Extract to anywhere on your machine you would like it to be permanently installed
+1. Open/launch `q2pro`
+
+### All platforms
 1. Join us in [Discord](https://discord.gg/aq2world) and find some people to play with
 
 ## Contact
 * Github Issues in this repository
 * [Discord](https://discord.gg/aq2world) ask for @Mods
+
+## Contribute
+1. Clone this repository
+1. Checkout a new branch
+1. Commit your modifications/additions
+1. Submit pull request
 
 ## Site Links
 * [AQ2World](https://www.aq2world.com)
