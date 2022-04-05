@@ -27,6 +27,11 @@ cp config_mac_${ARCH} ${Q2PRO_DIR}/config_mac_${ARCH}
 if [[ ${ARCH} = "m1" ]]; then
     cp aq2tng_Makefile_mac_m1 ${Q2PRO_DIR}/Makefile
 fi
+
+# if [[ ${ARCH} = "intel" ]]; then
+#     cp q2pro_Makefile_intel ${Q2PRO_DIR}/Makefile
+# fi
+
 cd ${Q2PRO_DIR}
 
 ## Build the binaries
