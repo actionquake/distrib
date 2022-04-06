@@ -104,6 +104,7 @@ jobs:
           tar czpf action_quake-${{ github.event.inputs.release_tag }}-linux-x64.tar.gz ${{ env.LIN64_DIST_DIR }}
           zip -r action_quake-${{ github.event.inputs.release_tag }}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
           zip -r action_quake-${{ github.event.inputs.release_tag }}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
+          mv action_quake-content.zip action_quake-content-${{ github.event.inputs.release_tag }}.zip
     
       - name: Create release
         uses: actions/create-release@v1
