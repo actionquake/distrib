@@ -79,5 +79,5 @@ jobs:
           body_path: 
           tag_name: ${{ github.event.inputs.release_tag }}
           files: |
-            action/action_quake-content-${{ github.event.inputs.release_tag }}.zip
+            ${{ env.CFG_WORKING_DIR }}/action_quake-content-${{ github.event.inputs.release_tag }}.zip
 
