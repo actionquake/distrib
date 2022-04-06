@@ -56,7 +56,7 @@ jobs:
 
       - name: Generate dist files
         run: |
-          zip -r action_quake-content-${{ github.event.inputs.release_tag }}.zip ${{ env.CFG_WORKING_DIR }}/action/
+          cd ${{ env.CFG_WORKING_DIR }} && zip -r action_quake-content-${{ github.event.inputs.release_tag }}.zip action/
 
       - name: Create release
         uses: actions/create-release@v1
