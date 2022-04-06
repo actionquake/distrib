@@ -35,7 +35,7 @@ fi
 cd ${Q2PRO_DIR}
 
 ## Build the binaries
-export CONFIG_FILE=config_mac_${ARCH};make V=1
+export CONFIG_FILE=config_mac_${ARCH};export PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/";make V=1
 build_exitcode=$?
 
 ## Copy files in preparation for the build step

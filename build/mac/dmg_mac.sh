@@ -25,14 +25,22 @@ echo "Architecture: ${ARCH}"
 echo "Version: ${VERSION}"
 
 ## Change dynamic lib references manually because Apple is dumb and won't let us static link
-
-install_name_tool -change /usr/lib/libcurl.4.dylib @executable_path/.lib/libcurl.4.dylib q2probuilds/${ARCH}/q2pro
-install_name_tool -change /System/Library/Frameworks/OpenAL.framework/Versions/A/OpenAL @executable_path/.lib/libopenal.1.21.1.dylib q2probuilds/${ARCH}/q2pro
-install_name_tool -change /usr/local/opt/libpng/lib/libpng16.16.dylib @executable_path/.lib/libpng16.16.dylib q2probuilds/${ARCH}/q2pro
-install_name_tool -change /usr/local/opt/jpeg/lib/libjpeg.9.dylib @executable_path/.lib/libjpeg.9.dylib q2probuilds/${ARCH}/q2pro
-install_name_tool -change /usr/lib/libz.1.dylib @executable_path/.lib/libz.1.dylib q2probuilds/${ARCH}/q2pro
-install_name_tool -change /usr/local/opt/sdl2/lib/libSDL2-2.0.0.dylib @executable_path/.lib/libSDL2-2.0.0.dylib q2probuilds/${ARCH}/q2pro
-#install_name_tool -change /usr/lib/libSystem.B.dylib @executable_path/.lib/
+echo "Adjusting dynamic lib paths for ${ARCH}..."
+if [[ ${ARCH} = "m1" ]]; then
+    #install_name_tool -change /usr/lib/libcurl.4.dylib @executable_path/.lib/libcurl.4.dylib q2probuilds/${ARCH}/q2pro
+    install_name_tool -change /System/Library/Frameworks/OpenAL.framework/Versions/A/OpenAL @executable_path/.lib/libopenal.1.21.1.dylib q2probuilds/${ARCH}/q2pro
+    install_name_tool -change /opt/homebrew/opt/libpng/lib/libpng16.16.dylib @executable_path/.lib/libpng16.16.dylib q2probuilds/${ARCH}/q2pro
+    install_name_tool -change /opt/homebrew/opt/jpeg/lib/libjpeg.9.dylib @executable_path/.lib/libjpeg.9.dylib q2probuilds/${ARCH}/q2pro
+    install_name_tool -change /usr/lib/libz.1.dylib @executable_path/.lib/libz.1.2.8.dylib q2probuilds/${ARCH}/q2pro
+    #install_name_tool -change /opt/homebrew/opt/sdl2/lib/libSDL2-2.0.0.dylib @executable_path/.lib/libSDL2-2.0.0.dylib q2probuilds/${ARCH}/q2pro
+else
+    #install_name_tool -change /usr/lib/libcurl.4.dylib @executable_path/.lib/libcurl.4.dylib q2probuilds/${ARCH}/q2pro
+    install_name_tool -change /usr/local/opt/openal-soft/lib/libopenal.1.dylib @executable_path/.lib/libopenal.1.21.1.dylib q2probuilds/${ARCH}/q2pro
+    install_name_tool -change /usr/local/opt/libpng/lib/libpng16.16.dylib @executable_path/.lib/libpng16.16.dylib q2probuilds/${ARCH}/q2pro
+    install_name_tool -change /usr/local/opt/jpeg/lib/libjpeg.9.dylib @executable_path/.lib/libjpeg.9.dylib q2probuilds/${ARCH}/q2pro
+    install_name_tool -change /usr/lib/libz.1.dylib @executable_path/.lib/libz.1.2.8.dylib q2probuilds/${ARCH}/q2pro
+    #install_name_tool -change /usr/local/opt/sdl2/lib/libSDL2-2.0.0.dylib @executable_path/.lib/libSDL2-2.0.0.dylib q2probuilds/${ARCH}/q2pro
+fi
 
 ## Populate AQ_Install directory
 mv ../../action AQ_Install/AQ.app/Contents/MacOS/

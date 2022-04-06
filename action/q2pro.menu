@@ -260,7 +260,7 @@ end
 begin wbindings
 	background wbindings_bkgd
     title "Weapon Bindings"
-    bind "change weapon mode (3-round/full auto/zoom)" weapon
+    bind "change weapon mode (burst/auto)" weapon
     bind "sniper zoom" lens
     bind "drop current weapon" drop weapon
     blank
