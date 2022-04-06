@@ -93,6 +93,12 @@ jobs:
         run: |
           cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN64_DIST_DIR }}/action/
       
+      - name: Download latest Content-only archive
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Content-Only.yaml
+          name: aq-content-only
+
       - name: Generate dist files
         run: |
           tar czpf action_quake-${{ github.event.inputs.release_tag }}-linux-x64.tar.gz ${{ env.LIN64_DIST_DIR }}
@@ -123,4 +129,5 @@ jobs:
             action_quake-${{ github.event.inputs.release_tag }}-linux-x64.tar.gz
             action_quake-${{ github.event.inputs.release_tag }}-windows-x64.zip
             action_quake-${{ github.event.inputs.release_tag }}-windows-i386.zip
+            action_quake-content-${{ github.event.inputs.release_tag }}.zip
 

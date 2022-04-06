@@ -1,4 +1,4 @@
-name: Content-Only Release
+name: Content-Only
 
 # on:
 #   push:
@@ -58,26 +58,10 @@ jobs:
         run: |
           cd ${{ env.CFG_WORKING_DIR }} && zip -r action_quake-content-${{ github.event.inputs.release_tag }}.zip action/
 
-      - name: Create release
-        uses: actions/create-release@v1
-        id: create_release
+      - name: Generate archive
+        uses: actions/upload-artifact@v3
         with:
-          draft: false
-          prerelease: false
-          release_name: action_quake-${{ github.event.inputs.release_tag }}
-          tag_name: ${{ github.event.inputs.release_tag }}
-          #body_path: CHANGELOG.md
-          body: ${{steps.github_release.outputs.changelog}}
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-
-      - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          body_path: 
-          tag_name: ${{ github.event.inputs.release_tag }}
-          files: |
+          name: aq-content-only
+          path: |
             ${{ env.CFG_WORKING_DIR }}/action_quake-content-${{ github.event.inputs.release_tag }}.zip
 
