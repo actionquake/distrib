@@ -36,7 +36,7 @@ jobs:
         with:
           workflow: TNG-Linux.yaml
           name: tng-lin-library
-          path: ${{ env.LIN64_DIST_DIR }}/action/
+          path: ${{ env.CFG_WORKING_DIR }}/action/
 
       ## Win32
       - name: Download latest Win32 TNG artifacts
@@ -44,7 +44,7 @@ jobs:
         with:
           workflow: TNG-Windows.yaml
           name: tng-win-32
-          path: ${{ env.WIN32_DIST_DIR }}/action/
+          path: ${{ env.CFG_WORKING_DIR }}/action/
 
       ## Win64
       - name: Download latest Win64 TNG artifacts
@@ -52,13 +52,10 @@ jobs:
         with:
           workflow: TNG-Windows.yaml
           name: tng-win-64
-          path: ${{ env.WIN64_DIST_DIR }}/action/
+          path: ${{ env.CFG_WORKING_DIR }}/action/
 
       - name: Generate dist files
         run: |
-          cp ${{ env.LIN64_DIST_DIR }}/action/gamex86_64.so ${{ env.CFG_WORKING_DIR }}/action/
-          cp ${{ env.WIN32_DIST_DIR }}/action/gamex86.dll ${{ env.CFG_WORKING_DIR }}/action/
-          cp ${{ env.WIN64_DIST_DIR }}/action/gamex86_64.dll ${{ env.CFG_WORKING_DIR }}/action/
           zip -r action_quake-content-${{ github.event.inputs.release_tag }}.zip ${{ env.CFG_WORKING_DIR }}/action/
 
       - name: Create release
