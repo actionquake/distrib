@@ -1,0 +1,86 @@
+name: Content-Only Release
+
+# on:
+#   push:
+#     branches: [main, ci]
+#   pull_request:
+#     branches: [main]
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release version tag"
+        required: true
+
+env:
+  CFG_WORKING_DIR: "config"
+  LIN64_DIST_DIR: "linux-x64-dist"
+  WIN64_DIST_DIR: "windows-x64-dist"
+  WIN32_DIST_DIR: "windows-i386-dist"
+  ACTION_DIR: "aq"
+
+jobs:      
+  content_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout distrib
+        uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.CFG_WORKING_DIR }}
+
+      ## Linux
+      - name: Download latest Linux TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Linux.yaml
+          name: tng-lin-library
+          path: ${{ env.LIN64_DIST_DIR }}/action/
+
+      ## Win32
+      - name: Download latest Win32 TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Windows.yaml
+          name: tng-win-32
+          path: ${{ env.WIN32_DIST_DIR }}/action/
+
+      ## Win64
+      - name: Download latest Win64 TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Windows.yaml
+          name: tng-win-64
+          path: ${{ env.WIN64_DIST_DIR }}/action/
+
+      - name: Generate dist files
+        run: |
+          cp ${{ env.LIN64_DIST_DIR }}/action/gamex86_64.so ${{ env.CFG_WORKING_DIR }}/action/
+          cp ${{ env.WIN32_DIST_DIR }}/action/gamex86.dll ${{ env.CFG_WORKING_DIR }}/action/
+          cp ${{ env.WIN64_DIST_DIR }}/action/gamex86_64.dll ${{ env.CFG_WORKING_DIR }}/action/
+          zip -r action_quake-content-${{ github.event.inputs.release_tag }}.zip ${{ env.CFG_WORKING_DIR }}/action/
+
+      - name: Create release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: action_quake-${{ github.event.inputs.release_tag }}
+          tag_name: ${{ github.event.inputs.release_tag }}
+          #body_path: CHANGELOG.md
+          body: ${{steps.github_release.outputs.changelog}}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload dist tarball to release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          body_path: 
+          tag_name: ${{ github.event.inputs.release_tag }}
+          files: |
+            action_quake-content-${{ github.event.inputs.release_tag }}.zip
+

@@ -19,27 +19,35 @@ Core functionality
 * One accepted/approved LTK file per included map, so that new players can fight against bots if they wish, and so that the bots aren't without any pathing
 - [x] urbanjungle
   - [x] Assets Passed Inspection
+  - [ ] Demo included
   - [ ] LTK file included
 - [ ] Map 2
   - [ ] Assets Passed Inspection
+  - [ ] Demo included
   - [ ] LTK file included
 - [ ] Map 3
   - [ ] Assets Passed Inspection
+  - [ ] Demo included
   - [ ] LTK file included
 - [ ] Map 4 
   - [ ] Assets Passed Inspection
+  - [ ] Demo included
   - [ ] LTK file included
 - [ ] Map 5 
   - [ ] Assets Passed Inspection
+  - [ ] Demo included
   - [ ] LTK file included
 - [ ] Map 6 
   - [ ] Assets Passed Inspection
+  - [ ] Demo included
   - [ ] LTK file included
 - [ ] Map 7 
   - [ ] Assets Passed Inspection
+  - [ ] Demo included
   - [ ] LTK file included
 - [ ] Map 8 
   - [ ] Assets Passed Inspection
+  - [ ] Demo included
   - [ ] LTK file included
 
 ##### Demos
