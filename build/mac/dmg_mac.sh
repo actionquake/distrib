@@ -38,9 +38,12 @@ else
     install_name_tool -change /usr/local/opt/openal-soft/lib/libopenal.1.dylib @executable_path/.lib/libopenal.1.21.1.dylib q2probuilds/${ARCH}/q2pro
     install_name_tool -change /usr/local/opt/libpng/lib/libpng16.16.dylib @executable_path/.lib/libpng16.16.dylib q2probuilds/${ARCH}/q2pro
     install_name_tool -change /usr/local/opt/jpeg/lib/libjpeg.9.dylib @executable_path/.lib/libjpeg.9.dylib q2probuilds/${ARCH}/q2pro
-    install_name_tool -change /usr/lib/libz.1.dylib @executable_path/.lib/libz.1.2.8.dylib q2probuilds/${ARCH}/q2pro
+    install_name_tool -change /usr/lib/libz.1.dylib @executable_path/.lib/libz.1.2.11.dylib q2probuilds/${ARCH}/q2pro
     #install_name_tool -change /usr/local/opt/sdl2/lib/libSDL2-2.0.0.dylib @executable_path/.lib/libSDL2-2.0.0.dylib q2probuilds/${ARCH}/q2pro
 fi
+
+## create MacOS if it does not exist
+mkdir -p AQ_Install/AQ.app/Contents/MacOS
 
 ## Populate AQ_Install directory
 mv ../../action AQ_Install/AQ.app/Contents/MacOS/
@@ -48,8 +51,14 @@ cp -r q2probuilds/${ARCH}/.lib AQ_Install/AQ.app/Contents/MacOS/
 cp q2probuilds/${ARCH}/q2proded q2probuilds/${ARCH}/q2pro AQ_Install/AQ.app/Contents/MacOS/
 cp q2probuilds/${ARCH}/game*.so AQ_Install/AQ.app/Contents/MacOS/action/
 
+## make q2pro executable
+chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
+
 ## Create dmg file
 hdiutil create -ov action_quake-${VERSION}-mac-${ARCH}.dmg -srcfolder AQ_Install -volname "Action Quake"
 
 ## Move action folder back
 mv AQ_Install/AQ.app/Contents/MacOS/action ../../
+
+## Delete MacOS-folder
+rm -r -f AQ_Install/AQ.app/Contents/MacOS
