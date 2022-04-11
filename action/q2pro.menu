@@ -265,17 +265,18 @@ begin wbindings
     bind "change weapon mode (burst/auto)" weapon
     bind "sniper zoom" lens
     bind "drop current weapon" drop weapon
+    bind "drop item" drop item
     blank
-    bind "select primary weapon" use special
-    bind "select Mk23 (Single)" use mk23 pistol
-    bind "select Mk23 (Dual)" use a 2nd pistol
-    bind "select SSG Sniper Rifle" use sniper
-    bind "select MP5/10" use mp5
-    bind "select M4" use m4
-    bind "select Handcannon" use handcannon
-    bind "select M3 Shotgun" use shotgun
-    bind "select throwing knife" use throwing combat knife
-    bind "select slashing knife" use slashing combat knife
+    bind "use primary weapon" use special
+    bind "use Mk23 Pistol (Single)" use mk23 pistol
+    bind "use Mk23 Pistol (Dual)" use a 2nd pistol
+    bind "use SSG Sniper Rifle" use sniper
+    bind "use MP5/10" use mp5
+    bind "use M4" use m4
+    bind "use Handcannon" use handcannon
+    bind "use M3 Shotgun" use shotgun
+    bind "use throwing knife" use throwing combat knife
+    bind "use slashing knife" use slashing combat knife
     bind "select grenade" use m26 fragmentation grenade
     bind "punch" punch
 end
