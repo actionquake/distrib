@@ -47,6 +47,11 @@ jobs:
         env:
           CC: "gcc"
           CONFIG_FILE: ".config"
+
+      - name: Make Q2Pro binaries executable
+        working-directory: build
+        run: |
+          chmod +x q2pro q2proded
       
       - name: Generate archive
         uses: actions/upload-artifact@v3
