@@ -70,7 +70,7 @@ begin main
     action " browse address book " pushmenu servers "favorites://" "file:///servers.lst" "broadcast://"
     action " browse demos " pushmenu demos
     /* -- Fix local bot spawn, in meantime connect to a server --    */
-	action " play against bots" "connect useast.aq2world.com:27917"
+    action " play against bots" "connect useast.aq2world.com:27917"
     blank
     action " settings" pushmenu settings
     blank
@@ -79,7 +79,7 @@ begin main
 end
 
 begin settings
-	background settings_bkgd
+    background settings_bkgd
     title "Settings"
     action "Player Setup" pushmenu players
     action "General Bindings" pushmenu bindings
@@ -115,7 +115,7 @@ begin addressbook
 end
 
 begin video
-	background video_bkgd
+    background video_bkgd
     title "Video Setup"
     values "fullscreen resolution" vid_fullscreen windowed $vid_modelist
     field "windowed size" vid_geometry
@@ -136,7 +136,7 @@ begin video
 end
 
 begin a_video
-	background a_video_bkgd
+    background a_video_bkgd
     title "Advanced Video Setup"
     pairs "separate frame rates" cl_async yes 1 no 0
     field "physics frame rate" cl_maxfps
@@ -159,7 +159,7 @@ begin a_video
 end
 
 begin msettings
-	background msettings_bkgd
+    background msettings_bkgd
     title "Misc Settings"
     pairs "gun handedness" cl_gun "do not show" 0 "same as hand" 1 "force right hand" 2 "force left hand" 3
     pairs "screenshot format" gl_screenshot_format png png jpg jpg tga tga
@@ -177,7 +177,7 @@ begin msettings
 end
 
 begin gsettings
-	background gsettings_bkgd
+    background gsettings_bkgd
     title "Game Settings and Binds"
     bind "ctf - drop flag" drop flag
     bind "matchmode - ready toggle" ready
@@ -198,10 +198,10 @@ begin gsettings
 end
 
 begin mouse
-	background mouse_bkgd
+    background mouse_bkgd
     title "Mouse Setup"
     pairs "invert mouse" m_pitch "no" "0.022" "yes" "-0.022"
-    range "sensitivity" sensitivity 0.1 10.0
+    field "sensitivity" sensitivity
     toggle "FOV sensitivity scaling" m_autosens
     blank
     pairs "crosshair" crosshair "cross" "1" "full cross" "2" "dotted cross" "3" "big cross" "4" "dot" "5" "big dot" "6" "double cross" "11" "double full" "12" "double dotted" "13" "double big" "14" "double dot" "15" "double big dot" "16"
@@ -212,7 +212,7 @@ begin mouse
 end
 
 begin sound
-	background sound_bkgd
+    background sound_bkgd
     title "Sound Setup"
     range "effects volume" s_volume 0 1
     values "ambient sounds" s_ambient "no" "yes" "only player's own"
@@ -225,7 +225,7 @@ begin sound
 end
 
 begin bindings
-	background bindings_bkgd
+    background bindings_bkgd
     title "General Bindings"
     bind "move forward" +forward
     bind "move backward" +back
@@ -258,9 +258,9 @@ begin bindings
 end
 
 begin wbindings
-	background wbindings_bkgd
+    background wbindings_bkgd
     title "Weapon Bindings"
-    bind "change weapon mode (3-round/full auto/zoom)" weapon
+    bind "change weapon mode (burst/auto)" weapon
     bind "sniper zoom" lens
     bind "drop current weapon" drop weapon
     blank
