@@ -20,4 +20,4 @@ CONFIG_FIXED_LIBAL=y
 
 CONFIG_PATH_DATA=.
 CONFIG_PATH_LIB=/Applications/AQ.app/Contents/MacOS/.lib
-CONFIG_PATH_HOME=/Applications/AQ.app/Contents/MacOS
+CONFIG_PATH_HOME=~/actionquake
