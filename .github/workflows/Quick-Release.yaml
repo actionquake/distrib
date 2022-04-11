@@ -102,21 +102,22 @@ jobs:
 
       - name: Generate content-only zip file
         run: |
-          mv action_quake-content.zip action_quake-content-${{ github.event.inputs.release_tag }}.zip
+          mv action_quake-content.zip action_quake-content-${GIT_TAG}.zip
 
       - name: Generate Linux deb files
         run: |
-          mkdir -p action_quake-${{ github.event.inputs.release_tag }}/usr/local/games
-          cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* action_quake-${{ github.event.inputs.release_tag }}/
-          cp -r ${{ env.LIN64_DIST_DIR }}/* action_quake-${{ github.event.inputs.release_tag }}/usr/local/games/
-          export GIT_TAG=${{ github.event.inputs.release_tag }}; sed -i "s/version_value_here/${GIT_TAG:1}/g" action_quake-${{ github.event.inputs.release_tag }}/control
-          dpkg-deb --build --root-owner-group action_quake-${{ github.event.inputs.release_tag }}
-          mv action_quake-${{ github.event.inputs.release_tag }}.deb action_quake-${{ github.event.inputs.release_tag }}-linux-amd64.deb
+          mkdir -p action_quake-${GIT_TAG}/usr/local/games
+          mkdir -p action_quake-${GIT_TAG}/DEBIAN
+          cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* action_quake-${GIT_TAG}/
+          cp -r ${{ env.LIN64_DIST_DIR }}/* action_quake-${GIT_TAG}/usr/local/games/
+          export GIT_TAG=${GIT_TAG}; sed -i "s/version_value_here/${GIT_TAG:1}/g" action_quake-${GIT_TAG}/control
+          dpkg-deb --build --root-owner-group action_quake-${GIT_TAG}
+          mv action_quake-${GIT_TAG}.deb action_quake-${GIT_TAG}-linux-amd64.deb
 
       - name: Generate Windows zip files
         run: |
-          zip -r action_quake-${{ github.event.inputs.release_tag }}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
-          zip -r action_quake-${{ github.event.inputs.release_tag }}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
+          zip -r action_quake-${GIT_TAG}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
+          zip -r action_quake-${GIT_TAG}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
     
       - name: Create release
         uses: actions/create-release@v1
@@ -124,8 +125,8 @@ jobs:
         with:
           draft: false
           prerelease: false
-          release_name: action_quake-${{ github.event.inputs.release_tag }}
-          tag_name: ${{ github.event.inputs.release_tag }}
+          release_name: action_quake-${GIT_TAG}
+          tag_name: ${GIT_TAG}
           #body_path: CHANGELOG.md
           body: ${{steps.github_release.outputs.changelog}}
         env:
@@ -137,10 +138,10 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           body_path: 
-          tag_name: ${{ github.event.inputs.release_tag }}
+          tag_name: ${GIT_TAG}
           files: |
-            action_quake-${{ github.event.inputs.release_tag }}-linux-amd64.deb
-            action_quake-${{ github.event.inputs.release_tag }}-windows-x64.zip
-            action_quake-${{ github.event.inputs.release_tag }}-windows-i386.zip
-            action_quake-content-${{ github.event.inputs.release_tag }}.zip
+            action_quake-${GIT_TAG}-linux-amd64.deb
+            action_quake-${GIT_TAG}-windows-x64.zip
+            action_quake-${GIT_TAG}-windows-i386.zip
+            action_quake-content-${GIT_TAG}.zip
 
