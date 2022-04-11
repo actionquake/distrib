@@ -108,7 +108,7 @@ jobs:
         run: |
           mkdir -p action_quake-${GIT_TAG}/usr/local/games
           mkdir -p action_quake-${GIT_TAG}/DEBIAN
-          cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* action_quake-${GIT_TAG}/
+          cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* action_quake-${GIT_TAG}/DEBIAN
           cp -r ${{ env.LIN64_DIST_DIR }}/* action_quake-${GIT_TAG}/usr/local/games/
           sed -i "s/version_value_here/${GIT_TAG:1}/g" action_quake-${GIT_TAG}/DEBIAN/control
           dpkg-deb --build --root-owner-group action_quake-${GIT_TAG}
