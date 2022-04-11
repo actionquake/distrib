@@ -1,4 +1,4 @@
-name: Quick Release
+name: Server Files
 
 # on:
 #   push:
@@ -18,9 +18,10 @@ env:
   LIN64_DIST_DIR: "linux-x64-dist"
   WIN64_DIST_DIR: "windows-x64-dist"
   WIN32_DIST_DIR: "windows-i386-dist"
+  MACINTEL_DIST_DIR: "mac-intel-dist"
 
 jobs:      
-  quick_release:
+  server_files:
     runs-on: ubuntu-latest
     #runs-on: self-hosted
     steps:
@@ -35,6 +36,7 @@ jobs:
           mkdir -p ${{ env.LIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN32_DIST_DIR }}/action
+          mkdir -p ${{ env.MACINTEL_DIST_DIR }}/action
 
       ## Linux
       - name: Download latest Linux Q2Pro artifacts
@@ -51,10 +53,6 @@ jobs:
           name: tng-lin-library
           path: ${{ env.LIN64_DIST_DIR }}/action/
 
-      - name: Copy action content
-        run: |
-          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.LIN64_DIST_DIR }}/action/
-
       ## Win32
       - name: Download latest Win32 Q2Pro artifacts
         uses: dawidd6/action-download-artifact@v2
@@ -69,10 +67,6 @@ jobs:
           workflow: TNG-Windows.yaml
           name: tng-win-32
           path: ${{ env.WIN32_DIST_DIR }}/action/
-
-      - name: Copy action content
-        run: |
-          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN32_DIST_DIR }}/action/
 
       ## Win64
       - name: Download latest Win64 Q2Pro artifacts
@@ -89,22 +83,11 @@ jobs:
           name: tng-win-64
           path: ${{ env.WIN64_DIST_DIR }}/action/
 
-      - name: Copy action content
-        run: |
-          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN64_DIST_DIR }}/action/
-      
-      - name: Download latest Content-only archive
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: Content-Only.yaml
-          name: aq-content-only
-
       - name: Generate dist files
         run: |
           tar czpf action_quake-${{ github.event.inputs.release_tag }}-linux-x64.tar.gz ${{ env.LIN64_DIST_DIR }}
           zip -r action_quake-${{ github.event.inputs.release_tag }}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
           zip -r action_quake-${{ github.event.inputs.release_tag }}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
-          mv action_quake-content.zip action_quake-content-${{ github.event.inputs.release_tag }}.zip
     
       - name: Create release
         uses: actions/create-release@v1
@@ -130,5 +113,4 @@ jobs:
             action_quake-${{ github.event.inputs.release_tag }}-linux-x64.tar.gz
             action_quake-${{ github.event.inputs.release_tag }}-windows-x64.zip
             action_quake-${{ github.event.inputs.release_tag }}-windows-i386.zip
-            action_quake-content-${{ github.event.inputs.release_tag }}.zip
 

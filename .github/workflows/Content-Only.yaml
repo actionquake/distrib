@@ -1,0 +1,63 @@
+name: Content-Only
+
+# on:
+#   push:
+#     branches: [main, ci]
+#   pull_request:
+#     branches: [main]
+
+on:
+  workflow_dispatch:
+
+env:
+  CFG_WORKING_DIR: "config"
+  LIN64_DIST_DIR: "linux-x64-dist"
+  WIN64_DIST_DIR: "windows-x64-dist"
+  WIN32_DIST_DIR: "windows-i386-dist"
+  ACTION_DIR: "aq"
+
+jobs:      
+  content_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout distrib
+        uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.CFG_WORKING_DIR }}
+
+      ## Linux
+      - name: Download latest Linux TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Linux.yaml
+          name: tng-lin-library
+          path: ${{ env.CFG_WORKING_DIR }}/action/
+
+      ## Win32
+      - name: Download latest Win32 TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Windows.yaml
+          name: tng-win-32
+          path: ${{ env.CFG_WORKING_DIR }}/action/
+
+      ## Win64
+      - name: Download latest Win64 TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Windows.yaml
+          name: tng-win-64
+          path: ${{ env.CFG_WORKING_DIR }}/action/
+
+      - name: Generate dist files
+        run: |
+          cd ${{ env.CFG_WORKING_DIR }} && zip -r action_quake-content.zip action/
+
+      - name: Generate archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: aq-content-only
+          path: |
+            ${{ env.CFG_WORKING_DIR }}/action_quake-content.zip
+

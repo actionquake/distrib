@@ -11,7 +11,7 @@
         <key>CFBundleIconFile</key>
         <string>AQ.icns</string>
         <key>CFBundleIdentifier</key>
-        <string>org.actionquake.q2pro.launcher</string>
+        <string>com.aq2world</string>
         <key>CFBundleName</key>
         <string>AQ</string>
         <key>CFBundlePackageType</key>

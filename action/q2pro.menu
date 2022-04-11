@@ -150,6 +150,7 @@ begin a_video
     pairs "dynamic lightmap" gl_dynamic disabled 0 enabled 1 partial 2
     range "saturation" gl_saturation 0.0 1.0
     pairs "modulation" gl_modulate none 0 normal 1 bright 2
+    range "modulation entities" gl_modulate_entities 0 10
     toggle "hardware gamma" vid_hwgamma
     range "lightmap saturation" gl_coloredlightmaps 0.0 1.0
     toggle "override textures" r_override_textures
@@ -252,6 +253,7 @@ begin bindings
     blank
     bind "bandage" bandage
     bind "open/close door" opendoor
+    bind "reload" reload
     blank
     action "Weapon Binds" pushmenu wbindings
     action "Game Settings and Binds" pushmenu gsettings
@@ -264,7 +266,7 @@ begin wbindings
     bind "sniper zoom" lens
     bind "drop current weapon" drop weapon
     blank
-    bind "select primary weapon" use primary
+    bind "select primary weapon" use special
     bind "select Mk23 (Single)" use mk23 pistol
     bind "select Mk23 (Dual)" use a 2nd pistol
     bind "select SSG Sniper Rifle" use sniper

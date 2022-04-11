@@ -1,6 +1,7 @@
-# for compilation on M1 mac with clang and Xcode, use
-# make clean;make;strip -x q2pro;strip -x q2proded
-# make strip does not wirk with clang
+# for compilation on M1 mac with clang, use
+# "make clean;make strip"
+# or "make clean;make strip;cp q2pr* /Applications/AQ.app/Contents/MacOS"
+# to make, strip and copy directrly to the AQ app
 CONFIG_PNG=y
 CONFIG_JPEG=y
 CONFIG_HTTP=y
@@ -17,11 +18,12 @@ CONFIG_GAME_BASE=action
 
 
 CONFIG_OPENAL=y
-#had problems compiling with OpenAL on clang, disabled for now
-#CONFIG_FIXED_LIBAL=y
-#AL_CFLAGS = -framework OpenAL
-#AL_LIBS = -framework OpenAL
+CONFIG_FIXED_LIBAL=y
+AL_CFLAGS = -framework OpenAL
+AL_LIBS = -framework OpenAL
 
-CONFIG_PATH_DATA=.
-CONFIG_PATH_LIB=.
-CONFIG_PATH_HOME=~/Applications/AQ.app/Contents/MacOS
+CONFIG_PATH_DATA=/Applications/AQ.app/Contents/MacOS
+CONFIG_PATH_LIB=/Applications/AQ.app/Contents/MacOS/.lib
+CONFIG_PATH_HOME=~/actionquake
+
+STRIP=strip -x
