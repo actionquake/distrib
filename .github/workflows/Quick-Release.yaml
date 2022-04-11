@@ -45,6 +45,10 @@ jobs:
           name: q2pro-linux
           path: ${{ env.LIN64_DIST_DIR }}/
 
+      - name: Set Linux binaries to executable
+        run: |
+          chmod +x ${{ env.LIN64_DIST_DIR }}/*
+
       - name: Download latest Linux TNG artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
