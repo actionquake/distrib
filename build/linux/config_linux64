@@ -14,3 +14,4 @@ CONFIG_DEBUG=y
 CFLAGS=-Werror
 
 CONFIG_GAME_BASE=action
+CONFIG_PATH_HOME=/usr/local/share/aq

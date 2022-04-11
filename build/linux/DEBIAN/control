@@ -1,0 +1,6 @@
+Package: AQ
+Version: version_value_here
+Architecture: ad64
+Maintainer: Aaron Dean <8dino2@gmail.com>
+Description: Aqtion
+ Classic FPS mod from the Quake II engine, visit https://www.aq2world.com and our Discord at https://discord.gg/aq2world !
