@@ -47,6 +47,7 @@ jobs:
 
       - name: Set Linux binaries to executable
         run: |
+          cp ${{ env.CFG_WORKING_DIR }}/build/linux/install.sh ${{ env.LIN64_DIST_DIR }}/
           chmod +x ${{ env.LIN64_DIST_DIR }}/*
 
       - name: Download latest Linux TNG artifacts
