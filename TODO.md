@@ -17,24 +17,24 @@ Core functionality
 * identify ones that do not have copyrighted or trademarked materials such as Coca-Cola signs
 * Optionally, replace copyrighted/trademarked textures with 'safe' ones
 * One accepted/approved LTK file per included map, so that new players can fight against bots if they wish, and so that the bots aren't without any pathing
-- [x] urbanjungle
+- [ ] urbanjungle
   - [x] Assets Passed Inspection
   - [ ] Demo included
   - [ ] LTK file included
-- [ ] Map 2
-  - [ ] Assets Passed Inspection
+- [ ] newrok
+  - [x] Assets Passed Inspection
   - [ ] Demo included
   - [ ] LTK file included
-- [ ] Map 3
-  - [ ] Assets Passed Inspection
+- [ ] storm
+  - [x] Assets Passed Inspection
   - [ ] Demo included
   - [ ] LTK file included
-- [ ] Map 4 
-  - [ ] Assets Passed Inspection
+- [ ] terminal
+  - [x] Assets Passed Inspection
   - [ ] Demo included
   - [ ] LTK file included
-- [ ] Map 5 
-  - [ ] Assets Passed Inspection
+- [ ] wizs
+  - [x] Assets Passed Inspection
   - [ ] Demo included
   - [ ] LTK file included
 - [ ] Map 6 
