@@ -126,7 +126,7 @@ jobs:
           draft: false
           prerelease: false
           release_name: action_quake-${{ github.event.inputs.release_tag }}
-          tag_name: ${GIT_TAG}
+          tag_name: ${{ github.event.inputs.release_tag }}
           #body_path: CHANGELOG.md
           body: ${{steps.github_release.outputs.changelog}}
         env:
