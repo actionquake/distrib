@@ -125,7 +125,7 @@ jobs:
         with:
           draft: false
           prerelease: false
-          release_name: action_quake-${GIT_TAG}
+          release_name: action_quake-${{ github.event.inputs.release_tag }}
           tag_name: ${GIT_TAG}
           #body_path: CHANGELOG.md
           body: ${{steps.github_release.outputs.changelog}}
@@ -138,7 +138,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           body_path: 
-          tag_name: ${GIT_TAG}
+          tag_name: ${{ github.event.inputs.release_tag }}
           files: |
             action_quake-${GIT_TAG}-linux-amd64.deb
             action_quake-${GIT_TAG}-windows-x64.zip
