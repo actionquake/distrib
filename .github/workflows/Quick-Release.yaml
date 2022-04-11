@@ -110,7 +110,7 @@ jobs:
           mkdir -p action_quake-${GIT_TAG}/DEBIAN
           cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* action_quake-${GIT_TAG}/
           cp -r ${{ env.LIN64_DIST_DIR }}/* action_quake-${GIT_TAG}/usr/local/games/
-          export GIT_TAG=${GIT_TAG}; sed -i "s/version_value_here/${GIT_TAG:1}/g" action_quake-${GIT_TAG}/control
+          sed -i "s/version_value_here/${GIT_TAG:1}/g" action_quake-${GIT_TAG}/DEBIAN/control
           dpkg-deb --build --root-owner-group action_quake-${GIT_TAG}
           mv action_quake-${GIT_TAG}.deb action_quake-${GIT_TAG}-linux-amd64.deb
 
