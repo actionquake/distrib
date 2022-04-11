@@ -106,8 +106,9 @@ jobs:
       - name: Generate Linux deb files
         run: |
           mkdir -p action_quake-${{ github.event.inputs.release_tag }}/usr/local/games
-          cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* action_quake-${{ github.event.inputs.release_tag }}/control
+          cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* action_quake-${{ github.event.inputs.release_tag }}/
           cp -r ${{ env.LIN64_DIST_DIR }}/* action_quake-${{ github.event.inputs.release_tag }}/usr/local/games/
+          sed -i "s/version_value_here/${{github.event.inputs.release_tag:1}}" action_quake-${{ github.event.inputs.release_tag }}/control
           dpkg-deb --build --root-owner-group action_quake-${{ github.event.inputs.release_tag }}
           mv action_quake-${{ github.event.inputs.release_tag }}.deb action_quake-${{ github.event.inputs.release_tag }}-linux-amd64.deb
 
