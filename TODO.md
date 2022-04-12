@@ -57,10 +57,11 @@ Core functionality
 ##### Demos
 * Include 2-3 demos of good action scenes, jumps and matches
 
-##### Distribution files
-* 'Official' releases via this distribution done in `pkz` files for game content
-
-##### Identified items that may need replaced
+##### Identified items that need addressed
 * Any assets that came from Quake II _retail_ (assets from the demo are okay)
 * Fix missing weapon models
 * Fix default model problem on Mac?
+
+##### Bugs
+* Linux q2pro does not act like an executable (compile with -no-pie seems to have no effect)
+* Windows builds do not have a fullscreen option in the Video Settings menu

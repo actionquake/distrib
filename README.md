@@ -67,6 +67,8 @@ Should it be determined that assets included in this distribution are indeed unl
 1. Checkout a new branch
 1. Commit your modifications/additions
 1. Submit pull request
+* Notes: 
+    * 'Official' releases via this distribution done in `pkz` files for game content (maps, etc)
 
 ## Site Links
 * [AQ2World](https://www.aq2world.com)
