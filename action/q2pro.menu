@@ -50,6 +50,7 @@ end
 
 background mainmenu_bkgd
 font conchars
+weapon w_sniper.md2
 cursor ch1
 
 color normal #0f90eb64
