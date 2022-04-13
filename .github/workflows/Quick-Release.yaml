@@ -39,7 +39,7 @@ jobs:
           mkdir -p ${{ env.WIN32_DIST_DIR }}/action
 
       ## Linux x86_64
-      - name: Download latest Linux Q2Pro artifacts
+      - name: Download latest Linux x86_64 Q2Pro artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Q2Pro-Linux.yaml
@@ -62,7 +62,7 @@ jobs:
           cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.LIN64_DIST_DIR }}/action/
 
       ## Linux ARM64
-      - name: Download latest Linux Q2Pro artifacts
+      - name: Download latest Linux arm64 Q2Pro artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Q2Pro-Linux.yaml

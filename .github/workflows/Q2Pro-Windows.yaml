@@ -12,7 +12,7 @@ on:
 
 jobs:
   windows_build_q2pro:
-    runs-on: self-hosted
+    runs-on: [self-hosted, x86]
     strategy:
       matrix:
         suffix: ["32", "64"]

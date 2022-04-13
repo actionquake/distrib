@@ -11,7 +11,7 @@ on:
 
 jobs:
   windows_build_tng:
-    runs-on: self-hosted
+    runs-on: [self-hosted, x86]
     steps:
       - uses: actions/checkout@v3
         with:
