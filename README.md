@@ -83,3 +83,22 @@ If you wish to use your RTX card with Quake II
 ## Site Links
 * [AQ2World](https://www.aq2world.com)
 * [AQ2Suomi](https://www.aq2suomi.com)
+
+## Credits
+* The [original A-Team](http://assets.aq2world.com/archive/websites/action.telefragged.com/) who designed, coded, tested and released this awesome mod
+* The [TNG team](http://aq2-tng.sourceforge.net/) who took over the project after 1.52 and had maintained and updated it till 2011
+* The [AQDT team](https://assets.aq2world.com/archive/websites/aqdt.fear.net/) who created their own variant and produced Espionage Tournament Edition
+* [Skuller](https://skuller.net/q2pro/) for the highly-acclaimed [q2pro](https://github.com/skullernet/q2pro)
+* [Raptor007](https://github.com/raptor007) and [hifi](https://github.com/hifi) who have [taken over development](https://github.com/aq2-tng/aq2-tng) after the TNG team
+* [PaulKlumpp](https://github.com/PaulKlumpp) for q2admin, LUA and MVD support
+* Mappers [stan0x](https://github.com/stan0x), Quimby, [WizardExt](https://www.wizardext.se/) for the included maps in this distribution
+* The [AQ2World Discord mod team](https://discord.gg/aq2world) for assisting, testing and contributing to this distribution, and keeping the scene alive
+* Every single mapper, sound designer, texture creator, model maker, skin artist and community contributor to this project since its inception in the late 90s, without your 600+ maps and gigabytes of content, we'd still be playing vanilla Q2.
+* The unforgotten and likely uncontactable community members who built and maintained sites to promote the mod and the community, your sites will be forever archived at [AQ2World](https://www.aq2world.com)
+    * [Action Quake Map Depot](https://assets.aq2world.com/archive/websites/aqmd.telefragged.com/)
+    * [The Newbie's Niche](https://assets.aq2world.com/archive/websites/www.actiongames.co.uk/tnn)
+    * [Action World](https://assets.aq2world.com/archive/websites/aw.telefragged.com)
+    * [Actor's Guild](https://assets.aq2world.com/archive/websites/guild.action-web.net)
+    * [AQ Spinoffs](https://assets.aq2world.com/archive/websites/aqmods.telefragged.com)
+    * [Mr. Ska's Pro Shop](https://assets.aq2world.com/archive/websites/proshop.fear.net)
+    * [AQ: Gangsters](https://assets.aq2world.com/archive/websites/www.planetquake.com/gangsters)
