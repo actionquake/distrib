@@ -16,6 +16,7 @@ on:
 env:
   CFG_WORKING_DIR: "config"
   LIN64_DIST_DIR: "linux-x64-dist"
+  LINARM64_DIST_DIR: "linux-arm64-dist"
   WIN64_DIST_DIR: "windows-x64-dist"
   WIN32_DIST_DIR: "windows-i386-dist"
   GIT_TAG: ${{ github.event.inputs.release_tag }}
@@ -37,28 +38,51 @@ jobs:
           mkdir -p ${{ env.WIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN32_DIST_DIR }}/action
 
-      ## Linux
+      ## Linux x86_64
       - name: Download latest Linux Q2Pro artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Q2Pro-Linux.yaml
-          name: q2pro-linux
+          name: q2pro-linux-x86_64
           path: ${{ env.LIN64_DIST_DIR }}/
 
       - name: Set Linux binaries to executable
         run: |
           chmod +x ${{ env.LIN64_DIST_DIR }}/*
 
-      - name: Download latest Linux TNG artifacts
+      - name: Download latest Linux x86_64 TNG artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: TNG-Linux.yaml
-          name: tng-lin-library
+          name: tng-lin-x86_64-library
           path: ${{ env.LIN64_DIST_DIR }}/action/
 
       - name: Copy action content
         run: |
           cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.LIN64_DIST_DIR }}/action/
+
+      ## Linux ARM64
+      - name: Download latest Linux Q2Pro artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Q2Pro-Linux.yaml
+          name: q2pro-linux-arm64
+          path: ${{ env.LINARM64_DIST_DIR }}/
+
+      - name: Set Linux binaries to executable
+        run: |
+          chmod +x ${{ env.LINARM64_DIST_DIR }}/*
+
+      - name: Download latest Linux arm64 TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Linux.yaml
+          name: tng-lin-arm64-library
+          path: ${{ env.LINARM64_DIST_DIR }}/action/
+
+      - name: Copy action content
+        run: |
+          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.LINARM64_DIST_DIR }}/action/
 
       ## Win32
       - name: Download latest Win32 Q2Pro artifacts
@@ -122,6 +146,7 @@ jobs:
       - name: Generate Linux tar files
         run: |
           tar czpf action_quake-${{ env.GIT_TAG }}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          tar czpf action_quake-${{ env.GIT_TAG }}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
 
       - name: Generate Windows zip files
         run: |
@@ -149,6 +174,7 @@ jobs:
           body_path: 
           tag_name: ${{ github.event.inputs.release_tag }}
           files: |
+            action_quake-${{ env.GIT_TAG }}-linux-arm64.tar.gz
             action_quake-${{ env.GIT_TAG }}-linux-amd64.tar.gz
             action_quake-${{ env.GIT_TAG }}-windows-x64.zip
             action_quake-${{ env.GIT_TAG }}-windows-i386.zip

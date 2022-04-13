@@ -10,13 +10,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  linux_build_tng:
-    runs-on: self-hosted
+  linux_x86_64_build_tng:
+    runs-on: self-hosted,x86
     steps:
       - uses: actions/checkout@v3
         with:
           repository: aq2-tng/aq2-tng
-          ref: 'bots'
           path: build
 
       - name: Build TNG
@@ -28,6 +27,27 @@ jobs:
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
-          name: tng-lin-library
+          name: tng-lin-x86_64-library
           path: |
             build/source/gamex86_64.so
+
+  linux_arm64_build_tng:
+    runs-on: self-hosted,ARM64
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: aq2-tng/aq2-tng
+          path: build
+
+      - name: Build TNG
+        working-directory: build/source
+        run: make V=1
+        env:
+          CC: "gcc"
+
+      - name: Generate archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: tng-lin-arm64-library
+          path: |
+            build/source/gameaarch64.so
