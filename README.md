@@ -29,16 +29,21 @@ Should it be determined that assets included in this distribution are indeed unl
 
 ## Instructions/Installation
 
+### RTX compatibility
+If you wish to use your RTX card with Quake II
+1. Install the RTX package for your platform [NVIDIA/Q2RTX](https://github.com/NVIDIA/Q2RTX/releases)
+1. Follow the below instructions
+
 ### Existing Quake II installations
 1. Download the action-quake-content zip file and extract the `action` directory into the same directory where `baseq2` exists
 1. To start Quake II under the `action` mode, use the following startup parameters: `+set game action`
 1. ***Note:*** Config files from your `baseq2` directory will still execute, so there may be some unexpected binds or cvars set
 
-### New/Fresh Standalone Install
 
+### New/Fresh Standalone Install
 #### Mac (Intel and M1)
-1. Install [Brew](https://brew.sh/)
-1. Install [OpenAL](https://formulae.brew.sh/formula/openal-soft) and [SDL2](https://formulae.brew.sh/formula/sdl2)
+1. Install [Brew](https://brew.sh/) if you do not already have it
+1. Install [OpenAL](https://formulae.brew.sh/formula/openal-soft) and [SDL2](https://formulae.brew.sh/formula/sdl2) if you do not already have it
 1. Download the .dmg release package for your architecture
 1. Drag AQ to the Applications directory
 1. Double-click `AQ` to launch
