@@ -12,7 +12,7 @@ on:
 jobs:
   linux_x86_64_build_q2pro:
     #runs-on: ubuntu-latest
-    runs-on: self-hosted,x86
+    runs-on: [self-hosted, x86]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -62,7 +62,7 @@ jobs:
             build/q2proded
   linux_arm_build_q2pro:
     #runs-on: ubuntu-latest
-    runs-on: self-hosted,ARM64
+    runs-on: [self-hosted, ARM64]
     steps:
       - uses: actions/checkout@v3
         with:

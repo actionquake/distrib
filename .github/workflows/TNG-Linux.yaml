@@ -11,7 +11,7 @@ on:
 
 jobs:
   linux_x86_64_build_tng:
-    runs-on: self-hosted,x86
+    runs-on: [self-hosted, x86]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -32,7 +32,7 @@ jobs:
             build/source/gamex86_64.so
 
   linux_arm64_build_tng:
-    runs-on: self-hosted,ARM64
+    runs-on: [self-hosted, ARM64]
     steps:
       - uses: actions/checkout@v3
         with:
