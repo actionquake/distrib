@@ -10,5 +10,5 @@ if [[ $arch == "x86_64" ]]; then
     download_link=$(curl -s https://api.github.com/repos/actionquake/distrib/releases | grep browser_download_url | grep linux-amd64 | head -n 1 | cut -d '"' -f 4)
     curl -L -o $target_file $download_link
     mkdir -p $target_dir
-    tar xf $target_file -C $target_dir
+    tar xf $target_file -C $target_dir --strip-components=1
 fi

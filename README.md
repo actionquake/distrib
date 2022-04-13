@@ -54,6 +54,11 @@ If you wish to use your RTX card with Quake II
 1. Open/launch `q2pro.exe`
 
 #### Linux
+1. Easy Install:  
+    * `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/actionquake/distrib/main/install.sh)"`
+1. Your install will be in your home directory named `aqtion`
+
+#### Tarball install
 1. Download the latest release tarball file
 1. Extract to anywhere on your machine you would like it to be permanently installed
 1. Open/launch `q2pro`
