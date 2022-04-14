@@ -52,12 +52,12 @@ jobs:
 
       - name: Generate dist files
         run: |
-          cd ${{ env.CFG_WORKING_DIR }} && zip -r action_quake-content.zip action/
+          cd ${{ env.CFG_WORKING_DIR }} && zip -r aqtion-content.zip action/
 
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
           name: aq-content-only
           path: |
-            ${{ env.CFG_WORKING_DIR }}/action_quake-content.zip
+            ${{ env.CFG_WORKING_DIR }}/aqtion-content.zip
 
