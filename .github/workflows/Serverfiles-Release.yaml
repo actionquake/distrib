@@ -70,6 +70,7 @@ jobs:
           cp ${{ env.CFG_WORKING_DIR }}/action/credits.pkz ${{ env.LIN64_DIST_DIR }}/action/
 
       - name: Combine version info into a single file
+        run: |
           cat ${{ env.LIN64_DIST_DIR }}/q2pro/versions >> ${{ env.LIN64_DIST_DIR }}/versions
           cat ${{ env.LIN64_DIST_DIR }}/q2admin/versions >> ${{ env.LIN64_DIST_DIR }}/versions
           cat ${{ env.LIN64_DIST_DIR }}/aq2-tng/versions >> ${{ env.LIN64_DIST_DIR }}/versions
