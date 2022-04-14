@@ -34,6 +34,7 @@ jobs:
 
       - name: Generate dist directories
         run: |
+          mkdir -p ${{ env.LINARM64_DIST_DIR }}/action
           mkdir -p ${{ env.LIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN32_DIST_DIR }}/action

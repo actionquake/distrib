@@ -23,6 +23,12 @@ jobs:
         run: |
           sed -i 's/baseq2/action/g' *
 
+      - name: Get version info for q2admin
+        id: version
+        working-directory: config
+        run: |
+          cd build && bash getversion.sh q2admin >> ../../build/versions
+
       - name: Build q2admin
         working-directory: build
         run: make V=1
@@ -37,6 +43,7 @@ jobs:
             build/gamex86_64.so
             build/plugins
             build/config.ex.lua
+            build/versions
 
   linux_arm64_build_q2admin:
     runs-on: [self-hosted, ARM64]
@@ -50,6 +57,12 @@ jobs:
         working-directory: build/src
         run: |
           sed -i 's/baseq2/action/g' *
+
+      - name: Get version info for q2admin
+        id: version
+        working-directory: config
+        run: |
+          cd build && bash getversion.sh q2admin >> ../../build/versions
 
       - name: Build q2admin
         working-directory: build
@@ -65,3 +78,4 @@ jobs:
             build/gameaarch64.so
             build/plugins
             build/config.ex.lua
+            build/versions
