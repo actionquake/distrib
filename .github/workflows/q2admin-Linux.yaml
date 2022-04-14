@@ -26,9 +26,9 @@ jobs:
 
       - name: Get version info for q2admin
         id: version
-        working-directory: config
         run: |
-          cd build && bash -x getversion.sh q2admin >> ../../build/versions
+          cp config/build/getversion.sh 
+          mv build && bash -x getversion.sh q2admin >> versions
 
       - name: Build q2admin
         working-directory: build
@@ -62,9 +62,9 @@ jobs:
 
       - name: Get version info for q2admin
         id: version
-        working-directory: config
         run: |
-          cd build && bash -x getversion.sh q2admin >> ../../build/versions
+          cp config/build/getversion.sh 
+          mv build && bash -x getversion.sh q2admin >> versions
 
       - name: Build q2admin
         working-directory: build
