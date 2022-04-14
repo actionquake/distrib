@@ -63,6 +63,8 @@ jobs:
         run: |
           cp -r ${{ env.CFG_WORKING_DIR }}/server/serverfiles/* ${{ env.LIN64_DIST_DIR }}/action/
           cp ${{ env.LIN64_DIST_DIR }}/q2admin/gamex86_64.so ${{ env.LIN64_DIST_DIR }}/action/gamex86_64.so
+          cp -r ${{ env.LIN64_DIST_DIR }}/q2admin/plugins ${{ env.LIN64_DIST_DIR }}/
+          cp ${{ env.LIN64_DIST_DIR }}/q2admin/config.ex.lua ${{ env.LIN64_DIST_DIR }}/config.lua
           cp ${{ env.LIN64_DIST_DIR }}/tng/gamex86_64.so ${{ env.LIN64_DIST_DIR }}/action/gamex86_64.real.so
           cp ${{ env.CFG_WORKING_DIR }}/action/urbanjungle.pkz ${{ env.LIN64_DIST_DIR }}/action/
           cp ${{ env.CFG_WORKING_DIR }}/action/credits.pkz ${{ env.LIN64_DIST_DIR }}/action/
