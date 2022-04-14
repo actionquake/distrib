@@ -65,7 +65,7 @@ jobs:
 
       - name: Generate dist files
         run: |
-          cd ${{ env.CFG_WORKING_DIR }} && zip -r aqtion-content.zip action/
+          cd ${{ env.CFG_WORKING_DIR }} && zip -r aqtion-content.zip versions action/
 
       - name: Generate archive
         uses: actions/upload-artifact@v3
