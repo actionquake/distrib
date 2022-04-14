@@ -27,7 +27,7 @@ jobs:
       - name: Get version info for q2admin
         id: version
         run: |
-          cp config/build/getversion.sh 
+          cp config/build/getversion.sh build/
           mv build && bash -x getversion.sh q2admin >> versions
 
       - name: Build q2admin
@@ -63,7 +63,7 @@ jobs:
       - name: Get version info for q2admin
         id: version
         run: |
-          cp config/build/getversion.sh 
+          cp config/build/getversion.sh build/
           mv build && bash -x getversion.sh q2admin >> versions
 
       - name: Build q2admin
