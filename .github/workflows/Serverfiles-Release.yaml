@@ -70,6 +70,11 @@ jobs:
           cp ${{ env.CFG_WORKING_DIR }}/action/urbanjungle.pkz ${{ env.LIN64_DIST_DIR }}/action/
           cp ${{ env.CFG_WORKING_DIR }}/action/credits.pkz ${{ env.LIN64_DIST_DIR }}/action/
 
+      - name: Get version info for distrib
+        id: version
+        run: |
+          cd config/build && bash -x getversion.sh distrib >> ../../${{ env.LIN64_DIST_DIR }}/versions
+
       - name: Combine version info into a single file
         run: |
           cat ${{ env.LIN64_DIST_DIR }}/q2admin/versions >> ${{ env.LIN64_DIST_DIR }}/versions
