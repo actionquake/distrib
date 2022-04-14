@@ -17,8 +17,8 @@ env:
 
 jobs:      
   serverfiles_release:
-    #runs-on: ubuntu-latest
-    runs-on: x86
+    runs-on: ubuntu-latest
+    #runs-on: x86
     steps:
       - name: Checkout distrib
         uses: actions/checkout@v3
@@ -72,9 +72,9 @@ jobs:
 
       - name: Combine version info into a single file
         run: |
-          cat ${{ env.LIN64_DIST_DIR }}/q2pro/versions >> ${{ env.LIN64_DIST_DIR }}/versions
+          cat ${{ env.LIN64_DIST_DIR }}/versions >> ${{ env.LIN64_DIST_DIR }}/versions
           cat ${{ env.LIN64_DIST_DIR }}/q2admin/versions >> ${{ env.LIN64_DIST_DIR }}/versions
-          cat ${{ env.LIN64_DIST_DIR }}/aq2-tng/versions >> ${{ env.LIN64_DIST_DIR }}/versions
+          cat ${{ env.LIN64_DIST_DIR }}/tng/versions >> ${{ env.LIN64_DIST_DIR }}/versions
 
       - name: Cleanup directory before packaging
         run: |
