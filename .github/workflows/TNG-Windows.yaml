@@ -38,7 +38,7 @@ jobs:
 
       - name: Build TNG (64-bit)
         working-directory: build/source
-        run: make V=1
+        run: make V=1 && mv gamex86_64.dll ../gamex86_64.dll
         env:
           IFDEF: "WIN64"
 
@@ -47,11 +47,12 @@ jobs:
         with:
           name: tng-win-64
           path: |
-            build/source/gamex86_64.dll
+            build/gamex86_64.dll
+            build/versions
 
       - name: Build TNG (32-bit)
         working-directory: build/source
-        run: make clean && make V=1
+        run: make clean && make V=1 && mv gamex86.dll ../gamex86.dll
         env:
           IFDEF: "WIN32"
 
@@ -60,4 +61,5 @@ jobs:
         with:
           name: tng-win-32
           path: |
-            build/source/gamex86.dll
+            build/gamex86.dll
+            build/versions

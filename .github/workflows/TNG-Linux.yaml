@@ -31,7 +31,7 @@ jobs:
 
       - name: Build TNG
         working-directory: build/source
-        run: make V=1
+        run: make V=1 && mv gamex86_64.so ../gamex86_64.so
         env:
           CC: "gcc"
 
@@ -40,7 +40,7 @@ jobs:
         with:
           name: tng-lin-x86_64-library
           path: |
-            build/source/gamex86_64.so
+            build/gamex86_64.so
             build/versions
 
   linux_arm64_build_tng:
@@ -64,7 +64,7 @@ jobs:
 
       - name: Build TNG
         working-directory: build/source
-        run: make V=1
+        run: make V=1 && mv gameaarch64.so ../gameaarch64.so
         env:
           CC: "gcc"
 
@@ -73,5 +73,5 @@ jobs:
         with:
           name: tng-lin-arm64-library
           path: |
-            build/source/gameaarch64.so
+            build/gameaarch64.so
             build/versions
