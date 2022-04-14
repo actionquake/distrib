@@ -144,6 +144,33 @@ jobs:
       #     dpkg-deb --build --root-owner-group aqtion-${{ env.GIT_TAG }}
       #     mv aqtion-${{ env.GIT_TAG }}.deb aqtion-${{ env.GIT_TAG }}-linux-amd64.deb
 
+      - name: Get version info for distrib
+        id: version
+        run: |
+          cd config/build
+          bash -x getversion.sh distrib >> ../../${{ env.LIN64_DIST_DIR }}/versions
+          bash -x getversion.sh distrib >> ../../${{ env.LINARM64_DIST_DIR }}/versions
+          bash -x getversion.sh distrib >> ../../${{ env.WIN64_DIST_DIR }}/versions
+          bash -x getversion.sh distrib >> ../../${{ env.WIN32_DIST_DIR }}/versions
+
+      - name: Combine version info into single files
+        run: |
+          cat ${{ env.LIN64_DIST_DIR }}/q2admin/versions >> ${{ env.LIN64_DIST_DIR }}/versions
+          cat ${{ env.LIN64_DIST_DIR }}/tng/versions >> ${{ env.LIN64_DIST_DIR }}/versions
+          echo "aqtion_distrib-version=${{ env.GIT_TAG }}" >> ${{ env.LIN64_DIST_DIR }}/versions
+
+          cat ${{ env.LINARM64_DIST_DIR }}/q2admin/versions >> ${{ env.LINARM64_DIST_DIR }}/versions
+          cat ${{ env.LINARM64_DIST_DIR }}/tng/versions >> ${{ env.LINARM64_DIST_DIR }}/versions
+          echo "aqtion_distrib-version=${{ env.GIT_TAG }}" >> ${{ env.LINARM64_DIST_DIR }}/versions
+
+          cat ${{ env.WIN64_DIST_DIR }}/q2admin/versions >> ${{ env.WIN64_DIST_DIR }}/versions
+          cat ${{ env.WIN64_DIST_DIR }}/tng/versions >> ${{ env.WIN64_DIST_DIR }}/versions
+          echo "aqtion_distrib-version=${{ env.GIT_TAG }}" >> ${{ env.WIN64_DIST_DIR }}/versions
+
+          cat ${{ env.WIN32_DIST_DIR }}/q2admin/versions >> ${{ env.WIN32_DIST_DIR }}/versions
+          cat ${{ env.WIN32_DIST_DIR }}/tng/versions >> ${{ env.WIN32_DIST_DIR }}/versions
+          echo "aqtion_distrib-version=${{ env.GIT_TAG }}" >> ${{ env.WIN32_DIST_DIR }}/versions
+
       - name: Generate Linux tar files
         run: |
           tar czpf aqtion-${{ env.GIT_TAG }}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
