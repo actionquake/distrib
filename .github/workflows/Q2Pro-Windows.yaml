@@ -45,7 +45,7 @@ jobs:
 
       - name: Build
         working-directory: build
-        run: make strip V=1
+        run: make strip -j2 V=1
         env:
           CONFIG_FILE: ".config_windows${{ matrix.suffix }}"
 

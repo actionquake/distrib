@@ -31,7 +31,7 @@ jobs:
 
       - name: Build TNG
         working-directory: build/source
-        run: make V=1 && mv gamex86_64.so ../gamex86_64.so
+        run: make -j2 V=1 && mv gamex86_64.so ../gamex86_64.so
         env:
           CC: "gcc"
 
@@ -64,7 +64,7 @@ jobs:
 
       - name: Build TNG
         working-directory: build/source
-        run: make V=1 && mv gameaarch64.so ../gameaarch64.so
+        run: make -j2 V=1 && mv gameaarch64.so ../gameaarch64.so
         env:
           CC: "gcc"
 

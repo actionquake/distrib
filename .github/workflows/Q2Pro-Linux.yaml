@@ -45,7 +45,7 @@ jobs:
 
       - name: Build Q2Pro
         working-directory: build
-        run: make strip V=1
+        run: make strip -j2 V=1
         env:
           CC: "gcc"
           CONFIG_FILE: ".config"
@@ -95,7 +95,7 @@ jobs:
 
       - name: Build Q2Pro
         working-directory: build
-        run: make strip V=1
+        run: make strip -j2 V=1
         env:
           CC: "gcc"
           CONFIG_FILE: ".config"

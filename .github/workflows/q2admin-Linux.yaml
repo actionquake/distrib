@@ -32,7 +32,7 @@ jobs:
 
       - name: Build q2admin
         working-directory: build
-        run: make V=1
+        run: make -j2 V=1
         env:
           CC: "gcc"
 
@@ -68,7 +68,7 @@ jobs:
 
       - name: Build q2admin
         working-directory: build
-        run: make V=1
+        run: make -j2 V=1
         env:
           CC: "gcc"
 
