@@ -18,6 +18,11 @@ jobs:
           repository: m4son/q2admin
           path: build
 
+      - name: Change references from baseq2 to action
+        working-directory: build/src
+        run: |
+          sed -i 's/baseq2/action/g' *
+
       - name: Build q2admin
         working-directory: build
         run: make V=1
@@ -40,6 +45,11 @@ jobs:
         with:
           repository: m4son/q2admin
           path: build
+
+      - name: Change references from baseq2 to action
+        working-directory: build/src
+        run: |
+          sed -i 's/baseq2/action/g' *
 
       - name: Build q2admin
         working-directory: build
