@@ -32,6 +32,12 @@ jobs:
           repository: actionquake/distrib
           path: config
 
+      - name: Get version info for q2pro
+        id: version
+        run: |
+          cp config/build/getversion.sh build/
+          cd build && bash -x getversion.sh q2pro >> versions
+
       - name: Copy config build files
         run: |
           cp -r config/build/windows/config_windows32 build/.config_windows32
@@ -50,4 +56,5 @@ jobs:
           path: |
             build/q2pro.exe
             build/q2proded.exe
+            build/versions
 

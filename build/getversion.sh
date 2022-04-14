@@ -4,8 +4,9 @@
 package_version=$1
 
 q2pro () {
-  q2pro_version=$(./version.sh  | head -n 1)
-  echo "q2pro_version=${q2pro_version}"
+  q2pro_revision=$(git rev-list --count HEAD)
+  q2pro_version=$(git rev-parse --short HEAD)
+  echo "q2pro_version=r${q2pro_revision}~${q2pro_version}"
 }
 
 q2admin () {

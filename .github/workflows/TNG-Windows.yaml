@@ -19,12 +19,22 @@ jobs:
           ref: 'bots'
           path: build
 
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: config
+
       # This is because the Makefile doesn't recognize mingw on Linux, and we have to append a special flag at the linking step for Windows
       - name: Rough hack to fix Makefile
         run: |
-          wget https://raw.githubusercontent.com/actionquake/distrib/main/build/windows/tng-windows-append
           mv build/source/Makefile build/source/Makefile-original
-          cat tng-windows-append build/source/Makefile-original > build/source/Makefile
+          cat config/build/windows/tng-windows-append build/source/Makefile-original > build/source/Makefile
+
+      - name: Get version info for tng
+        id: version
+        run: |
+          cp config/build/getversion.sh build/
+          cd build && bash -x getversion.sh tng >> versions
 
       - name: Build TNG (64-bit)
         working-directory: build/source

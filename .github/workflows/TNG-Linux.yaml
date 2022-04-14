@@ -18,6 +18,17 @@ jobs:
           repository: aq2-tng/aq2-tng
           path: build
 
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: config
+      
+      - name: Get version info for tng
+        id: version
+        run: |
+          cp config/build/getversion.sh build/
+          cd build && bash -x getversion.sh tng >> versions
+
       - name: Build TNG
         working-directory: build/source
         run: make V=1
@@ -30,6 +41,7 @@ jobs:
           name: tng-lin-x86_64-library
           path: |
             build/source/gamex86_64.so
+            build/versions
 
   linux_arm64_build_tng:
     runs-on: [self-hosted, ARM64]
@@ -38,6 +50,17 @@ jobs:
         with:
           repository: aq2-tng/aq2-tng
           path: build
+
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: config
+
+      - name: Get version info for tng
+        id: version
+        run: |
+          cp config/build/getversion.sh build/
+          cd build && bash -x getversion.sh tng >> versions
 
       - name: Build TNG
         working-directory: build/source
@@ -51,3 +74,4 @@ jobs:
           name: tng-lin-arm64-library
           path: |
             build/source/gameaarch64.so
+            build/versions
