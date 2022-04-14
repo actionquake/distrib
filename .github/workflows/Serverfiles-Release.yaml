@@ -72,7 +72,6 @@ jobs:
 
       - name: Combine version info into a single file
         run: |
-          cat ${{ env.LIN64_DIST_DIR }}/versions >> ${{ env.LIN64_DIST_DIR }}/versions
           cat ${{ env.LIN64_DIST_DIR }}/q2admin/versions >> ${{ env.LIN64_DIST_DIR }}/versions
           cat ${{ env.LIN64_DIST_DIR }}/tng/versions >> ${{ env.LIN64_DIST_DIR }}/versions
 
