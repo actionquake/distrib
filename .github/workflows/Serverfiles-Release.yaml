@@ -67,6 +67,11 @@ jobs:
           cp ${{ env.CFG_WORKING_DIR }}/action/urbanjungle.pkz ${{ env.LIN64_DIST_DIR }}/action/
           cp ${{ env.CFG_WORKING_DIR }}/action/credits.pkz ${{ env.LIN64_DIST_DIR }}/action/
 
+      - name: Cleanup directory before packaging
+        run: |
+          rm -rf ${{ env.LIN64_DIST_DIR }}/q2admin/
+          rm -rf ${{ env.LIN64_DIST_DIR }}/tng/
+
       # ## Linux ARM64
       # - name: Download latest Linux arm64 Q2Pro artifacts
       #   uses: dawidd6/action-download-artifact@v2
