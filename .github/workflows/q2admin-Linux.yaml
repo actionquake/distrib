@@ -28,7 +28,7 @@ jobs:
         id: version
         run: |
           cp config/build/getversion.sh build/
-          mv build && bash -x getversion.sh q2admin >> versions
+          cd build && bash -x getversion.sh q2admin >> versions
 
       - name: Build q2admin
         working-directory: build
@@ -64,7 +64,7 @@ jobs:
         id: version
         run: |
           cp config/build/getversion.sh build/
-          mv build && bash -x getversion.sh q2admin >> versions
+          cd build && bash -x getversion.sh q2admin >> versions
 
       - name: Build q2admin
         working-directory: build
