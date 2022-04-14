@@ -130,28 +130,28 @@ jobs:
 
       - name: Generate content-only zip file
         run: |
-          mv action_quake-content.zip action_quake-content-${{ env.GIT_TAG }}.zip
+          mv aqtion-content.zip aqtion-content-${{ env.GIT_TAG }}.zip
 
       ## Can't install .deb to normal user dirs, wtf Linux?
       # - name: Generate Linux deb files
       #   run: |
-      #     mkdir -p action_quake-${{ env.GIT_TAG }}/usr/local/games
-      #     mkdir -p action_quake-${{ env.GIT_TAG }}/DEBIAN
-      #     cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* action_quake-${{ env.GIT_TAG }}/DEBIAN
-      #     cp -r ${{ env.LIN64_DIST_DIR }}/* action_quake-${{ env.GIT_TAG }}/usr/local/games/
-      #     sed -i "s/version_value_here/${GIT_TAG:1}/g" action_quake-${{ env.GIT_TAG }}/DEBIAN/control
-      #     dpkg-deb --build --root-owner-group action_quake-${{ env.GIT_TAG }}
-      #     mv action_quake-${{ env.GIT_TAG }}.deb action_quake-${{ env.GIT_TAG }}-linux-amd64.deb
+      #     mkdir -p aqtion-${{ env.GIT_TAG }}/usr/local/games
+      #     mkdir -p aqtion-${{ env.GIT_TAG }}/DEBIAN
+      #     cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* aqtion-${{ env.GIT_TAG }}/DEBIAN
+      #     cp -r ${{ env.LIN64_DIST_DIR }}/* aqtion-${{ env.GIT_TAG }}/usr/local/games/
+      #     sed -i "s/version_value_here/${GIT_TAG:1}/g" aqtion-${{ env.GIT_TAG }}/DEBIAN/control
+      #     dpkg-deb --build --root-owner-group aqtion-${{ env.GIT_TAG }}
+      #     mv aqtion-${{ env.GIT_TAG }}.deb aqtion-${{ env.GIT_TAG }}-linux-amd64.deb
 
       - name: Generate Linux tar files
         run: |
-          tar czpf action_quake-${{ env.GIT_TAG }}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
-          tar czpf action_quake-${{ env.GIT_TAG }}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
+          tar czpf aqtion-${{ env.GIT_TAG }}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          tar czpf aqtion-${{ env.GIT_TAG }}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
 
       - name: Generate Windows zip files
         run: |
-          zip -r action_quake-${{ env.GIT_TAG }}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
-          zip -r action_quake-${{ env.GIT_TAG }}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
+          zip -r aqtion-${{ env.GIT_TAG }}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
+          zip -r aqtion-${{ env.GIT_TAG }}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
     
       - name: Create release
         uses: actions/create-release@v1
@@ -159,7 +159,7 @@ jobs:
         with:
           draft: false
           prerelease: false
-          release_name: action_quake-${{ github.event.inputs.release_tag }}
+          release_name: aqtion-${{ github.event.inputs.release_tag }}
           tag_name: ${{ github.event.inputs.release_tag }}
           #body_path: CHANGELOG.md
           body: ${{steps.github_release.outputs.changelog}}
@@ -174,9 +174,9 @@ jobs:
           body_path: 
           tag_name: ${{ github.event.inputs.release_tag }}
           files: |
-            action_quake-${{ env.GIT_TAG }}-linux-arm64.tar.gz
-            action_quake-${{ env.GIT_TAG }}-linux-amd64.tar.gz
-            action_quake-${{ env.GIT_TAG }}-windows-x64.zip
-            action_quake-${{ env.GIT_TAG }}-windows-i386.zip
-            action_quake-content-${{ env.GIT_TAG }}.zip
+            aqtion-${{ env.GIT_TAG }}-linux-arm64.tar.gz
+            aqtion-${{ env.GIT_TAG }}-linux-amd64.tar.gz
+            aqtion-${{ env.GIT_TAG }}-windows-x64.zip
+            aqtion-${{ env.GIT_TAG }}-windows-i386.zip
+            aqtion-content-${{ env.GIT_TAG }}.zip
 

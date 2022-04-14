@@ -26,4 +26,11 @@ tng () {
   echo "aq2-tng_version=${tng_revision}~${tng_version}"
 }
 
+distrib () {
+  distrib=config
+  cd ${distrib}
+  distrib_version=$(git rev-parse --short HEAD)
+  echo "distrib_version=${distrib_version}"
+}
+
 $package_version

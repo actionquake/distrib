@@ -36,7 +36,7 @@ jobs:
         id: version
         working-directory: config
         run: |
-          cd build && bash getversion.sh >> ../../build/versions
+          cd build && bash getversion.sh q2pro >> ../../build/versions
 
       - name: Copy config build files
         run: |
@@ -86,7 +86,7 @@ jobs:
         id: version
         working-directory: config
         run: |
-          cd build && bash getversion.sh >> ../../build/versions
+          cd build && bash getversion.sh q2pro >> ../../build/versions
 
       - name: Copy config build files
         run: |
