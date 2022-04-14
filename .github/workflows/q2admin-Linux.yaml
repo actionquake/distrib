@@ -18,16 +18,17 @@ jobs:
           repository: m4son/q2admin
           path: build
 
-      - name: Change references from baseq2 to action
+      - name: Change references from baseq2 to action and rename config.ex.lua
         working-directory: build/src
         run: |
           sed -i 's/baseq2/action/g' *
+          mv ../config.ex.lua ../config.lua
 
       - name: Get version info for q2admin
         id: version
         working-directory: config
         run: |
-          cd build && bash getversion.sh q2admin >> ../../build/versions
+          cd build && bash -x getversion.sh q2admin >> ../../build/versions
 
       - name: Build q2admin
         working-directory: build
@@ -42,7 +43,7 @@ jobs:
           path: |
             build/gamex86_64.so
             build/plugins
-            build/config.ex.lua
+            build/config.lua
             build/versions
 
   linux_arm64_build_q2admin:
@@ -53,16 +54,17 @@ jobs:
           repository: m4son/q2admin
           path: build
 
-      - name: Change references from baseq2 to action
+      - name: Change references from baseq2 to action and rename config.ex.lua
         working-directory: build/src
         run: |
           sed -i 's/baseq2/action/g' *
+          mv ../config.ex.lua ../config.lua
 
       - name: Get version info for q2admin
         id: version
         working-directory: config
         run: |
-          cd build && bash getversion.sh q2admin >> ../../build/versions
+          cd build && bash -x getversion.sh q2admin >> ../../build/versions
 
       - name: Build q2admin
         working-directory: build
@@ -77,5 +79,5 @@ jobs:
           path: |
             build/gameaarch64.so
             build/plugins
-            build/config.ex.lua
+            build/config.lua
             build/versions
