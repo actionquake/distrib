@@ -34,9 +34,9 @@ jobs:
 
       - name: Get version info for q2pro
         id: version
-        working-directory: config
         run: |
-          cd build && bash getversion.sh q2pro >> ../../build/versions
+          cp config/build/getversion.sh build/
+          cd build && bash -x getversion.sh q2pro >> versions
 
       - name: Copy config build files
         run: |
@@ -84,9 +84,9 @@ jobs:
 
       - name: Get version info for q2pro
         id: version
-        working-directory: config
         run: |
-          cd build && bash getversion.sh q2pro >> ../../build/versions
+          cp config/build/getversion.sh build/
+          cd build && bash -x getversion.sh q2pro >> versions
 
       - name: Copy config build files
         run: |
