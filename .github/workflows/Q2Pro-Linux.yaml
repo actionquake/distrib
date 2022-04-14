@@ -19,10 +19,6 @@ jobs:
           repository: skullernet/q2pro
           path: build
 
-      - name: Display version info
-        working-directory: build
-        run: bash version.sh
-
       # Self-hosted runner has these
       # - name: Install dependencies
       #   run: |
@@ -35,6 +31,12 @@ jobs:
         with:
           repository: actionquake/distrib
           path: config
+
+      - name: Get version info for q2pro
+        id: version
+        working-directory: config
+        run: |
+          cd build && bash getversion.sh >> ../../build/versions
 
       - name: Copy config build files
         run: |
@@ -52,7 +54,7 @@ jobs:
         working-directory: build
         run: |
           chmod +x q2pro q2proded
-      
+
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
@@ -60,6 +62,8 @@ jobs:
           path: |
             build/q2pro
             build/q2proded
+            build/versions
+
   linux_arm_build_q2pro:
     #runs-on: ubuntu-latest
     runs-on: [self-hosted, ARM64]
@@ -77,6 +81,12 @@ jobs:
         with:
           repository: actionquake/distrib
           path: config
+
+      - name: Get version info for q2pro
+        id: version
+        working-directory: config
+        run: |
+          cd build && bash getversion.sh >> ../../build/versions
 
       - name: Copy config build files
         run: |
@@ -102,4 +112,5 @@ jobs:
           path: |
             build/q2pro
             build/q2proded
+            build/versions
 
