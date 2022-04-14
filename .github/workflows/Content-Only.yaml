@@ -26,12 +26,25 @@ jobs:
           repository: actionquake/distrib
           path: ${{ env.CFG_WORKING_DIR }}
 
-      ## Linux
+      - name: Get version info for distrib
+        id: version
+        run: |
+          cd build && bash -x getversion.sh distrib >> ${{ env.CFG_WORKING_DIR }}/versions
+
+      ## Linux 64-bit
       - name: Download latest Linux TNG artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: TNG-Linux.yaml
-          name: tng-lin-library
+          name: tng-lin-x86_64-library
+          path: ${{ env.CFG_WORKING_DIR }}/action/
+
+      ## Linux ARM64
+      - name: Download latest Linux TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Linux.yaml
+          name: tng-lin-arm64-library
           path: ${{ env.CFG_WORKING_DIR }}/action/
 
       ## Win32
