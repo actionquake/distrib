@@ -11,8 +11,6 @@ env:
   CFG_WORKING_DIR: "config"
   LIN64_DIST_DIR: "linux-x64-dist"
   LINARM64_DIST_DIR: "linux-arm64-dist"
-  WIN64_DIST_DIR: "windows-x64-dist"
-  WIN32_DIST_DIR: "windows-i386-dist"
   GIT_TAG: ${{ github.event.inputs.release_tag }}
 
 jobs:      
@@ -30,8 +28,6 @@ jobs:
         run: |
           mkdir -p ${{ env.LIN64_DIST_DIR }}/action
           mkdir -p ${{ env.LINARM64_DIST_DIR }}/action
-          mkdir -p ${{ env.WIN64_DIST_DIR }}/action
-          mkdir -p ${{ env.WIN32_DIST_DIR }}/action
 
       ## Linux x86_64
       - name: Download latest Linux x86_64 Q2Pro artifacts
@@ -85,97 +81,63 @@ jobs:
           rm -rf ${{ env.LIN64_DIST_DIR }}/q2admin/
           rm -rf ${{ env.LIN64_DIST_DIR }}/tng/
 
-      # ## Linux ARM64
-      # - name: Download latest Linux arm64 Q2Pro artifacts
-      #   uses: dawidd6/action-download-artifact@v2
-      #   with:
-      #     workflow: Q2Pro-Linux.yaml
-      #     name: q2pro-linux-arm64
-      #     path: ${{ env.LINARM64_DIST_DIR }}/
+      ## Linux ARM64
+      - name: Download latest Linux arm64 Q2Pro artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Q2Pro-Linux.yaml
+          name: q2pro-linux-arm64
+          path: ${{ env.LINARM64_DIST_DIR }}/
 
-      # - name: Set Linux binaries to executable
-      #   run: |
-      #     chmod +x ${{ env.LINARM64_DIST_DIR }}/*
+      - name: Set Linux binaries to executable, remove q2pro
+        run: |
+          chmod +x ${{ env.LINARM64_DIST_DIR }}/q2proded
+          rm -rf ${{ env.LINARM64_DIST_DIR }}/q2pro
 
-      # - name: Download latest Linux arm64 TNG artifacts
-      #   uses: dawidd6/action-download-artifact@v2
-      #   with:
-      #     workflow: TNG-Linux.yaml
-      #     name: tng-lin-arm64-library
-      #     path: ${{ env.LINARM64_DIST_DIR }}/action/
+      - name: Download latest Linux arm64 TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Linux.yaml
+          name: tng-lin-arm64-library
+          path: ${{ env.LINARM64_DIST_DIR }}/tng
 
-      # - name: Copy action content
-      #   run: |
-      #     cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.LINARM64_DIST_DIR }}/action/
-
-      # ## Win32
-      # - name: Download latest Win32 Q2Pro artifacts
-      #   uses: dawidd6/action-download-artifact@v2
-      #   with:
-      #     workflow: Q2Pro-Windows.yaml
-      #     name: q2pro-win-32
-      #     path: ${{ env.WIN32_DIST_DIR }}/
-
-      # - name: Download latest Win32 TNG artifacts
-      #   uses: dawidd6/action-download-artifact@v2
-      #   with:
-      #     workflow: TNG-Windows.yaml
-      #     name: tng-win-32
-      #     path: ${{ env.WIN32_DIST_DIR }}/action/
-
-      # - name: Copy action content
-      #   run: |
-      #     cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN32_DIST_DIR }}/action/
-
-      # ## Win64
-      # - name: Download latest Win64 Q2Pro artifacts
-      #   uses: dawidd6/action-download-artifact@v2
-      #   with:
-      #     workflow: Q2Pro-Windows.yaml
-      #     name: q2pro-win-64
-      #     path: ${{ env.WIN64_DIST_DIR }}/
-
-      # - name: Download latest Win64 TNG artifacts
-      #   uses: dawidd6/action-download-artifact@v2
-      #   with:
-      #     workflow: TNG-Windows.yaml
-      #     name: tng-win-64
-      #     path: ${{ env.WIN64_DIST_DIR }}/action/
-
-      # - name: Copy action content
-      #   run: |
-      #     cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN64_DIST_DIR }}/action/
+      - name: Download latest Linux arm64 q2admin artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: q2admin-Linux.yaml
+          name: q2admin-lin-arm64-library
+          path: ${{ env.LINARM64_DIST_DIR }}/q2admin
       
-      # - name: Download latest Content-only archive
-      #   uses: dawidd6/action-download-artifact@v2
-      #   with:
-      #     workflow: Content-Only.yaml
-      #     name: aq-content-only
+      - name: Copy server files, initial maps, q2admin and TNG
+        run: |
+          cp -r ${{ env.CFG_WORKING_DIR }}/server/serverfiles/* ${{ env.LINARM64_DIST_DIR }}/action/
+          cp ${{ env.LINARM64_DIST_DIR }}/q2admin/gamearm64.so ${{ env.LINARM64_DIST_DIR }}/action/gamearm64.so
+          cp -r ${{ env.LINARM64_DIST_DIR }}/q2admin/plugins ${{ env.LINARM64_DIST_DIR }}/
+          cp ${{ env.LINARM64_DIST_DIR }}/q2admin/config.lua ${{ env.LINARM64_DIST_DIR }}/config.lua
+          cp ${{ env.LINARM64_DIST_DIR }}/tng/gamearm64.so ${{ env.LINARM64_DIST_DIR }}/action/gamearm64.real.so
+          cp ${{ env.CFG_WORKING_DIR }}/action/urbanjungle.pkz ${{ env.LINARM64_DIST_DIR }}/action/
+          cp ${{ env.CFG_WORKING_DIR }}/action/credits.pkz ${{ env.LINARM64_DIST_DIR }}/action/
 
-      # - name: Generate content-only zip file
-      #   run: |
-      #     mv action_quake-content.zip action_quake-content-${{ env.GIT_TAG }}.zip
+      - name: Get version info for distrib
+        id: version
+        run: |
+          cd config/build && bash -x getversion.sh distrib >> ../../${{ env.LINARM64_DIST_DIR }}/versions
 
-      ## Can't install .deb to normal user dirs, wtf Linux?
-      # - name: Generate Linux deb files
-      #   run: |
-      #     mkdir -p action_quake-${{ env.GIT_TAG }}/usr/local/games
-      #     mkdir -p action_quake-${{ env.GIT_TAG }}/DEBIAN
-      #     cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* action_quake-${{ env.GIT_TAG }}/DEBIAN
-      #     cp -r ${{ env.LIN64_DIST_DIR }}/* action_quake-${{ env.GIT_TAG }}/usr/local/games/
-      #     sed -i "s/version_value_here/${GIT_TAG:1}/g" action_quake-${{ env.GIT_TAG }}/DEBIAN/control
-      #     dpkg-deb --build --root-owner-group action_quake-${{ env.GIT_TAG }}
-      #     mv action_quake-${{ env.GIT_TAG }}.deb action_quake-${{ env.GIT_TAG }}-linux-amd64.deb
+      - name: Combine version info into a single file
+        run: |
+          cat ${{ env.LINARM64_DIST_DIR }}/q2admin/versions >> ${{ env.LINARM64_DIST_DIR }}/versions
+          cat ${{ env.LINARM64_DIST_DIR }}/tng/versions >> ${{ env.LINARM64_DIST_DIR }}/versions
+
+      - name: Cleanup directory before packaging
+        run: |
+          rm -rf ${{ env.LINARM64_DIST_DIR }}/q2admin/
+          rm -rf ${{ env.LINARM64_DIST_DIR }}/tng/
 
       - name: Generate Linux tar files
         run: |
           tar czpf aqtion-serverfiles-${{ env.GIT_TAG }}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          tar czpf aqtion-serverfiles-${{ env.GIT_TAG }}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
 
-      # - name: Generate Windows zip files
-      #   run: |
-      #     zip -r action_quake-${{ env.GIT_TAG }}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
-      #     zip -r action_quake-${{ env.GIT_TAG }}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
-    
       - name: Create release
         uses: actions/create-release@v1
         id: create_release
@@ -198,4 +160,5 @@ jobs:
           tag_name: ${{ github.event.inputs.release_tag }}
           files: |
             aqtion-serverfiles-${{ env.GIT_TAG }}-linux-amd64.tar.gz
+            aqtion-serverfiles-${{ env.GIT_TAG }}-linux-arm64.tar.gz
 
