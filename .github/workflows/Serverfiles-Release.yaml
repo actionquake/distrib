@@ -134,7 +134,7 @@ jobs:
           draft: false
           prerelease: false
           release_name: AQtion Server Files ${{github.ref_name}}
-          tag_name: ${{github.ref_name}}
+          tag_name: ${{github.ref_name}}-server
           #body_path: CHANGELOG.md
           body: ${{steps.github_release.outputs.changelog}}
         env:
@@ -146,7 +146,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           body_path: 
-          tag_name: ${{github.ref_name}}
+          tag_name: ${{github.ref_name}}-server
           files: |
             aqtion-serverfiles-${{github.ref_name}}-linux-amd64.tar.gz
             aqtion-serverfiles-${{github.ref_name}}-linux-arm64.tar.gz
