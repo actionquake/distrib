@@ -24,11 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     #runs-on: self-hosted
     steps:
-      - name: Generate release tag
-        id: tag
-        run: |
-          echo "::set-output name=release_tag::${GITHUB_REF/refs\/tags\//)"
-          
       - name: Checkout distrib
         uses: actions/checkout@v3
         with:
@@ -134,7 +129,7 @@ jobs:
 
       - name: Generate content-only zip file
         run: |
-          mv aqtion-content.zip aqtion-content-${{ steps.tag.outputs.release_tag }}.zip
+          mv aqtion-content.zip aqtion-content-${{github.ref_name}}.zip
 
       ## Can't install .deb to normal user dirs, wtf Linux?
       # - name: Generate Linux deb files
@@ -149,13 +144,13 @@ jobs:
       
       - name: Generate Linux tar files
         run: |
-          tar czpf aqtion-${{ steps.tag.outputs.release_tag }}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
-          tar czpf aqtion-${{ steps.tag.outputs.release_tag }}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
+          tar czpf aqtion-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          tar czpf aqtion-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
 
       - name: Generate Windows zip files
         run: |
-          zip -r aqtion-${{ steps.tag.outputs.release_tag }}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
-          zip -r aqtion-${{ steps.tag.outputs.release_tag }}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
+          zip -r aqtion-${{github.ref_name}}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
+          zip -r aqtion-${{github.ref_name}}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
     
       - name: Create release
         uses: actions/create-release@v1
@@ -163,8 +158,8 @@ jobs:
         with:
           draft: false
           prerelease: false
-          release_name: aqtion-${{ steps.tag.outputs.release_tag }}
-          tag_name: ${{ steps.tag.outputs.release_tag }}
+          release_name: aqtion-${{github.ref_name}}
+          tag_name: ${{github.ref_name}}
           #body_path: CHANGELOG.md
           body: ${{steps.github_release.outputs.changelog}}
         env:
@@ -176,7 +171,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           body_path: 
-          tag_name: ${{ steps.tag.outputs.release_tag }}
+          tag_name: ${{github.ref_name}}
           files: |
             aqtion-${{ env.GIT_TAG }}-linux-arm64.tar.gz
             aqtion-${{ env.GIT_TAG }}-linux-amd64.tar.gz
