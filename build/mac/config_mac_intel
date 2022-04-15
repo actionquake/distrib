@@ -18,6 +18,7 @@ CONFIG_FIXED_LIBAL=y
 #AL_CFLAGS = -framework OpenAL
 #AL_LIBS = -framework OpenAL
 
-CONFIG_PATH_DATA=.
-CONFIG_PATH_LIB=/Applications/AQ.app/Contents/MacOS/.lib
-CONFIG_PATH_HOME=~/actionquake
+CONFIG_PATH_DATA=/Applications/AQ.app/Contents/MacOS
+CONFIG_PATH_HOME=~/aqtion
+
+STRIP=strip -x
