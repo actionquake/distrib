@@ -17,6 +17,9 @@ jobs:
   serverfiles_release:
     runs-on: ubuntu-latest
     #runs-on: x86
+    # strategy:
+    #   matrix:
+    #     aqtionpath: ["${{ env.LIN64_DIST_DIR }}", "${{ env.LINARM64_DIST_DIR }}"]
     steps:
       - name: Checkout distrib
         uses: actions/checkout@v3
@@ -67,16 +70,12 @@ jobs:
           name: q2admin-lin-arm64-library
           path: ${{ env.LINARM64_DIST_DIR }}/q2admin
 
-
       - name: Set Linux binaries to executable, remove q2pro
         run: |
           chmod +x ${{ env.LIN64_DIST_DIR }}/q2proded
           rm -rf ${{ env.LIN64_DIST_DIR }}/q2pro
           chmod +x ${{ env.LINARM64_DIST_DIR }}/q2proded
           rm -rf ${{ env.LINARM64_DIST_DIR }}/q2pro
-
-      
-      
       
       - name: Linux x86_64 - copy server files, initial maps, q2admin and TNG
         run: |
@@ -91,10 +90,10 @@ jobs:
       - name: Linux ARM64 - copy server files, initial maps, q2admin and TNG
         run: |
           cp -r ${{ env.CFG_WORKING_DIR }}/server/serverfiles/* ${{ env.LINARM64_DIST_DIR }}/action/
-          cp ${{ env.LINARM64_DIST_DIR }}/q2admin/gamearm64.so ${{ env.LINARM64_DIST_DIR }}/action/gamearm64.so
+          cp ${{ env.LINARM64_DIST_DIR }}/q2admin/gameaarch64.so ${{ env.LINARM64_DIST_DIR }}/action/gameaarch64.so
           cp -r ${{ env.LINARM64_DIST_DIR }}/q2admin/plugins ${{ env.LINARM64_DIST_DIR }}/
           cp ${{ env.LINARM64_DIST_DIR }}/q2admin/config.lua ${{ env.LINARM64_DIST_DIR }}/config.lua
-          cp ${{ env.LINARM64_DIST_DIR }}/tng/gamearm64.so ${{ env.LINARM64_DIST_DIR }}/action/gamearm64.real.so
+          cp ${{ env.LINARM64_DIST_DIR }}/tng/gameaarch64.so ${{ env.LINARM64_DIST_DIR }}/action/gameaarch64.real.so
           cp ${{ env.CFG_WORKING_DIR }}/action/urbanjungle.pkz ${{ env.LINARM64_DIST_DIR }}/action/
           cp ${{ env.CFG_WORKING_DIR }}/action/credits.pkz ${{ env.LINARM64_DIST_DIR }}/action/
 
