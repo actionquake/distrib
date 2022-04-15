@@ -1,17 +1,16 @@
 name: Quick Release
 
-# on:
-#   push:
-#     branches: [main, ci]
-#   pull_request:
-#     branches: [main]
+on:  
+  push:
+    tags:
+      - '*'
 
-on:
-  workflow_dispatch:
-    inputs:
-      release_tag:
-        description: "Release version tag"
-        required: true
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       release_tag:
+#         description: "Release version tag"
+#         required: true
 
 env:
   CFG_WORKING_DIR: "config"

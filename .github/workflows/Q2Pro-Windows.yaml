@@ -1,14 +1,11 @@
 name: Windows Q2Pro (32/64-bit)
 
-# on:
-#   push:
-#     branches: [main, ci]
-#   pull_request:
-#     branches: [main]
-
 on:
-  workflow_dispatch:
+  push:
+    branches: ci
 
+# on:
+#   workflow_dispatch:
 
 jobs:
   windows_build_q2pro:

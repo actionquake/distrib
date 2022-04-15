@@ -1,13 +1,11 @@
 name: Linux Q2Pro (64-bit)
 
-# on:
-#   push:
-#     branches: [main, ci]
-#   pull_request:
-#     branches: [main]
-
 on:
-  workflow_dispatch:
+  push:
+    branches: ci
+
+# on:
+#   workflow_dispatch:
 
 jobs:
   linux_x86_64_build_q2pro:

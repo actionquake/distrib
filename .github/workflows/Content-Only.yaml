@@ -1,20 +1,17 @@
 name: Content-Only
 
-# on:
-#   push:
-#     branches: [main, ci]
-#   pull_request:
-#     branches: [main]
-
 on:
-  workflow_dispatch:
+  push:
+    branches: ci
+
+# on:
+#   workflow_dispatch:
 
 env:
   CFG_WORKING_DIR: "config"
   LIN64_DIST_DIR: "linux-x64-dist"
   WIN64_DIST_DIR: "windows-x64-dist"
   WIN32_DIST_DIR: "windows-i386-dist"
-  ACTION_DIR: "aq"
 
 jobs:      
   content_release:
