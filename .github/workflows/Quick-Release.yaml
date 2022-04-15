@@ -3,7 +3,7 @@ name: Quick Release
 on:  
   push:
     tags:
-      - '*'
+      - 'v*'
 
 # on:
 #   workflow_dispatch:
@@ -18,13 +18,17 @@ env:
   LINARM64_DIST_DIR: "linux-arm64-dist"
   WIN64_DIST_DIR: "windows-x64-dist"
   WIN32_DIST_DIR: "windows-i386-dist"
-  GIT_TAG: ${{ github.event.inputs.release_tag }}
 
 jobs:      
   quick_release:
     runs-on: ubuntu-latest
     #runs-on: self-hosted
     steps:
+      - name: Generate release tag
+        id: tag
+        run: |
+          echo "::set-output name=release_tag::${GITHUB_REF/refs\/tags\//)"
+          
       - name: Checkout distrib
         uses: actions/checkout@v3
         with:
@@ -130,7 +134,7 @@ jobs:
 
       - name: Generate content-only zip file
         run: |
-          mv aqtion-content.zip aqtion-content-${{ env.GIT_TAG }}.zip
+          mv aqtion-content.zip aqtion-content-${{ steps.tag.outputs.release_tag }}.zip
 
       ## Can't install .deb to normal user dirs, wtf Linux?
       # - name: Generate Linux deb files
@@ -145,13 +149,13 @@ jobs:
       
       - name: Generate Linux tar files
         run: |
-          tar czpf aqtion-${{ env.GIT_TAG }}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
-          tar czpf aqtion-${{ env.GIT_TAG }}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
+          tar czpf aqtion-${{ steps.tag.outputs.release_tag }}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          tar czpf aqtion-${{ steps.tag.outputs.release_tag }}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
 
       - name: Generate Windows zip files
         run: |
-          zip -r aqtion-${{ env.GIT_TAG }}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
-          zip -r aqtion-${{ env.GIT_TAG }}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
+          zip -r aqtion-${{ steps.tag.outputs.release_tag }}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
+          zip -r aqtion-${{ steps.tag.outputs.release_tag }}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
     
       - name: Create release
         uses: actions/create-release@v1
@@ -159,8 +163,8 @@ jobs:
         with:
           draft: false
           prerelease: false
-          release_name: aqtion-${{ github.event.inputs.release_tag }}
-          tag_name: ${{ github.event.inputs.release_tag }}
+          release_name: aqtion-${{ steps.tag.outputs.release_tag }}
+          tag_name: ${{ steps.tag.outputs.release_tag }}
           #body_path: CHANGELOG.md
           body: ${{steps.github_release.outputs.changelog}}
         env:
@@ -172,7 +176,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           body_path: 
-          tag_name: ${{ github.event.inputs.release_tag }}
+          tag_name: ${{ steps.tag.outputs.release_tag }}
           files: |
             aqtion-${{ env.GIT_TAG }}-linux-arm64.tar.gz
             aqtion-${{ env.GIT_TAG }}-linux-amd64.tar.gz

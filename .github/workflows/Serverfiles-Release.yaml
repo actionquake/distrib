@@ -16,7 +16,6 @@ env:
   CFG_WORKING_DIR: "config"
   LIN64_DIST_DIR: "linux-x64-dist"
   LINARM64_DIST_DIR: "linux-arm64-dist"
-  GIT_TAG: ${{ github.event.inputs.release_tag }}
 
 jobs:      
   serverfiles_release:
@@ -26,6 +25,11 @@ jobs:
     #   matrix:
     #     aqtionpath: ["${{ env.LIN64_DIST_DIR }}", "${{ env.LINARM64_DIST_DIR }}"]
     steps:
+      - name: Generate release tag
+        id: tag
+        run: |
+          echo "::set-output name=release_tag::${GITHUB_REF/refs\/tags\//)"
+
       - name: Checkout distrib
         uses: actions/checkout@v3
         with:
@@ -125,8 +129,8 @@ jobs:
 
       - name: Generate Linux tar files
         run: |
-          tar czpf aqtion-serverfiles-${{ env.GIT_TAG }}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
-          tar czpf aqtion-serverfiles-${{ env.GIT_TAG }}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
+          tar czpf aqtion-serverfiles-${{ steps.tag.outputs.release_tag }}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          tar czpf aqtion-serverfiles-${{ steps.tag.outputs.release_tag }}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
 
       - name: Create release
         uses: actions/create-release@v1
@@ -134,8 +138,8 @@ jobs:
         with:
           draft: false
           prerelease: false
-          release_name: AQtion Server Files ${{ github.event.inputs.release_tag }}
-          tag_name: ${{ github.event.inputs.release_tag }}
+          release_name: AQtion Server Files ${{ steps.tag.outputs.release_tag }}
+          tag_name: ${{ steps.tag.outputs.release_tag }}
           #body_path: CHANGELOG.md
           body: ${{steps.github_release.outputs.changelog}}
         env:
@@ -147,8 +151,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           body_path: 
-          tag_name: ${{ github.event.inputs.release_tag }}
+          tag_name: ${{ steps.tag.outputs.release_tag }}
           files: |
-            aqtion-serverfiles-${{ env.GIT_TAG }}-linux-amd64.tar.gz
-            aqtion-serverfiles-${{ env.GIT_TAG }}-linux-arm64.tar.gz
+            aqtion-serverfiles-${{ steps.tag.outputs.release_tag }}-linux-amd64.tar.gz
+            aqtion-serverfiles-${{ steps.tag.outputs.release_tag }}-linux-arm64.tar.gz
 
