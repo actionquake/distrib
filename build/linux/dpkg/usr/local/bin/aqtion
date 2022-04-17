@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+# Check for existence of check_install
+SCRIPT_PATH="/usr/local/share/aqtion/check_install.sh"
+
+if test -f ${SCRIPT_PATH} ]; then
+    echo "Installation is damaged, please reinstall this package."
+    echo "If you feel this is in error or you have reinstalled this package and you continue to get this error,"
+    echo "post a Github Issue at https://github.com/actionquake/distrib with the following:"
+    echo "uname:" $(uname -a)
+    echo "script info:" $(ls -l ${SCRIPT_PATH})
+    exit 1
+else
+    sh ${SCRIPT_PATH}
+fi

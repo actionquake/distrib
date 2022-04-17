@@ -124,8 +124,8 @@ jobs:
 
       - name: Generate Linux tar files
         run: |
-          tar czpf aqtion-serverfiles-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
-          tar czpf aqtion-serverfiles-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
+          tar czpf aqtion-server-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          tar czpf aqtion-server-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
 
       ## We're already creating a release when we generate a new tag
       # - name: Create release
@@ -149,6 +149,6 @@ jobs:
           body_path: 
           tag_name: ${{github.ref_name}}
           files: |
-            aqtion-serverfiles-${{github.ref_name}}-linux-amd64.tar.gz
-            aqtion-serverfiles-${{github.ref_name}}-linux-arm64.tar.gz
+            aqtion-server-${{github.ref_name}}-linux-amd64.tar.gz
+            aqtion-server-${{github.ref_name}}-linux-arm64.tar.gz
 
