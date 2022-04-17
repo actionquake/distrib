@@ -1,0 +1,81 @@
+name: Linux q2admin (64-bit)
+
+on:
+  push:
+    branches: ci
+
+# on:
+#   workflow_dispatch:
+
+jobs:
+  linux_x86_64_build_q2admin:
+    runs-on: [self-hosted, x86]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: m4son/q2admin
+          path: build
+
+      - name: Change references from baseq2 to action and rename config.ex.lua
+        working-directory: build/src
+        run: |
+          sed -i 's/baseq2/action/g' *
+          mv ../config.ex.lua ../config.lua
+
+      - name: Get version info for q2admin
+        id: version
+        run: |
+          cp config/build/getversion.sh build/
+          cd build && bash -x getversion.sh q2admin >> versions
+
+      - name: Build q2admin
+        working-directory: build
+        run: make -j2 V=1
+        env:
+          CC: "gcc"
+
+      - name: Generate archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: q2admin-lin-x86_64-library
+          path: |
+            build/gamex86_64.so
+            build/plugins
+            build/config.lua
+            build/versions
+
+  linux_arm64_build_q2admin:
+    runs-on: [self-hosted, ARM64]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: m4son/q2admin
+          path: build
+
+      - name: Change references from baseq2 to action and rename config.ex.lua
+        working-directory: build/src
+        run: |
+          sed -i 's/baseq2/action/g' *
+          mv ../config.ex.lua ../config.lua
+
+      - name: Get version info for q2admin
+        id: version
+        run: |
+          cp config/build/getversion.sh build/
+          cd build && bash -x getversion.sh q2admin >> versions
+
+      - name: Build q2admin
+        working-directory: build
+        run: make -j2 V=1
+        env:
+          CC: "gcc"
+
+      - name: Generate archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: q2admin-lin-arm64-library
+          path: |
+            build/gameaarch64.so
+            build/plugins
+            build/config.lua
+            build/versions

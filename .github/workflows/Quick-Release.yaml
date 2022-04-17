@@ -1,0 +1,182 @@
+name: Quick Release
+
+on:  
+  push:
+    tags:
+      - 'v*'
+
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       release_tag:
+#         description: "Release version tag"
+#         required: true
+
+env:
+  CFG_WORKING_DIR: "config"
+  LIN64_DIST_DIR: "linux-x64-dist"
+  LINARM64_DIST_DIR: "linux-arm64-dist"
+  WIN64_DIST_DIR: "windows-x64-dist"
+  WIN32_DIST_DIR: "windows-i386-dist"
+
+jobs:      
+  quick_release:
+    runs-on: ubuntu-latest
+    #runs-on: self-hosted
+    steps:
+      - name: Checkout distrib
+        uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.CFG_WORKING_DIR }}
+
+      - name: Generate dist directories
+        run: |
+          mkdir -p ${{ env.LINARM64_DIST_DIR }}/action
+          mkdir -p ${{ env.LIN64_DIST_DIR }}/action
+          mkdir -p ${{ env.WIN64_DIST_DIR }}/action
+          mkdir -p ${{ env.WIN32_DIST_DIR }}/action
+
+      ## Linux x86_64
+      - name: Download latest Linux x86_64 Q2Pro artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Q2Pro-Linux.yaml
+          name: q2pro-linux-x86_64
+          path: ${{ env.LIN64_DIST_DIR }}/
+
+      - name: Set Linux binaries to executable
+        run: |
+          chmod +x ${{ env.LIN64_DIST_DIR }}/*
+
+      - name: Download latest Linux x86_64 TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Linux.yaml
+          name: tng-lin-x86_64-library
+          path: ${{ env.LIN64_DIST_DIR }}/action/
+
+      - name: Copy action content
+        run: |
+          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.LIN64_DIST_DIR }}/action/
+
+      ## Linux ARM64
+      - name: Download latest Linux arm64 Q2Pro artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Q2Pro-Linux.yaml
+          name: q2pro-linux-arm64
+          path: ${{ env.LINARM64_DIST_DIR }}/
+
+      - name: Set Linux binaries to executable
+        run: |
+          chmod +x ${{ env.LINARM64_DIST_DIR }}/*
+
+      - name: Download latest Linux arm64 TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Linux.yaml
+          name: tng-lin-arm64-library
+          path: ${{ env.LINARM64_DIST_DIR }}/action/
+
+      - name: Copy action content
+        run: |
+          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.LINARM64_DIST_DIR }}/action/
+
+      ## Win32
+      - name: Download latest Win32 Q2Pro artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Q2Pro-Windows.yaml
+          name: q2pro-win-32
+          path: ${{ env.WIN32_DIST_DIR }}/
+
+      - name: Download latest Win32 TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Windows.yaml
+          name: tng-win-32
+          path: ${{ env.WIN32_DIST_DIR }}/action/
+
+      - name: Copy action content
+        run: |
+          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN32_DIST_DIR }}/action/
+
+      ## Win64
+      - name: Download latest Win64 Q2Pro artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Q2Pro-Windows.yaml
+          name: q2pro-win-64
+          path: ${{ env.WIN64_DIST_DIR }}/
+
+      - name: Download latest Win64 TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Windows.yaml
+          name: tng-win-64
+          path: ${{ env.WIN64_DIST_DIR }}/action/
+
+      - name: Copy action content
+        run: |
+          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN64_DIST_DIR }}/action/
+      
+      - name: Download latest Content-only archive
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Content-Only.yaml
+          name: aq-content-only
+
+      - name: Generate content-only zip file
+        run: |
+          mv aqtion-content.zip aqtion-content-${{github.ref_name}}.zip
+
+      ## Can't install .deb to normal user dirs, wtf Linux?
+      # - name: Generate Linux deb files
+      #   run: |
+      #     mkdir -p aqtion-${{github.ref_name}}/usr/local/games
+      #     mkdir -p aqtion-${{github.ref_name}}/DEBIAN
+      #     cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* aqtion-${{github.ref_name}}/DEBIAN
+      #     cp -r ${{ env.LIN64_DIST_DIR }}/* aqtion-${{github.ref_name}}/usr/local/games/
+      #     sed -i "s/version_value_here/${GIT_TAG:1}/g" aqtion-${{github.ref_name}}/DEBIAN/control
+      #     dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}
+      #     mv aqtion-${{github.ref_name}}.deb aqtion-${{github.ref_name}}-linux-amd64.deb
+      
+      - name: Generate Linux tar files
+        run: |
+          tar czpf aqtion-client-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          tar czpf aqtion-client-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
+
+      - name: Generate Windows zip files
+        run: |
+          zip -r aqtion-client-${{github.ref_name}}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
+          zip -r aqtion-client-${{github.ref_name}}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
+    
+      ## We're already creating a release when we generate a new tag
+      # - name: Create release
+      #   uses: actions/create-release@v1
+      #   id: create_release
+      #   with:
+      #     draft: false
+      #     prerelease: false
+      #     release_name: aqtion-${{github.ref_name}}
+      #     tag_name: ${{github.ref_name}}-client
+      #     #body_path: CHANGELOG.md
+      #     body: ${{steps.github_release.outputs.changelog}}
+      #   env:
+      #     GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload dist tarball to release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          body_path: 
+          tag_name: ${{github.ref_name}}
+          files: |
+            aqtion-client-${{github.ref_name}}-linux-arm64.tar.gz
+            aqtion-client-${{github.ref_name}}-linux-amd64.tar.gz
+            aqtion-client-${{github.ref_name}}-windows-x64.zip
+            aqtion-client-${{github.ref_name}}-windows-i386.zip
+            aqtion-content-${{github.ref_name}}.zip
+

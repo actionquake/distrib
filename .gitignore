@@ -1,0 +1,10 @@
+.otherassets
+.DS_Store
+items.txt
+CHANGELOG*
+tmp
+build/mac/AQ_Install/AQ.app/Contents/MacOS
+*.dmg
+gamex*
+action/gamearm*
+build/mac/q2pro/

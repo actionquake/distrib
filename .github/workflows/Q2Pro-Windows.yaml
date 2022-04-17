@@ -1,18 +1,15 @@
 name: Windows Q2Pro (32/64-bit)
 
-# on:
-#   push:
-#     branches: [main, ci]
-#   pull_request:
-#     branches: [main]
-
 on:
-  workflow_dispatch:
+  push:
+    branches: ci
 
+# on:
+#   workflow_dispatch:
 
 jobs:
   windows_build_q2pro:
-    runs-on: self-hosted
+    runs-on: [self-hosted, x86]
     strategy:
       matrix:
         suffix: ["32", "64"]
@@ -32,22 +29,29 @@ jobs:
           repository: actionquake/distrib
           path: config
 
+      - name: Get version info for q2pro
+        id: version
+        run: |
+          cp config/build/getversion.sh build/
+          cd build && bash -x getversion.sh q2pro >> versions
+
       - name: Copy config build files
         run: |
-          cp -r config/build/ci/config_windows32 build/.config_windows32
-          cp -r config/build/ci/config_windows64 build/.config_windows64
+          cp -r config/build/windows/config_windows32 build/.config_windows32
+          cp -r config/build/windows/config_windows64 build/.config_windows64
 
       - name: Build
         working-directory: build
-        run: make strip V=1
+        run: make strip -j2 V=1
         env:
           CONFIG_FILE: ".config_windows${{ matrix.suffix }}"
 
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
-          name: q2pro-win
+          name: "q2pro-win-${{ matrix.suffix }}"
           path: |
             build/q2pro.exe
             build/q2proded.exe
+            build/versions
 

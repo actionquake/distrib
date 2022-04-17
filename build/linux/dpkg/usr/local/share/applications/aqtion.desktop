@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=AQtion
+Comment=AQtion Linux Desktop Client
+Exec=aqtion %U
+Icon=aqtion
+Terminal=false
+Categories=Game;
+MimeType=x-scheme-handler/aqtion;

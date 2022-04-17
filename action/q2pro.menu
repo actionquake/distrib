@@ -1,0 +1,283 @@
+/*
+This is example menu definition file for Q2PRO.
+
+File format is line based, whitespace is ignored.  C and C++ style comments are
+supported.  Long lines can be broken into multiple ones by escaping linefeed
+characters with backslashes.
+
+Lines are macro expanded at script load time just as usual console commands.
+Any cvars and macros can be referenced.
+
+Duplicate menu entries override previous ones.  Built-in menus ('demos',
+'servers' and 'players') can not be overridden.  When user presses ESC while
+disconnected, 'main' menu is pushed.  When user presses ESC while spawned in
+game, 'game' menu is pushed if it is found, otherwise 'main' menu is pushed.
+
+Supported keywords and their syntax:
+
+include <filename>
+
+background <color|image>
+font <image>
+cursor <image>
+weapon <model>
+
+color <state> <color>
+
+begin <menuname>
+   title <menutitle>
+   banner <image>
+   background <color|image>
+   plaque <plaque> [logo]
+
+   range <name> <cvar> <min> <max> [step]
+
+   pairs <name> <cvar> <string1> <value1> [...]
+   values <name> <cvar> <string1> [...]
+   strings <name> <cvar> <value1> [...]
+   toggle <name> <cvar> [~][bit]
+
+   bind <name> <command>
+   action <name> <command>
+   bitmap <image> <command>
+   savegame <slot>
+   loadgame <slot>
+   blank
+
+   field [options] <name> <cvar>
+end
+*/
+
+background mainmenu_bkgd
+font conchars
+weapon w_sniper.md2
+cursor ch1
+
+color normal #0f90eb64
+color active #0f90ff64
+color selection #0f90eb64
+color disabled #7f7f7f
+
+begin multiplayer
+    banner m_banner_multiplayer
+
+end
+
+begin main
+    title "Main Menu"
+    action " Discord - https://discord.gg/aq2world" ""
+    blank
+    action " browse action quake servers " pushmenu servers "http://q2servers.com/?g=action&raw=1"
+    action " browse address book " pushmenu servers "favorites://" "file:///servers.lst" "broadcast://"
+    action " browse demos " pushmenu demos
+    /* -- Fix local bot spawn, in meantime connect to a server --    */
+    action " play against bots" "connect useast.aq2world.com:27917"
+    blank
+    action " settings" pushmenu settings
+    blank
+    action " disconnect" disconnect
+    action " quit" quit
+end
+
+begin settings
+    background settings_bkgd
+    title "Settings"
+    action "Player Setup" pushmenu players
+    action "General Bindings" pushmenu bindings
+    action "Weapon Bindings" pushmenu wbindings
+    action "Game Settings" pushmenu gsettings
+    action "Misc Settings" pushmenu msettings
+    blank
+    action "Video Setup" pushmenu video
+    action "Sound Setup" pushmenu sound
+    action "Mouse Setup" pushmenu mouse
+    blank
+end
+
+begin addressbook
+    //title "Address Book"
+    banner m_banner_addressbook
+    field --width 32 --center adr0
+    field --width 32 --center adr1
+    field --width 32 --center adr2
+    field --width 32 --center adr3
+    field --width 32 --center adr4
+    field --width 32 --center adr5
+    field --width 32 --center adr6
+    field --width 32 --center adr7
+    field --width 32 --center adr8
+    field --width 32 --center adr9
+    field --width 32 --center adr10
+    field --width 32 --center adr11
+    field --width 32 --center adr12
+    field --width 32 --center adr13
+    field --width 32 --center adr14
+    field --width 32 --center adr15
+end
+
+begin video
+    background video_bkgd
+    title "Video Setup"
+    values "fullscreen resolution" vid_fullscreen windowed $vid_modelist
+    field "windowed size" vid_geometry
+    pairs "widescreen mode" cl_adjustfov on 1 off 0
+    pairs "vertical sync" gl_swapinterval on 1 off 0
+    range "gamma" vid_gamma 1.3 0.3
+    range "brightness" gl_brightness 0 0.10
+    field "field of view" fov
+    action --align "apply now" "popmenu; vid_restart; pushmenu settings; pushmenu video"
+    blank
+    pairs "hud scaling" scr_scale auto 0 1x 1 2x 2
+    pairs "menu scaling" ui_scale auto 0 1x 1 2x 2
+    pairs "console scaling" con_scale auto 0 1x 1 2x 2
+    blank
+    pairs "font shadow" gl_fontshadow on 1 off 0
+    blank
+    action "Advanced Video Setup" pushmenu a_video
+end
+
+begin a_video
+    background a_video_bkgd
+    title "Advanced Video Setup"
+    pairs "separate frame rates" cl_async yes 1 no 0
+    field "physics frame rate" cl_maxfps
+    field "rendering frame rate" r_maxfps
+    blank
+    range "particle scale" gl_partscale 0 5
+    toggle "particle style" gl_partstyle
+    pairs "particle shape" circle 0 square 1 full_circle 2
+    pairs "celshading" gl_celshading none 0 basic 1 strong 2 full 3
+    blank
+    pairs "dynamic lightmap" gl_dynamic disabled 0 enabled 1 partial 2
+    range "saturation" gl_saturation 0.0 1.0
+    pairs "modulation" gl_modulate none 0 normal 1 bright 2
+    range "modulation entities" gl_modulate_entities 0 10
+    toggle "hardware gamma" vid_hwgamma
+    range "lightmap saturation" gl_coloredlightmaps 0.0 1.0
+    toggle "override textures" r_override_textures
+    toggle "override models" r_override_models
+    blank
+    action --align "apply now" "popmenu; vid_restart; pushmenu settings; pushmenu video; pushmenu a_video"
+end
+
+begin msettings
+    background msettings_bkgd
+    title "Misc Settings"
+    pairs "gun handedness" cl_gun "do not show" 0 "same as hand" 1 "force right hand" 2 "force left hand" 3
+    pairs "screenshot format" gl_screenshot_format png png jpg jpg tga tga
+    blank
+    pairs "automatic downloads" allow_download on 1 off 0
+    pairs "maps" allow_download_maps on 1 off 0
+    pairs "models" allow_download_models on 1 off 0
+    pairs "sounds" allow_download_sounds on 1 off 0
+    pairs "pics" allow_download_pics on 1 off 0
+    pairs "skins" allow_download_players on 1 off 0
+    pairs "textures" allow_download_textures on 1 off 0
+    blank
+    pairs "display stats" stats_mode disabled 0 "end of round" 1 "end of map" 2
+    toggle "automatic demo recording" autorecord
+end
+
+begin gsettings
+    background gsettings_bkgd
+    title "Game Settings and Binds"
+    bind "ctf - drop flag" drop flag
+    bind "matchmode - ready toggle" ready
+    bind "matchmode - lock team" lock
+    bind "matchmode - unlock team" unlock
+    bind "espionage - volunteer" volunteer
+    bind "darkmode - flashlight" flashlight
+    blank
+    bind "show stats" stats list
+    bind "screenshot" screenshotjpg
+    bind "restore score on rejoin" ghost
+    blank
+    bind "sniper zoom in" lens in
+    bind "sniper zoom out" lens out
+    blank
+    pairs "auto join same team" auto_join on 1 off 0
+    pairs "auto equip same equipment" auto_equip on 1 off 0
+end
+
+begin mouse
+    background mouse_bkgd
+    title "Mouse Setup"
+    pairs "invert mouse" m_pitch "no" "0.022" "yes" "-0.022"
+    field "sensitivity" sensitivity
+    toggle "FOV sensitivity scaling" m_autosens
+    blank
+    pairs "crosshair" crosshair "cross" "1" "full cross" "2" "dotted cross" "3" "big cross" "4" "dot" "5" "big dot" "6" "double cross" "11" "double full" "12" "double dotted" "13" "double big" "14" "double dot" "15" "double big dot" "16"
+    range "crosshair red" ch_red 0.0 1.0
+    range "crosshair green" ch_green 0.0 1.0
+    range "crosshair blue" ch_blue 0.0 1.0
+    range "crosshair alpha" ch_alpha 0.0 1.0
+end
+
+begin sound
+    background sound_bkgd
+    title "Sound Setup"
+    range "effects volume" s_volume 0 1
+    values "ambient sounds" s_ambient "no" "yes" "only player's own"
+    pairs "chat beep" cl_chat_sound \
+        disabled "" \
+        default misc/talk.wav \
+        alternative misc/talk1.wav \
+        misc/talk_user.wav misc/talk_user.wav
+    action --align "test chat beep" "stopsound; popmenu; pushmenu sound; echo playing $cl_chat_sound; play $cl_chat_sound"
+end
+
+begin bindings
+    background bindings_bkgd
+    title "General Bindings"
+    bind "move forward" +forward
+    bind "move backward" +back
+    bind "strafe left" +moveleft
+    bind "strafe right" +moveright
+    bind "jump" +moveup
+    bind "duck" +movedown
+    bind "fire weapon" +attack
+    bind "switch to next weapon" weapnext
+    bind "switch to previous weapon" weapprev
+    bind "walk (quiet movement)" +speed
+    blank
+    bind "show scores" cmd help
+    bind "main menu" inven
+    bind "voting menu" menu
+    bind "show stats" stats
+    blank
+    bind "menu up" invprev
+    bind "menu down" invnext
+    bind "menu select" invuse
+    blank
+    bind "world chat" messagemode 
+    bind "team chat" messagemode2
+    blank
+    bind "bandage" bandage
+    bind "open/close door" opendoor
+    bind "reload" reload
+    blank
+    action "Weapon Binds" pushmenu wbindings
+    action "Game Settings and Binds" pushmenu gsettings
+end
+
+begin wbindings
+    background wbindings_bkgd
+    title "Weapon Bindings"
+    bind "change weapon mode (burst/auto)" weapon
+    bind "sniper zoom" lens
+    bind "drop current weapon" drop weapon
+    bind "drop item" drop item
+    blank
+    bind "use primary weapon" use special
+    bind "use Mk23 Pistol (Single)" use mk23 pistol
+    bind "use Mk23 Pistol (Dual)" use a 2nd pistol
+    bind "use SSG Sniper Rifle" use sniper
+    bind "use MP5/10" use mp5
+    bind "use M4" use m4
+    bind "use Handcannon" use handcannon
+    bind "use M3 Shotgun" use shotgun
+    bind "use throwing knife" use throwing combat knife
+    bind "use slashing knife" use slashing combat knife
+    bind "select grenade" use m26 fragmentation grenade
+    bind "punch" punch
+end

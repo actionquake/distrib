@@ -1,7 +1,0 @@
-ifeq ($(IFDEF),WIN32)
-    WIN32=yes
-endif
-
-ifeq ($(IFDEF),WIN64)
-    WIN64=yes
-endif

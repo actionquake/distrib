@@ -1,33 +1,75 @@
-name: TNG Linux (64-bit)
-
-# on:
-#   push:
-#     branches: [main, ci]
-#   pull_request:
-#     branches: [main]
+name: Linux TNG (64-bit)
 
 on:
-  workflow_dispatch:
+  push:
+    branches: ci
+
+# on:
+#   workflow_dispatch:
 
 jobs:
-  linux_build_tng:
-    runs-on: self-hosted
+  linux_x86_64_build_tng:
+    runs-on: [self-hosted, x86]
     steps:
       - uses: actions/checkout@v3
         with:
           repository: aq2-tng/aq2-tng
-          ref: 'bots'
           path: build
+
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: config
+      
+      - name: Get version info for tng
+        id: version
+        run: |
+          cp config/build/getversion.sh build/
+          cd build && bash -x getversion.sh tng >> versions
 
       - name: Build TNG
         working-directory: build/source
-        run: make V=1
+        run: make -j2 V=1 && mv gamex86_64.so ../gamex86_64.so
         env:
           CC: "gcc"
 
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
-          name: tng-lin-library
+          name: tng-lin-x86_64-library
           path: |
-            build/source/gamex86_64.so
+            build/gamex86_64.so
+            build/versions
+
+  linux_arm64_build_tng:
+    runs-on: [self-hosted, ARM64]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: aq2-tng/aq2-tng
+          path: build
+
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: config
+
+      - name: Get version info for tng
+        id: version
+        run: |
+          cp config/build/getversion.sh build/
+          cd build && bash -x getversion.sh tng >> versions
+
+      - name: Build TNG
+        working-directory: build/source
+        run: make -j2 V=1 && mv gameaarch64.so ../gameaarch64.so
+        env:
+          CC: "gcc"
+
+      - name: Generate archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: tng-lin-arm64-library
+          path: |
+            build/gameaarch64.so
+            build/versions
