@@ -4,6 +4,7 @@
 
 AQTION_DIR=${HOME}/aqtion
 DISTRIB_URL="https://api.github.com/repos/actionquake/distrib/releases/latest"
+ARCH=$(uname -m)
 
 CURRENT_USER=$(whoami)
 
@@ -14,7 +15,7 @@ fi
 
 if $(command -v curl &> /dev/null)
 then
-    LATEST_VERSION=$(curl -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep amd64 | head -n 1 | cut -d "/" -f 8)
+    LATEST_VERSION=$(curl -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep client | head -n 1 | cut -d "/" -f 8)
 else
     echo "${command} not found, please install ${command}"
 fi
@@ -67,8 +68,22 @@ update_version_number () {
 
 download_aqtion () {
     mkdir -p ${AQTION_DIR}
-    LATEST_PACKAGE=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep amd64 | head -n 1)
-    LATEST_VERSION=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep amd64 | head -n 1 | cut -d "/" -f 8)
+
+    if [ ${ARCH} = "x86_64" ]
+    then
+        LINUX_ARCH="amd64"
+    elif [ ${ARCH} = "aarch64" ]
+    then
+        LINUX_ARCH="arm64"
+    else
+        echo "x86_64 or aarch64 not detected, please post a Github Issue at https://github.com/actionquake/distrib with the following information:"
+        echo "uname: $(uname)"
+        echo "arch detected: $(uname -m)"
+        exit 1
+    fi 
+
+    LATEST_PACKAGE=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | head -n 1)
+    LATEST_VERSION=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | head -n 1 | cut -d "/" -f 8)
     curl -q -s -L -o /tmp/aqtion_latest.tar.gz "${LATEST_PACKAGE}"
     tar xzf /tmp/aqtion_latest.tar.gz -C "${AQTION_DIR}" --strip-components=1
     update_version_number ${LATEST_VERSION}
@@ -77,6 +92,7 @@ download_aqtion () {
 }
 
 launch_game () {
+    cd ${AQTION_DIR}
     ${AQTION_DIR}/q2pro "$@"
 }
 
