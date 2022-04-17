@@ -82,8 +82,8 @@ download_aqtion () {
         exit 1
     fi 
 
-    LATEST_PACKAGE=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | head -n 1)
-    LATEST_VERSION=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | head -n 1 | cut -d "/" -f 8)
+    LATEST_PACKAGE=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | head -n 1)
+    LATEST_VERSION=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | head -n 1 | cut -d "/" -f 8)
     curl -q -s -L -o /tmp/aqtion_latest.tar.gz "${LATEST_PACKAGE}"
     tar xzf /tmp/aqtion_latest.tar.gz -C "${AQTION_DIR}" --strip-components=1
     update_version_number ${LATEST_VERSION}

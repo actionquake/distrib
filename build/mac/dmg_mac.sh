@@ -55,7 +55,7 @@ cp q2probuilds/${ARCH}/game*.so AQ_Install/AQ.app/Contents/MacOS/action/
 chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
 
 ## Create dmg file
-hdiutil create -ov aqtion-${VERSION}-mac-${ARCH}.dmg -srcfolder AQ_Install -volname "Action Quake"
+hdiutil create -ov aqtion-client-${VERSION}-mac-${ARCH}.dmg -srcfolder AQ_Install -volname "Action Quake"
 
 ## Move action folder back
 mv AQ_Install/AQ.app/Contents/MacOS/action ../../
