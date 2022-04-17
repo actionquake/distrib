@@ -6,23 +6,35 @@ AQTION_DIR=${HOME}/aqtion
 DISTRIB_URL="https://api.github.com/repos/actionquake/distrib/releases/latest"
 ARCH=$(uname -m)
 
+## Check if current context is root, do not install if root
 CURRENT_USER=$(whoami)
-
 if [ ${CURRENT_USER} == "root" ]; then
     echo "Error: User running script is root, do not install as root"
     exit 1
 fi
 
-if $(command -v curl &> /dev/null)
+## This script uses curl, check
+if [ ! command -v curl &> /dev/null ]
 then
-    LATEST_VERSION=$(curl -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep client | head -n 1 | cut -d "/" -f 8)
-else
-    echo "${command} not found, please install ${command}"
+    echo "curl not found, please install curl"
+    echo "Run this and retry:"
+    echo "sudo apt-get update && sudo apt-get install curl -y"
+    exit 1
+fi
+
+## AQtion requires SDL2, check
+if [ ! command -v sdl2-config &> /dev/null ]
+then
+    echo "sdl2 not found, please install sdl2"
+    echo "Run this and retry:"
+    echo "sudo apt-get update && sudo apt-get install libsdl2-2.0 -y"
+    exit 1
 fi
 
 ## Functions
 check_for_install () {
     INSTALLED_VERSION=$(grep -s installed_version ${AQTION_DIR}/versions | cut -f 2 -d "=")
+    LATEST_VERSION=$(curl -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep client | head -n 1 | cut -d "/" -f 8)
 
     if [ ! -f "${AQTION_DIR}/versions" ]  ## Version not found, assuming this is a fresh install
     then
