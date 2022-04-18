@@ -8,14 +8,17 @@ ARCH=$(uname -m)
 
 ## Check if current context is root, do not install if root
 CURRENT_USER=$(whoami)
-if [ ${CURRENT_USER} == "root" ]; then
+if [ ${CURRENT_USER} == "root" ]
+then
     echo "Error: User running script is root, do not install as root"
     exit 1
 fi
 
 ## This script uses curl, check
-if [ ! command -v curl &> /dev/null ]
+if command -v curl &> /dev/null
 then
+    :
+else
     echo "curl not found, please install curl"
     echo "Run this and retry:"
     echo "sudo apt-get update && sudo apt-get install curl -y"
@@ -23,8 +26,10 @@ then
 fi
 
 ## AQtion requires SDL2, check
-if [ ! command -v sdl2-config &> /dev/null ]
+if command -v sdl2-config &> /dev/null
 then
+    :
+else
     echo "sdl2 not found, please install sdl2"
     echo "Run this and retry:"
     echo "sudo apt-get update && sudo apt-get install libsdl2-2.0 -y"
@@ -96,7 +101,8 @@ download_aqtion () {
 
     LATEST_PACKAGE=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | head -n 1)
     LATEST_VERSION=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | head -n 1 | cut -d "/" -f 8)
-    curl -q -s -L -o /tmp/aqtion_latest.tar.gz "${LATEST_PACKAGE}"
+    echo "Downloading AQtion ${LATEST_VERSION} ..."
+    curl --progress-bar -q -s -L -o /tmp/aqtion_latest.tar.gz "${LATEST_PACKAGE}"
     tar xzf /tmp/aqtion_latest.tar.gz -C "${AQTION_DIR}" --strip-components=1
     update_version_number ${LATEST_VERSION}
     echo "Installation successful!"
