@@ -138,8 +138,8 @@ jobs:
           sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
           cp -r dpkg aqtion-client-${{github.ref_name}}-linux-amd64
           cp -r dpkg aqtion-client-${{github.ref_name}}-linux-arm64
-          sed -i "s/arch_value_here/amd64/g" dpkg/DEBIAN/control
-          sed -i "s/arch_value_here/arm64/g" dpkg/DEBIAN/control
+          sed -i "s/arch_value_here/amd64/g" aqtion-client-${{github.ref_name}}-linux-amd64/DEBIAN/control
+          sed -i "s/arch_value_here/arm64/g" dpkg aqtion-client-${{github.ref_name}}-linux-arm64/DEBIAN/control
           dpkg-deb --build --root-owner-group aqtion-client-${{github.ref_name}}-linux-amd64
           dpkg-deb --build --root-owner-group aqtion-client-${{github.ref_name}}-linux-arm64
           mv aqtion-client-${{github.ref_name}}-linux-* ../../../
