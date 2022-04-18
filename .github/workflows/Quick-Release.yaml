@@ -142,30 +142,23 @@ jobs:
       #     dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}
       #     mv aqtion-${{github.ref_name}}.deb aqtion-${{github.ref_name}}-linux-amd64.deb
       
-      - name: Generate Linux tar files
+      - name: Generate Linux deb files
+        working-directory: ${{ env.CFG_WORKING_DIR }}/build/linux
         run: |
-          tar czpf aqtion-client-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
-          tar czpf aqtion-client-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
+          sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
+          cp -r dpkg aqtion-client-${{github.ref_name}}-linux-amd64
+          cp -r dpkg aqtion-client-${{github.ref_name}}-linux-arm64
+          sed -i "s/arch_value_here/amd64/g" dpkg/DEBIAN/control
+          sed -i "s/arch_value_here/arm64/g" dpkg/DEBIAN/control
+          dpkg-deb --build --root-owner-group aqtion-client-${{github.ref_name}}-linux-amd64
+          dpkg-deb --build --root-owner-group aqtion-client-${{github.ref_name}}-linux-arm64
+          mv aqtion-client-${{github.ref_name}}-linux-* ../../../
 
       - name: Generate Windows zip files
         run: |
           zip -r aqtion-client-${{github.ref_name}}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
           zip -r aqtion-client-${{github.ref_name}}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
     
-      ## We're already creating a release when we generate a new tag
-      # - name: Create release
-      #   uses: actions/create-release@v1
-      #   id: create_release
-      #   with:
-      #     draft: false
-      #     prerelease: false
-      #     release_name: aqtion-${{github.ref_name}}
-      #     tag_name: ${{github.ref_name}}-client
-      #     #body_path: CHANGELOG.md
-      #     body: ${{steps.github_release.outputs.changelog}}
-      #   env:
-      #     GITHUB_TOKEN: ${{ github.token }}
-
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1
         env:
@@ -174,8 +167,8 @@ jobs:
           body_path: 
           tag_name: ${{github.ref_name}}
           files: |
-            aqtion-client-${{github.ref_name}}-linux-arm64.tar.gz
-            aqtion-client-${{github.ref_name}}-linux-amd64.tar.gz
+            aqtion-client-${{github.ref_name}}-linux-arm64.deb
+            aqtion-client-${{github.ref_name}}-linux-amd64.deb
             aqtion-client-${{github.ref_name}}-windows-x64.zip
             aqtion-client-${{github.ref_name}}-windows-i386.zip
             aqtion-content-${{github.ref_name}}.zip
