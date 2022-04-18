@@ -18,6 +18,7 @@ env:
   LINARM64_DIST_DIR: "linux-arm64-dist"
   WIN64_DIST_DIR: "windows-x64-dist"
   WIN32_DIST_DIR: "windows-i386-dist"
+  GIT_TAG: ${{github.ref_name}}
 
 jobs:      
   quick_release:
@@ -134,7 +135,7 @@ jobs:
       - name: Generate Linux deb files
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/linux
         run: |
-          sed -i "s/version_value_here/${{github.ref_name:1}}/g" dpkg/DEBIAN/control
+          sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
           cp -r dpkg aqtion-client-${{github.ref_name}}-linux-amd64
           cp -r dpkg aqtion-client-${{github.ref_name}}-linux-arm64
           sed -i "s/arch_value_here/amd64/g" dpkg/DEBIAN/control
