@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  server:
+    image: aqtion
+    ports:
+      - "27910:27910/udp"
+    stdin_open: true
+    tty: true
+    restart: on-failure:5
+    env_file:
+     - ./teamplay.example.env
+    command: q2proded +exec teamplay.cfg +set net_port ${PORT} +set hostname ${HOSTNAME} +set maxclients ${MAXCLIENTS} +set rcon_password ${RCON_PASSWORD}

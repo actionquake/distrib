@@ -3,7 +3,7 @@ name: Quick Release
 on:  
   push:
     tags:
-      - '*'
+      - 'v*'
 
 # on:
 #   workflow_dispatch:
@@ -18,7 +18,6 @@ env:
   LINARM64_DIST_DIR: "linux-arm64-dist"
   WIN64_DIST_DIR: "windows-x64-dist"
   WIN32_DIST_DIR: "windows-i386-dist"
-  GIT_TAG: ${{ github.event.inputs.release_tag }}
 
 jobs:      
   quick_release:
@@ -130,53 +129,52 @@ jobs:
 
       - name: Generate content-only zip file
         run: |
-          mv aqtion-content.zip aqtion-content-${{ env.GIT_TAG }}.zip
+          mv aqtion-content.zip aqtion-content-${{github.ref_name}}.zip
 
       ## Can't install .deb to normal user dirs, wtf Linux?
       # - name: Generate Linux deb files
       #   run: |
-      #     mkdir -p aqtion-${{ env.GIT_TAG }}/usr/local/games
-      #     mkdir -p aqtion-${{ env.GIT_TAG }}/DEBIAN
-      #     cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* aqtion-${{ env.GIT_TAG }}/DEBIAN
-      #     cp -r ${{ env.LIN64_DIST_DIR }}/* aqtion-${{ env.GIT_TAG }}/usr/local/games/
-      #     sed -i "s/version_value_here/${GIT_TAG:1}/g" aqtion-${{ env.GIT_TAG }}/DEBIAN/control
-      #     dpkg-deb --build --root-owner-group aqtion-${{ env.GIT_TAG }}
-      #     mv aqtion-${{ env.GIT_TAG }}.deb aqtion-${{ env.GIT_TAG }}-linux-amd64.deb
+      #     mkdir -p aqtion-${{github.ref_name}}/usr/local/games
+      #     mkdir -p aqtion-${{github.ref_name}}/DEBIAN
+      #     cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* aqtion-${{github.ref_name}}/DEBIAN
+      #     cp -r ${{ env.LIN64_DIST_DIR }}/* aqtion-${{github.ref_name}}/usr/local/games/
+      #     sed -i "s/version_value_here/${GIT_TAG:1}/g" aqtion-${{github.ref_name}}/DEBIAN/control
+      #     dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}
+      #     mv aqtion-${{github.ref_name}}.deb aqtion-${{github.ref_name}}-linux-amd64.deb
       
+      - name: Generate Linux deb files
+        working-directory: ${{ env.CFG_WORKING_DIR }}/build/linux
+        run: |
+          sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
+          cp -r dpkg aqtion-client-${{github.ref_name}}-linux-amd64
+          cp -r dpkg aqtion-client-${{github.ref_name}}-linux-arm64
+          sed -i "s/arch_value_here/amd64/g" dpkg/DEBIAN/control
+          sed -i "s/arch_value_here/arm64/g" dpkg/DEBIAN/control
+          dpkg-deb --build --root-owner-group aqtion-client-${{github.ref_name}}-linux-amd64
+          dpkg-deb --build --root-owner-group aqtion-client-${{github.ref_name}}-linux-arm64
+          mv aqtion-client-${{github.ref_name}}-linux-* ../../../
+
       - name: Generate Linux tar files
         run: |
-          tar czpf aqtion-${{ env.GIT_TAG }}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
-          tar czpf aqtion-${{ env.GIT_TAG }}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
+          tar czpf aqtion-client-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          tar czpf aqtion-client-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
 
       - name: Generate Windows zip files
         run: |
-          zip -r aqtion-${{ env.GIT_TAG }}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
-          zip -r aqtion-${{ env.GIT_TAG }}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
+          zip -r aqtion-client-${{github.ref_name}}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
+          zip -r aqtion-client-${{github.ref_name}}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
     
-      - name: Create release
-        uses: actions/create-release@v1
-        id: create_release
-        with:
-          draft: false
-          prerelease: false
-          release_name: aqtion-${{ github.event.inputs.release_tag }}
-          tag_name: ${{ github.event.inputs.release_tag }}
-          #body_path: CHANGELOG.md
-          body: ${{steps.github_release.outputs.changelog}}
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           body_path: 
-          tag_name: ${{ github.event.inputs.release_tag }}
+          tag_name: ${{github.ref_name}}
           files: |
-            aqtion-${{ env.GIT_TAG }}-linux-arm64.tar.gz
-            aqtion-${{ env.GIT_TAG }}-linux-amd64.tar.gz
-            aqtion-${{ env.GIT_TAG }}-windows-x64.zip
-            aqtion-${{ env.GIT_TAG }}-windows-i386.zip
-            aqtion-content-${{ env.GIT_TAG }}.zip
+            aqtion-client-${{github.ref_name}}-linux-arm64.deb
+            aqtion-client-${{github.ref_name}}-linux-amd64.deb
+            aqtion-client-${{github.ref_name}}-windows-x64.zip
+            aqtion-client-${{github.ref_name}}-windows-i386.zip
+            aqtion-content-${{github.ref_name}}.zip
 

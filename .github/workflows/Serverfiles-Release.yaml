@@ -16,7 +16,6 @@ env:
   CFG_WORKING_DIR: "config"
   LIN64_DIST_DIR: "linux-x64-dist"
   LINARM64_DIST_DIR: "linux-arm64-dist"
-  GIT_TAG: ${{ github.event.inputs.release_tag }}
 
 jobs:      
   serverfiles_release:
@@ -125,21 +124,22 @@ jobs:
 
       - name: Generate Linux tar files
         run: |
-          tar czpf aqtion-serverfiles-${{ env.GIT_TAG }}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
-          tar czpf aqtion-serverfiles-${{ env.GIT_TAG }}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
+          tar czpf aqtion-server-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          tar czpf aqtion-server-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
 
-      - name: Create release
-        uses: actions/create-release@v1
-        id: create_release
-        with:
-          draft: false
-          prerelease: false
-          release_name: AQtion Server Files ${{ github.event.inputs.release_tag }}
-          tag_name: ${{ github.event.inputs.release_tag }}
-          #body_path: CHANGELOG.md
-          body: ${{steps.github_release.outputs.changelog}}
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+      ## We're already creating a release when we generate a new tag
+      # - name: Create release
+      #   uses: actions/create-release@v1
+      #   id: create_release
+      #   with:
+      #     draft: false
+      #     prerelease: false
+      #     release_name: AQtion Server Files ${{github.ref_name}}
+      #     tag_name: ${{github.ref_name}}-server
+      #     #body_path: CHANGELOG.md
+      #     body: ${{steps.github_release.outputs.changelog}}
+        # env:
+        #   GITHUB_TOKEN: ${{ github.token }}
 
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1
@@ -147,8 +147,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           body_path: 
-          tag_name: ${{ github.event.inputs.release_tag }}
+          tag_name: ${{github.ref_name}}
           files: |
-            aqtion-serverfiles-${{ env.GIT_TAG }}-linux-amd64.tar.gz
-            aqtion-serverfiles-${{ env.GIT_TAG }}-linux-arm64.tar.gz
+            aqtion-server-${{github.ref_name}}-linux-amd64.tar.gz
+            aqtion-server-${{github.ref_name}}-linux-arm64.tar.gz
 

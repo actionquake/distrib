@@ -5,17 +5,24 @@ Core functionality
     - [x] 64-bit Mac M1
     - [x] 32-bit Windows
     - [x] 64-bit Windows
-    - [x] 64-bit Linux
+    - [x] 64-bit x86 Linux
+    - [x] 64-bit ARM Linux
 
-- [x] Latest library from aq2-tng (Raptor007's bot branch to include LTK):
+- [x] Latest library from aq2-tng:
     - [x] 64-bit Mac Intel
     - [x] 64-bit Mac M1
     - [x] 32-bit Windows
     - [x] 64-bit Windows
-    - [x] 64-bit Linux
+    - [x] 64-bit x86 Linux
+    - [x] 64-bit ARM Linux
+
+- [ ] Server files for hosting AQtion servers
+    - [x] 64-bit x86 Linux
+    - [x] 64-bit ARM Linux
+    - [ ] Docker-ready deployment
 
 - [x] q2config.cfg - Contains reasonable defaults for new players
-- [ ] autoexec.cfg - For special, user-adjustable bind macros
+- [x] autoexec.cfg - For special, user-adjustable bind macros
 
 ### Maps
 * identify ones that do not have copyrighted or trademarked materials such as Coca-Cola signs
