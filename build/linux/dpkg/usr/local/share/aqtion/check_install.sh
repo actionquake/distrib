@@ -70,8 +70,9 @@ check_for_install () {
         download_aqtion
     else
         echo "Existing installation found!"
-        echo "If you wish to upgrade to a newer version if one is available, re-run like so:"
-        echo "aqtion update"
+        echo "If you wish to upgrade to a newer version if one is available, re-run like so: 'aqtion update'"
+        echo "If this does not work, try 'aqtion clean' and then 'aqtion update'"
+        echo "If you are still having problems, contact a mod in AQ2World Discord or open a Github Issue"
         exit 0
     fi
 }
