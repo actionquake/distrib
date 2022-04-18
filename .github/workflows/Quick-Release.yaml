@@ -154,6 +154,11 @@ jobs:
           dpkg-deb --build --root-owner-group aqtion-client-${{github.ref_name}}-linux-arm64
           mv aqtion-client-${{github.ref_name}}-linux-* ../../../
 
+      - name: Generate Linux tar files
+        run: |
+          tar czpf aqtion-client-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          tar czpf aqtion-client-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
+
       - name: Generate Windows zip files
         run: |
           zip -r aqtion-client-${{github.ref_name}}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
