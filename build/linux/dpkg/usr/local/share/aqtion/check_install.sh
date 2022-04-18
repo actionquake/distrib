@@ -74,7 +74,7 @@ check_for_install () {
         echo "If you wish to upgrade to a newer version if one is available, re-run like so: 'aqtion update'"
         echo "If this does not work, try 'aqtion clean' and then 'aqtion update'"
         echo "If you are still having problems, contact a mod in AQ2World Discord or open a Github Issue"
-        exit 0
+        return 0
     fi
 }
 
@@ -125,7 +125,7 @@ download_aqtion () {
         echo "x86_64 or aarch64 not detected, please post a Github Issue at https://github.com/actionquake/distrib with the following information:"
         echo "uname: $(uname)"
         echo "arch detected: $(uname -m)"
-        exit 1
+        return 1
     fi
 
     ## Tarball name "aqtion-client-VERSION-linux-ARCH.tar.gz"
