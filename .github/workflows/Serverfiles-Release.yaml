@@ -31,6 +31,11 @@ jobs:
           repository: actionquake/distrib
           path: ${{ env.CFG_WORKING_DIR }}
 
+      - name: Generate checksum file
+        working-directory: ${{ env.CFG_WORKING_DIR }}/action
+        run: |
+          find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
+
       - name: Generate dist directories
         run: |
           mkdir -p ${{ env.LIN64_DIST_DIR }}/action

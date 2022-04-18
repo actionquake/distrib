@@ -16,7 +16,15 @@ then
         echo "script info: $(ls -l ${SCRIPT_PATH})"
         exit 1
     fi
-
+elif [ $1 = "help" ]
+then
+    echo "Run this script without arguments to install AQtion!"
+    echo "Other arguments available:"
+    echo "help -- This message"
+    echo "clean -- Removes check files in case they are interfering with installation/upgrades"
+    echo "update -- This will check Github for the latest releases, if your currently installed release doesn't match, it will ask you if you want to upgrade"
+    echo "uninstall -- This will attempt to uninstall AQtion files and the deb install"
+    exit 0
 elif [ $1 = "clean" ]
 then
     sh ${SCRIPT_PATH} clean
@@ -27,6 +35,6 @@ elif [ $1 = "uninstall" ]
 then
     sh ${SCRIPT_PATH} uninstall
 else
-    echo "Valid arguments are 'clean', 'update' and 'uninstall'"
+    echo "Valid arguments are 'help', 'clean', 'update' and 'uninstall'"
     exit 1
 fi

@@ -11,6 +11,7 @@ ARCH=$(uname -m)
 if [ $1 = "clean" ]
 then
     rm -rf ${AQTION_DIR}/aqtion/versions
+    rm -rf ${AQTION_DIR}/update_check
 fi
 
 if [ $1 = "update" ]
@@ -133,9 +134,9 @@ download_aqtion () {
     LATEST_VERSION=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | grep -v deb | head -n 1 | cut -d "/" -f 8)
     LATEST_PACKAGE="aqtion-client-${LATEST_VERSION}-linux-${LINUX_ARCH}.tar.gz"
     echo "Downloading AQtion ${LATEST_VERSION} ..."
-    curl --progress-bar -q -s -L -o /tmp/aqtion_latest.tar.gz "${LATEST_PACKAGE}"
-    tar xzf /tmp/aqtion_latest.tar.gz -C "${AQTION_DIR}" --strip-components=1
-    if [ $? = 0 ]
+    curl --progress-bar -q -s -L -o /tmp/aqtion_${LATEST_VERSION}.tar.gz "${LATEST_PACKAGE}"
+    extracttar=$(tar xzf /tmp/aqtion_${LATEST_VERSION}.tar.gz -C "${AQTION_DIR}" --strip-components=1)
+    if [ ${extracttar} = "0" ]
     then
         update_version_number ${LATEST_VERSION}
         echo "Installation successful!"
@@ -154,15 +155,24 @@ download_aqtion () {
 
 uninstall () {
     echo "Completely removing AQtion from ${AQTION_DIR} ..."
-    rm -rf ${AQTION_DIR}
-    if [ $? = "0" ]
+    removedeb=$(sudo dpkg -r aqtion && sudo dpkg --purge aqtion)
+    if [ $removedeb = "0" ]
     then
-        echo "Removal successful"
-        exit 0
+        echo "Debian package successfully removed, deleting local AQtion content..."
+    else
+        echo "Debian package removal error, please check 'dpkg -l | grep aqtion'"
+        echo "Attempting to delete local AQtion content..."
+    fi
+    removeaqtion=$(sudo rm -rf ${AQTION_DIR})
+    if [ $removeaqtion = "0" ]
+    then
+        echo "AQtion file removal successful."
+        echo "Uninstallation complete."
+        return 0
     else
         echo "Error in removing files, check that they are not in use or that you don't have a shell that is in ${AQTION_DIR} directory"
         echo "To manually uninstall, run 'rm -rf ${AQTION_DIR}' in your shell"
-        exit 1
+        return 1
     fi
 }
 
