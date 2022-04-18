@@ -164,6 +164,8 @@ jobs:
           files: |
             aqtion-client-${{github.ref_name}}-linux-arm64.deb
             aqtion-client-${{github.ref_name}}-linux-amd64.deb
+            aqtion-client-${{github.ref_name}}-linux-arm64.tar.gz
+            aqtion-client-${{github.ref_name}}-linux-amd64.tar.gz
             aqtion-client-${{github.ref_name}}-windows-x64.zip
             aqtion-client-${{github.ref_name}}-windows-i386.zip
             aqtion-content-${{github.ref_name}}.zip

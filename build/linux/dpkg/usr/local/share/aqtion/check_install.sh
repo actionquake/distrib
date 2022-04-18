@@ -9,7 +9,6 @@ ARCH=$(uname -m)
 if [ $1 = "clean" ]
 then
     rm -rf ${AQTION_DIR}/aqtion/versions
-    check_for_install
 fi
 
 ## Check if current context is root, do not install if root
