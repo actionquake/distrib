@@ -6,9 +6,15 @@ AQTION_DIR=${HOME}/aqtion
 DISTRIB_URL="https://api.github.com/repos/actionquake/distrib/releases/latest"
 ARCH=$(uname -m)
 
+if [ $1 = "clean" ]
+then
+    rm -rf ${AQTION_DIR}/aqtion/versions
+    check_for_install
+fi
+
 ## Check if current context is root, do not install if root
 CURRENT_USER=$(whoami)
-if [ ${CURRENT_USER} == "root" ]
+if [ ${CURRENT_USER} = "root" ]
 then
     echo "Error: User running script is root, do not install as root"
     exit 1
@@ -99,14 +105,21 @@ download_aqtion () {
         exit 1
     fi 
 
-    LATEST_PACKAGE=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | head -n 1)
-    LATEST_VERSION=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | head -n 1 | cut -d "/" -f 8)
+    LATEST_PACKAGE=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | grep -v deb | head -n 1)
+    LATEST_VERSION=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | grep -v deb | head -n 1 | cut -d "/" -f 8)
     echo "Downloading AQtion ${LATEST_VERSION} ..."
     curl --progress-bar -q -s -L -o /tmp/aqtion_latest.tar.gz "${LATEST_PACKAGE}"
     tar xzf /tmp/aqtion_latest.tar.gz -C "${AQTION_DIR}" --strip-components=1
-    update_version_number ${LATEST_VERSION}
-    echo "Installation successful!"
-    launch_game
+    if [ $? = 0 ]
+    then
+        update_version_number ${LATEST_VERSION}
+        echo "Installation successful!"
+        launch_game
+    else
+        echo "Installation failure, take this debug information and post a Github Issue at https://github.com/actionquake/distrib with the following information: "
+        echo "Latest version available: ${LATEST_VERSION}"
+        echo "Attempted package download: ${LATEST_PACKAGE}"
+    fi
 }
 
 launch_game () {
