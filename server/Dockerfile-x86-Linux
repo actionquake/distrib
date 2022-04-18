@@ -1,6 +1,6 @@
 FROM amd64/ubuntu:18.04
 RUN apt-get update && apt-get install wget liblua5.1-dev -y
-ENV aqtionversion=v0.5.3
+ENV aqtionversion=v0.5.4
 
 # Download and install prebuild binaries
 RUN mkdir /aq2server

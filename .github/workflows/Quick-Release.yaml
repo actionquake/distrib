@@ -131,21 +131,10 @@ jobs:
         run: |
           mv aqtion-content.zip aqtion-content-${{github.ref_name}}.zip
 
-      ## Can't install .deb to normal user dirs, wtf Linux?
-      # - name: Generate Linux deb files
-      #   run: |
-      #     mkdir -p aqtion-${{github.ref_name}}/usr/local/games
-      #     mkdir -p aqtion-${{github.ref_name}}/DEBIAN
-      #     cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* aqtion-${{github.ref_name}}/DEBIAN
-      #     cp -r ${{ env.LIN64_DIST_DIR }}/* aqtion-${{github.ref_name}}/usr/local/games/
-      #     sed -i "s/version_value_here/${GIT_TAG:1}/g" aqtion-${{github.ref_name}}/DEBIAN/control
-      #     dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}
-      #     mv aqtion-${{github.ref_name}}.deb aqtion-${{github.ref_name}}-linux-amd64.deb
-      
       - name: Generate Linux deb files
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/linux
         run: |
-          sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
+          sed -i "s/version_value_here/${{github.ref_name:1}}/g" dpkg/DEBIAN/control
           cp -r dpkg aqtion-client-${{github.ref_name}}-linux-amd64
           cp -r dpkg aqtion-client-${{github.ref_name}}-linux-arm64
           sed -i "s/arch_value_here/amd64/g" dpkg/DEBIAN/control
