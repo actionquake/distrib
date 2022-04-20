@@ -21,22 +21,22 @@ env:
   GIT_TAG: ${{github.ref_name}}
 
 jobs:      
-  quick_release:
+  butler_release:
     runs-on: ubuntu-latest
     #runs-on: self-hosted
     steps:
+      - name: Checkout distrib
+        uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.CFG_WORKING_DIR }}
+
       - name: Install Butler (Itch.io)
         working-directory: ${{ env.CFG_WORKING_DIR }}
         run: |
           curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default && unzip butler.zip
           chmod +x butler
           ./butler -V
-
-      - name: Checkout distrib
-        uses: actions/checkout@v3
-        with:
-          repository: actionquake/distrib
-          path: ${{ env.CFG_WORKING_DIR }}
 
       - name: Generate checksum file
         working-directory: ${{ env.CFG_WORKING_DIR }}/action
