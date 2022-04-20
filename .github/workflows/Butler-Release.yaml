@@ -32,7 +32,6 @@ jobs:
           path: ${{ env.CFG_WORKING_DIR }}
 
       - name: Install Butler (Itch.io)
-        working-directory: ${{ env.CFG_WORKING_DIR }}
         run: |
           curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default && unzip butler.zip
           chmod +x butler
