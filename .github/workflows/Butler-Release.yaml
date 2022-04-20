@@ -134,25 +134,21 @@ jobs:
           cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN64_DIST_DIR }}/action/
       
       - name: Butler Push Win64
-        working-directory: ${{ env.CFG_WORKING_DIR }}
         run: ./butler push ${{ env.WIN64_DIST_DIR }} aqtion/aqtion:windows-x64 --userversion ${GIT_TAG:1}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
       
       - name: Butler Push Win32
-        working-directory: ${{ env.CFG_WORKING_DIR }}
         run: ./butler push ${{ env.WIN32_DIST_DIR }} aqtion/aqtion:windows-i386 --userversion ${GIT_TAG:1}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
       
       - name: Butler Push Lin64 x86
-        working-directory: ${{ env.CFG_WORKING_DIR }}
         run: ./butler push ${{ env.LIN64_DIST_DIR }} aqtion/aqtion:linux-x64 --userversion ${GIT_TAG:1}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
       - name: Butler Push Lin64 ARM
-        working-directory: ${{ env.CFG_WORKING_DIR }}
         run: ./butler push ${{ env.LINARM64_DIST_DIR }} aqtion/aqtion:linux-arm --userversion ${GIT_TAG:1}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
