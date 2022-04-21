@@ -1,6 +1,7 @@
 #!/bin/bash
 
 RAW_ARCH=$1
+STORE_BUILD=$2
 CURRENT_DIR=$(pwd)
 
 if [[ -z $1 ]]; then
@@ -23,9 +24,13 @@ rm -rf ${Q2PRO_DIR}
 
 ## Clone and enter cloned repository
 git clone https://github.com/skullernet/q2pro.git ${Q2PRO_DIR}
-cp config_mac_${ARCH} ${Q2PRO_DIR}/config_mac_${ARCH}
-if [[ ${ARCH} = "m1" ]]; then
-    cp aq2tng_Makefile_mac_m1 ${Q2PRO_DIR}/Makefile
+
+if [[ -z ${STORE_BUILD} ]]
+then
+    cp config_mac_${ARCH} ${Q2PRO_DIR}/config_mac_${ARCH}
+    if [[ ${ARCH} = "m1" ]]; then
+        cp aq2tng_Makefile_mac_m1 ${Q2PRO_DIR}/Makefile
+    fi
 fi
 
 cd ${Q2PRO_DIR}
