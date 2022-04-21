@@ -3,6 +3,7 @@
 RAW_ARCH=$1
 VERSION=$2
 CURRENT_DIR=$(pwd)
+DMG_FILENAME=aqtion-${VERSION}-mac-${RAW_ARCH}.dmg
 
 if [[ -z $1 ]]; then
     echo "Run script with arguments: [intel|arm] <version>"
@@ -51,7 +52,7 @@ cp q2probuilds/${ARCH}/game*.so AQ_Install/AQ.app/Contents/MacOS/action/
 chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
 
 ## Create dmg file
-hdiutil create -ov aqtion-client-${VERSION}-mac-${ARCH}.dmg -srcfolder AQ_Install -volname "AQtion"
+hdiutil create -ov ${DMG_FILENAME} -srcfolder AQ_Install -volname "AQtion"
 
 ## Move action folder back
 mv AQ_Install/AQ.app/Contents/MacOS/action ../../
@@ -59,10 +60,12 @@ mv AQ_Install/AQ.app/Contents/MacOS/action ../../
 ## Delete MacOS-folder
 rm -r -f AQ_Install/AQ.app/Contents/MacOS
 
-## Optional upload directly to the release
-read -p "Do you want to automatically upload aqtion-client-${VERSION}-mac-${ARCH}.dmg to an existing Github Release? (Y/N):  " yn
-case $yn in
-    [Yy]* ) gh release upload ${VERSION} aqtion-client-${VERSION}-mac-${ARCH}.dmg;;
-    [Nn]* ) exit 0;;
-    * ) echo "Please answer Y or N.";;
-esac
+## Optional upload directly to the release (manual)
+if [[ -z ${CI} ]]; then
+    read -p "Do you want to automatically upload ${DMG_FILENAME} to an existing Github Release? (Y/N):  " yn
+    case $yn in
+        [Yy]* ) gh release upload ${VERSION} ${DMG_FILENAME};;
+        [Nn]* ) echo "Not uploading, script complete!"; exit 0;;
+        * ) echo "Please answer Y or N.";;
+    esac
+fi
