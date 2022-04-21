@@ -1,16 +1,18 @@
 name: Server Files Release
 
-on:  
-  push:
-    tags:
-      - '*'
+# on:  
+#   push:
+#     tags:
+#       - '*'
 
-# on:
-#   workflow_dispatch:
-#     inputs:
-#       release_tag:
-#         description: "Release version tag"
-#         required: true
+
+## TEMPORARILY NOT USED UNTIL WE DECIDE WHAT WE'RE DOING WITH SERVERS
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release version tag"
+        required: true
 
 env:
   CFG_WORKING_DIR: "config"
@@ -131,20 +133,6 @@ jobs:
         run: |
           tar czpf aqtion-server-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
           tar czpf aqtion-server-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
-
-      ## We're already creating a release when we generate a new tag
-      # - name: Create release
-      #   uses: actions/create-release@v1
-      #   id: create_release
-      #   with:
-      #     draft: false
-      #     prerelease: false
-      #     release_name: AQtion Server Files ${{github.ref_name}}
-      #     tag_name: ${{github.ref_name}}-server
-      #     #body_path: CHANGELOG.md
-      #     body: ${{steps.github_release.outputs.changelog}}
-        # env:
-        #   GITHUB_TOKEN: ${{ github.token }}
 
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1
