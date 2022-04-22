@@ -50,12 +50,12 @@ Core functionality
   - [x] Assets Passed Inspection
   - [ ] Demo included
   - [ ] LTK file included
-- [ ] Map 6 
-  - [ ] Assets Passed Inspection
+- [ ] beer
+  - [x] Assets Passed Inspection
   - [ ] Demo included
   - [ ] LTK file included
-- [ ] Map 7 
-  - [ ] Assets Passed Inspection
+- [ ] tequila
+  - [x] Assets Passed Inspection
   - [ ] Demo included
   - [ ] LTK file included
 - [ ] Map 8 
