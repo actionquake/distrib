@@ -24,6 +24,13 @@ jobs:
   steam_release:
     runs-on: [self-hosted, x86] ##  Must run on self-hosted due to Steam login credential weirdness
     steps:
+      - name: 'Cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
+          
       - name: Checkout distrib
         uses: actions/checkout@v3
         with:
