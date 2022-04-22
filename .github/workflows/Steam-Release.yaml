@@ -30,7 +30,7 @@ jobs:
           rm -rf ./* || true
           rm -rf ./.??* || true
           ls -la ./
-          
+
       - name: Checkout distrib
         uses: actions/checkout@v3
         with:
@@ -131,28 +131,28 @@ jobs:
       ## Upload to Steam
       - name: Upload StandaloneWindows64
         working-directory: ${{ env.CFG_WORKING_DIR }}
-        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/aqtion_win64_app_build.vdf +quit
+        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/steam/aqtion_win64_app_build.vdf +quit
         env:
           STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
           STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
       
       - name: Upload StandaloneWindows32
         working-directory: ${{ env.CFG_WORKING_DIR }}
-        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/aqtion_win32_app_build.vdf +quit
+        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/steam/aqtion_win32_app_build.vdf +quit
         env:
           STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
           STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
       
       - name: Upload StandaloneLinux64
         working-directory: ${{ env.CFG_WORKING_DIR }}
-        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/aqtion_lin64_app_build.vdf +quit
+        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/steam/aqtion_lin64_app_build.vdf +quit
         env:
           STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
           STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
 
       - name: Upload StandaloneMacIntel
         working-directory: ${{ env.CFG_WORKING_DIR }}
-        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/aqtion_mac_intel_app_build.vdf +quit
+        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/steam/aqtion_mac_intel_app_build.vdf +quit
         env:
           STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
           STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
