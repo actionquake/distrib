@@ -55,7 +55,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Q2Pro-Linux.yaml
-          name: q2pro-linux-x86_64
+          name: q2pro-linux-x86_64-steam
           path: ${{ env.LIN64_DIST_DIR }}/
 
       - name: Set Linux binaries to executable
