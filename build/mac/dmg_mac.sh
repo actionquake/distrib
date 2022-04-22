@@ -69,7 +69,7 @@ mv AQ_Install/AQ.app/Contents/MacOS/action ../../
 rm -r -f AQ_Install/AQ.app/Contents/MacOS
 
 ## Optional upload directly to the release (manual)
-if [[ -z ${CI} || ${PACKAGE_TYPE} -ne "steam" ]]; then
+if [[ -z ${CI} || ${PACKAGE_TYPE} != "steam" ]]; then
     read -p "Do you want to automatically upload ${DMG_FILENAME} to an existing Github Release? (Y/N):  " yn
     case $yn in
         [Yy]* ) gh release upload ${VERSION} ${DMG_FILENAME};;
