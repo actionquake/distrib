@@ -47,7 +47,7 @@ jobs:
           mkdir -p ${{ env.LIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN32_DIST_DIR }}/action
-          mkdir -p ${{ env.MAC_INTEL_DIST_DIR }}/action
+          mkdir -p ${{ env.MAC_INTEL_DIST_DIR }}
 
       ## Linux x86_64
       - name: Download latest Linux x86_64 Q2Pro artifacts
@@ -129,30 +129,14 @@ jobs:
       #     zip -r aqtion-client-${{github.ref_name}}-mac-intel.zip ${{ env.MAC_INTEL_DIST_DIR }}
 
       ## Upload to Steam
-      - name: Upload StandaloneWindows64
+      - name: Copy VDF scripts
         working-directory: ${{ env.CFG_WORKING_DIR }}
-        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/steam/aqtion_win64_app_build.vdf +quit
-        env:
-          STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
-          STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
-      
-      - name: Upload StandaloneWindows32
-        working-directory: ${{ env.CFG_WORKING_DIR }}
-        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/steam/aqtion_win32_app_build.vdf +quit
-        env:
-          STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
-          STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
-      
-      - name: Upload StandaloneLinux64
-        working-directory: ${{ env.CFG_WORKING_DIR }}
-        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/steam/aqtion_lin64_app_build.vdf +quit
-        env:
-          STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
-          STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
+        run: |
+          cp scripts/steam/*.vdf .
 
-      - name: Upload StandaloneMacIntel
+      - name: Upload All Builds
         working-directory: ${{ env.CFG_WORKING_DIR }}
-        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/steam/aqtion_mac_intel_app_build.vdf +quit
+        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/steam/aqtion.vdf +quit
         env:
           STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
           STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
