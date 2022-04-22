@@ -3,7 +3,7 @@
 * [![TNG Linux (64-bit)](https://github.com/actionquake/distrib/actions/workflows/TNG-Linux.yaml/badge.svg)](https://github.com/actionquake/distrib/actions/workflows/TNG-Linux.yaml)
 * [![TNG Windows (32/64-bit)](https://github.com/actionquake/distrib/actions/workflows/TNG-Windows.yaml/badge.svg)](https://github.com/actionquake/distrib/actions/workflows/TNG-Windows.yaml)
 
-# Action Quake Base Installation
+# AQtion Base Installation
 
 ## License considerations
 Every effort has been made to ensure that no licensed, copyrighted and/or trademarked content exists in this distribution.  We abide by the license imposed by id software upon the Quake II source code, and its application upon the modification 'Action Quake 2' to redistribute the source along with the application stipulated under **TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION**
@@ -15,15 +15,15 @@ https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 - Action Quake source code: https://github.com/aq2-tng/aq2-tng (Action Quake Libraries)
 - The worldwide community of contributors over the decades: (Action Quake Content)
 
-Should it be determined that assets included in this distribution are indeed unlicensed for use, the maintainers of this repository will make expedited and thorough adjustments to this distribution repository to remove said assets and replaced with appropriate content.  Please leave a message as a Github Issue containing links and references to the content, and we will respond as soon as we can.
+Should it be determined that assets included in this distribution are indeed unlicensed for use, the maintainers of this repository will make expedited and thorough adjustments to this distribution repository to remove said assets and replace with appropriate content.  Please leave a message as a Github Issue containing links and references to the content, and we will respond as soon as we can.
 
 ## Requirements
-* A computer built within the last 25 years
+* A computer built within the last 25 years :)
 * Windows 98, ME, XP, Vista, 7, 8, 10 and probably 11 are all compatible, 32 and 64-bit
-* Mac OS (Intel processors)
-* 64-bit Linux with a video card and sound card
-* Essentially, if you are able to run Quake II, you can run Action Quake.  We do not provide direct support for running Quake II as there are over 20 years of forum posts and articles on how to use it, but if you are running into problems with this specific release, contact us
-* If there's a special request for 32-bit Linux, ARM or otherwise, open an Issue!
+* Mac OS (Intel and M1)
+* 64-bit x86 and ARM Linux with a video card and sound card
+* Essentially, if you are able to run Quake II, you can run AQtion.  We do not provide direct support for running Quake II as there are over 20 years of forum posts and articles on how to use it, but if you are running into problems with this specific release, contact us
+* If there's a special request for 32-bit Linux otherwise, open an Issue!
 
 ---
 
@@ -35,10 +35,9 @@ If you wish to use your RTX card with Quake II
 1. Follow the below instructions
 
 ### Existing Quake II installations
-1. Download the action-quake-content zip file and extract the `action` directory into the same directory where `baseq2` exists
+1. Download the aqtion-content zip file and extract the `action` directory into the same directory where `baseq2` exists (in the same directory as your Quake II executable)
 1. To start Quake II under the `action` mode, use the following startup parameters: `+set game action`
 1. ***Note:*** Config files from your `baseq2` directory will still execute, so there may be some unexpected binds or cvars set
-
 
 ### New/Fresh Standalone Install
 #### Mac (Intel and M1)
@@ -47,21 +46,22 @@ If you wish to use your RTX card with Quake II
 1. Download the .dmg release package for your architecture
 1. Drag AQ to the Applications directory
 1. Double-click `AQ` to launch
+1. Downloaded and custom content will exist in `~/aqtion`
 
 #### Windows
 1. Download the latest release zip file
 1. Extract to anywhere on your machine you would like it to be permanently installed
-1. Open/launch `q2pro.exe`
+1. Launch `q2pro.exe`
 
-#### Linux
-1. Easy Install:  
-    * `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/actionquake/distrib/main/install.sh)"`
-1. Your install will be in your home directory named `aqtion`
+#### Linux (Deb Install)
+1. Download the `.deb` install and run AQtion from your Games Menu, or:
+1. Download the `.deb` install and from your Terminal, run `aqtion`
+1. Use `aqtion help` for additional commands if needed
 
-#### Tarball install
-1. Download the latest release tarball file
+#### Linux (Tarball install)
+1. Download the latest release tarball file for your architecture (`amd64 - x86` or `arm64 - aarch64`)
 1. Extract to anywhere on your machine you would like it to be permanently installed
-1. Open/launch `q2pro`
+1. In your Terminal, navigate to the extracted directory and launch `q2pro`
 
 #### All platforms
 1. Join us in [Discord](https://discord.gg/aq2world) and find some people to play with
@@ -92,7 +92,7 @@ If you wish to use your RTX card with Quake II
 * [Skuller](https://skuller.net/q2pro/) for the highly-acclaimed [q2pro](https://github.com/skullernet/q2pro)
 * [Raptor007](https://github.com/raptor007) and [hifi](https://github.com/hifi) who have [taken over development](https://github.com/aq2-tng/aq2-tng) after the TNG team, and all forked repos who continuously improve this repository
 * [hifi](https://github.com/hifi) for q2admin, LUA and MVD support and all forked repos who continuously improve this repository
-* Mappers [stan0x](https://github.com/stan0x), Quimby, [WizardExt](https://www.wizardext.se/) for the included maps in this distribution
+* Mappers [stan0x](https://github.com/stan0x), **Quimby**, [WizardExt](https://www.wizardext.se/), **WetWired** for the included maps in this distribution
 * The [AQ2World Discord mod team](https://discord.gg/aq2world) for assisting, testing and contributing to this distribution, and keeping the scene alive
 * Every single mapper, sound designer, texture creator, model maker, skin artist and community contributor to this project since its inception in the late 90s, without your 600+ maps and gigabytes of content, we'd still be playing vanilla Q2.
 * All past, present and future players who for we do this all for, please keep the scene alive!

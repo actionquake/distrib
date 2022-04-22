@@ -18,9 +18,10 @@ env:
   LINARM64_DIST_DIR: "linux-arm64-dist"
   WIN64_DIST_DIR: "windows-x64-dist"
   WIN32_DIST_DIR: "windows-i386-dist"
+  GIT_TAG: ${{github.ref_name}}
 
 jobs:      
-  quick_release:
+  linux_windows_release:
     runs-on: ubuntu-latest
     #runs-on: self-hosted
     steps:
@@ -29,6 +30,11 @@ jobs:
         with:
           repository: actionquake/distrib
           path: ${{ env.CFG_WORKING_DIR }}
+
+      - name: Generate checksum file
+        working-directory: ${{ env.CFG_WORKING_DIR }}/action
+        run: |
+          find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
 
       - name: Generate dist directories
         run: |
@@ -131,25 +137,14 @@ jobs:
         run: |
           mv aqtion-content.zip aqtion-content-${{github.ref_name}}.zip
 
-      ## Can't install .deb to normal user dirs, wtf Linux?
-      # - name: Generate Linux deb files
-      #   run: |
-      #     mkdir -p aqtion-${{github.ref_name}}/usr/local/games
-      #     mkdir -p aqtion-${{github.ref_name}}/DEBIAN
-      #     cp ${{ env.CFG_WORKING_DIR }}/build/linux/DEBIAN/* aqtion-${{github.ref_name}}/DEBIAN
-      #     cp -r ${{ env.LIN64_DIST_DIR }}/* aqtion-${{github.ref_name}}/usr/local/games/
-      #     sed -i "s/version_value_here/${GIT_TAG:1}/g" aqtion-${{github.ref_name}}/DEBIAN/control
-      #     dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}
-      #     mv aqtion-${{github.ref_name}}.deb aqtion-${{github.ref_name}}-linux-amd64.deb
-      
       - name: Generate Linux deb files
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/linux
         run: |
           sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
           cp -r dpkg aqtion-client-${{github.ref_name}}-linux-amd64
           cp -r dpkg aqtion-client-${{github.ref_name}}-linux-arm64
-          sed -i "s/arch_value_here/amd64/g" dpkg/DEBIAN/control
-          sed -i "s/arch_value_here/arm64/g" dpkg/DEBIAN/control
+          sed -i "s/arch_value_here/amd64/g" aqtion-client-${{github.ref_name}}-linux-amd64/DEBIAN/control
+          sed -i "s/arch_value_here/arm64/g" aqtion-client-${{github.ref_name}}-linux-arm64/DEBIAN/control
           dpkg-deb --build --root-owner-group aqtion-client-${{github.ref_name}}-linux-amd64
           dpkg-deb --build --root-owner-group aqtion-client-${{github.ref_name}}-linux-arm64
           mv aqtion-client-${{github.ref_name}}-linux-* ../../../
@@ -172,9 +167,50 @@ jobs:
           body_path: 
           tag_name: ${{github.ref_name}}
           files: |
-            aqtion-client-${{github.ref_name}}-linux-arm64.deb
-            aqtion-client-${{github.ref_name}}-linux-amd64.deb
-            aqtion-client-${{github.ref_name}}-windows-x64.zip
-            aqtion-client-${{github.ref_name}}-windows-i386.zip
+            aqtion-${{github.ref_name}}-linux-arm64.deb
+            aqtion-${{github.ref_name}}-linux-amd64.deb
+            aqtion-${{github.ref_name}}-linux-arm64.tar.gz
+            aqtion-${{github.ref_name}}-linux-amd64.tar.gz
+            aqtion-${{github.ref_name}}-windows-x64.zip
+            aqtion-${{github.ref_name}}-windows-i386.zip
             aqtion-content-${{github.ref_name}}.zip
+
+  mac_release:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout distrib
+        uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.CFG_WORKING_DIR }}
+      
+      - name: Generate checksum file
+        working-directory: ${{ env.CFG_WORKING_DIR }}/action
+        run: find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
+
+      - name: Generate Mac Intel DMG
+        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
+        run: bash dmg_mac.sh intel ${{github.ref_name}}
+        env:
+          CI: "true"
+        
+      - name: Generate Mac m1 DMG
+        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
+        run: bash dmg_mac.sh m1 ${{github.ref_name}}
+        env:
+          CI: "true"
+
+      - name: Upload dist dmgs to release
+        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          body_path: 
+          tag_name: ${{github.ref_name}}
+          files: |
+            aqtion-${{github.ref_name}}-mac-intel.dmg
+            aqtion-${{github.ref_name}}-mac-m1.dmg
+      
+    
 
