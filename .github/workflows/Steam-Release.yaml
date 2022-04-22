@@ -130,12 +130,10 @@ jobs:
 
       ## Upload to Steam
       - name: Copy VDF scripts
-        working-directory: ${{ env.CFG_WORKING_DIR }}
         run: |
-          cp scripts/steam/*.vdf .
+          cp ${{ env.CFG_WORKING_DIR }}/scripts/steam/*.vdf .
 
       - name: Upload All Builds
-        working-directory: ${{ env.CFG_WORKING_DIR }}
         run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build aqtion.vdf +quit
         env:
           STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
