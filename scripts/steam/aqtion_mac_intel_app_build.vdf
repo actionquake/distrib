@@ -1,14 +1,14 @@
 "AppBuild"
 {
 	"AppID" "1978800" // your AppID
-	"Desc" "Windows 64-bit" // internal description for this build
+	"Desc" "StandaloneMacIntel" // internal description for this build
 
-	"ContentRoot" "windows-x64-dist/" // root content folder, relative to location of this file
+	"ContentRoot" "mac-intel-dist/" // root content folder, relative to location of this file
 	"BuildOutput" "output/" // build output folder for build logs and build cache files
 
 	"Depots"
 	{
-		"1978801" // your DepotID
+		"1978804" // your DepotID
 		{
 			"FileMapping"
 			{

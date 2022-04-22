@@ -15,14 +15,14 @@ on:
 env:
   CFG_WORKING_DIR: "config"
   LIN64_DIST_DIR: "linux-x64-dist"
-  LINARM64_DIST_DIR: "linux-arm64-dist"
   WIN64_DIST_DIR: "windows-x64-dist"
   WIN32_DIST_DIR: "windows-i386-dist"
+  MAC_INTEL_DIST_DIR: "mac-intel-dist"
+  GIT_TAG: ${{github.ref_name}}
 
 jobs:      
   steam_release:
-    runs-on: ubuntu-latest
-    #runs-on: self-hosted
+    runs-on: [self-hosted, x86] ##  Must run on self-hosted due to Steam login credential weirdness
     steps:
       - name: Checkout distrib
         uses: actions/checkout@v3
@@ -37,25 +37,17 @@ jobs:
 
       - name: Generate dist directories
         run: |
-          mkdir -p ${{ env.LINARM64_DIST_DIR }}/action
           mkdir -p ${{ env.LIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN32_DIST_DIR }}/action
-
-
-      - name: Setup steamcmd
-        uses: CyberAndrii/setup-steamcmd@v1
-
-      - name: Update app
-        run: steamcmd +login anonymous +app_update 1337 validate +quit
-
+          mkdir -p ${{ env.MAC_INTEL_DIST_DIR }}/action
 
       ## Linux x86_64
       - name: Download latest Linux x86_64 Q2Pro artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Q2Pro-Linux.yaml
-          name: q2pro-linux-x86_64
+          name: q2pro-linux-x86_64-steam
           path: ${{ env.LIN64_DIST_DIR }}/
 
       - name: Set Linux binaries to executable
@@ -72,29 +64,6 @@ jobs:
       - name: Copy action content
         run: |
           cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.LIN64_DIST_DIR }}/action/
-
-      ## Linux ARM64
-      - name: Download latest Linux arm64 Q2Pro artifacts
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: Q2Pro-Linux.yaml
-          name: q2pro-linux-arm64
-          path: ${{ env.LINARM64_DIST_DIR }}/
-
-      - name: Set Linux binaries to executable
-        run: |
-          chmod +x ${{ env.LINARM64_DIST_DIR }}/*
-
-      - name: Download latest Linux arm64 TNG artifacts
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: TNG-Linux.yaml
-          name: tng-lin-arm64-library
-          path: ${{ env.LINARM64_DIST_DIR }}/action/
-
-      - name: Copy action content
-        run: |
-          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.LINARM64_DIST_DIR }}/action/
 
       ## Win32
       - name: Download latest Win32 Q2Pro artifacts
@@ -133,23 +102,43 @@ jobs:
       - name: Copy action content
         run: |
           cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN64_DIST_DIR }}/action/
-      
-      - name: Butler Push Win64
-        run: ./butler push ${{ env.WIN64_DIST_DIR }} aqtion/aqtion:windows-x64 --userversion ${{ github.event.inputs.release_tag }}
-        env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-      
-      - name: Butler Push Win32
-        run: ./butler push ${{ env.WIN32_DIST_DIR }} aqtion/aqtion:windows-i386 --userversion ${{ github.event.inputs.release_tag }}
-        env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-      
-      - name: Butler Push Lin64 x86
-        run: ./butler push ${{ env.LIN64_DIST_DIR }} aqtion/aqtion:linux-x64 --userversion ${{ github.event.inputs.release_tag }}
-        env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
-      - name: Butler Push Lin64 ARM
-        run: ./butler push ${{ env.LINARM64_DIST_DIR }} aqtion/aqtion:linux-arm --userversion ${{ github.event.inputs.release_tag }}
+      ## Mac Intel
+      - name: Copy action content
+        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
+        run: |
+          bash steam_mac.sh
+          unzip aqtion-mac-${{ env.GIT_TAG }}-intel-steam.zip -d ${{ env.MAC_INTEL_DIST_DIR }}/
+
+      ## Generate zip files
+      # - name: Zip artifacts for Steam deployment
+      #   run: |
+      #     zip -r aqtion-client-${{github.ref_name}}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
+      #     zip -r aqtion-client-${{github.ref_name}}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
+      #     zip -r aqtion-client-${{github.ref_name}}-linux-x64.zip ${{ env.LIN64_DIST_DIR }}
+      #     zip -r aqtion-client-${{github.ref_name}}-mac-intel.zip ${{ env.MAC_INTEL_DIST_DIR }}
+
+      ## Upload to Steam
+      - name: Upload StandaloneWindows64
+        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/aqtion_win64_app_build.vdf +quit
         env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+          STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
+          STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
+      
+      - name: Upload StandaloneWindows32
+        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/aqtion_win32_app_build.vdf +quit
+        env:
+          STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
+          STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
+      
+      - name: Upload StandaloneLinux64
+        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/aqtion_lin64_app_build.vdf +quit
+        env:
+          STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
+          STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
+
+      - name: Upload StandaloneMacIntel
+        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build scripts/aqtion_mac_intel_app_build.vdf +quit
+        env:
+          STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
+          STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
