@@ -69,7 +69,9 @@ build_exitcode=$?
 ## Copy files in preparation for the build step
 if [[ ${build_exitcode} -eq 0 ]]; then
     echo "Build successful!  Copying relevant files"
-    cp ${CURRENT_DIR}/${Q2PRO_DIR}/q2pro ${CURRENT_DIR}/${Q2PRO_DIR}/q2proded ${CURRENT_DIR}/${Q2PRO_DIR}/game*.so ${CURRENT_DIR}/q2probuilds/${ARCH}
+    cp ${CURRENT_DIR}/${Q2PRO_DIR}/q2pro ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+    cp ${CURRENT_DIR}/${Q2PRO_DIR}/q2proded ${CURRENT_DIR}/q2probuilds/${ARCH}/q2proded_${PACKAGE_TYPE}
+    cp ${CURRENT_DIR}/${Q2PRO_DIR}/game*.so ${CURRENT_DIR}/q2probuilds/${ARCH}
 else
     echo "Error occurred during build step: Copying q2pro files"
     echo "Exiting script!"

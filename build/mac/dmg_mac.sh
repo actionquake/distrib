@@ -2,8 +2,8 @@
 
 RAW_ARCH=$1
 VERSION=$2
+PACKAGE_TYPE=$3
 CURRENT_DIR=$(pwd)
-DMG_FILENAME=aqtion-${VERSION}-mac-${RAW_ARCH}.dmg
 
 if [[ -z $1 ]]; then
     echo "Run script with arguments: [intel|arm] <version>"
@@ -21,31 +21,39 @@ if [[ -z ${VERSION} ]]; then
     exit 1
 fi
 
+if [[ -z ${PACKAGE_TYPE} ]]; then
+    echo "No package type detected, example values: [ standalone | steam ]"
+    exit 1
+fi
+
 echo "Current dir is ${CURRENT_DIR}"
 echo "Architecture: ${ARCH}"
 echo "Version: ${VERSION}"
+echo "Package Type: ${PACKAGE_TYPE}"
+DMG_FILENAME=aqtion-mac-${VERSION}-${ARCH}-${PACKAGE_TYPE}.dmg
 
 ## Change dynamic lib references manually because Apple is dumb and won't let us static link
 echo "Adjusting dynamic lib paths for ${ARCH}..."
 if [[ ${ARCH} = "m1" ]]; then
-    install_name_tool -change /System/Library/Frameworks/OpenAL.framework/Versions/A/OpenAL @executable_path/.lib/libopenal.1.21.1.dylib q2probuilds/${ARCH}/q2pro
-    install_name_tool -change /opt/homebrew/opt/libpng/lib/libpng16.16.dylib @executable_path/.lib/libpng16.16.dylib q2probuilds/${ARCH}/q2pro
-    install_name_tool -change /opt/homebrew/opt/jpeg/lib/libjpeg.9.dylib @executable_path/.lib/libjpeg.9.dylib q2probuilds/${ARCH}/q2pro
-    install_name_tool -change /usr/lib/libz.1.dylib @executable_path/.lib/libz.1.2.8.dylib q2probuilds/${ARCH}/q2pro
+    install_name_tool -change /System/Library/Frameworks/OpenAL.framework/Versions/A/OpenAL @executable_path/.lib/libopenal.1.21.1.dylib q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+    install_name_tool -change /opt/homebrew/opt/libpng/lib/libpng16.16.dylib @executable_path/.lib/libpng16.16.dylib q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+    install_name_tool -change /opt/homebrew/opt/jpeg/lib/libjpeg.9.dylib @executable_path/.lib/libjpeg.9.dylib q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+    install_name_tool -change /usr/lib/libz.1.dylib @executable_path/.lib/libz.1.2.8.dylib q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
 else
-    install_name_tool -change /usr/local/opt/openal-soft/lib/libopenal.1.dylib @executable_path/.lib/libopenal.1.21.1.dylib q2probuilds/${ARCH}/q2pro
-    install_name_tool -change /usr/local/opt/libpng/lib/libpng16.16.dylib @executable_path/.lib/libpng16.16.dylib q2probuilds/${ARCH}/q2pro
-    install_name_tool -change /usr/local/opt/jpeg/lib/libjpeg.9.dylib @executable_path/.lib/libjpeg.9.dylib q2probuilds/${ARCH}/q2pro
-    install_name_tool -change /usr/lib/libz.1.dylib @executable_path/.lib/libz.1.2.11.dylib q2probuilds/${ARCH}/q2pro
+    install_name_tool -change /usr/local/opt/openal-soft/lib/libopenal.1.dylib @executable_path/.lib/libopenal.1.21.1.dylib q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+    install_name_tool -change /usr/local/opt/libpng/lib/libpng16.16.dylib @executable_path/.lib/libpng16.16.dylib q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+    install_name_tool -change /usr/local/opt/jpeg/lib/libjpeg.9.dylib @executable_path/.lib/libjpeg.9.dylib q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+    install_name_tool -change /usr/lib/libz.1.dylib @executable_path/.lib/libz.1.2.11.dylib q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
 fi
 
 ## create MacOS if it does not exist
 mkdir -p AQ_Install/AQ.app/Contents/MacOS
 
-## Populate AQ_Install directory
+## Populate AQ_Install directory (note we're specifying the specifically-built pacage types)
 mv ../../action AQ_Install/AQ.app/Contents/MacOS/
 cp -r q2probuilds/${ARCH}/.lib AQ_Install/AQ.app/Contents/MacOS/
-cp q2probuilds/${ARCH}/q2proded q2probuilds/${ARCH}/q2pro AQ_Install/AQ.app/Contents/MacOS/
+cp q2probuilds/${ARCH}/q2proded_${PACKAGE_TYPE} AQ_Install/AQ.app/Contents/MacOS/q2proded
+cp q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE} AQ_Install/AQ.app/Contents/MacOS/q2pro
 cp q2probuilds/${ARCH}/game*.so AQ_Install/AQ.app/Contents/MacOS/action/
 
 ## make q2pro executable
@@ -61,7 +69,7 @@ mv AQ_Install/AQ.app/Contents/MacOS/action ../../
 rm -r -f AQ_Install/AQ.app/Contents/MacOS
 
 ## Optional upload directly to the release (manual)
-if [[ -z ${CI} ]]; then
+if [[ -z ${CI} || ${PACKAGE_TYPE} -ne "steam" ]]; then
     read -p "Do you want to automatically upload ${DMG_FILENAME} to an existing Github Release? (Y/N):  " yn
     case $yn in
         [Yy]* ) gh release upload ${VERSION} ${DMG_FILENAME};;
