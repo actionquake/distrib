@@ -1,7 +1,7 @@
 "AppBuild"
 {
 	"AppID" "1978800" // your AppID
-	"Desc" "Windows 32-bit" // internal description for this build
+	"Desc" "StandaloneWindows32" // internal description for this build
 
 	"ContentRoot" "windows-i386-dist/" // root content folder, relative to location of this file
 	"BuildOutput" "output/" // build output folder for build logs and build cache files

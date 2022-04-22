@@ -24,7 +24,7 @@ fi
 echo "Current dir is ${CURRENT_DIR}"
 echo "Architecture: ${ARCH}"
 echo "Version: ${VERSION}"
-echo "Package Type: steam"
+echo "Package Type: ${PACKAGE_TYPE}"
 DMG_FILENAME=aqtion-mac-${VERSION}-${ARCH}-${PACKAGE_TYPE}
 
 ## create MacOS if it does not exist
