@@ -78,6 +78,20 @@ else
     exit 1
 fi
 
+## Change dynamic lib references manually because Apple is dumb and won't let us static link
+echo "Adjusting dynamic lib paths for ${ARCH}..."
+if [[ ${ARCH} = "m1" ]]; then
+    install_name_tool -change /System/Library/Frameworks/OpenAL.framework/Versions/A/OpenAL @executable_path/.lib/libopenal.1.21.1.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+    install_name_tool -change /opt/homebrew/opt/libpng/lib/libpng16.16.dylib @executable_path/.lib/libpng16.16.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+    install_name_tool -change /opt/homebrew/opt/jpeg/lib/libjpeg.9.dylib @executable_path/.lib/libjpeg.9.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+    install_name_tool -change /usr/lib/libz.1.dylib @executable_path/.lib/libz.1.2.8.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+else
+    install_name_tool -change /usr/local/opt/openal-soft/lib/libopenal.1.dylib @executable_path/.lib/libopenal.1.21.1.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+    install_name_tool -change /usr/local/opt/libpng/lib/libpng16.16.dylib @executable_path/.lib/libpng16.16.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+    install_name_tool -change /usr/local/opt/jpeg/lib/libjpeg.9.dylib @executable_path/.lib/libjpeg.9.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+    install_name_tool -change /usr/lib/libz.1.dylib @executable_path/.lib/libz.1.2.11.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
+fi
+
 ## Cleanup task
 rm -rf ${CURRENT_DIR}/q2pro
 
