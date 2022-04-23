@@ -148,23 +148,23 @@ jobs:
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/linux
         run: |
           sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
-          cp -r dpkg aqtion-client-${{github.ref_name}}-linux-amd64
-          cp -r dpkg aqtion-client-${{github.ref_name}}-linux-arm64
-          sed -i "s/arch_value_here/amd64/g" aqtion-client-${{github.ref_name}}-linux-amd64/DEBIAN/control
-          sed -i "s/arch_value_here/arm64/g" aqtion-client-${{github.ref_name}}-linux-arm64/DEBIAN/control
-          dpkg-deb --build --root-owner-group aqtion-client-${{github.ref_name}}-linux-amd64
-          dpkg-deb --build --root-owner-group aqtion-client-${{github.ref_name}}-linux-arm64
-          mv aqtion-client-${{github.ref_name}}-linux-* ../../../
+          cp -r dpkg aqtion-${{github.ref_name}}-linux-amd64
+          cp -r dpkg aqtion-${{github.ref_name}}-linux-arm64
+          sed -i "s/arch_value_here/amd64/g" aqtion-${{github.ref_name}}-linux-amd64/DEBIAN/control
+          sed -i "s/arch_value_here/arm64/g" aqtion-${{github.ref_name}}-linux-arm64/DEBIAN/control
+          dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-amd64
+          dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-arm64
+          mv aqtion-${{github.ref_name}}-linux-* ../../../
 
       - name: Generate Linux tar files
         run: |
-          tar czpf aqtion-client-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
-          tar czpf aqtion-client-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
+          tar czpf aqtion-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          tar czpf aqtion-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
 
       - name: Generate Windows zip files
         run: |
-          zip -r aqtion-client-${{github.ref_name}}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
-          zip -r aqtion-client-${{github.ref_name}}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
+          zip -r aqtion-${{github.ref_name}}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
+          zip -r aqtion-${{github.ref_name}}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
     
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1

@@ -106,7 +106,7 @@ download_aqtion () {
 
     #LATEST_PACKAGE=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | grep -v deb | head -n 1)
     LATEST_VERSION=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | grep -v deb | head -n 1 | cut -d "/" -f 8)
-    LATEST_PACKAGE="aqtion-client-${LATEST_VERSION}-linux-${LINUX_ARCH}.tar.gz"
+    LATEST_PACKAGE="aqtion-${LATEST_VERSION}-linux-${LINUX_ARCH}.tar.gz"
     echo "Downloading AQtion ${LATEST_VERSION} ..."
     curl --progress-bar -q -s -L -o /tmp/aqtion_${LATEST_VERSION}.tar.gz "${LATEST_PACKAGE}"
     extracttar=$(tar xzf /tmp/aqtion_${LATEST_VERSION}.tar.gz -C "${AQTION_DIR}" --strip-components=1)
