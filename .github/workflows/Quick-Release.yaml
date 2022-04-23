@@ -182,42 +182,42 @@ jobs:
             aqtion-${{github.ref_name}}-windows-i386.zip
             aqtion-content-${{github.ref_name}}.zip
 
-  mac_release:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout distrib
-        uses: actions/checkout@v3
-        with:
-          repository: actionquake/distrib
-          path: ${{ env.CFG_WORKING_DIR }}
+  # mac_release:
+  #   runs-on: macos-latest
+  #   steps:
+  #     - name: Checkout distrib
+  #       uses: actions/checkout@v3
+  #       with:
+  #         repository: actionquake/distrib
+  #         path: ${{ env.CFG_WORKING_DIR }}
       
-      - name: Generate checksum file
-        working-directory: ${{ env.CFG_WORKING_DIR }}/action
-        run: find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
+  #     - name: Generate checksum file
+  #       working-directory: ${{ env.CFG_WORKING_DIR }}/action
+  #       run: find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
 
-      - name: Generate Mac Intel DMG
-        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash dmg_mac.sh intel ${{github.ref_name}}
-        env:
-          CI: "true"
+  #     - name: Generate Mac Intel DMG
+  #       working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
+  #       run: bash dmg_mac.sh intel ${{github.ref_name}}
+  #       env:
+  #         CI: "true"
         
-      - name: Generate Mac m1 DMG
-        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash dmg_mac.sh m1 ${{github.ref_name}}
-        env:
-          CI: "true"
+  #     - name: Generate Mac m1 DMG
+  #       working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
+  #       run: bash dmg_mac.sh m1 ${{github.ref_name}}
+  #       env:
+  #         CI: "true"
 
-      - name: Upload dist dmgs to release
-        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          body_path: 
-          tag_name: ${{github.ref_name}}
-          files: |
-            aqtion-${{github.ref_name}}-mac-intel.dmg
-            aqtion-${{github.ref_name}}-mac-m1.dmg
+  #     - name: Upload dist dmgs to release
+  #       working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
+  #       uses: softprops/action-gh-release@v1
+  #       env:
+  #         GITHUB_TOKEN: ${{ github.token }}
+  #       with:
+  #         body_path: 
+  #         tag_name: ${{github.ref_name}}
+  #         files: |
+  #           aqtion-${{github.ref_name}}-mac-intel.dmg
+  #           aqtion-${{github.ref_name}}-mac-m1.dmg
       
     
 
