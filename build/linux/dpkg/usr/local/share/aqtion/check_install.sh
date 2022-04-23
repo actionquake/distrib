@@ -7,32 +7,6 @@ AQTION_DIR=${HOME}/aqtion
 DISTRIB_URL="https://api.github.com/repos/actionquake/distrib/releases/latest"
 ARCH=$(uname -m)
 
-## Argument script logic
-
-if [[ ${COMMAND} = "clean" ]]
-then
-    rm -rf ${AQTION_DIR}/aqtion/versions
-    rm -rf ${AQTION_DIR}/update_check
-fi
-
-if [[ ${COMMAND} = "update" ]]
-then
-    if [[ ! -f "${AQTION_DIR}/versions" ]]
-    then
-        echo "No local install found, downloading the latest version..."
-        check_for_install
-    else
-        INSTALLED_VERSION=$(grep -s installed_version ${AQTION_DIR}/versions | cut -f 2 -d "=")
-        check_for_updates ${INSTALLED_VERSION}
-    fi
-fi
-
-if [[ ${COMMAND} = "uninstall" ]]
-then
-    uninstall
-    exit 0
-fi
-
 ## Check if current context is root, do not install if root
 CURRENT_USER=$(whoami)
 if [[ ${CURRENT_USER} = "root" ]]
@@ -156,24 +130,10 @@ download_aqtion () {
 uninstall () {
     echo "Completely removing AQtion from ${AQTION_DIR} ..."
     removedeb=$(sudo dpkg -r aqtion && sudo dpkg --purge aqtion)
-    if [[ $removedeb = "0" ]]
-    then
-        echo "Debian package successfully removed, deleting local AQtion content..."
-    else
-        echo "Debian package removal error, please check 'dpkg -l | grep aqtion'"
-        echo "Attempting to delete local AQtion content..."
-    fi
+    echo "Debian package successfully removed, deleting local AQtion content..."
     removeaqtion=$(sudo rm -rf ${AQTION_DIR})
-    if [[ $removeaqtion = "0" ]]
-    then
-        echo "AQtion file removal successful."
-        echo "Uninstallation complete."
-        return 0
-    else
-        echo "Error in removing files, check that they are not in use or that you don't have a shell that is in ${AQTION_DIR} directory"
-        echo "To manually uninstall, run 'rm -rf ${AQTION_DIR}' in your shell"
-        return 1
-    fi
+    echo "AQtion file removal successful."
+    echo "Uninstallation complete."
 }
 
 launch_game () {
@@ -182,4 +142,30 @@ launch_game () {
 }
 
 # Let's-a go
+if [[ ${COMMAND} = "clean" ]]
+then
+    rm -rf ${AQTION_DIR}/aqtion/versions
+    rm -rf ${AQTION_DIR}/update_check
+    echo "AQtion directory cleaned and ready to check for updates"
+    exit 0
+fi
+
+if [[ ${COMMAND} = "update" ]]
+then
+    if [[ ! -f "${AQTION_DIR}/versions" ]]
+    then
+        echo "No local install found, downloading the latest version..."
+    else
+        INSTALLED_VERSION=$(grep -s installed_version ${AQTION_DIR}/versions | cut -f 2 -d "=")
+        check_for_updates ${INSTALLED_VERSION}
+    fi
+fi
+
+if [[ ${COMMAND} = "uninstall" ]]
+then
+    uninstall
+    exit 0
+fi
+
+## If no arguments, let's play!
 check_for_install
