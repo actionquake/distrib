@@ -102,15 +102,14 @@ download_aqtion () {
         return 1
     fi
 
-    ## Tarball name "aqtion-client-VERSION-linux-ARCH.tar.gz"
+    ## Tarball name "aqtion-VERSION-linux-ARCH.tar.gz"
 
-    #LATEST_PACKAGE=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | grep -v deb | head -n 1)
-    LATEST_VERSION=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | grep -v deb | head -n 1 | cut -d "/" -f 8)
+    LATEST_VERSION=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep -v deb | head -n 1 | cut -d "/" -f 8)
     LATEST_PACKAGE="aqtion-${LATEST_VERSION}-linux-${LINUX_ARCH}.tar.gz"
     echo "Downloading AQtion ${LATEST_VERSION} ..."
-    curl --progress-bar -q -s -L -o /tmp/aqtion_${LATEST_VERSION}.tar.gz "${LATEST_PACKAGE}"
+    curl --progress-bar -q -s -L -o /tmp/aqtion_${LATEST_VERSION}.tar.gz "https://github.com/actionquake/distrib/releases/download/${LATEST_VERSION}/${LATEST_PACKAGE}"
     extracttar=$(tar xzf /tmp/aqtion_${LATEST_VERSION}.tar.gz -C "${AQTION_DIR}" --strip-components=1)
-    if [[ ${extracttar} = "0" ]]
+    if [[ $? = "0" ]]
     then
         update_version_number ${LATEST_VERSION}
         echo "Installation successful!"
