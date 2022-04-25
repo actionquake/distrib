@@ -15,6 +15,8 @@ then
         echo "uname: $(uname -a)"
         echo "script info: $(ls -l ${SCRIPT_PATH})"
         exit 1
+    else
+        ${SCRIPT_PATH}
     fi
 elif [ $1 = "help" ]
 then
@@ -27,13 +29,13 @@ then
     exit 0
 elif [ $1 = "clean" ]
 then
-    sh ${SCRIPT_PATH} clean
+    bash ${SCRIPT_PATH} "clean"
 elif [ $1 = "update" ]
 then
-    sh ${SCRIPT_PATH} update
+    bash ${SCRIPT_PATH} "update"
 elif [ $1 = "uninstall" ]
 then
-    sh ${SCRIPT_PATH} uninstall
+    bash ${SCRIPT_PATH} "uninstall"
 else
     echo "Valid arguments are 'help', 'clean', 'update' and 'uninstall'"
     exit 1

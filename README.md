@@ -60,7 +60,7 @@ If you wish to use your RTX card with Quake II
 
 #### Linux (Tarball install)
 1. Download the latest release tarball file for your architecture (`amd64 - x86` or `arm64 - aarch64`)
-1. Extract to anywhere on your machine you would like it to be permanently installed
+1. Extract to `~/aqtion` (`/home/YOUR_USERNAME/aqtion`)
 1. In your Terminal, navigate to the extracted directory and launch `q2pro`
 
 #### All platforms

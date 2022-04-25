@@ -23,7 +23,7 @@ fi
 echo "Current dir is ${CURRENT_DIR}"
 echo "Architecture: ${ARCH}"
 echo "Version: ${VERSION}"
-DMG_FILENAME=aqtion-mac-${VERSION}-${ARCH}
+DMG_FILENAME=aqtion-${VERSION}-mac-${ARCH}
 
 ## create MacOS if it does not exist
 mkdir -p AQ_Install/AQ.app/Contents/MacOS
@@ -31,8 +31,8 @@ mkdir -p AQ_Install/AQ.app/Contents/MacOS
 ## Populate AQ_Install directory (note we're specifying the specifically-built pacage types)
 mv ../../action AQ_Install/AQ.app/Contents/MacOS/
 cp -r q2probuilds/${ARCH}/.lib AQ_Install/AQ.app/Contents/MacOS/
-cp q2probuilds/${ARCH}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
-cp q2probuilds/${ARCH}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
+cp q2probuilds/${ARCH}/q2proded_standalone AQ_Install/AQ.app/Contents/MacOS/q2proded
+cp q2probuilds/${ARCH}/q2pro_standalone AQ_Install/AQ.app/Contents/MacOS/q2pro
 cp q2probuilds/${ARCH}/game*.so AQ_Install/AQ.app/Contents/MacOS/action/
 
 ## make q2pro executable

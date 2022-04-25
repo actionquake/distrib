@@ -2,38 +2,14 @@
 
 ## Define directories and check for basic commands
 
+COMMAND=$1
 AQTION_DIR=${HOME}/aqtion
 DISTRIB_URL="https://api.github.com/repos/actionquake/distrib/releases/latest"
 ARCH=$(uname -m)
 
-## Argument script logic
-
-if [ $1 = "clean" ]
-then
-    rm -rf ${AQTION_DIR}/aqtion/versions
-    rm -rf ${AQTION_DIR}/update_check
-fi
-
-if [ $1 = "update" ]
-then
-    if [ ! -f "${AQTION_DIR}/versions" ]
-    then
-        echo "No local install found, downloading the latest version..."
-        check_for_install
-    else
-        INSTALLED_VERSION=$(grep -s installed_version ${AQTION_DIR}/versions | cut -f 2 -d "=")
-        check_for_updates ${INSTALLED_VERSION}
-    fi
-fi
-
-if [ $1 = "uninstall" ]
-then
-    uninstall
-fi
-
 ## Check if current context is root, do not install if root
 CURRENT_USER=$(whoami)
-if [ ${CURRENT_USER} = "root" ]
+if [[ ${CURRENT_USER} = "root" ]]
 then
     echo "Error: User running script is root, do not install as root"
     exit 1
@@ -66,25 +42,23 @@ check_for_install () {
     INSTALLED_VERSION=$(grep -s installed_version ${AQTION_DIR}/versions | cut -f 2 -d "=")
     LATEST_VERSION=$(curl -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep client | head -n 1 | cut -d "/" -f 8)
 
-    if [ ! -f "${AQTION_DIR}/versions" ]  ## Version not found, assuming this is a fresh install
+    if [[ ! -f "${AQTION_DIR}/versions" ]]  ## Version not found, assuming this is a fresh install
     then
         download_aqtion
     else
         echo "Existing installation found!"
         echo "If you wish to upgrade to a newer version if one is available, re-run like so: 'aqtion update'"
-        echo "If this does not work, try 'aqtion clean' and then 'aqtion update'"
-        echo "If you are still having problems, contact a mod in AQ2World Discord or open a Github Issue"
-        return 0
+        launch_game
     fi
 }
 
 check_for_updates () {
-    if [ "${INSTALLED_VERSION}" = "${LATEST_VERSION}" ]
+    if [[ "${INSTALLED_VERSION}" = "${LATEST_VERSION}" ]]
     then
         echo "Installed version is up-to-date, continuing..."
         launch_game
     else
-        if [ -f ${AQTION_DIR}/update_check ]
+        if [[ -f ${AQTION_DIR}/update_check ]]
         then
             echo "Update check disabled, launching game..."
             launch_game;
@@ -103,7 +77,7 @@ check_for_updates () {
 }
 
 update_version_number () {
-    if [ -s "${AQTION_DIR}/versions" ] || [ ! -f "${AQTION_DIR}/versions" ]
+    if [[ -s "${AQTION_DIR}/versions" ]] || [[ ! -f "${AQTION_DIR}/versions" ]]
     then  # Version file not found
         echo "installed_version=${LATEST_VERSION}" >> ${AQTION_DIR}/versions
     else  # Update version
@@ -115,10 +89,10 @@ update_version_number () {
 download_aqtion () {
     mkdir -p ${AQTION_DIR}
 
-    if [ ${ARCH} = "x86_64" ]
+    if [[ ${ARCH} = "x86_64" ]]
     then
         LINUX_ARCH="amd64"
-    elif [ ${ARCH} = "aarch64" ]
+    elif [[ ${ARCH} = "aarch64" ]]
     then
         LINUX_ARCH="arm64"
     else
@@ -128,21 +102,20 @@ download_aqtion () {
         return 1
     fi
 
-    ## Tarball name "aqtion-client-VERSION-linux-ARCH.tar.gz"
+    ## Tarball name "aqtion-VERSION-linux-ARCH.tar.gz"
 
-    #LATEST_PACKAGE=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | grep -v deb | head -n 1)
-    LATEST_VERSION=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep client | grep -v deb | head -n 1 | cut -d "/" -f 8)
-    LATEST_PACKAGE="aqtion-client-${LATEST_VERSION}-linux-${LINUX_ARCH}.tar.gz"
+    LATEST_VERSION=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep -v deb | head -n 1 | cut -d "/" -f 8)
+    LATEST_PACKAGE="aqtion-${LATEST_VERSION}-linux-${LINUX_ARCH}.tar.gz"
     echo "Downloading AQtion ${LATEST_VERSION} ..."
-    curl --progress-bar -q -s -L -o /tmp/aqtion_${LATEST_VERSION}.tar.gz "${LATEST_PACKAGE}"
+    curl --progress-bar -q -s -L -o /tmp/aqtion_${LATEST_VERSION}.tar.gz "https://github.com/actionquake/distrib/releases/download/${LATEST_VERSION}/${LATEST_PACKAGE}"
     extracttar=$(tar xzf /tmp/aqtion_${LATEST_VERSION}.tar.gz -C "${AQTION_DIR}" --strip-components=1)
-    if [ ${extracttar} = "0" ]
+    if [[ $? = "0" ]]
     then
         update_version_number ${LATEST_VERSION}
         echo "Installation successful!"
         launch_game
     else
-        if [ -z "${LATEST_VERSION}" ] || [ -z "${LATEST_PACKAGE}" ]
+        if [[ -z "${LATEST_VERSION}" ]] || [[ -z "${LATEST_PACKAGE}" ]]
         then
             LATEST_VERSION="undefined"
             LATEST_PACKAGE="undefined"
@@ -156,24 +129,10 @@ download_aqtion () {
 uninstall () {
     echo "Completely removing AQtion from ${AQTION_DIR} ..."
     removedeb=$(sudo dpkg -r aqtion && sudo dpkg --purge aqtion)
-    if [ $removedeb = "0" ]
-    then
-        echo "Debian package successfully removed, deleting local AQtion content..."
-    else
-        echo "Debian package removal error, please check 'dpkg -l | grep aqtion'"
-        echo "Attempting to delete local AQtion content..."
-    fi
+    echo "Debian package successfully removed, deleting local AQtion content..."
     removeaqtion=$(sudo rm -rf ${AQTION_DIR})
-    if [ $removeaqtion = "0" ]
-    then
-        echo "AQtion file removal successful."
-        echo "Uninstallation complete."
-        return 0
-    else
-        echo "Error in removing files, check that they are not in use or that you don't have a shell that is in ${AQTION_DIR} directory"
-        echo "To manually uninstall, run 'rm -rf ${AQTION_DIR}' in your shell"
-        return 1
-    fi
+    echo "AQtion file removal successful."
+    echo "Uninstallation complete."
 }
 
 launch_game () {
@@ -182,4 +141,30 @@ launch_game () {
 }
 
 # Let's-a go
+if [[ ${COMMAND} = "clean" ]]
+then
+    rm -rf ${AQTION_DIR}/aqtion/versions
+    rm -rf ${AQTION_DIR}/update_check
+    echo "AQtion directory cleaned and ready to check for updates"
+    exit 0
+fi
+
+if [[ ${COMMAND} = "update" ]]
+then
+    if [[ ! -f "${AQTION_DIR}/versions" ]]
+    then
+        echo "No local install found, downloading the latest version..."
+    else
+        INSTALLED_VERSION=$(grep -s installed_version ${AQTION_DIR}/versions | cut -f 2 -d "=")
+        check_for_updates ${INSTALLED_VERSION}
+    fi
+fi
+
+if [[ ${COMMAND} = "uninstall" ]]
+then
+    uninstall
+    exit 0
+fi
+
+## If no arguments, let's play!
 check_for_install

@@ -42,7 +42,7 @@ chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
 
 ## Create zip file
 cd AQ_Install || return
-zip -r ../../../${DMG_FILENAME}.zip AQ.app
+zip -r ../../../../${DMG_FILENAME}.zip AQ.app
 cd .. || return
 
 ## Move action folder back
