@@ -14,7 +14,7 @@ on:
 
 env:
   CFG_WORKING_DIR: "config"
-  GIT_TAG: ${{github.ref_name}}
+  GIT_TAG: ${{ github.event.inputs.release_tag }}
 
 jobs:      
   generate_mac_artifacts:
@@ -28,13 +28,13 @@ jobs:
 
       - name: Generate Mac Intel DMG
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash standalone_mac.sh intel ${{github.ref_name}}
+        run: bash standalone_mac.sh intel ${{ env.GIT_TAG }}
         env:
           CI: "true"
         
       - name: Generate Mac m1 DMG
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash standalone_mac.sh m1 ${{github.ref_name}}
+        run: bash standalone_mac.sh m1 ${{ env.GIT_TAG }}
         env:
           CI: "true"
 
@@ -43,14 +43,14 @@ jobs:
         with:
           name: mac-intel-dmg
           path: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{github.ref_name}}-mac-intel.dmg
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-intel.dmg
 
       - name: Generate M1 artifact
         uses: actions/upload-artifact@v3
         with:
           name: mac-m1-dmg
           path: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{github.ref_name}}-mac-m1.dmg
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-m1.dmg
 
       - name: Upload dist dmgs to release
         uses: softprops/action-gh-release@v1
@@ -58,10 +58,10 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           body_path: 
-          tag_name: ${{github.ref_name}}
+          tag_name: ${{ env.GIT_TAG }}
           files: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{github.ref_name}}-mac-intel.dmg
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{github.ref_name}}-mac-m1.dmg
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-intel.dmg
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-m1.dmg
       
     
 
