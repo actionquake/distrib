@@ -38,6 +38,20 @@ jobs:
         env:
           CI: "true"
 
+      - name: Generate archives
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-intel-dmg
+          path: |
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{github.ref_name}}-mac-intel.dmg
+
+      - name: Generate archives
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-m1-dmg
+          path: |
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{github.ref_name}}-mac-m1.dmg
+
       - name: Upload dist dmgs to release
         uses: softprops/action-gh-release@v1
         env:

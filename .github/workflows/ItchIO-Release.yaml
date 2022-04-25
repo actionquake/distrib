@@ -138,6 +138,19 @@ jobs:
       - name: Copy action content
         run: |
           cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN64_DIST_DIR }}/action/
+
+      ## Mac
+      - name: Download latest Mac Intel DMG
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Mac-Artifacts.yaml
+          name: mac-intel-dmg
+
+      - name: Download latest Mac M1 DMG
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Mac-Artifacts.yaml
+          name: mac-m1-dmg
       
       - name: Butler Push Win64
         run: ./butler push ${{ env.WIN64_DIST_DIR }} aqtion/aqtion:windows-x64 --userversion ${{ github.event.inputs.release_tag }}
@@ -156,5 +169,15 @@ jobs:
 
       - name: Butler Push Lin64 ARM
         run: ./butler push ${{ env.LINARM64_DIST_DIR }} aqtion/aqtion:linux-arm --userversion ${{ github.event.inputs.release_tag }}
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+      
+      - name: Butler Push Mac Intel
+        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-mac-intel.dmg aqtion/aqtion:mac-intel --userversion ${{ github.event.inputs.release_tag }}
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+
+      - name: Butler Push Mac M1
+        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-mac-m1.dmg aqtion/aqtion:mac-m1 --userversion ${{ github.event.inputs.release_tag }}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
