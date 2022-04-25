@@ -1,0 +1,78 @@
+name: Windows Artifacts
+
+# on:
+#   push:
+#     branches: ci
+
+
+## Do not use this yet
+on:
+  workflow_dispatch:
+
+env:
+  Q2PRO_DIR: q2probuild
+  TNG_DIR: tngbuild
+  DIST_DIR: config
+
+jobs:
+  windows_build_q2pro:
+    runs-on: [self-hosted, x86]
+    strategy:
+      matrix:
+        suffix: ["32", "64"]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: skullernet/q2pro
+          path: ${{ env.Q2PRO_DIR }}
+
+      - uses: actions/checkout@v3
+        with:
+          repository: aq2-tng/aq2-tng
+          ref: 'bots'
+          path: ${{ env.TNG_DIR }}
+
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.DIST_DIR }}
+
+      - name: Install dependencies
+        run: |
+          wget -nv https://github.com/skullernet/q2pro-mgw-sdk/releases/download/2021-09-07/q2pro-mgw-sdk.tar.gz
+          tar xf q2pro-mgw-sdk.tar.gz
+
+      - name: Get version info for q2pro
+        id: version
+        run: |
+          cp ${{ env.DIST_DIR }}/build/getversion.sh ${{ env.Q2PRO_DIR }}/
+          cd ${{ env.Q2PRO_DIR }} && bash -x getversion.sh q2pro >> versions
+
+      - name: Copy config build files and icons
+        run: |
+          cp -r ${{ env.DIST_DIR }}/build/windows/config_windows32 ${{ env.Q2PRO_DIR }}/.config_windows32
+          cp -r ${{ env.DIST_DIR }}/build/windows/config_windows64 ${{ env.Q2PRO_DIR }}/.config_windows64
+          cp ${{ env.DIST_DIR }}/build/windows/aq2pro.ico ${{ env.Q2PRO_DIR }}/src/windows/res/q2pro.ico
+          cp ${{ env.DIST_DIR }}/build/windows/aq2proded.ico ${{ env.Q2PRO_DIR }}/src/windows/res/q2proded.ico
+
+      - name: Build
+        working-directory: ${{ env.Q2PRO_DIR }}
+        run: make strip -j2 V=1
+        env:
+          CONFIG_FILE: ".config_windows${{ matrix.suffix }}"
+
+      - name: Generate q2pro archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: "q2pro-win-${{ matrix.suffix }}"
+          path: |
+            ${{ env.Q2PRO_DIR }}/q2pro.exe
+            ${{ env.Q2PRO_DIR }}/q2proded.exe
+            ${{ env.Q2PRO_DIR }}/versions
+
+      - name: TNG Rough hack to fix Makefile
+        run: |
+          mv ${{ env.TNG_DIR }}/source/Makefile ${{ env.TNG_DIR }}/source/Makefile-original
+          cat ${{ env.DIST_DIR }}/build/windows/tng-windows-append ${{ env.TNG_DIR }}/source/Makefile-original > ${{ env.TNG_DIR }}/source/Makefile
+
+
