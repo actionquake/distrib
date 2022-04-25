@@ -51,17 +51,3 @@ jobs:
           name: mac-m1-dmg
           path: |
             ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-m1.dmg
-
-      - name: Upload dist dmgs to release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          body_path: 
-          tag_name: ${{ env.GIT_TAG }}
-          files: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-intel.dmg
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-m1.dmg
-      
-    
-

@@ -18,7 +18,7 @@ env:
   LINARM64_DIST_DIR: "linux-arm64-dist"
   WIN64_DIST_DIR: "windows-x64-dist"
   WIN32_DIST_DIR: "windows-i386-dist"
-  GIT_TAG: ${{github.ref_name}}
+  GIT_TAG: ${{ github.event.inputs.release_tag }}
 
 jobs:      
   linux_windows_release:
@@ -142,43 +142,43 @@ jobs:
 
       - name: Generate content-only zip file
         run: |
-          mv aqtion-content.zip aqtion-content-${{github.ref_name}}.zip
+          mv aqtion-content.zip aqtion-content-${{ env.GIT_TAG }}.zip
 
       - name: Generate Linux deb files
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/linux
         run: |
           sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
-          cp -r dpkg aqtion-${{github.ref_name}}-linux-amd64
-          cp -r dpkg aqtion-${{github.ref_name}}-linux-arm64
-          sed -i "s/arch_value_here/amd64/g" aqtion-${{github.ref_name}}-linux-amd64/DEBIAN/control
-          sed -i "s/arch_value_here/arm64/g" aqtion-${{github.ref_name}}-linux-arm64/DEBIAN/control
-          dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-amd64
-          dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-arm64
-          mv aqtion-${{github.ref_name}}-linux-* ../../../
+          cp -r dpkg aqtion-${{ env.GIT_TAG }}-linux-amd64
+          cp -r dpkg aqtion-${{ env.GIT_TAG }}-linux-arm64
+          sed -i "s/arch_value_here/amd64/g" aqtion-${{ env.GIT_TAG }}-linux-amd64/DEBIAN/control
+          sed -i "s/arch_value_here/arm64/g" aqtion-${{ env.GIT_TAG }}-linux-arm64/DEBIAN/control
+          dpkg-deb --build --root-owner-group aqtion-${{ env.GIT_TAG }}-linux-amd64
+          dpkg-deb --build --root-owner-group aqtion-${{ env.GIT_TAG }}-linux-arm64
+          mv aqtion-${{ env.GIT_TAG }}-linux-* ../../../
 
       - name: Generate Linux x86 deb archive
         uses: actions/upload-artifact@v3
         with:
           name: linux-amd64-deb
           path: |
-            aqtion-${{github.ref_name}}-linux-amd64.deb
+            aqtion-${{ env.GIT_TAG }}-linux-amd64.deb
 
       - name: Generate Linux ARM64 deb archive
         uses: actions/upload-artifact@v3
         with:
           name: linux-arm64-deb
           path: |
-            aqtion-${{github.ref_name}}-linux-arm64.deb
+            aqtion-${{ env.GIT_TAG }}-linux-arm64.deb
 
       - name: Generate Linux tar files
         run: |
-          tar czpf aqtion-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
-          tar czpf aqtion-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
+          tar czpf aqtion-${{ env.GIT_TAG }}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
+          tar czpf aqtion-${{ env.GIT_TAG }}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
 
       - name: Generate Windows zip files
         run: |
-          zip -r aqtion-${{github.ref_name}}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
-          zip -r aqtion-${{github.ref_name}}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
+          zip -r aqtion-${{ env.GIT_TAG }}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
+          zip -r aqtion-${{ env.GIT_TAG }}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
     
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1
@@ -186,15 +186,15 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           body_path: 
-          tag_name: ${{github.ref_name}}
+          tag_name: ${{ env.GIT_TAG }}
           files: |
-            aqtion-${{github.ref_name}}-linux-arm64.deb
-            aqtion-${{github.ref_name}}-linux-amd64.deb
-            aqtion-${{github.ref_name}}-linux-arm64.tar.gz
-            aqtion-${{github.ref_name}}-linux-amd64.tar.gz
-            aqtion-${{github.ref_name}}-windows-x64.zip
-            aqtion-${{github.ref_name}}-windows-i386.zip
-            aqtion-content-${{github.ref_name}}.zip
+            aqtion-${{ env.GIT_TAG }}-linux-arm64.deb
+            aqtion-${{ env.GIT_TAG }}-linux-amd64.deb
+            aqtion-${{ env.GIT_TAG }}-linux-arm64.tar.gz
+            aqtion-${{ env.GIT_TAG }}-linux-amd64.tar.gz
+            aqtion-${{ env.GIT_TAG }}-windows-x64.zip
+            aqtion-${{ env.GIT_TAG }}-windows-i386.zip
+            aqtion-content-${{ env.GIT_TAG }}.zip
 
   mac_release:
     runs-on: macos-latest
@@ -223,10 +223,10 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           body_path: 
-          tag_name: ${{github.ref_name}}
+          tag_name: ${{ env.GIT_TAG }}
           files: |
-            aqtion-${{github.ref_name}}-mac-intel.dmg
-            aqtion-${{github.ref_name}}-mac-m1.dmg
+            aqtion-${{ env.GIT_TAG }}-mac-intel.dmg
+            aqtion-${{ env.GIT_TAG }}-mac-m1.dmg
       
     
 
