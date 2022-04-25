@@ -156,6 +156,20 @@ jobs:
           dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-arm64
           mv aqtion-${{github.ref_name}}-linux-* ../../../
 
+      - name: Generate Linux x86 deb archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-amd64-deb
+          path: |
+            aqtion-${{github.ref_name}}-linux-amd64.deb
+
+      - name: Generate Linux ARM64 deb archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-arm64-deb
+          path: |
+            aqtion-${{github.ref_name}}-linux-arm64.deb
+
       - name: Generate Linux tar files
         run: |
           tar czpf aqtion-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}

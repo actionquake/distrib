@@ -56,50 +56,18 @@ jobs:
           mkdir -p ${{ env.WIN32_DIST_DIR }}/action
 
       ## Linux x86_64
-      - name: Download latest Linux x86_64 Q2Pro artifacts
+      - name: Download latest Linux amd64 deb artifact
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: Q2Pro-Linux.yaml
-          name: q2pro-linux-x86_64
-          path: ${{ env.LIN64_DIST_DIR }}/
-
-      - name: Set Linux binaries to executable
-        run: |
-          chmod +x ${{ env.LIN64_DIST_DIR }}/*
-
-      - name: Download latest Linux x86_64 TNG artifacts
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: TNG-Linux.yaml
-          name: tng-lin-x86_64-library
-          path: ${{ env.LIN64_DIST_DIR }}/action/
-
-      - name: Copy action content
-        run: |
-          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.LIN64_DIST_DIR }}/action/
+          workflow: Quick-Release.yaml
+          name: linux-amd64-deb
 
       ## Linux ARM64
-      - name: Download latest Linux arm64 Q2Pro artifacts
+      - name: Download latest Linux arm64 deb artifact
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: Q2Pro-Linux.yaml
-          name: q2pro-linux-arm64
-          path: ${{ env.LINARM64_DIST_DIR }}/
-
-      - name: Set Linux binaries to executable
-        run: |
-          chmod +x ${{ env.LINARM64_DIST_DIR }}/*
-
-      - name: Download latest Linux arm64 TNG artifacts
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: TNG-Linux.yaml
-          name: tng-lin-arm64-library
-          path: ${{ env.LINARM64_DIST_DIR }}/action/
-
-      - name: Copy action content
-        run: |
-          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.LINARM64_DIST_DIR }}/action/
+          workflow: Quick-Release.yaml
+          name: linux-arm64-deb
 
       ## Win32
       - name: Download latest Win32 Q2Pro artifacts
@@ -163,12 +131,12 @@ jobs:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
       
       - name: Butler Push Lin64 x86
-        run: ./butler push ${{ env.LIN64_DIST_DIR }} aqtion/aqtion:linux-x64 --userversion ${{ github.event.inputs.release_tag }}
+        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-linux-amd64.deb aqtion/aqtion:linux-x64 --userversion ${{ github.event.inputs.release_tag }}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
       - name: Butler Push Lin64 ARM
-        run: ./butler push ${{ env.LINARM64_DIST_DIR }} aqtion/aqtion:linux-arm --userversion ${{ github.event.inputs.release_tag }}
+        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-linux-arm64.deb aqtion/aqtion:linux-arm --userversion ${{ github.event.inputs.release_tag }}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
       
