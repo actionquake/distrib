@@ -18,7 +18,7 @@ env:
   LINARM64_DIST_DIR: "linux-arm64-dist"
   WIN64_DIST_DIR: "windows-x64-dist"
   WIN32_DIST_DIR: "windows-i386-dist"
-  GIT_TAG: ${{ github.event.inputs.release_tag }}
+  GIT_TAG: ${{github.ref_name}}
 
 jobs:      
   linux_windows_release:
