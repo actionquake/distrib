@@ -35,10 +35,12 @@ jobs:
           cp config/build/getversion.sh build/
           cd build && bash -x getversion.sh q2pro >> versions
 
-      - name: Copy config build files
+      - name: Copy config build files and icons
         run: |
           cp -r config/build/windows/config_windows32 build/.config_windows32
           cp -r config/build/windows/config_windows64 build/.config_windows64
+          cp config/build/windows/aq2pro.ico build/src/windows/res/q2pro.ico
+          cp config/build/windows/aq2proded.ico build/src/windows/res/q2proded.ico
 
       - name: Build
         working-directory: build
