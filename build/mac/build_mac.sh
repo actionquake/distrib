@@ -61,7 +61,7 @@ if [[ ${ARCH} = "m1" ]]; then
 fi
 
 ## Build the binaries
-cd ${Q2PRO_DIR} && git checkout bots || return
+cd ${Q2PRO_DIR} || return
 export CONFIG_FILE=config_mac;export PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/";make -j2 V=1
 build_exitcode=$?
 
