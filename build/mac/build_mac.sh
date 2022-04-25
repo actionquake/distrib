@@ -37,7 +37,7 @@ Q2PRO_DIR="q2pro"
 ## Cleanup /tmp/q2pro
 rm -rf ${Q2PRO_DIR}
 
-## Clone and enter cloned repository
+## Clone repository
 git clone https://github.com/skullernet/q2pro.git ${Q2PRO_DIR}
 
 ## Build using standard config file unless 'steam' is second argument to script, then use the steam config
@@ -61,7 +61,7 @@ if [[ ${ARCH} = "m1" ]]; then
 fi
 
 ## Build the binaries
-cd ${Q2PRO_DIR} || return
+cd ${Q2PRO_DIR} && git checkout bots || return
 export CONFIG_FILE=config_mac;export PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/";make -j2 V=1
 build_exitcode=$?
 
