@@ -1,4 +1,4 @@
-name: Content-Only
+name: Content Artifact
 
 on:
   push:
@@ -14,7 +14,7 @@ env:
   WIN32_DIST_DIR: "windows-i386-dist"
 
 jobs:      
-  content_release:
+  generate_content_artifact:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout distrib

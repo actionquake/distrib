@@ -1,4 +1,4 @@
-name: Mac Release
+name: Mac Artifacts
 
 # on:  
 #   push:
@@ -17,7 +17,7 @@ env:
   GIT_TAG: ${{github.ref_name}}
 
 jobs:      
-  mac_release:
+  generate_mac_artifacts:
     runs-on: macos-latest
     steps:
       - name: Checkout distrib
