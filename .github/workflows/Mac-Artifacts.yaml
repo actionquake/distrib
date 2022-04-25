@@ -28,24 +28,24 @@ jobs:
 
       - name: Generate Mac Intel DMG
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash dmg_mac.sh intel ${{github.ref_name}}
+        run: bash standalone_mac.sh intel ${{github.ref_name}}
         env:
           CI: "true"
         
       - name: Generate Mac m1 DMG
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash dmg_mac.sh m1 ${{github.ref_name}}
+        run: bash standalone_mac.sh m1 ${{github.ref_name}}
         env:
           CI: "true"
 
-      - name: Generate archives
+      - name: Generate Intel artifact
         uses: actions/upload-artifact@v3
         with:
           name: mac-intel-dmg
           path: |
             ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{github.ref_name}}-mac-intel.dmg
 
-      - name: Generate archives
+      - name: Generate M1 artifact
         uses: actions/upload-artifact@v3
         with:
           name: mac-m1-dmg
