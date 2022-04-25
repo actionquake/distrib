@@ -18,7 +18,7 @@ CONFIG_FIXED_LIBAL=y
 #AL_CFLAGS = -framework OpenAL
 #AL_LIBS = -framework OpenAL
 
-CONFIG_PATH_DATA=~/Library/Application Support/Steam/SteamApps/common/AQtion
+CONFIG_PATH_DATA=~/Library/Application Support/Steam/steamapps/common/AQtion
 CONFIG_PATH_HOME=~/aqtion
 
 STRIP=strip -x
