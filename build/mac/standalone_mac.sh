@@ -1,5 +1,11 @@
 #!/bin/bash
 
+##
+### This file should be run as part of the CI pipeline as it builds a DMG file
+##
+### If you're trying to compile a Mac version, use the `build_mac.sh` script
+##
+
 RAW_ARCH=$1
 VERSION=$2
 CURRENT_DIR=$(pwd)
