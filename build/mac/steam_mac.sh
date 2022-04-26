@@ -40,7 +40,7 @@ install q2probuilds/${ARCH}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/actio
 
 ## Create zip file
 cd AQ_Install || return
-zip -r ../../../../${DMG_FILENAME}.zip AQ.app
+zip -r ../${DMG_FILENAME}.zip AQ.app
 cd .. || return
 
 ## Move action folder back

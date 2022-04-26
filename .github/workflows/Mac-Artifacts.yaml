@@ -26,9 +26,6 @@ jobs:
           repository: actionquake/distrib
           path: ${{ env.CFG_WORKING_DIR }}
 
-      - name: Install dylibbundler
-        run: brew install dylibbundler
-
       - name: Generate Mac Intel DMG
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
         run: bash standalone_mac.sh intel ${{ env.GIT_TAG }}
@@ -41,16 +38,42 @@ jobs:
         env:
           CI: "true"
 
-      - name: Generate Intel artifact
+      - name: Generate Mac Intel zip
+        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
+        run: bash steam_mac.sh intel ${{ env.GIT_TAG }}
+        env:
+          CI: "true"
+        
+      - name: Generate Mac m1 zip
+        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
+        run: bash steam_mac.sh m1 ${{ env.GIT_TAG }}
+        env:
+          CI: "true"
+
+      - name: Generate Intel DMG artifact
         uses: actions/upload-artifact@v3
         with:
           name: mac-intel-dmg
           path: |
             ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-intel.dmg
 
-      - name: Generate M1 artifact
+      - name: Generate M1 DMG artifact
         uses: actions/upload-artifact@v3
         with:
           name: mac-m1-dmg
           path: |
             ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-m1.dmg
+
+      - name: Generate Intel zip artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-intel-zip
+          path: |
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-${{ env.GIT_TAG }}-intel.zip
+
+      - name: Generate M1 zip artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-m1-zip
+          path: |
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-${{ env.GIT_TAG }}-m1.zip
