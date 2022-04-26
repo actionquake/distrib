@@ -26,17 +26,6 @@ else
     exit 1
 fi
 
-## AQtion requires SDL2, check
-if command -v sdl2-config &> /dev/null
-then
-    :
-else
-    echo "sdl2 not found, please install sdl2"
-    echo "Run this and retry:"
-    echo "sudo apt-get update && sudo apt-get install libsdl2-2.0 -y"
-    exit 1
-fi
-
 ## Functions
 check_for_install () {
     INSTALLED_VERSION=$(grep -s installed_version ${AQTION_DIR}/versions | cut -f 2 -d "=")

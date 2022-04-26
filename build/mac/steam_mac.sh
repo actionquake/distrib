@@ -31,6 +31,9 @@ echo "Architecture: ${ARCH}"
 echo "Version: ${VERSION}"
 DMG_FILENAME=aqtion-mac-${VERSION}-${ARCH}
 
+## create MacOS if it does not exist
+mkdir -p AQ_Install/AQ.app/Contents/MacOS
+
 ## Move action dir into the app for the zip file and populate AQ_Install directory
 mv ../../action AQ_Install/AQ.app/Contents/MacOS/
 cp -r q2probuilds/${ARCH}/lib AQ_Install/AQ.app/Contents/MacOS/
