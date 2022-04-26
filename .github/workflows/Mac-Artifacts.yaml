@@ -26,6 +26,9 @@ jobs:
           repository: actionquake/distrib
           path: ${{ env.CFG_WORKING_DIR }}
 
+      - name: Install dylibbundler
+        run: brew install dylibbundler
+
       - name: Generate Mac Intel DMG
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
         run: bash standalone_mac.sh intel ${{ env.GIT_TAG }}
