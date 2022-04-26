@@ -34,12 +34,15 @@ DMG_FILENAME=aqtion-${VERSION}-mac-${ARCH}
 ## create MacOS if it does not exist
 mkdir -p AQ_Install/AQ.app/Contents/MacOS
 
-## Populate AQ_Install directory (note we're specifying the specifically-built pacage types)
 mv ../../action AQ_Install/AQ.app/Contents/MacOS/
-cp -r q2probuilds/${ARCH}/.lib AQ_Install/AQ.app/Contents/MacOS/
-cp q2probuilds/${ARCH}/q2proded_standalone AQ_Install/AQ.app/Contents/MacOS/q2proded
-cp q2probuilds/${ARCH}/q2pro_standalone AQ_Install/AQ.app/Contents/MacOS/q2pro
-cp q2probuilds/${ARCH}/game*.so AQ_Install/AQ.app/Contents/MacOS/action/
+#cp -r q2probuilds/${ARCH}/.lib AQ_Install/AQ.app/Contents/MacOS/
+install -d AQ_Install/AQ.app/Contents/MacOS/lib
+install q2probuilds/${ARCH}/q2proded_standalone AQ_Install/AQ.app/Contents/MacOS/q2proded
+install q2probuilds/${ARCH}/q2pro_standalone AQ_Install/AQ.app/Contents/MacOS/q2pro
+install q2probuilds/${ARCH}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
+dylibbundler -b -x "AQ_Install/AQ.app/Contents/MacOS/q2pro" \
+        -x "AQ_Install/AQ.app/Contents/MacOS/q2proded" \
+		-d "AQ_Install/AQ.app/Contents/MacOS/lib" -of -p @executable_path/lib
 
 ## make q2pro executable
 chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*

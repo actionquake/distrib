@@ -60,6 +60,12 @@ if [[ ${ARCH} = "m1" ]]; then
     echo "Copying m1 Makefile successful"
 fi
 
+## Patch system.c patch file to make Mac paths work
+cp mac_dirpath.patch ${Q2PRO_DIR}/src/unix/
+cd ${Q2PRO_DIR}/src/unix
+patch < mac_dirpath.patch
+cd ../../../
+
 ## Build the binaries
 cd ${Q2PRO_DIR} || return
 export CONFIG_FILE=config_mac;export PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/";make -j2 V=1
@@ -76,20 +82,6 @@ else
     echo "Error occurred during build step: Copying q2pro files"
     echo "Exiting script!"
     exit 1
-fi
-
-## Change dynamic lib references manually because Apple is dumb and won't let us static link
-echo "Adjusting dynamic lib paths for ${ARCH}..."
-if [[ ${ARCH} = "m1" ]]; then
-    install_name_tool -change /System/Library/Frameworks/OpenAL.framework/Versions/A/OpenAL @executable_path/.lib/libopenal.1.21.1.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
-    install_name_tool -change /opt/homebrew/opt/libpng/lib/libpng16.16.dylib @executable_path/.lib/libpng16.16.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
-    install_name_tool -change /opt/homebrew/opt/jpeg/lib/libjpeg.9.dylib @executable_path/.lib/libjpeg.9.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
-    install_name_tool -change /usr/lib/libz.1.dylib @executable_path/.lib/libz.1.2.8.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
-else
-    install_name_tool -change /usr/local/opt/openal-soft/lib/libopenal.1.dylib @executable_path/.lib/libopenal.1.21.1.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
-    install_name_tool -change /usr/local/opt/libpng/lib/libpng16.16.dylib @executable_path/.lib/libpng16.16.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
-    install_name_tool -change /usr/local/opt/jpeg/lib/libjpeg.9.dylib @executable_path/.lib/libjpeg.9.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
-    install_name_tool -change /usr/lib/libz.1.dylib @executable_path/.lib/libz.1.2.11.dylib ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE}
 fi
 
 ## Cleanup task
