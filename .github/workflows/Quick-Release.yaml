@@ -217,6 +217,11 @@ jobs:
           workflow: Mac-Artifacts.yaml
           name: mac-m1-dmg
 
+      - name: Add version number to Mac release artifacts name
+        run: |
+          mv aqtion-mac-intel.dmg aqtion-${{github.ref_name}}-mac-intel.dmg
+          mv aqtion-mac-m1.dmg aqtion-${{github.ref_name}}-mac-m1.dmg
+
       - name: Upload dist dmgs to release
         uses: softprops/action-gh-release@v1
         env:
