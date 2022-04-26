@@ -8,7 +8,6 @@
 
 RAW_ARCH=$1
 VERSION=$2
-PACKAGE_TYPE="steam"
 CURRENT_DIR=$(pwd)
 
 if [[ -z $1 ]]; then
@@ -30,23 +29,20 @@ fi
 echo "Current dir is ${CURRENT_DIR}"
 echo "Architecture: ${ARCH}"
 echo "Version: ${VERSION}"
-echo "Package Type: ${PACKAGE_TYPE}"
-DMG_FILENAME=aqtion-mac-${VERSION}-${ARCH}-${PACKAGE_TYPE}
+DMG_FILENAME=aqtion-mac-${VERSION}-${ARCH}
 
 ## create MacOS if it does not exist
 mkdir -p AQ_Install/AQ.app/Contents/MacOS
 
-## Populate AQ_Install directory (note we're specifying the specifically-built pacage types)
+## Populate AQ_Install directory
 mv ../../action AQ_Install/AQ.app/Contents/MacOS/
-#cp -r q2probuilds/${ARCH}/.lib AQ_Install/AQ.app/Contents/MacOS/
 install -d AQ_Install/AQ.app/Contents/MacOS/lib
-install q2probuilds/${ARCH}/q2proded_${PACKAGE_TYPE} AQ_Install/AQ.app/Contents/MacOS/q2proded
-install q2probuilds/${ARCH}/q2pro_${PACKAGE_TYPE} AQ_Install/AQ.app/Contents/MacOS/q2pro
+install q2probuilds/${ARCH}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
+install q2probuilds/${ARCH}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
 install q2probuilds/${ARCH}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
 dylibbundler -b -x "AQ_Install/AQ.app/Contents/MacOS/q2pro" \
         -x "AQ_Install/AQ.app/Contents/MacOS/q2proded" \
 		-d "AQ_Install/AQ.app/Contents/MacOS/lib" -of -p @executable_path/lib
-
 
 ## make q2pro executable
 chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
