@@ -29,7 +29,7 @@ fi
 echo "Current dir is ${CURRENT_DIR}"
 echo "Architecture: ${ARCH}"
 echo "Version: ${VERSION}"
-DMG_FILENAME=aqtion-mac-${VERSION}-${ARCH}
+DMG_FILENAME=aqtion-${VERSION}-mac-${ARCH}
 
 ## create MacOS if it does not exist
 mkdir -p AQ_Install/AQ.app/Contents/MacOS
