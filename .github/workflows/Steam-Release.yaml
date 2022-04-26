@@ -119,7 +119,7 @@ jobs:
 
       - name: Copy action content (Mac Intel)
         run: |
-          unzip aqtion-mac-${{ env.GIT_TAG }}-intel.zip 
+          unzip aqtion-${{ env.GIT_TAG }}-mac-intel.zip 
 
       ## Generate zip files
       # - name: Zip artifacts for Steam deployment
