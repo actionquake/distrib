@@ -69,11 +69,11 @@ jobs:
         with:
           name: mac-intel-zip
           path: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-${{ env.GIT_TAG }}-intel.zip
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-intel.zip
 
       - name: Generate M1 zip artifact
         uses: actions/upload-artifact@v3
         with:
           name: mac-m1-zip
           path: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-${{ env.GIT_TAG }}-m1.zip
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-m1.zip
