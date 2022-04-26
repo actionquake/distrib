@@ -1,16 +1,11 @@
 name: Mac Artifacts
 
-on:  
-  push:
-    tags:
-      - 'v*'
-
-# on:
-#   workflow_dispatch:
-#     inputs:
-#       release_tag:
-#         description: "Release version tag"
-#         required: true
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release version tag"
+        required: true
 
 env:
   CFG_WORKING_DIR: "config"
