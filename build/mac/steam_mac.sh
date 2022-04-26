@@ -31,21 +31,12 @@ echo "Architecture: ${ARCH}"
 echo "Version: ${VERSION}"
 DMG_FILENAME=aqtion-mac-${VERSION}-${ARCH}
 
-## create MacOS if it does not exist
-mkdir -p AQ_Install/AQ.app/Contents/MacOS
-
-## Populate AQ_Install directory
+## Move action dir into the app for the zip file and populate AQ_Install directory
 mv ../../action AQ_Install/AQ.app/Contents/MacOS/
-install -d AQ_Install/AQ.app/Contents/MacOS/lib
+cp -r q2probuilds/${ARCH}/lib AQ_Install/AQ.app/Contents/MacOS/
 install q2probuilds/${ARCH}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
 install q2probuilds/${ARCH}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
 install q2probuilds/${ARCH}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
-dylibbundler -b -x "AQ_Install/AQ.app/Contents/MacOS/q2pro" \
-        -x "AQ_Install/AQ.app/Contents/MacOS/q2proded" \
-		-d "AQ_Install/AQ.app/Contents/MacOS/lib" -of -p @executable_path/lib
-
-## make q2pro executable
-chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
 
 ## Create zip file
 cd AQ_Install || return
