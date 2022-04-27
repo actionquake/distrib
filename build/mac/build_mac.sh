@@ -84,6 +84,7 @@ fi
 
 ## Build the tng binaries
 cd ${TNG_DIR}/source || return
+git checkout bots
 make -j2 V=1
 build_exitcode=$?
 
