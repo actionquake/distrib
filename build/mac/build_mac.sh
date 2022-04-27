@@ -33,10 +33,10 @@ git clone https://github.com/skullernet/q2pro.git ${Q2PRO_DIR}
 cp config_mac_${ARCH} ${Q2PRO_DIR}/config_mac
 
 ## Apple Silicon M1 needs a special Makefile
-if [[ ${ARCH} = "m1" ]]; then
-    cp aq2tng_Makefile_mac_m1 ${Q2PRO_DIR}/Makefile
-    echo "Copying m1 Makefile successful"
-fi
+#if [[ ${ARCH} = "m1" ]]; then
+#    cp aq2tng_Makefile_mac_m1 ${Q2PRO_DIR}/Makefile
+#    echo "Copying m1 Makefile successful"
+#fi
 
 ## Patch system.c patch file to make Mac paths work
 cp mac_dirpath.patch ${Q2PRO_DIR}/src/unix/
@@ -55,7 +55,6 @@ if [[ ${build_exitcode} -eq 0 ]]; then
     echo "Build successful!  Copying relevant files"
     cp ${CURRENT_DIR}/${Q2PRO_DIR}/q2pro ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro
     cp ${CURRENT_DIR}/${Q2PRO_DIR}/q2proded ${CURRENT_DIR}/q2probuilds/${ARCH}/q2proded
-    cp ${CURRENT_DIR}/${Q2PRO_DIR}/game*.so ${CURRENT_DIR}/q2probuilds/${ARCH}
 else
     echo "Error occurred during build step: Copying q2pro files"
     echo "Exiting script!"
