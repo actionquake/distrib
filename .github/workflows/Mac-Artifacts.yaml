@@ -1,0 +1,79 @@
+name: Mac Artifacts
+
+# on:  
+#   push:
+#     tags:
+#       - 'v*'
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release version tag"
+        required: true
+
+env:
+  CFG_WORKING_DIR: "config"
+  GIT_TAG: ${{ github.event.inputs.release_tag }}
+
+jobs:      
+  generate_mac_artifacts:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout distrib
+        uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.CFG_WORKING_DIR }}
+
+      - name: Generate Mac Intel DMG
+        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
+        run: bash standalone_mac.sh intel ${{ env.GIT_TAG }}
+        env:
+          CI: "true"
+        
+      - name: Generate Mac m1 DMG
+        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
+        run: bash standalone_mac.sh m1 ${{ env.GIT_TAG }}
+        env:
+          CI: "true"
+
+      - name: Generate Mac Intel zip
+        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
+        run: bash steam_mac.sh intel ${{ env.GIT_TAG }}
+        env:
+          CI: "true"
+        
+      - name: Generate Mac m1 zip
+        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
+        run: bash steam_mac.sh m1 ${{ env.GIT_TAG }}
+        env:
+          CI: "true"
+
+      - name: Generate Intel DMG artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-intel-dmg
+          path: |
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-intel.dmg
+
+      - name: Generate M1 DMG artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-m1-dmg
+          path: |
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-m1.dmg
+
+      - name: Generate Intel zip artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-intel-zip
+          path: |
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-intel.zip
+
+      - name: Generate M1 zip artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-m1-zip
+          path: |
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{ env.GIT_TAG }}-mac-m1.zip

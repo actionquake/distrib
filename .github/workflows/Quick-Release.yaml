@@ -156,6 +156,20 @@ jobs:
           dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-arm64
           mv aqtion-${{github.ref_name}}-linux-* ../../../
 
+      - name: Generate Linux x86 deb archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-amd64-deb
+          path: |
+            aqtion-${{github.ref_name}}-linux-amd64.deb
+
+      - name: Generate Linux ARM64 deb archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-arm64-deb
+          path: |
+            aqtion-${{github.ref_name}}-linux-arm64.deb
+
       - name: Generate Linux tar files
         run: |
           tar czpf aqtion-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
@@ -191,17 +205,17 @@ jobs:
           repository: actionquake/distrib
           path: ${{ env.CFG_WORKING_DIR }}
       
-      - name: Generate Mac Intel DMG
-        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash dmg_mac.sh intel ${{github.ref_name}}
-        env:
-          CI: "true"
-        
-      - name: Generate Mac m1 DMG
-        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash dmg_mac.sh m1 ${{github.ref_name}}
-        env:
-          CI: "true"
+      - name: Download latest Mac Intel DMG
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Mac-Artifacts.yaml
+          name: mac-intel-dmg
+
+      - name: Download latest Mac M1 DMG
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Mac-Artifacts.yaml
+          name: mac-m1-dmg
 
       - name: Upload dist dmgs to release
         uses: softprops/action-gh-release@v1
@@ -211,8 +225,8 @@ jobs:
           body_path: 
           tag_name: ${{github.ref_name}}
           files: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{github.ref_name}}-mac-intel.dmg
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-${{github.ref_name}}-mac-m1.dmg
+            aqtion-${{github.ref_name}}-mac-intel.dmg
+            aqtion-${{github.ref_name}}-mac-m1.dmg
       
     
 

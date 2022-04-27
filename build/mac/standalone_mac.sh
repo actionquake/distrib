@@ -1,5 +1,11 @@
 #!/bin/bash
 
+##
+### This file should be run as part of the CI pipeline as it builds a DMG file
+##
+### If you're trying to compile a Mac version, use the `build_mac.sh` script
+##
+
 RAW_ARCH=$1
 VERSION=$2
 CURRENT_DIR=$(pwd)
@@ -28,12 +34,12 @@ DMG_FILENAME=aqtion-${VERSION}-mac-${ARCH}
 ## create MacOS if it does not exist
 mkdir -p AQ_Install/AQ.app/Contents/MacOS
 
-## Populate AQ_Install directory (note we're specifying the specifically-built pacage types)
+## Move action dir into the app for the zip file and populate AQ_Install directory
 mv ../../action AQ_Install/AQ.app/Contents/MacOS/
-cp -r q2probuilds/${ARCH}/.lib AQ_Install/AQ.app/Contents/MacOS/
-cp q2probuilds/${ARCH}/q2proded_standalone AQ_Install/AQ.app/Contents/MacOS/q2proded
-cp q2probuilds/${ARCH}/q2pro_standalone AQ_Install/AQ.app/Contents/MacOS/q2pro
-cp q2probuilds/${ARCH}/game*.so AQ_Install/AQ.app/Contents/MacOS/action/
+cp -r q2probuilds/${ARCH}/lib AQ_Install/AQ.app/Contents/MacOS/
+install q2probuilds/${ARCH}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
+install q2probuilds/${ARCH}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
+install q2probuilds/${ARCH}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
 
 ## make q2pro executable
 chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*

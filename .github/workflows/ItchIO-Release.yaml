@@ -1,0 +1,151 @@
+name: Butler (Itch.io) Release
+
+# on:  
+#   push:
+#     tags:
+#       - 'v*'
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release version tag"
+        required: true
+
+env:
+  CFG_WORKING_DIR: "config"
+  LIN64_DIST_DIR: "linux-x64-dist"
+  LINARM64_DIST_DIR: "linux-arm64-dist"
+  WIN64_DIST_DIR: "windows-x64-dist"
+  WIN32_DIST_DIR: "windows-i386-dist"
+
+jobs:      
+  butler_release:
+    runs-on: ubuntu-latest
+    #runs-on: self-hosted
+    steps:
+      - name: 'Cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
+          
+      - name: Checkout distrib
+        uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.CFG_WORKING_DIR }}
+
+      - name: Install Butler (Itch.io)
+        run: |
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default && unzip butler.zip
+          chmod +x butler
+          ./butler -V
+
+      - name: Generate checksum file
+        working-directory: ${{ env.CFG_WORKING_DIR }}/action
+        run: |
+          find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
+
+      - name: Generate dist directories
+        run: |
+          mkdir -p ${{ env.LINARM64_DIST_DIR }}/action
+          mkdir -p ${{ env.LIN64_DIST_DIR }}/action
+          mkdir -p ${{ env.WIN64_DIST_DIR }}/action
+          mkdir -p ${{ env.WIN32_DIST_DIR }}/action
+
+      ## Linux x86_64
+      - name: Download latest Linux amd64 deb artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Quick-Release.yaml
+          name: linux-amd64-deb
+
+      ## Linux ARM64
+      - name: Download latest Linux arm64 deb artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Quick-Release.yaml
+          name: linux-arm64-deb
+
+      ## Win32
+      - name: Download latest Win32 Q2Pro artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Q2Pro-Windows.yaml
+          name: q2pro-win-32
+          path: ${{ env.WIN32_DIST_DIR }}/
+
+      - name: Download latest Win32 TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Windows.yaml
+          name: tng-win-32
+          path: ${{ env.WIN32_DIST_DIR }}/action/
+
+      - name: Copy action content
+        run: |
+          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN32_DIST_DIR }}/action/
+
+      ## Win64
+      - name: Download latest Win64 Q2Pro artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Q2Pro-Windows.yaml
+          name: q2pro-win-64
+          path: ${{ env.WIN64_DIST_DIR }}/
+
+      - name: Download latest Win64 TNG artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: TNG-Windows.yaml
+          name: tng-win-64
+          path: ${{ env.WIN64_DIST_DIR }}/action/
+
+      - name: Copy action content
+        run: |
+          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN64_DIST_DIR }}/action/
+
+      ## Mac
+      - name: Download latest Mac Intel DMG
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Mac-Artifacts.yaml
+          name: mac-intel-dmg
+
+      - name: Download latest Mac M1 DMG
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Mac-Artifacts.yaml
+          name: mac-m1-dmg
+      
+      - name: Butler Push Win64
+        run: ./butler push ${{ env.WIN64_DIST_DIR }} aqtion/aqtion:windows-x64 --userversion ${{ github.event.inputs.release_tag }}
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+      
+      - name: Butler Push Win32
+        run: ./butler push ${{ env.WIN32_DIST_DIR }} aqtion/aqtion:windows-i386 --userversion ${{ github.event.inputs.release_tag }}
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+      
+      - name: Butler Push Lin64 x86
+        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-linux-amd64.deb aqtion/aqtion:linux-x64 --userversion ${{ github.event.inputs.release_tag }}
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+
+      - name: Butler Push Lin64 ARM
+        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-linux-arm64.deb aqtion/aqtion:linux-arm --userversion ${{ github.event.inputs.release_tag }}
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+      
+      - name: Butler Push Mac Intel
+        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-mac-intel.dmg aqtion/aqtion:mac-intel --userversion ${{ github.event.inputs.release_tag }}
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+
+      - name: Butler Push Mac M1
+        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-mac-m1.dmg aqtion/aqtion:mac-m1 --userversion ${{ github.event.inputs.release_tag }}
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
