@@ -24,29 +24,13 @@ jobs:
           repository: actionquake/distrib
           path: ${{ env.CFG_WORKING_DIR }}
 
-      - name: Generate Mac Intel DMG
+      - name: Generate Mac Intel artifacts
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash standalone_mac.sh intel
-        env:
-          CI: "true"
+        run: bash package_mac.sh intel
         
-      - name: Generate Mac m1 DMG
+      - name: Generate Mac m1 artifacts
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash standalone_mac.sh m1
-        env:
-          CI: "true"
-
-      - name: Generate Mac Intel zip
-        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash steam_mac.sh intel
-        env:
-          CI: "true"
-        
-      - name: Generate Mac m1 zip
-        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash steam_mac.sh m1
-        env:
-          CI: "true"
+        run: bash package_mac.sh m1
 
       - name: Generate Intel DMG artifact
         uses: actions/upload-artifact@v3
