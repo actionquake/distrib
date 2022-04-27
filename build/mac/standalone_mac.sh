@@ -7,7 +7,6 @@
 ##
 
 RAW_ARCH=$1
-VERSION=$2
 CURRENT_DIR=$(pwd)
 
 if [[ -z $1 ]]; then
@@ -21,15 +20,10 @@ if [[ ${ARCH} -ne "intel" || ${ARCH} -ne "arm" ]]; then
     exit 1
 fi
 
-if [[ -z ${VERSION} ]]; then
-    echo "No version detected, example suggested value format: v0.0.20"
-    exit 1
-fi
 
 echo "Current dir is ${CURRENT_DIR}"
 echo "Architecture: ${ARCH}"
-echo "Version: ${VERSION}"
-DMG_FILENAME=aqtion-${VERSION}-mac-${ARCH}
+DMG_FILENAME=aqtion-mac-${ARCH}
 
 ## create MacOS if it does not exist
 mkdir -p AQ_Install/AQ.app/Contents/MacOS
@@ -54,11 +48,11 @@ mv AQ_Install/AQ.app/Contents/MacOS/action ../../
 rm -r -f AQ_Install/AQ.app/Contents/MacOS
 
 ## Optional upload directly to the release (manual)
-if [[ -z ${CI} ]]; then
-    read -p "Do you want to automatically upload ${DMG_FILENAME}.dmg to an existing Github Release? (Y/N):  " yn
-    case $yn in
-        [Yy]* ) gh release upload ${VERSION} ${DMG_FILENAME}.dmg;;
-        [Nn]* ) echo "Not uploading, script complete!"; exit 0;;
-        * ) echo "Please answer Y or N.";;
-    esac
-fi
+# if [[ -z ${CI} ]]; then
+#     read -p "Do you want to automatically upload ${DMG_FILENAME}.dmg to an existing Github Release? (Y/N):  " yn
+#     case $yn in
+#         [Yy]* ) gh release upload ${DMG_FILENAME}.dmg;;
+#         [Nn]* ) echo "Not uploading, script complete!"; exit 0;;
+#         * ) echo "Please answer Y or N.";;
+#     esac
+# fi
