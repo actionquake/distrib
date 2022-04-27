@@ -15,8 +15,8 @@ CPU=x86_64
 
 CONFIG_OPENAL=y
 CONFIG_FIXED_LIBAL=y
-#AL_CFLAGS = -framework OpenAL
-#AL_LIBS = -framework OpenAL
+AL_CFLAGS = -framework OpenAL
+AL_LIBS = -framework OpenAL
 
 CONFIG_PATH_DATA=./AQ.app/Contents/MacOS
 CONFIG_PATH_HOME=~/aqtion
