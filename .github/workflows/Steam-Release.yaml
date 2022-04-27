@@ -18,7 +18,6 @@ env:
   WIN64_DIST_DIR: "windows-x64-dist"
   WIN32_DIST_DIR: "windows-i386-dist"
   MAC_INTEL_DIST_DIR: "mac-intel-dist"
-  GIT_TAG: ${{github.ref_name}}
 
 jobs:      
   steam_release:
@@ -119,7 +118,7 @@ jobs:
 
       - name: Copy action content (Mac Intel)
         run: |
-          unzip aqtion-${{ github.event.inputs.release_tag }}-mac-intel.zip -d ${{ env.MAC_INTEL_DIST_DIR }}/
+          unzip aqtion-mac-intel.zip -d ${{ env.MAC_INTEL_DIST_DIR }}/
 
       ## Generate zip files
       # - name: Zip artifacts for Steam deployment
