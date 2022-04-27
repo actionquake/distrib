@@ -18,5 +18,5 @@ CONFIG_GAME_BASE=action
 # Makes the binary executable rather than as a shared library
 LDFLAGS=-no-pie
 
-CONFIG_PATH_DATA=~/.steam/debian-installation/steamapps/common/AQtion
+CONFIG_PATH_DATA=.
 CONFIG_PATH_HOME=~/aqtion
