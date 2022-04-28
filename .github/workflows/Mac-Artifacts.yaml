@@ -24,38 +24,20 @@ jobs:
           repository: actionquake/distrib
           path: ${{ env.CFG_WORKING_DIR }}
 
-      - name: Generate Mac Intel artifacts
+      - name: Generate Mac artifacts
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash package_mac.sh intel
-        
-      - name: Generate Mac m1 artifacts
-        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash package_mac.sh m1
+        run: bash package_mac.sh
 
-      - name: Generate Intel DMG artifact
+      - name: Generate Universal DMG artifact
         uses: actions/upload-artifact@v3
         with:
-          name: mac-intel-dmg
+          name: mac-universal-dmg
           path: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-intel.dmg
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-universal.dmg
 
-      - name: Generate M1 DMG artifact
+      - name: Generate Universal zip artifact
         uses: actions/upload-artifact@v3
         with:
-          name: mac-m1-dmg
+          name: mac-universal-zip
           path: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-m1.dmg
-
-      - name: Generate Intel zip artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: mac-intel-zip
-          path: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-intel.zip
-
-      - name: Generate M1 zip artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: mac-m1-zip
-          path: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-m1.zip
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-universal.zip

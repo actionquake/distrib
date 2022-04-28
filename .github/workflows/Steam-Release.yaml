@@ -17,7 +17,7 @@ env:
   LIN64_DIST_DIR: "linux-x64-dist"
   WIN64_DIST_DIR: "windows-x64-dist"
   WIN32_DIST_DIR: "windows-i386-dist"
-  MAC_INTEL_DIST_DIR: "mac-intel-dist"
+  MAC_DIST_DIR: "mac-universal-dist"
 
 jobs:      
   steam_release:
@@ -110,15 +110,15 @@ jobs:
           cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN64_DIST_DIR }}/action/
 
       ## Mac Intel
-      - name: Download latest Mac Intel artifact
+      - name: Download latest Mac Universal artifact
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Mac-Artifacts.yaml
-          name: mac-intel-zip
+          name: mac-universal-zip
 
-      - name: Copy action content (Mac Intel)
+      - name: Copy action content (Mac Universal)
         run: |
-          unzip aqtion-mac-intel.zip -d ${{ env.MAC_INTEL_DIST_DIR }}/
+          unzip aqtion-mac-universal.zip -d ${{ env.MAC_DIST_DIR }}/
 
       ## Generate zip files
       # - name: Zip artifacts for Steam deployment
