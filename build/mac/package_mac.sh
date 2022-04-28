@@ -6,34 +6,26 @@
 ### If you're trying to compile a Mac version, use the `build_mac.sh` script
 ##
 
-RAW_ARCH=$1
 CURRENT_DIR=$(pwd)
 
-if [[ -z $1 ]]; then
-    echo "Run script with arguments: [intel|arm] <version>"
-    exit 0
-fi
-
-ARCH=$(echo ${RAW_ARCH} | tr '[:upper:]' '[:lower:]')
-if [[ ${ARCH} -ne "intel" || ${ARCH} -ne "arm" ]]; then
-    echo "ARCH must be one of [intel | arm]"
-    exit 1
-fi
-
-
 echo "Current dir is ${CURRENT_DIR}"
-echo "Architecture: ${ARCH}"
-DMG_FILENAME=aqtion-mac-${ARCH}
+DMG_FILENAME=aqtion-mac-universal
 
-## create MacOS if it does not exist
+## create MacOS dir if it does not exist
 mkdir -p AQ_Install/AQ.app/Contents/MacOS
+
+## Create universal binary from prebuilt binaries
+lipo -create -output q2probuilds/universal/q2pro q2probuilds/intel/q2pro q2probuilds/m1/q2pro
+lipo -create -output q2probuilds/universal/q2proded q2probuilds/intel/q2proded q2probuilds/m1/q2proded
 
 ## Move action dir into the app for the zip file and populate AQ_Install directory
 mv ../../action AQ_Install/AQ.app/Contents/MacOS/
-cp -r q2probuilds/${ARCH}/lib AQ_Install/AQ.app/Contents/MacOS/
-install q2probuilds/${ARCH}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
-install q2probuilds/${ARCH}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
-install q2probuilds/${ARCH}/game*.so AQ_Install/AQ.app/Contents/MacOS/action/
+cp -r q2probuilds/intel/lib AQ_Install/AQ.app/Contents/MacOS/intellib
+cp -r q2probuilds/m1/lib AQ_Install/AQ.app/Contents/MacOS/armlib
+install q2probuilds/universal/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
+install q2probuilds/universal/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
+install q2probuilds/intel/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
+install q2probuilds/intel/gamearm.so AQ_Install/AQ.app/Contents/MacOS/action/
 
 ## make q2pro executable
 chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*

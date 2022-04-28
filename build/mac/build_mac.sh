@@ -66,9 +66,15 @@ rm -rf ${CURRENT_DIR}/q2pro
 ## Generate dylib mappings
 cd ${CURRENT_DIR}
 mkdir -p q2probuilds/${ARCH}/lib
-dylibbundler -b -x "q2probuilds/${ARCH}/q2pro" \
-        -x "q2probuilds/${ARCH}/q2proded" \
-		-d "q2probuilds/${ARCH}/lib" -of -p @executable_path/lib
+if [[ ${ARCH} = "m1" ]]; then
+    dylibbundler -b -x "q2probuilds/${ARCH}/q2pro" \
+            -x "q2probuilds/${ARCH}/q2proded" \
+            -d "q2probuilds/${ARCH}/lib" -of -p @executable_path/m1lib
+else
+    dylibbundler -b -x "q2probuilds/${ARCH}/q2pro" \
+            -x "q2probuilds/${ARCH}/q2proded" \
+            -d "q2probuilds/${ARCH}/lib" -of -p @executable_path/intellib
+fi
 
 ## make q2pro executable
 chmod +x q2probuilds/${ARCH}/q2pro*
