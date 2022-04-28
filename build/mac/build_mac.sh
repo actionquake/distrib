@@ -32,6 +32,12 @@ rm -rf ${Q2PRO_DIR}
 git clone https://github.com/skullernet/q2pro.git ${Q2PRO_DIR}
 cp config_mac_${ARCH} ${Q2PRO_DIR}/config_mac
 
+## Apple Silicon M1 needs a special Makefile
+#if [[ ${ARCH} = "m1" ]]; then
+#    cp aq2tng_Makefile_mac_m1 ${Q2PRO_DIR}/Makefile
+#    echo "Copying m1 Makefile successful"
+#fi
+
 ## Patch system.c patch file to make Mac paths work
 cp mac_dirpath.patch ${Q2PRO_DIR}/src/unix/
 cd ${Q2PRO_DIR}/src/unix
