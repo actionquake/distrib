@@ -3,7 +3,7 @@
 RAW_ARCH=$1
 CURRENT_DIR=$(pwd)
 PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/"
-CONFIG_FILE=config_mac
+
 
 if [[ -z ${RAW_ARCH} ]]
 then
@@ -33,7 +33,7 @@ rm -rf ${Q2PRO_DIR}
 
 ## Clone repository, copy config file
 git clone https://github.com/skullernet/q2pro.git ${Q2PRO_DIR}
-cp config_mac_${ARCH} ${Q2PRO_DIR}/config_mac
+cp q2pro_config_mac ${Q2PRO_DIR}/config_mac
 
 ## Patch system.c patch file to make Mac paths work
 cp mac_dirpath.patch ${Q2PRO_DIR}/src/unix/
@@ -43,7 +43,7 @@ cd ${CURRENT_DIR}
 
 ## Build the q2pro binaries
 cd ${Q2PRO_DIR} || return
-make -j2 V=1
+export CONFIG_FILE=config_mac; make -j2 V=1
 build_exitcode=$?
 
 ## Copy files in preparation for the build step
