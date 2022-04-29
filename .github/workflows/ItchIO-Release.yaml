@@ -114,6 +114,10 @@ jobs:
           workflow: Mac-Artifacts.yaml
           name: mac-universal-dmg
       
+      - name: Rename Mac Artifact to include version
+        run: |
+          mv aqtion-mac-universal.dmg aqtion-${{github.ref_name}}-mac-universal.dmg
+      
       - name: Butler Push Win64
         run: ./butler push ${{ env.WIN64_DIST_DIR }} aqtion/aqtion:windows-x64 --userversion ${{ github.event.inputs.release_tag }}
         env:

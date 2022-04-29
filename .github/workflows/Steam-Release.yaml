@@ -46,7 +46,7 @@ jobs:
           mkdir -p ${{ env.LIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN32_DIST_DIR }}/action
-          mkdir -p ${{ env.MAC_INTEL_DIST_DIR }}
+          mkdir -p ${{ env.MAC_DIST_DIR }}
 
       ## Linux x86_64
       - name: Download latest Linux x86_64 Q2Pro artifacts
