@@ -114,11 +114,11 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Mac-Artifacts.yaml
-          name: mac-universal-dmg
+          name: mac-universal-zip
 
       - name: Copy action content (Mac Universal)
         run: |
-          mv aqtion-mac-universal.dmg ${{ env.MAC_DIST_DIR }}/
+          unzip aqtion-mac-universal.zip -d ${{ env.MAC_DIST_DIR }}/
 
       ## Generate zip files
       # - name: Zip artifacts for Steam deployment
