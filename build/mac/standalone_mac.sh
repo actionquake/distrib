@@ -7,29 +7,28 @@
 ##
 
 RAW_ARCH=$1
-VERSION=$2
 CURRENT_DIR=$(pwd)
 
 if [[ -z $1 ]]; then
-    echo "Run script with arguments: [intel|arm] <version>"
+    echo "Run script with arguments: [intel|m1] <version>"
     exit 0
 fi
 
 ARCH=$(echo ${RAW_ARCH} | tr '[:upper:]' '[:lower:]')
-if [[ ${ARCH} -ne "intel" || ${ARCH} -ne "arm" ]]; then
-    echo "ARCH must be one of [intel | arm]"
+if [[ ${ARCH} -ne "intel" || ${ARCH} -ne "m1" ]]; then
+    echo "ARCH must be one of [intel | m1]"
     exit 1
 fi
 
-if [[ -z ${VERSION} ]]; then
-    echo "No version detected, example suggested value format: v0.0.20"
-    exit 1
+if [ ${ARCH} = "intel" ]; then
+    GAMEFILE=gamex86_64.so
+else
+    GAMEFILE=gamearm.so
 fi
 
 echo "Current dir is ${CURRENT_DIR}"
 echo "Architecture: ${ARCH}"
-echo "Version: ${VERSION}"
-DMG_FILENAME=aqtion-${VERSION}-mac-${ARCH}
+DMG_FILENAME=aqtion-mac-${ARCH}
 
 ## create MacOS if it does not exist
 mkdir -p AQ_Install/AQ.app/Contents/MacOS
@@ -39,7 +38,7 @@ mv ../../action AQ_Install/AQ.app/Contents/MacOS/
 cp -r q2probuilds/${ARCH}/lib AQ_Install/AQ.app/Contents/MacOS/
 install q2probuilds/${ARCH}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
 install q2probuilds/${ARCH}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
-install q2probuilds/${ARCH}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
+install q2probuilds/${ARCH}/${GAMEFILE} AQ_Install/AQ.app/Contents/MacOS/action/
 
 ## make q2pro executable
 chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
@@ -54,11 +53,11 @@ mv AQ_Install/AQ.app/Contents/MacOS/action ../../
 rm -r -f AQ_Install/AQ.app/Contents/MacOS
 
 ## Optional upload directly to the release (manual)
-if [[ -z ${CI} ]]; then
-    read -p "Do you want to automatically upload ${DMG_FILENAME}.dmg to an existing Github Release? (Y/N):  " yn
-    case $yn in
-        [Yy]* ) gh release upload ${VERSION} ${DMG_FILENAME}.dmg;;
-        [Nn]* ) echo "Not uploading, script complete!"; exit 0;;
-        * ) echo "Please answer Y or N.";;
-    esac
-fi
+# if [[ -z ${CI} ]]; then
+#     read -p "Do you want to automatically upload ${DMG_FILENAME}.dmg to an existing Github Release? (Y/N):  " yn
+#     case $yn in
+#         [Yy]* ) gh release upload ${DMG_FILENAME}.dmg;;
+#         [Nn]* ) echo "Not uploading, script complete!"; exit 0;;
+#         * ) echo "Please answer Y or N.";;
+#     esac
+# fi
