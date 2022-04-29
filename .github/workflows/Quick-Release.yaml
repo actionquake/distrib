@@ -186,6 +186,10 @@ jobs:
           workflow: Mac-Artifacts.yaml
           name: mac-universal-dmg
 
+      - name: Rename Mac Artifact to include version
+        run: |
+          mv aqtion-mac-universal.dmg aqtion-${{github.ref_name}}-mac-universal.dmg
+
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1
         env:
