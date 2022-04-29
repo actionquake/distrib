@@ -1,7 +1,7 @@
 "DepotBuildConfig"
 {
         "DepotID" "1978804"
-        "Contentroot" "mac-intel-dist/"
+        "Contentroot" "mac-universal-dist/"
         "FileMapping"
         {
                 "LocalPath" "*"

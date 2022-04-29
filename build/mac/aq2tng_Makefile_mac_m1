@@ -27,6 +27,11 @@ endif
 CC?=gcc
 BASE_CFLAGS=-Wall -fno-strict-aliasing -DC_ONLY -DVERSION="\"$(VERSION)\""
 
+## For building M1 on Mac Intel, export BUILDFOR=M1
+ifeq ($(BUILDFOR),M1)
+    BASE_CFLAGS += -target arm64-apple-macos12
+endif
+
 ifdef WEXTRA
 BASE_CFLAGS += -Wextra
 else
