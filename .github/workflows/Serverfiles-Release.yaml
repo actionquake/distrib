@@ -134,14 +134,22 @@ jobs:
           tar czpf aqtion-server-${{github.ref_name}}-linux-amd64.tar.gz ${{ env.LIN64_DIST_DIR }}
           tar czpf aqtion-server-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.LINARM64_DIST_DIR }}
 
-      - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+      - name: Generate server artifacts
+        uses: actions/upload-artifact@v3
         with:
-          body_path: 
-          tag_name: ${{github.ref_name}}
-          files: |
+          name: linux-server-zip
+          path: |
             aqtion-server-${{github.ref_name}}-linux-amd64.tar.gz
             aqtion-server-${{github.ref_name}}-linux-arm64.tar.gz
+
+      # - name: Upload dist tarball to release
+      #   uses: softprops/action-gh-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ github.token }}
+      #   with:
+      #     body_path: 
+      #     tag_name: ${{github.ref_name}}
+      #     files: |
+      #       aqtion-server-${{github.ref_name}}-linux-amd64.tar.gz
+      #       aqtion-server-${{github.ref_name}}-linux-arm64.tar.gz
 
