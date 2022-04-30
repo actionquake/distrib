@@ -88,25 +88,18 @@ jobs:
           chmod +x ${{ env.LINARM64_DIST_DIR }}/q2proded
           rm -rf ${{ env.LINARM64_DIST_DIR }}/q2pro
       
-      - name: Linux x86_64 - copy server files, initial maps, q2admin and TNG
+      - name: Linux x86_64 - copy q2admin and TNG
         run: |
-          cp -r ${{ env.CFG_WORKING_DIR }}/server/serverfiles/* ${{ env.LIN64_DIST_DIR }}/action/
           cp ${{ env.LIN64_DIST_DIR }}/q2admin/gamex86_64.so ${{ env.LIN64_DIST_DIR }}/action/gamex86_64.so
           cp -r ${{ env.LIN64_DIST_DIR }}/q2admin/plugins ${{ env.LIN64_DIST_DIR }}/
           cp ${{ env.LIN64_DIST_DIR }}/q2admin/config.lua ${{ env.LIN64_DIST_DIR }}/config.lua
           cp ${{ env.LIN64_DIST_DIR }}/tng/gamex86_64.so ${{ env.LIN64_DIST_DIR }}/action/gamex86_64.real.so
-          cp ${{ env.CFG_WORKING_DIR }}/action/urbanjungle.pkz ${{ env.LIN64_DIST_DIR }}/action/
-          cp ${{ env.CFG_WORKING_DIR }}/action/credits.pkz ${{ env.LIN64_DIST_DIR }}/action/
 
       - name: Linux ARM64 - copy server files, initial maps, q2admin and TNG
         run: |
-          cp -r ${{ env.CFG_WORKING_DIR }}/server/serverfiles/* ${{ env.LINARM64_DIST_DIR }}/action/
-          cp ${{ env.LINARM64_DIST_DIR }}/q2admin/gameaarch64.so ${{ env.LINARM64_DIST_DIR }}/action/gameaarch64.so
           cp -r ${{ env.LINARM64_DIST_DIR }}/q2admin/plugins ${{ env.LINARM64_DIST_DIR }}/
           cp ${{ env.LINARM64_DIST_DIR }}/q2admin/config.lua ${{ env.LINARM64_DIST_DIR }}/config.lua
           cp ${{ env.LINARM64_DIST_DIR }}/tng/gameaarch64.so ${{ env.LINARM64_DIST_DIR }}/action/gameaarch64.real.so
-          cp ${{ env.CFG_WORKING_DIR }}/action/urbanjungle.pkz ${{ env.LINARM64_DIST_DIR }}/action/
-          cp ${{ env.CFG_WORKING_DIR }}/action/credits.pkz ${{ env.LINARM64_DIST_DIR }}/action/
 
       - name: Get version info for distrib
         id: version
