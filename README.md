@@ -39,6 +39,10 @@ If you wish to use your RTX card with Quake II
 1. To start Quake II under the `action` mode, use the following startup parameters: `+set game action`
 1. ***Note:*** Config files from your `baseq2` directory will still execute, so there may be some unexpected binds or cvars set
 
+### Steam and Itch.io
+1. Search for `aqtion` in the Steam Store or Itch.io search bar
+1. Install and Play!
+
 ### New/Fresh Standalone Install
 #### Mac (Intel and M1)
 1. Install [Brew](https://brew.sh/) if you do not already have it
