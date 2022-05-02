@@ -169,6 +169,14 @@ jobs:
           name: linux-arm64-deb
           path: |
             aqtion-${{github.ref_name}}-linux-arm64.deb
+      
+      - name: Copy the license file into all directories
+        working-directory: ${{ env.CFG_WORKING_DIR }}
+        run: |
+          cp LICENSE ../${{ env.LIN64_DIST_DIR }}
+          cp LICENSE ../${{ env.LINARM64_DIST_DIR }}
+          cp LICENSE ../${{ env.WIN64_DIST_DIR }}
+          cp LICENSE ../${{ env.WIN32_DIST_DIR }}
 
       - name: Generate Linux tar files
         run: |
@@ -179,7 +187,7 @@ jobs:
         run: |
           zip -r aqtion-${{github.ref_name}}-windows-x64.zip ${{ env.WIN64_DIST_DIR }}
           zip -r aqtion-${{github.ref_name}}-windows-i386.zip ${{ env.WIN32_DIST_DIR }}
-    
+
       - name: Download latest Mac Univesal DMG
         uses: dawidd6/action-download-artifact@v2
         with:

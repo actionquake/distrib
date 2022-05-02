@@ -24,6 +24,11 @@ jobs:
           repository: actionquake/distrib
           path: ${{ env.CFG_WORKING_DIR }}
 
+      - name: Copy the license file into all directories
+        working-directory: ${{ env.CFG_WORKING_DIR }}
+        run: |
+          cp LICENSE build/mac/AQ_Install/AQ.app/Resources/
+
       - name: Generate Mac artifacts
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
         run: bash package_mac.sh
