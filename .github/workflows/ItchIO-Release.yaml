@@ -135,6 +135,6 @@ jobs:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
       
       - name: Butler Push Mac Universal
-        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-mac-universal.dmg aqtion/aqtion:mac-universal --userversion ${{ github.event.inputs.release_tag }}
+        run: ./butler push aqtion-mac-universal.dmg aqtion/aqtion:mac-universal --userversion ${{ github.event.inputs.release_tag }}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}

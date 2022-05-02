@@ -13,7 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: aq2-tng/aq2-tng
+          # repository: aq2-tng/aq2-tng  ## Official repository
+          repository: raptor007/aq2-tng ## Raptor007's repository
           ref: 'bots'
           path: build
 
