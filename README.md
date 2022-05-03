@@ -96,7 +96,7 @@ If you wish to use your RTX card with Quake II
 * [Skuller](https://skuller.net/q2pro/) for the highly-acclaimed [q2pro](https://github.com/skullernet/q2pro)
 * [Raptor007](https://github.com/raptor007) and [hifi](https://github.com/hifi) who have [taken over development](https://github.com/aq2-tng/aq2-tng) after the TNG team, and all forked repos who continuously improve this repository
 * [hifi](https://github.com/hifi) for q2admin, LUA and MVD support and all forked repos who continuously improve this repository
-* Mappers [stan0x](https://github.com/stan0x), **Quimby**, [WizardExt](https://www.wizardext.se/), **WetWired** and **Beavisss** for the included maps in this distribution
+* Mappers [stan0x](https://github.com/stan0x), **Quimby**, [WizardExt](https://www.wizardext.se/), **WetWired**, **Beavisss** and **Pauhi** for the included maps in this distribution
 * The [AQ2World Discord mod team](https://discord.gg/aq2world) for assisting, testing and contributing to this distribution, and keeping the scene alive
 * Every single mapper, sound designer, texture creator, model maker, skin artist and community contributor to this project since its inception in the late 90s, without your 600+ maps and gigabytes of content, we'd still be playing vanilla Q2.
 * All past, present and future players who for we do this all for, please keep the scene alive!
