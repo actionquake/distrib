@@ -74,7 +74,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Q2Pro-Windows.yaml
-          name: q2pro-win-32
+          name: q2pro-win-32-standalone
           path: ${{ env.WIN32_DIST_DIR }}/
 
       - name: Download latest Win32 TNG artifacts
@@ -93,7 +93,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Q2Pro-Windows.yaml
-          name: q2pro-win-64
+          name: q2pro-win-64-standalone
           path: ${{ env.WIN64_DIST_DIR }}/
 
       - name: Download latest Win64 TNG artifacts
