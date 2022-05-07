@@ -3,7 +3,8 @@
 RAW_ARCH=$1
 CURRENT_DIR=$(pwd)
 PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/"
-
+PLATFORM=STEAM
+PLATFORM_URL=https://aqtiongame.com
 
 if [[ -z ${RAW_ARCH} ]]
 then
@@ -40,6 +41,34 @@ cp mac_dirpath.patch ${Q2PRO_DIR}/src/unix/
 cd ${Q2PRO_DIR}/src/unix
 patch < mac_dirpath.patch
 cd ${CURRENT_DIR}
+
+## Patch common.h & q2pro/src/common/common.c to rename q2pro to AQtion
+patch -u ${Q2PRO_DIR}/inc/common/common.h << EOF
+@@ -26,10 +26,10 @@
+ // common.h -- definitions common between client and server, but not game.dll
+ //
+ 
+-#define PRODUCT         "Q2PRO"
++#define PRODUCT         "AQtion"
+ 
+ #if USE_CLIENT
+-#define APPLICATION     "q2pro"
++#define APPLICATION     "AQtion ($PLATFORM)"
+ #else
+ #define APPLICATION     "q2proded"
+ #endif
+EOF
+
+patch -u ${Q2PRO_DIR}/src/common/common.c << EOF
+@@ -1031,7 +1031,7 @@
+
+     Com_Printf("====== " PRODUCT " initialized ======\n\n");
+     Com_LPrintf(PRINT_NOTICE, APPLICATION " " VERSION ", " __DATE__ "\n");
+-    Com_Printf("https://github.com/skullernet/q2pro\n\n");
++    Com_Printf("$PLATFORM_URL\n\n");
+
+     time(&com_startTime);
+EOF
 
 ## Build the q2pro binaries
 cd ${Q2PRO_DIR} || return
