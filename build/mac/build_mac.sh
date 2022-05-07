@@ -27,6 +27,7 @@ echo "Proceeding with build..."
 ### Q2Pro
 for PLATFORM in "${PLATFORMS[@]}"
 do
+    cd ${CURRENT_DIR}
     Q2PRO_DIR="q2pro"
 
     ## Cleanup /tmp/q2pro if exists
@@ -44,30 +45,34 @@ do
 
     ## Patch common.h & q2pro/src/common/common.c to rename q2pro to AQtion
     patch -u ${Q2PRO_DIR}/inc/common/common.h << EOF
-    @@ -26,10 +26,10 @@
-    // common.h -- definitions common between client and server, but not game.dll
-    //
-    
-    -#define PRODUCT         "Q2PRO"
-    +#define PRODUCT         "AQtion"
-    
-    #if USE_CLIENT
-    -#define APPLICATION     "q2pro"
-    +#define APPLICATION     "AQtion ($PLATFORM)"
-    #else
-    #define APPLICATION     "q2proded"
-    #endif
+--- common.h.orig
++++ common.h
+@@ -26,10 +26,10 @@
+ // common.h -- definitions common between client and server, but not game.dll
+ //
+ 
+-#define PRODUCT         "Q2PRO"
++#define PRODUCT         "AQtion"
+ 
+ #if USE_CLIENT
+-#define APPLICATION     "q2pro"
++#define APPLICATION     "AQtion (${PLATFORM})"
+ #else
+ #define APPLICATION     "q2proded"
+ #endif
 EOF
 
     patch -u ${Q2PRO_DIR}/src/common/common.c << EOF
-    @@ -1031,7 +1031,7 @@
-
-        Com_Printf("====== " PRODUCT " initialized ======\n\n");
-        Com_LPrintf(PRINT_NOTICE, APPLICATION " " VERSION ", " __DATE__ "\n");
-    -    Com_Printf("https://github.com/skullernet/q2pro\n\n");
-    +    Com_Printf("https://www.aqtiongame.com/$PLATFORM\n\n");
-
-        time(&com_startTime);
+--- common.c.orig
++++ common.c
+@@ -1031,7 +1031,7 @@
+ 
+     Com_Printf("====== " PRODUCT " initialized ======\n\n");
+     Com_LPrintf(PRINT_NOTICE, APPLICATION " " VERSION ", " __DATE__ "\n");
+-    Com_Printf("https://github.com/skullernet/q2pro\n\n");
++    Com_Printf("https://github.com/skullernet/q2proasdfasdfsadf\n\n");
+ 
+     time(&com_startTime);
 EOF
 
     ## Build the q2pro binaries
@@ -76,6 +81,7 @@ EOF
     build_exitcode=$?
 
     ## Copy files in preparation for the build step
+    mkdir -p ${CURRENT_DIR}/q2probuilds/${ARCH}/${PLATFORM}
     if [[ ${build_exitcode} -eq 0 ]]; then
         echo "Q2Pro build successful!  Copying relevant files"
         cp ${CURRENT_DIR}/${Q2PRO_DIR}/q2pro ${CURRENT_DIR}/q2probuilds/${ARCH}/${PLATFORM}/q2pro
@@ -91,11 +97,11 @@ EOF
 
     ## Generate dylib mappings
     cd ${CURRENT_DIR}
-    mkdir -p q2probuilds/${ARCH}/${PLATFORM}/lib
+    mkdir -p q2probuilds/${ARCH}/lib
 
     dylibbundler -b -x "q2probuilds/${ARCH}/${PLATFORM}/q2pro" \
             -x "q2probuilds/${ARCH}/${PLATFORM}/q2proded" \
-            -d "q2probuilds/${ARCH}/${PLATFORM}/lib" -of -p @executable_path/${ARCH}lib
+            -d "q2probuilds/${ARCH}/lib" -of -p @executable_path/${ARCH}lib
 
     ## make q2pro executable
     chmod +x q2probuilds/${ARCH}/${PLATFORM}/q2pro*
