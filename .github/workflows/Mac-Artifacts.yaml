@@ -66,22 +66,3 @@ jobs:
           name: mac-universal-zip-steam
           path: |
             ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-universal-steam.zip
-
-      # Itch.io
-      - name: Generate Mac itchio artifacts
-        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash package_mac.sh itchio
-
-      - name: Generate Universal itchio DMG artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: mac-universal-dmg-itchio
-          path: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-universal-itchio.dmg
-
-      - name: Generate Universal itchio zip artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: mac-universal-zip-itchio
-          path: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-universal-itchio.zip

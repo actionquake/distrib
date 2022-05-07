@@ -13,7 +13,7 @@ CURRENT_DIR=$(pwd)
 if [[ -z ${DISTRIB} ]]
 then
     echo "How to use this script:"
-    echo "./package_mac.sh [steam | standalone | itchio]"
+    echo "./package_mac.sh [steam | standalone]"
     echo "Re-run with the appropriate arguments"
     exit 1
 fi
