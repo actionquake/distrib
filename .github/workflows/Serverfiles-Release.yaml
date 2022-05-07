@@ -43,7 +43,8 @@ jobs:
       - name: Build TNG (Linux x86)
         working-directory: ${{ env.TNG_WORKING_DIR }}
         run: |
-          cd source && make -j2 V=1 && cp gamex86_64.so ../../
+          cd source && make -j2 V=1
+          cp gamex86_64.so ../../
 
       - name: Checkout distrib
         uses: actions/checkout@v3
@@ -66,7 +67,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Q2Pro-Linux.yaml
-          name: q2pro-linux-x86_64
+          name: q2pro-linux-x86_64-standalone
           path: ${{ env.LIN64_DIST_DIR }}/
       - name: Download latest Linux x86_64 TNG artifacts
         uses: dawidd6/action-download-artifact@v2
