@@ -44,7 +44,7 @@ cd ${CURRENT_DIR}
 ## Build the q2pro binaries
 cd ${Q2PRO_DIR} || return
 
-DISTRIBS=( STANDALONE STEAM ITCHIO )
+DISTRIBS=( standalone steam itchio )
 
 for DISTRIB in "${DISTRIBS[@]}"
 do
