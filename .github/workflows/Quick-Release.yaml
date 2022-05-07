@@ -108,7 +108,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: TNG-Windows.yaml
-          name: tng-win-32-standalone
+          name: tng-win-32
           path: ${{ env.WIN32_DIST_DIR }}/action/
 
       - name: Copy action content
@@ -120,14 +120,14 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Q2Pro-Windows.yaml
-          name: q2pro-win-64
+          name: q2pro-win-64-standalone
           path: ${{ env.WIN64_DIST_DIR }}/
 
       - name: Download latest Win64 TNG artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: TNG-Windows.yaml
-          name: tng-win-64-standalone
+          name: tng-win-64
           path: ${{ env.WIN64_DIST_DIR }}/action/
 
       - name: Copy action content
