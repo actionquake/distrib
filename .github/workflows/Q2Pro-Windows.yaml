@@ -73,20 +73,3 @@ jobs:
             build/q2pro.exe
             build/q2proded.exe
             build/versions
-
-      # Itch.io
-      - name: Build Q2Pro Itchio
-        working-directory: build
-        run: make clean && echo "DIST=ITCHIO" >> .config_windows${{ matrix.suffix }} && make strip -j2 V=1
-        env:
-          CONFIG_FILE: ".config_windows${{ matrix.suffix }}"
-
-      - name: Generate archive
-        uses: actions/upload-artifact@v3
-        with:
-          name: "q2pro-win-${{ matrix.suffix }}-itchio"
-          path: |
-            build/q2pro.exe
-            build/q2proded.exe
-            build/versions
-
