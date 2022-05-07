@@ -43,19 +43,26 @@ cd ${CURRENT_DIR}
 
 ## Build the q2pro binaries
 cd ${Q2PRO_DIR} || return
-export CONFIG_FILE=config_mac; make -j2 V=1
-build_exitcode=$?
 
-## Copy files in preparation for the build step
-if [[ ${build_exitcode} -eq 0 ]]; then
-    echo "Q2Pro build successful!  Copying relevant files"
-    cp ${CURRENT_DIR}/${Q2PRO_DIR}/q2pro ${CURRENT_DIR}/q2probuilds/${ARCH}/q2pro
-    cp ${CURRENT_DIR}/${Q2PRO_DIR}/q2proded ${CURRENT_DIR}/q2probuilds/${ARCH}/q2proded
-else
-    echo "Error occurred during build step: Copying q2pro files"
-    echo "Exiting script!"
-    exit 1
-fi
+DISTRIBS=( STANDALONE STEAM ITCHIO )
+
+for DISTRIB in "${DISTRIBS[@]}"
+do
+    mkdir -p ${CURRENT_DIR}/q2probuilds/${ARCH}/${DISTRIB}
+    export CONFIG_FILE=config_mac; echo "DIST=${DISTRIB}" >> config_mac; make clean && make -j2 V=1
+    build_exitcode=$?
+
+    ## Copy files in preparation for the build step
+    if [[ ${build_exitcode} -eq 0 ]]; then
+        echo "Q2Pro ${DISTRIB} build successful!  Copying relevant files"
+        cp ${CURRENT_DIR}/${Q2PRO_DIR}/q2pro ${CURRENT_DIR}/q2probuilds/${ARCH}/${DISTRIB}/q2pro
+        cp ${CURRENT_DIR}/${Q2PRO_DIR}/q2proded ${CURRENT_DIR}/q2probuilds/${ARCH}/${DISTRIB}/q2proded
+    else
+        echo "Error occurred during build step: Copying q2pro files"
+        echo "Exiting script!"
+        exit 1
+    fi
+done
 
 ## Cleanup task
 rm -rf ${CURRENT_DIR}/q2pro

@@ -24,8 +24,17 @@ endif
 ifndef VER
     VER := $(shell ./version.sh --version)
 endif
+ifndef DIST
+    DIST := STANDALONE
+endif
 
-CC ?= gcc
+# Apple M1 build on Intel
+ifeq ($(BUILDFOR),M1)
+    CC ?= clang
+else
+    CC ?= gcc
+endif
+
 WINDRES ?= windres
 STRIP ?= strip
 RM ?= rm -f
@@ -42,8 +51,15 @@ RCFLAGS_s :=
 RCFLAGS_c :=
 RCFLAGS_g :=
 
-LDFLAGS_s :=
-LDFLAGS_c :=
+## For building M1 on Mac Intel, export BUILDFOR=M1
+ifeq ($(BUILDFOR),M1)
+    LDFLAGS_s := -target arm64-apple-macos12
+    LDFLAGS_c := -target arm64-apple-macos12
+else
+    LDFLAGS_s :=
+    LDFLAGS_c :=
+endif
+
 LDFLAGS_g := -shared
 
 ifdef CONFIG_WINDOWS
@@ -484,7 +500,7 @@ else
 
     ifeq ($(SYS),Linux)
         LIBS_s += -ldl -lrt
-        LIBS_c += -ldl -lrt -lpthread -no-pie
+        LIBS_c += -ldl -lrt -lpthread
     endif
 endif
 
