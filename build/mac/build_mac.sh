@@ -57,7 +57,7 @@ do
     #else
     #define APPLICATION     "q2proded"
     #endif
-    EOF
+EOF
 
     patch -u ${Q2PRO_DIR}/src/common/common.c << EOF
     @@ -1031,7 +1031,7 @@
@@ -68,7 +68,7 @@ do
     +    Com_Printf("https://www.aqtiongame.com/$PLATFORM\n\n");
 
         time(&com_startTime);
-    EOF
+EOF
 
     ## Build the q2pro binaries
     cd ${Q2PRO_DIR} || return
