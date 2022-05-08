@@ -5,7 +5,7 @@ CHANGELOG*
 tmp
 build/mac/AQ_Install/AQ.app/Contents/MacOS
 *.dmg
-gamex*
+action/gamex*
 action/gamearm*
 build/mac/q2pro/
 mac/aqtion-mac-*.zip
