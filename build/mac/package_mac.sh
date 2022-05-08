@@ -8,7 +8,7 @@
 
 DISTRIB=$1
 CURRENT_DIR=$(pwd)
-PLATFORMS=(Steam itch Standalone)
+PLATFORMS=(Steam Standalone)
 
 
 if [[ -z ${DISTRIB} ]]
