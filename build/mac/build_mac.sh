@@ -38,10 +38,34 @@ do
     cp q2pro_config_mac ${Q2PRO_DIR}/config_mac
 
     ## Patch system.c patch file to make Mac paths work
-    cp mac_dirpath.patch ${Q2PRO_DIR}/src/unix/
-    cd ${Q2PRO_DIR}/src/unix
-    patch < mac_dirpath.patch
-    cd ${CURRENT_DIR}
+    patch -u ${Q2PRO_DIR}/src/unix/system.c << EOF
+--- system.c	2022-04-25 23:05:48.000000000 -0400
++++ system.c.mac	2022-04-25 23:09:42.000000000 -0400
+@@ -282,6 +282,22 @@
+     signal(SIGPIPE, SIG_IGN);
+     signal(SIGUSR1, hup_handler);
+ 
++    #ifdef __APPLE__
++	// set AQ.app/Contents/Resources as basedir
++	char path[MAX_OSPATH], *c;
++	unsigned int i = sizeof(path);
++
++	if (_NSGetExecutablePath(path, &i) > -1) {
++		if ((c = strstr(path, "AQ.app"))) {
++			strcpy(c, "AQ.app/Contents/MacOS");
++			Cvar_FullSet("basedir", path, CVAR_NOSET, FROM_CODE);
++
++			strcpy(c, "AQ.app/Contents/MacOS");
++			Cvar_FullSet("libdir", path, CVAR_NOSET, FROM_CODE);
++		}
++	}
++    #endif
++
+     // basedir <path>
+     // allows the game to run from outside the data tree
+     sys_basedir = Cvar_Get("basedir", DATADIR, CVAR_NOSET);
+EOF
+
 
     ## Patch common.h & q2pro/src/common/common.c to rename q2pro to AQtion
     patch -u ${Q2PRO_DIR}/inc/common/common.h << EOF
