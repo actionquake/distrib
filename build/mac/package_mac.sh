@@ -6,8 +6,18 @@
 ### If you're trying to compile a Mac version, use the `build_mac.sh` script
 ##
 
+DISTRIB=$1
 CURRENT_DIR=$(pwd)
 PLATFORMS=(Steam itch Standalone)
+
+
+if [[ -z ${DISTRIB} ]]
+then
+    echo "How to use this script:"
+    echo "./package_mac.sh [steam | standalone]"
+    echo "Re-run with the appropriate arguments"
+    exit 1
+fi
 
 echo "Current dir is ${CURRENT_DIR}"
 

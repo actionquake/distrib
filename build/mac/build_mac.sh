@@ -3,7 +3,7 @@
 RAW_ARCH=$1
 CURRENT_DIR=$(pwd)
 PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/"
-PLATFORMS=(Steam itch Standalone)
+PLATFORMS=(Steam Standalone)
 
 if [[ -z ${RAW_ARCH} ]]
 then

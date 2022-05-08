@@ -42,7 +42,8 @@ jobs:
           cp config/build/windows/aq2pro.ico build/src/windows/res/q2pro.ico
           cp config/build/windows/aq2proded.ico build/src/windows/res/q2proded.ico
 
-      - name: Build
+      # Standalone
+      - name: Build Q2Pro Standalone
         working-directory: build
         run: make strip -j2 V=1
         env:
@@ -51,9 +52,24 @@ jobs:
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
-          name: "q2pro-win-${{ matrix.suffix }}"
+          name: "q2pro-win-${{ matrix.suffix }}-standalone"
           path: |
             build/q2pro.exe
             build/q2proded.exe
             build/versions
 
+      # Steam
+      - name: Build Q2Pro Steam
+        working-directory: build
+        run: make clean && echo "DIST=STEAM" >> .config_windows${{ matrix.suffix }} && make strip -j2 V=1
+        env:
+          CONFIG_FILE: ".config_windows${{ matrix.suffix }}"
+
+      - name: Generate archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: "q2pro-win-${{ matrix.suffix }}-steam"
+          path: |
+            build/q2pro.exe
+            build/q2proded.exe
+            build/versions
