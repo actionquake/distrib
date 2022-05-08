@@ -1,21 +1,20 @@
 name: Server Files Release
 
-# on:  
-#   push:
-#     tags:
-#       - '*'
-
-
-## TEMPORARILY NOT USED UNTIL WE DECIDE WHAT WE'RE DOING WITH SERVERS
 on:
   workflow_dispatch:
     inputs:
-      release_tag:
-        description: "Release version tag"
+      github_repo:
+        description: "TNG Github repo"
         required: true
+        default: raptor007/aq2-tng
+      github_branch:
+        description: "TNG Github branch"
+        required: true
+        default: bots
 
 env:
   CFG_WORKING_DIR: "config"
+  TNG_WORKING_DIR: "tng"
   LIN64_DIST_DIR: "linux-x64-dist"
   LINARM64_DIST_DIR: "linux-arm64-dist"
 
@@ -27,6 +26,26 @@ jobs:
     #   matrix:
     #     aqtionpath: ["${{ env.LIN64_DIST_DIR }}", "${{ env.LINARM64_DIST_DIR }}"]
     steps:
+      # - name: Install dependencies
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt install -y libsdl2-dev libopenal-dev \
+      #     libpng-dev libjpeg-dev zlib1g-dev mesa-common-dev \
+      #     libcurl4-gnutls-dev
+      
+      - name: Checkout TNG
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ github.event.inputs.github_repo }}
+          refs: ${{ github.event.inputs.github_branch }}
+          path: ${{ env.TNG_WORKING_DIR }}
+
+      - name: Build TNG (Linux x86)
+        working-directory: ${{ env.TNG_WORKING_DIR }}
+        run: |
+          cd source && make -j2 V=1
+          cp gamex86_64.so ../../
+
       - name: Checkout distrib
         uses: actions/checkout@v3
         with:
@@ -48,7 +67,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Q2Pro-Linux.yaml
-          name: q2pro-linux-x86_64
+          name: q2pro-linux-x86_64-standalone
           path: ${{ env.LIN64_DIST_DIR }}/
       - name: Download latest Linux x86_64 TNG artifacts
         uses: dawidd6/action-download-artifact@v2
@@ -88,9 +107,10 @@ jobs:
           chmod +x ${{ env.LINARM64_DIST_DIR }}/q2proded
           rm -rf ${{ env.LINARM64_DIST_DIR }}/q2pro
       
+      # cp ${{ env.LIN64_DIST_DIR }}/q2admin/gamex86_64.so ${{ env.LIN64_DIST_DIR }}/action/gamex86_64.so
       - name: Linux x86_64 - copy q2admin and TNG
         run: |
-          cp ${{ env.LIN64_DIST_DIR }}/q2admin/gamex86_64.so ${{ env.LIN64_DIST_DIR }}/action/gamex86_64.so
+          cp gamex86_64.so ${{ env.LIN64_DIST_DIR }}/action/gamex86_64.so
           cp -r ${{ env.LIN64_DIST_DIR }}/q2admin/plugins ${{ env.LIN64_DIST_DIR }}/
           cp ${{ env.LIN64_DIST_DIR }}/q2admin/config.lua ${{ env.LIN64_DIST_DIR }}/config.lua
           cp ${{ env.LIN64_DIST_DIR }}/tng/gamex86_64.so ${{ env.LIN64_DIST_DIR }}/action/gamex86_64.real.so
@@ -132,17 +152,5 @@ jobs:
         with:
           name: linux-server-zip
           path: |
-            aqtion-server-${{github.ref_name}}-linux-amd64.tar.gz
-            aqtion-server-${{github.ref_name}}-linux-arm64.tar.gz
-
-      # - name: Upload dist tarball to release
-      #   uses: softprops/action-gh-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ github.token }}
-      #   with:
-      #     body_path: 
-      #     tag_name: ${{github.ref_name}}
-      #     files: |
-      #       aqtion-server-${{github.ref_name}}-linux-amd64.tar.gz
-      #       aqtion-server-${{github.ref_name}}-linux-arm64.tar.gz
-
+            aqtion-${{github.ref_name}}-linux-srv-amd64.tar.gz
+            aqtion-${{github.ref_name}}-linux-srv-arm64.tar.gz
