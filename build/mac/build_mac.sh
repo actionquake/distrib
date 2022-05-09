@@ -34,7 +34,7 @@ do
     rm -rf ${Q2PRO_DIR}
 
     ## Clone repository, copy config file
-    git clone https://github.com/skullernet/q2pro.git ${Q2PRO_DIR}
+    git clone https://github.com/actionquake/q2pro.git ${Q2PRO_DIR}
     cp q2pro_config_mac ${Q2PRO_DIR}/config_mac
 
     ## Patch system.c patch file to make Mac paths work
@@ -139,11 +139,11 @@ EOF
     ## Clone repository, copy config file
     git clone https://github.com/raptor007/aq2-tng ${TNG_DIR}
 
-    ## Apple Silicon M1 needs a special Makefile
+    ## Apple Silicon M1 needs defined to change CC and MACHINE
     if [[ ${ARCH} = "m1" ]]; then
-        cp aq2tng_Makefile_mac_m1 ${TNG_DIR}/source/Makefile
-        export BUILDFOR=M1
-        echo "Copying m1 Makefile successful"
+        #cp aq2tng_Makefile_mac_m1 ${TNG_DIR}/source/Makefile
+        export TNG_BUILD_FOR=M1
+        #echo "Copying m1 Makefile successful"
     fi
 
     ## Build the tng binaries
