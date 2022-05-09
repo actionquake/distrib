@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: skullernet/q2pro
+          repository: actionquake/q2pro
           path: build
 
       # Self-hosted runner has these
@@ -88,7 +88,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: skullernet/q2pro
+          repository: actionquake/q2pro
           path: build
 
       - name: Display version info
@@ -137,7 +137,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: skullernet/q2pro
+          repository: actionquake/q2pro
           path: build
 
       # Self-hosted runner has these
