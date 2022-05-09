@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: actionquake/q2pro
+          refs: aqtion
           path: build
 
       # Self-hosted runner has these
@@ -89,6 +90,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: actionquake/q2pro
+          refs: aqtion
           path: build
 
       - name: Display version info
@@ -138,6 +140,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: actionquake/q2pro
+          refs: aqtion
           path: build
 
       # Self-hosted runner has these

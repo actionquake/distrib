@@ -33,8 +33,9 @@ do
     ## Cleanup /tmp/q2pro if exists
     rm -rf ${Q2PRO_DIR}
 
-    ## Clone repository, copy config file
+    ## Clone repository, checkout aqtion branch, copy config file
     git clone https://github.com/actionquake/q2pro.git ${Q2PRO_DIR}
+    git checkout aqtion
     cp q2pro_config_mac ${Q2PRO_DIR}/config_mac
 
     ## Patch system.c patch file to make Mac paths work

@@ -17,6 +17,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: actionquake/q2pro
+          refs: aqtion
           path: build
 
       - name: Install dependencies
