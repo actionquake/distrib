@@ -14,6 +14,7 @@ CONFIG_PACKETDUP=y
 CFLAGS=-Werror
 
 CONFIG_GAME_BASE=action
+CONFIG_GAME_DEFAULT=action
 
 # Makes the binary executable rather than as a shared library
 LDFLAGS=-no-pie
