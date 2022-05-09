@@ -216,4 +216,4 @@ jobs:
             aqtion-${{github.ref_name}}-mac-universal.dmg
 
       - name: Update Vercel download links
-        run: curl -v -X POST ${{ secrets.DEPLOY_API_URL }}
+        run: curl -X POST ${{ secrets.DEPLOY_API_URL }}
