@@ -76,7 +76,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Q2Pro-Windows.yaml
-          name: q2pro-win-32
+          name: q2pro-win-32-steam
           path: ${{ env.WIN32_DIST_DIR }}/
 
       - name: Download latest Win32 TNG artifacts
@@ -95,7 +95,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Q2Pro-Windows.yaml
-          name: q2pro-win-64
+          name: q2pro-win-64-steam
           path: ${{ env.WIN64_DIST_DIR }}/
 
       - name: Download latest Win64 TNG artifacts
@@ -109,16 +109,16 @@ jobs:
         run: |
           cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN64_DIST_DIR }}/action/
 
-      ## Mac Intel
+      ## Mac Universal
       - name: Download latest Mac Universal artifact
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Mac-Artifacts.yaml
-          name: mac-universal-zip
+          name: mac-universal-zip-steam
 
       - name: Copy action content (Mac Universal)
         run: |
-          unzip aqtion-mac-universal.zip -d ${{ env.MAC_DIST_DIR }}/
+          unzip aqtion-mac-universal-steam.zip -d ${{ env.MAC_DIST_DIR }}/
 
       ## Generate zip files
       # - name: Zip artifacts for Steam deployment

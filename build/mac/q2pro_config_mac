@@ -15,7 +15,7 @@ CONFIG_PACKETDUP=y
 #CONFIG_DEBUG=n
 #CFLAGS=-Werror   # OpenAL-related warnings can be ignored
 CONFIG_GAME_BASE=action
-
+CONFIG_GAME_DEFAULT=action
 
 CONFIG_OPENAL=y
 CONFIG_FIXED_LIBAL=y

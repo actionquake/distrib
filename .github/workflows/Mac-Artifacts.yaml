@@ -29,20 +29,40 @@ jobs:
         run: |
           cp LICENSE build/mac/AQ_Install/AQ.app/Contents/Resources/
 
-      - name: Generate Mac artifacts
+      # Standalone
+      - name: Generate Mac Standalone artifacts
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
-        run: bash package_mac.sh
+        run: bash package_mac.sh standalone
 
-      - name: Generate Universal DMG artifact
+      - name: Generate Universal Standalone DMG artifact
         uses: actions/upload-artifact@v3
         with:
-          name: mac-universal-dmg
+          name: mac-universal-dmg-standalone
           path: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-universal.dmg
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-universal-standalone.dmg
 
-      - name: Generate Universal zip artifact
+      - name: Generate Universal Standalone zip artifact
         uses: actions/upload-artifact@v3
         with:
-          name: mac-universal-zip
+          name: mac-universal-zip-standalone
           path: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-universal.zip
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-universal-standalone.zip
+
+      # Steam
+      - name: Generate Mac Steam artifacts
+        working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
+        run: bash package_mac.sh steam
+
+      - name: Generate Universal Steam DMG artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-universal-dmg-steam
+          path: |
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-universal-steam.dmg
+
+      - name: Generate Universal Steam zip artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-universal-zip-steam
+          path: |
+            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-universal-steam.zip
