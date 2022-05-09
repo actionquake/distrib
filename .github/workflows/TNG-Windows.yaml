@@ -39,7 +39,7 @@ jobs:
         working-directory: build/source
         run: make -j2 V=1 && mv gamex86_64.dll ../gamex86_64.dll
         env:
-          TNG_WIN_ARCH: "WIN64"
+          TNG_BUILD_FOR: "WIN64"
 
       - name: Generate Win64 archive
         uses: actions/upload-artifact@v3
@@ -53,7 +53,7 @@ jobs:
         working-directory: build/source
         run: make clean && make -j2 V=1 && mv gamex86.dll ../gamex86.dll
         env:
-          TNG_WIN_ARCH: "WIN32"
+          TNG_BUILD_FOR: "WIN32"
 
       - name: Generate Win32 archive
         uses: actions/upload-artifact@v3

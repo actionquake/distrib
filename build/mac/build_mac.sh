@@ -142,7 +142,7 @@ EOF
     ## Apple Silicon M1 needs defined to change CC and MACHINE
     if [[ ${ARCH} = "m1" ]]; then
         #cp aq2tng_Makefile_mac_m1 ${TNG_DIR}/source/Makefile
-        export TNG_MAC_ARCH=M1
+        export TNG_BUILD_FOR=M1
         #echo "Copying m1 Makefile successful"
     fi
 
