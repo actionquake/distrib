@@ -152,5 +152,5 @@ jobs:
         with:
           name: linux-server-zip
           path: |
-            aqtion-server-${{github.ref_name}}-linux-amd64.tar.gz
-            aqtion-server-${{github.ref_name}}-linux-arm64.tar.gz
+            aqtion-${{github.ref_name}}-linux-srv-amd64.tar.gz
+            aqtion-${{github.ref_name}}-linux-srv-arm64.tar.gz

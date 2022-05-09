@@ -19,7 +19,7 @@ Should it be determined that assets included in this distribution are indeed unl
 
 ## Requirements
 * A computer built within the last 25 years :)
-* Windows 98, ME, XP, Vista, 7, 8, 10 and probably 11 are all compatible, 32 and 64-bit
+* Windows XP, Vista, 7, 8, 10 and probably 11 are all compatible, 32 and 64-bit
 * Mac OS (Intel and M1)
 * 64-bit x86 and ARM Linux with a video card and sound card
 * Essentially, if you are able to run Quake II, you can run AQtion.  We do not provide direct support for running Quake II as there are over 20 years of forum posts and articles on how to use it, but if you are running into problems with this specific release, contact us

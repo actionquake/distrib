@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: skullernet/q2pro
+          repository: actionquake/q2pro
           path: ${{ env.Q2PRO_DIR }}
 
       - uses: actions/checkout@v3

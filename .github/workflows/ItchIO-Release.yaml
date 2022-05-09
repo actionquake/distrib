@@ -74,7 +74,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Q2Pro-Windows.yaml
-          name: q2pro-win-32
+          name: q2pro-win-32-standalone
           path: ${{ env.WIN32_DIST_DIR }}/
 
       - name: Download latest Win32 TNG artifacts
@@ -93,7 +93,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Q2Pro-Windows.yaml
-          name: q2pro-win-64
+          name: q2pro-win-64-standalone
           path: ${{ env.WIN64_DIST_DIR }}/
 
       - name: Download latest Win64 TNG artifacts
@@ -112,7 +112,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Mac-Artifacts.yaml
-          name: mac-universal-dmg
+          name: mac-universal-dmg-standalone
       
       - name: Butler Push Win64
         run: ./butler push ${{ env.WIN64_DIST_DIR }} aqtion/aqtion:windows-x64 --userversion ${{ github.event.inputs.release_tag }}
@@ -135,6 +135,6 @@ jobs:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
       
       - name: Butler Push Mac Universal
-        run: ./butler push aqtion-mac-universal.dmg aqtion/aqtion:mac-universal --userversion ${{ github.event.inputs.release_tag }}
+        run: ./butler push aqtion-mac-universal-standalone.dmg aqtion/aqtion:mac-universal --userversion ${{ github.event.inputs.release_tag }}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
