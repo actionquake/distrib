@@ -139,11 +139,11 @@ EOF
     ## Clone repository, copy config file
     git clone https://github.com/raptor007/aq2-tng ${TNG_DIR}
 
-    ## Apple Silicon M1 needs a special Makefile
+    ## Apple Silicon M1 needs defined to change CC and MACHINE
     if [[ ${ARCH} = "m1" ]]; then
-        cp aq2tng_Makefile_mac_m1 ${TNG_DIR}/source/Makefile
-        export BUILDFOR=M1
-        echo "Copying m1 Makefile successful"
+        #cp aq2tng_Makefile_mac_m1 ${TNG_DIR}/source/Makefile
+        export TNG_MAC_ARCH=M1
+        #echo "Copying m1 Makefile successful"
     fi
 
     ## Build the tng binaries
