@@ -34,10 +34,8 @@ do
     rm -rf ${Q2PRO_DIR}
 
     ## Clone repository, checkout aqtion branch, copy config file
-    git clone https://github.com/actionquake/q2pro.git ${Q2PRO_DIR}
-    git checkout aqtion
+    git clone -b aqtion https://github.com/actionquake/q2pro.git ${Q2PRO_DIR}
     cp q2pro_config_mac ${Q2PRO_DIR}/config_mac
-
     ## Patch system.c patch file to make Mac paths work
 
     ## This is only needed if you are using the main branch of q2pro ##
@@ -108,7 +106,7 @@ do
     if [ ${PLATFORM} = "Steam" ]; then
         export CONFIG_FILE=config_mac; echo "PLATFORM=Steam" >> config_mac; make -j2 V=1
     else
-        export CONFIG_FILE=config_mac; make -j2 V=1
+        export CONFIG_FILE=config_mac; echo "PLATFORM=Standalone" >> config_mac; make -j2 V=1
     fi
     build_exitcode=$?
 
