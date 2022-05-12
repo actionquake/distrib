@@ -42,7 +42,7 @@ jobs:
       # Standalone
       - name: Build Q2Pro
         working-directory: build
-        run: make strip -j2 V=1
+        run: echo "PLATFORM=Standalone" >> build/.config && make strip -j2 V=1
         env:
           CC: "gcc"
           CONFIG_FILE: ".config"
@@ -64,7 +64,7 @@ jobs:
       # Steam
       - name: Build Q2Pro Steam
         working-directory: build
-        run: make clean && echo "DIST=STEAM" >> .config && make strip -j2 V=1
+        run: make clean && echo "PLATFORM=Steam" >> build/.config && make strip -j2 V=1
         env:
           CC: "gcc"
           CONFIG_FILE: ".config"
@@ -111,6 +111,7 @@ jobs:
       - name: Copy config build files
         run: |
           cp config/build/linux/config_linux64 build/.config
+          echo "PLATFORM=Standalone" >> build/.config
 
       - name: Build Q2Pro
         working-directory: build
@@ -133,57 +134,58 @@ jobs:
             build/q2proded
             build/versions
 
-  linux_x86_64_build_q2pro_steam:
-    #runs-on: ubuntu-latest
-    runs-on: [self-hosted, x86]
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          repository: actionquake/q2pro
-          ref: aqtion
-          path: build
+  # linux_x86_64_build_q2pro_steam:
+  #   #runs-on: ubuntu-latest
+  #   runs-on: [self-hosted, x86]
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         repository: actionquake/q2pro
+  #         ref: aqtion
+  #         path: build
 
-      # Self-hosted runner has these
-      # - name: Install dependencies
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt install -y libsdl2-dev libopenal-dev \
-      #     libpng-dev libjpeg-dev zlib1g-dev mesa-common-dev \
-      #     libcurl4-gnutls-dev
+  #     # Self-hosted runner has these
+  #     # - name: Install dependencies
+  #     #   run: |
+  #     #     sudo apt-get update
+  #     #     sudo apt install -y libsdl2-dev libopenal-dev \
+  #     #     libpng-dev libjpeg-dev zlib1g-dev mesa-common-dev \
+  #     #     libcurl4-gnutls-dev
 
-      - uses: actions/checkout@v3
-        with:
-          repository: actionquake/distrib
-          path: config
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         repository: actionquake/distrib
+  #         path: config
 
-      - name: Get version info for q2pro
-        id: version
-        run: |
-          cp config/build/getversion.sh build/
-          cd build && bash -x getversion.sh q2pro >> versions
+  #     - name: Get version info for q2pro
+  #       id: version
+  #       run: |
+  #         cp config/build/getversion.sh build/
+  #         cd build && bash -x getversion.sh q2pro >> versions
 
-      - name: Copy config build files
-        run: |
-          cp config/build/linux/config_linux64 build/.config
-          cp config/build/q2pro_Makefile build/Makefile
+  #     - name: Copy config build files
+  #       run: |
+  #         cp config/build/linux/config_linux64 build/.config
+  #         cp config/build/q2pro_Makefile build/Makefile
+  #         echo "PLATFORM=Steam" >> build/.config
 
-      - name: Build Q2Pro
-        working-directory: build
-        run: make strip -j2 V=1
-        env:
-          CC: "gcc"
-          CONFIG_FILE: ".config"
+  #     - name: Build Q2Pro
+  #       working-directory: build
+  #       run: make strip -j2 V=1
+  #       env:
+  #         CC: "gcc"
+  #         CONFIG_FILE: ".config"
 
-      - name: Make Q2Pro binaries executable
-        working-directory: build
-        run: |
-          chmod +x q2pro q2proded
+  #     - name: Make Q2Pro binaries executable
+  #       working-directory: build
+  #       run: |
+  #         chmod +x q2pro q2proded
 
-      - name: Generate archive
-        uses: actions/upload-artifact@v3
-        with:
-          name: q2pro-linux-x86_64-steam
-          path: |
-            build/q2pro
-            build/q2proded
-            build/versions
+  #     - name: Generate archive
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: q2pro-linux-x86_64-steam
+  #         path: |
+  #           build/q2pro
+  #           build/q2proded
+  #           build/versions

@@ -24,9 +24,6 @@ endif
 ifndef VER
     VER := $(shell ./version.sh --version)
 endif
-ifndef DIST
-    DIST := STANDALONE
-endif
 
 # Apple M1 build on Intel
 ifeq ($(BUILDFOR),M1)
@@ -122,7 +119,7 @@ BUILD_DEFS := -DCPUSTRING='"$(CPU)"'
 BUILD_DEFS += -DBUILDSTRING='"$(SYS)"'
 
 VER_DEFS := -DREVISION=$(REV)
-VER_DEFS += -DVERSION='"$(VER) $(DIST)"'
+VER_DEFS += -DVERSION='"$(VER)"'
 
 CONFIG_GAME_BASE ?= baseq2
 CONFIG_GAME_DEFAULT ?=
