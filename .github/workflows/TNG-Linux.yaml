@@ -15,7 +15,7 @@ jobs:
         with:
           # repository: aq2-tng/aq2-tng  ## Official repository
           repository: actionquake/aq2-tng
-          ref: 'bots'
+          ref: 'aqtion'
           path: build
 
       - uses: actions/checkout@v3

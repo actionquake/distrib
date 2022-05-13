@@ -62,7 +62,7 @@ jobs:
       # Steam
       - name: Build Q2Pro Steam
         working-directory: build
-        run: make clean && echo "DIST=STEAM" >> .config_windows${{ matrix.suffix }} && make strip -j2 V=1
+        run: make clean && echo "PLATFORM=Steam" >> .config_windows${{ matrix.suffix }} && make strip -j2 V=1
         env:
           CONFIG_FILE: ".config_windows${{ matrix.suffix }}"
 
