@@ -1,5 +1,6 @@
 .otherassets
 .DS_Store
+.vscode
 items.txt
 CHANGELOG*
 tmp
