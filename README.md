@@ -29,6 +29,10 @@ Should it be determined that assets included in this distribution are indeed unl
 
 ## Instructions/Installation
 
+### Steam and Itch.io
+* [Steam](https://store.steampowered.com/app/1978800/AQtion/)
+* [Itch.io](https://aqtion.itch.io/aqtion)
+
 ### RTX compatibility
 If you wish to use your RTX card with Quake II
 1. Install the RTX package for your platform [NVIDIA/Q2RTX](https://github.com/NVIDIA/Q2RTX/releases)
@@ -39,11 +43,9 @@ If you wish to use your RTX card with Quake II
 1. To start Quake II under the `action` mode, use the following startup parameters: `+set game action`
 1. ***Note:*** Config files from your `baseq2` directory will still execute, so there may be some unexpected binds or cvars set
 
-### Steam and Itch.io
-1. Search for `aqtion` in the Steam Store or Itch.io search bar
-1. Install and Play!
+---
 
-### New/Fresh Standalone Install
+### Standalone Install
 #### Mac (Intel and M1)
 1. Install [Brew](https://brew.sh/) if you do not already have it
 1. Install [OpenAL](https://formulae.brew.sh/formula/openal-soft) and [SDL2](https://formulae.brew.sh/formula/sdl2) if you do not already have it
