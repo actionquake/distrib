@@ -1,4 +1,4 @@
-name: Build
+name: Q2RTX Build
 
 # on:
 #   push:
@@ -24,8 +24,8 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v2
-      repository: NVIDIA/Q2RTX
       with:
+        repository: actionquake/Q2RTX
         submodules: true
       
     - name: Configure Win64
@@ -54,8 +54,8 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v2
-      repository: NVIDIA/Q2RTX
       with:
+        repository: actionquake/Q2RTX
         submodules: true
 
     - name: Install prerequisites
