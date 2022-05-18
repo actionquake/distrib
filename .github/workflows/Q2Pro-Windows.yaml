@@ -62,10 +62,14 @@ jobs:
             build/versions
 
       # Standalone
+      ## sed commands are for removing home path (standalone doesn't need it)
+      ## and to remove the Platform from the previous build
+      #          sed -i '/CONFIG_PATH_HOME/d' .config_windows*
+
       - name: Build Q2Pro Standalone
         working-directory: build
         run: |
-          sed -i '/CONFIG_PATH_HOME/d' .config_windows*
+          sed -i '/PLATFORM/d' .config_windows*
           make clean
           make strip -j2 V=1
         env:
