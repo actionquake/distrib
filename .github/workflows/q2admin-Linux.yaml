@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: m4son/q2admin
+          repository: actionquake/q2admin
           path: build
 
       - name: Change references from baseq2 to action and rename config.ex.lua
@@ -49,7 +49,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: m4son/q2admin
+          repository: actionquake/q2admin
           path: build
 
       - name: Change references from baseq2 to action and rename config.ex.lua
