@@ -21,7 +21,7 @@ env:
   GIT_TAG: ${{github.ref_name}}
 
 jobs:      
-  linux_windows_release:
+  quick_release:
     runs-on: ubuntu-latest
     #runs-on: self-hosted
     steps:
