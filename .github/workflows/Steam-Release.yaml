@@ -7,10 +7,7 @@ name: Steam Release
 
 on:
   workflow_dispatch:
-    inputs:
-      release_tag:
-        description: "Release version tag"
-        required: true
+
 
 env:
   CFG_WORKING_DIR: "config"
