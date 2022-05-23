@@ -6,7 +6,7 @@ on:
       github_repo:
         description: "TNG Github repo"
         required: true
-        default: raptor007/aq2-tng
+        default: actionquake/aq2-tng
       github_branch:
         description: "TNG Github branch"
         required: true
