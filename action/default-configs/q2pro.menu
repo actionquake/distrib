@@ -113,10 +113,13 @@ end
 begin playnow
     title "Play Now"
     action "Deathmatch - Free For All" "connect dm1.useast.playnow.aqtiongame.com:27920"
+    blank
     action "Team Deathmatch" "connect tdm1.useast.playnow.aqtiongame.com:27930"
     blank
     action "Team Play" "connect tp1.useast.playnow.aqtiongame.com:27910"
+    blank
     action "3 Team" "connect 3team1.useast.playnow.aqtiongame.com:27940"
+    blank
     action "Capture the Flag" "connect 13.49.64.70:27950"
 end
 
