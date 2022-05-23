@@ -59,6 +59,13 @@ jobs:
           workflow: TNG-Windows.yaml
           name: tng-win-64
           path: ${{ env.CFG_WORKING_DIR }}/action/
+        
+      - name: Zip configs to pkz
+        working-directory: ${{ env.CFG_WORKING_DIR }}
+        run: |
+          cd action/default-configs/
+          zip -r ../0_default-configs.pkz * && cd ..
+          rm -rf default-configs/
 
       - name: Generate dist files
         run: |
