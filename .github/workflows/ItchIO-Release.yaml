@@ -55,6 +55,13 @@ jobs:
           mkdir -p ${{ env.WIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN32_DIST_DIR }}/action
 
+      - name: Zip configs to pkz
+        working-directory: ${{ env.CFG_WORKING_DIR }}
+        run: |
+          cd action/default-configs/
+          zip -r ../0_default-configs.pkz * && cd ..
+          rm -rf default-configs/
+
       ## Linux x86_64
       - name: Download latest Linux amd64 deb artifact
         uses: dawidd6/action-download-artifact@v2

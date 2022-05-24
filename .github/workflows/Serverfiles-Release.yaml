@@ -6,7 +6,7 @@ on:
       github_repo:
         description: "TNG Github repo"
         required: true
-        default: raptor007/aq2-tng
+        default: actionquake/aq2-tng
       github_branch:
         description: "TNG Github branch"
         required: true
@@ -61,6 +61,13 @@ jobs:
         run: |
           mkdir -p ${{ env.LIN64_DIST_DIR }}/action
           mkdir -p ${{ env.LINARM64_DIST_DIR }}/action
+
+      - name: Zip configs to pkz
+        working-directory: ${{ env.CFG_WORKING_DIR }}
+        run: |
+          cd action/default-configs/
+          zip -r ../0_default-configs.pkz * && cd ..
+          rm -rf default-configs/
 
       ## Get all artifacts
       - name: Download latest Linux x86_64 Q2Pro artifacts

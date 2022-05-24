@@ -7,10 +7,7 @@ name: Steam Release
 
 on:
   workflow_dispatch:
-    inputs:
-      release_tag:
-        description: "Release version tag"
-        required: true
+
 
 env:
   CFG_WORKING_DIR: "config"
@@ -47,6 +44,13 @@ jobs:
           mkdir -p ${{ env.WIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN32_DIST_DIR }}/action
           mkdir -p ${{ env.MAC_DIST_DIR }}
+
+      - name: Zip configs to pkz
+        working-directory: ${{ env.CFG_WORKING_DIR }}
+        run: |
+          cd action/default-configs/
+          zip -r ../0_default-configs.pkz * && cd ..
+          rm -rf default-configs/
 
       ## Linux x86_64
       - name: Download latest Linux x86_64 Q2Pro artifacts

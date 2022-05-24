@@ -21,7 +21,7 @@ env:
   GIT_TAG: ${{github.ref_name}}
 
 jobs:      
-  linux_windows_release:
+  quick_release:
     runs-on: ubuntu-latest
     #runs-on: self-hosted
     steps:
@@ -49,6 +49,13 @@ jobs:
           mkdir -p ${{ env.LIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN32_DIST_DIR }}/action
+      
+      - name: Zip configs to pkz
+        working-directory: ${{ env.CFG_WORKING_DIR }}
+        run: |
+          cd action/default-configs/
+          zip -r ../0_default-configs.pkz * && cd ..
+          rm -rf default-configs/
 
       ## Linux x86_64
       - name: Download latest Linux x86_64 Q2Pro artifacts
