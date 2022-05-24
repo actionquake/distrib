@@ -60,7 +60,7 @@ color disabled #7f7f7f
 
 begin main
     title "Main Menu"`
-    action " Discord - https://discord.gg/aq2world" pushmenu credits
+    action " Discord - https://discord.aq2world.com" pushmenu credits
     blank
     action " Play Online " pushmenu playonline
     action " Play Offline " pushmenu playoffline
