@@ -112,15 +112,17 @@ end
 
 begin playnow
     title "Play Now"
-    action "Deathmatch - Free For All" "connect dm1.useast.playnow.aqtiongame.com:27920"
+    action "Deathmatch - Free For All" "connect qj.aq2world.com:27901"
     blank
-    action "Team Deathmatch" "connect tdm1.useast.playnow.aqtiongame.com:27930"
+    action "Team Deathmatch" "connect qj.aq2world.com:27902"
     blank
-    action "Team Play" "connect tp1.useast.playnow.aqtiongame.com:27910"
+    action "Team Play" "connect qj.aq2world.com:27903"
     blank
-    action "3 Team" "connect 3team1.useast.playnow.aqtiongame.com:27940"
+    action "3 Team" "connect qj.aq2world.com:27904"
     blank
-    action "Capture the Flag" "connect 13.49.64.70:27950"
+    action "Capture the Flag" "qj.aq2world.com:27905"
+    blank
+    action "Espionage" "qj.aq2world.com:27906"
 end
 
 begin bots
