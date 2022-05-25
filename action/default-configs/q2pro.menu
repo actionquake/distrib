@@ -92,9 +92,9 @@ end
 
 begin playonline
     title "Play Online"
-    action " Play Now!" pushmenu playnow
+    action " Play Now! " pushmenu playnow
     blank
-    action " Browse Official Servers " pushmenu servers "https://raw.githubusercontent.com/darkshade9/aq2world/master/docs/official/official-servers.txt"
+    //action " Browse Official Servers " pushmenu servers "https://raw.githubusercontent.com/darkshade9/aq2world/master/docs/official/official-servers.txt"
     action " Browse All Servers " pushmenu servers "http://q2servers.com/?g=action&raw=1"
     blank
     action " Browse Favorite Servers " pushmenu servers "favorites://" "file:///servers.lst"

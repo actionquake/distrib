@@ -5,6 +5,8 @@
 ##
 ### If you're trying to compile a Mac version, use the `build_mac.sh` script
 ##
+### Do not run this locally, you need to package the 0_default-configs.pkz in action/ first
+##
 
 DISTRIB=$1
 CURRENT_DIR=$(pwd)
