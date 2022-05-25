@@ -114,9 +114,9 @@ begin playnow
     title "Play Now"
     action "Team Play" "connect qj.aq2world.com:27901"
     blank
-    action "Team Deathmatch" "connect qj.aq2world.com:27902"
+    action "Deathmatch - Free For All" "connect qj.aq2world.com:27902"
     blank
-    action "Deathmatch - Free For All" "connect qj.aq2world.com:27903"
+    action "Team Deathmatch" "connect qj.aq2world.com:27903"
     blank
     action "3 Team" "connect qj.aq2world.com:27904"
     blank
