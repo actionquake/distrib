@@ -271,6 +271,9 @@ begin msettings
     blank
     pairs "display round stats" stats_mode disabled 0 "end of round" 1 "end of map" 2
     toggle "automatic demo recording" autorecord
+    blank
+    field "Bandage message" bandage[say]
+    field "Frag message" frag[say]
 end
 
 begin gsettings
