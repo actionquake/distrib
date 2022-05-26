@@ -351,7 +351,7 @@ begin bindings
     bind "switch to previous weapon" weapprev
     bind "walk (quiet movement)" +speed
     blank
-    bind "show scores" cmd help
+    bind "show scores" score
     bind "show stats" stats list
     bind "main menu" inven
     bind "voting menu" menu
