@@ -271,6 +271,12 @@ begin msettings
     blank
     pairs "display round stats" stats_mode disabled 0 "end of round" 1 "end of map" 2
     toggle "automatic demo recording" autorecord
+    blank
+    field "Bandage message" bandage[say]
+    field "Frag message" frag[say]
+    blank
+    toggle "Disable [Windows key]" win_disablewinkey
+    toggle "Disable [Alt]-[Tab]" win_noalttab
 end
 
 begin gsettings
@@ -348,7 +354,7 @@ begin bindings
     bind "switch to previous weapon" weapprev
     bind "walk (quiet movement)" +speed
     blank
-    bind "show scores" cmd help
+    bind "show scores" score
     bind "show stats" stats list
     bind "main menu" inven
     bind "voting menu" menu
