@@ -274,6 +274,9 @@ begin msettings
     blank
     field "Bandage message" bandage[say]
     field "Frag message" frag[say]
+    blank
+    toggle "Disable [Windows key]" win_disablewinkey
+    toggle "Disable [Alt]-[Tab]" win_noalttab
 end
 
 begin gsettings
