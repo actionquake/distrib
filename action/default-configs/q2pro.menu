@@ -227,7 +227,6 @@ begin video
     toggle "vertical sync" gl_swapinterval
     range "gamma" vid_gamma 1.3 0.3
     range "brightness" gl_brightness 0 0.10
-    field "field of view" fov
     blank
     pairs "hud scaling" scr_scale auto 0 1x 1 2x 2
     pairs "menu scaling" ui_scale auto 0 1x 1 2x 2
@@ -272,6 +271,12 @@ begin msettings
     blank
     pairs "display round stats" stats_mode disabled 0 "end of round" 1 "end of map" 2
     toggle "automatic demo recording" autorecord
+    blank
+    field "Bandage message" bandage[say]
+    field "Frag message" frag[say]
+    blank
+    toggle "Disable [Windows key]" win_disablewinkey
+    toggle "Disable [Alt]-[Tab]" win_noalttab
 end
 
 begin gsettings
@@ -349,7 +354,7 @@ begin bindings
     bind "switch to previous weapon" weapprev
     bind "walk (quiet movement)" +speed
     blank
-    bind "show scores" cmd help
+    bind "show scores" score
     bind "show stats" stats list
     bind "main menu" inven
     bind "voting menu" menu
