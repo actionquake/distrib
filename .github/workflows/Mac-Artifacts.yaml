@@ -29,6 +29,13 @@ jobs:
         run: |
           cp LICENSE build/mac/AQ_Install/AQ.app/Contents/Resources/
 
+      - name: Zip configs to pkz
+        working-directory: ${{ env.CFG_WORKING_DIR }}
+        run: |
+          cd action/default-configs/
+          zip -r ../0_default-configs.pkz * && cd ..
+          rm -rf default-configs/
+
       # Standalone
       - name: Generate Mac Standalone artifacts
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
