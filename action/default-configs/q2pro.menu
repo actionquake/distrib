@@ -272,11 +272,12 @@ begin msettings
     pairs "display round stats" stats_mode disabled 0 "end of round" 1 "end of map" 2
     toggle "automatic demo recording" autorecord
     blank
-    field "Bandage message" bandage[say]
-    field "Frag message" frag[say]
+    pairs "bandage radio team message" bandage[radio] "disabled" disabled "I'm hit" im_hit "Cover me" cover "Taking fire..." taking_f
+    field "bandage team message" bandage[say]
+    field "frag team message" roundkill[say]
     blank
-    toggle "Disable [Windows key]" win_disablewinkey
-    toggle "Disable [Alt]-[Tab]" win_noalttab
+    toggle "disable [Windows key]" win_disablewinkey
+    toggle "disable [Alt]-[Tab]" win_noalttab
 end
 
 begin gsettings
