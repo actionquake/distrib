@@ -19,12 +19,13 @@ Great!  Hosting a server is a great way to contribute to the community and helps
 * A recent or latest version of Docker and Docker-Compose
 * Reasonable bandwidth (10MBit+)
 * Ability to open UDP port 27910 (and more if hosting multiple) to the Internet
-
 * Suggested providers:
-    * DigitalOcean (relatively inexpensive)
-    * AWS (several dozen locations)
+    * [DigitalOcean](https://www.digitalocean.com) (relatively inexpensive)
+    * [AWS](https://aws.amazon.com/) (several dozen locations)
+    * [Hetzner](https://www.hetzner.com/cloud)
+    * [OVH](https://www.ovhcloud.com/en/public-cloud/compute/)
     * Your favorite VPS
-
+* **Keep in mind that these servers require very few resources; a few dozen megabytes of RAM and very little CPU, and less than 512MB of disk space just for AQtion, even with a _ton_ of maps.**
 ----
 ### Step by step
 
