@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  tp1:
+    container_name: tp1
+    image: aqtiongame/server:v3
+    ports:
+      - "27910:27910/udp"
+    stdin_open: true
+    tty: true
+    restart: on-failure:5
+    env_file:
+     - ./tp1.env
+    environment:
+     - PORT=27910
+     - TEAM_1_NAME=Red Rockets
+     - TEAM_2_NAME=Blue Blazes
+     - TEAM_3_NAME=Yellow Bellies
+     - TEAM_1_SKIN=male/ctf_r
+     - TEAM_2_SKIN=male/ctf_b
+     - TEAM_3_SKIN=male/ctf_y
+     - HOSTNAME=[TP1] Rojo v Azul
+     - MAXCLIENTS=11
+     - RCON_PASSWORD=replaceme!!
+     - TIMELIMIT=20
+     - FRAGLIMIT=0
+     - ROUNDLIMIT=12
+     - FULLMAPS=FALSE
+     - ROTATION=actcity2,wizs,time,teamjungle
+     - MAP=teamjungle
+  volumes:
+     - ./tp1.motd:/aq2server/action/motd.txt:ro
+
+volumes:
+  maps:
+    volumes:
+      - maps:/aq2server/action/maps
