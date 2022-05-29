@@ -272,12 +272,11 @@ begin msettings
     pairs "display round stats" stats_mode disabled 0 "end of round" 1 "end of map" 2
     toggle "automatic demo recording" autorecord
     blank
-    pairs "bandage radio team message" bandage[radio] "disabled" disabled "I'm hit" im_hit "Cover me" cover "Taking fire..." taking_f
-    field "bandage team message" bandage[say]
-    field "frag team message" roundkill[say]
+    field "Bandage message" bandage[say]
+    field "Frag message" frag[say]
     blank
-    toggle "disable [Windows key]" win_disablewinkey
-    toggle "disable [Alt]-[Tab]" win_noalttab
+    toggle "Disable [Windows key]" win_disablewinkey
+    toggle "Disable [Alt]-[Tab]" win_noalttab
 end
 
 begin gsettings
@@ -312,15 +311,20 @@ begin mouse
         "cross" "1" \
         "full cross" "2" \
         "dotted cross" "3" \
-        "big cross" "4" \
-        "dot" "5" \
-        "big dot" "6" \
+        "hollow cross" "4" \
+        "boxed cross" "5" \
+        "hollow dot" "6" \
+        "dot" "7" \
+        "square dot" "8" \
+        "dot + cross" "9" \
+        "big cross" "10" \
         "double cross" "11" \
-        "double full" "12" \
-        "double dotted" "13" \
-        "double big" "14" \
-        "double dot" "15" \
-        "double big dot" "16"
+        "bordered cross" "12" \
+        "big boxed cross" "13" \
+        "big hollow dot" "14" \
+        "big dot" "15" \
+        "big square dot" "16" \
+        "three-colored cross" "17"
     range "crosshair red" ch_red 0.0 1.0
     range "crosshair green" ch_green 0.0 1.0
     range "crosshair blue" ch_blue 0.0 1.0
