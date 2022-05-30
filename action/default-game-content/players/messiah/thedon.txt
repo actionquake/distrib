@@ -1,0 +1,48 @@
+12/23/98
+
+================================================================
+
+Author			: Chris "Bubba" Morris		
+
+Skin Name              	: The Don
+
+Model Name		: Shotgun Messiah
+
+Installation directory  : quake2/baseq2/players/messiah
+
+Files:			: Thedon.txt Thedon.pcx Thedon_i.pcx
+
+Messiah Model 
+and Animation by	: Mike "Happy Slappy" McMillen	
+
+Email Address           : (Bubba) 		hollschris@sprynet.com  
+
+Website Address         : n/a
+
+Skin description       	: This is your classic hit man skin.  The guys at Shotgun Messiah 
+			  were kind enough to make this BAMF model that lent itself so well
+			  to this skin.  
+
+SPECIAL THANKS		: Thanks to SM for providing the model and base skin (Blade) for this
+			  holiday project of mine.  Slaine, I appreciate the use of Blades coat.
+			  It is perfect for this skin.
+			
+			  And a very special thanks to the guys at AQ for providing hours of 
+			  enjoyment. 
+			
+			  Oh, Acadian, thanks for the playtesting.
+
+* Play Information *
+
+New Sounds              : NO 
+
+CTF Skins               : NO
+
+VWEP Support            : NO 
+
+
+
+* Copyright / Permissions *
+QUAKE(R) and QUAKE II(R) are registered trademarks of id Software, Inc.
+This skin is not to be distributed as part of any
+commercial product.

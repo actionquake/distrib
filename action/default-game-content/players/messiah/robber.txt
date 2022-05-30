@@ -1,0 +1,48 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ACTION QUAKE2 SKIN : "Robber" for the Messiah                "03/14/99" 	       				
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Skin:		Robber
+
+PPM:		Messiah
+
+Author:		[-ZeUs0-]
+
+Release date:	03/14/99
+
+E-Mail:		zeus0@telefragged.com
+
+URL(s):		http://aq2og.telefragged.com
+		
+		
+Files:		Robber.txt, robber.pcx, robber_i.pcx
+
+Instructions:	Unzip all these files to your quake2/action/players/messiah
+                directory.  (IF, that is, you're playin Action Quake) 
+		
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Important: 	This skin is free to use by anyone in any game. I made this skin with the 
+ 		intent on using it for Action Quake (ie. http://action.telefragged.com/)
+		but it can be used wherever the model is used. 
+
+Thanks:		Id software, The A-Team (oop can't call em that!!)
+
+DISCLAIMER:	Use this skin as-is, ... do NOT make any modifications to this skin, nor 
+ 		should this be allowed to be a part of any type of commercially sold soft-
+		ware (unless you notify me).  This is FREE. This skin CAN however be part of any 
+		d/l skinpak, as long as this txt file is with it. 
+
+Notes:		My second skin. This was requested by someone on http://guild.telefragged.com
+		but also by kramed of the AQ2OG. Here ya go!
+---------------------------------------------------------------------------------------
+
+PS:		Please notify me if this skin is reviewed or added to a gallery or archive.
+		Want to use these skins for your clan? Please notify me.
+		
+		I ALSO RUN A SERVER FOR WHICH THIS SKIN AND ANY OTHERS I MIGHT MAKE WILL BE RUN.
+		
+---------------------------------------------------------------------------------------
+
+

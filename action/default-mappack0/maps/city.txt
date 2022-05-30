@@ -1,0 +1,81 @@
+
+98/12/09
+
+===========================================================================================
+Title                   : THE CITY
+Filename                : CITY.BSP
+Game			: AQ2
+Author                  : MATS "RUSKPRICK" HOLM
+Email Address           : mats.holm@mbox307.swipnet.se
+Web Address             : ---
+Description             : some houses, a street, tv, stereo, lights, camera... 
+Additional Credits to   : ID SOFTWARE, A GREAT GAME
+                          WALLY, A VERY GOOD TEXTURE-EDITOR
+                          COOL EDIT PRO, NICE WAV EDITOR
+                          PSP, BEST OF THE BEST
+                          QOOLE, EASY EDITOR WITH NICE BUGS, STILL THE BEST ONE
+                          DARKMISS, FOR THE SKY
+                          PAUL GÖTENMARK - PG SUPPORT, FOR HIS SUPPORT
+                          (gå till http://home5.swipnet.se/~w-58080/
+                           för billiga datordelar)
+
+===========================================================================================
+
+* egoist information *   
+
+other maps by me        : (WARLOCKS LAIR)             warlock.bsp     "who knows?..."
+                        : (A TOWEL FOR TUBA)          thetowel.bsp    "bathhouse"
+                        : (THE SEARCH FOR WULFHERE)   wulfhere.bsp    "ancient tempel"
+                          these maps can be found at "ftp.cdrom.com"
+
+                        : (WHEN I KILLED THE TEACHER) teacher.bsp     "school"
+
+===========================================================================================
+
+* Play Information *
+
+Single Player           : NO
+Cooperative             : NO
+Deathmatch              : 1-64 
+Teamplay                : YES
+Difficulty Settings     : NO
+New Sounds              : YES
+New Graphics            : YES
+
+
+===========================================================================================
+
+* Construction *
+
+Base                    : SURE
+Editor(s) used          : QOOLE
+Known Bugs              : NO
+Build Time              : OVER A MONTH
+Compile Time		: 1 HOUR
+Notes:                  : NO
+
+===========================================================================================
+
+*installation*
+
+unzip the all the files to quake2\action
+
+(if something goes wrong...)
+
+the wal-files : quake2\action\textures\	city\
+the pcx-files : quake2\action\env\
+the tga-files : quake2\action\env\
+the bsp-file  : quake2\action\maps\
+the wav-files : quake2\action\sound\city\
+
+===========================================================================================
+
+
+* Copyright / Permissions *
+
+dont do anything to my map you shouldnt do, but...
+You can USE all these textures and sounds for your own quake level WITHOUT my permission,
+DONT CHANGE THEM... PLEASE
+ 
+
+
