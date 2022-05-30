@@ -30,10 +30,10 @@ jobs:
           cp LICENSE build/mac/AQ_Install/AQ.app/Contents/Resources/
 
       - name: Zip game contents to pkz
-        working-directory: ${{ env.CFG_WORKING_DIR }}
+        working-directory: ${{ env.CFG_WORKING_DIR }}/action
         run: |
           for makepkz in default-game-content default-mappack0 default-mappack1 default-pics default-sounds; do
-            cd action/${makepkz}/
+            cd ${makepkz}
             zip -r ../0_${makepkz}.pkz * && cd ..
             rm -rf ${makepkz}/
           done
