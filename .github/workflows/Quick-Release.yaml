@@ -50,12 +50,14 @@ jobs:
           mkdir -p ${{ env.WIN64_DIST_DIR }}/action
           mkdir -p ${{ env.WIN32_DIST_DIR }}/action
       
-      - name: Zip configs to pkz
+      - name: Zip game content to pkz
         working-directory: ${{ env.CFG_WORKING_DIR }}
         run: |
-          cd action/default-configs/
-          zip -r ../0_default-configs.pkz * && cd ..
-          rm -rf default-configs/
+          for makepkz in default-game-content default-mappack0 default-mappack1 default-pics default-sounds; do
+            cd action/${makepkz}/
+            zip -r ../0_${makepkz}.pkz * && cd ..
+            rm -rf ${makepkz}/
+          done
 
       ## Linux x86_64
       - name: Download latest Linux x86_64 Q2Pro artifacts

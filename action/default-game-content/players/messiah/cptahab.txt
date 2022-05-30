@@ -1,0 +1,49 @@
+01/17/1999
+
+================================================================
+
+Author			: Chris "Bubba" Morris		
+
+Skin Name              	: CptAhab
+
+Model Name		: Shotgun Messiah
+
+Installation directory  : quake2/baseq2/players/messiah
+
+Files:			: CptAhab.txt CptAhab.pcx CptAhab_i.pcx
+
+Messiah Model 
+and Animation by	: Mike "Happy Slappy" McMillen	
+
+Email Address           : (Bubba) 		hollschris@sprynet.com  
+
+Website Address         : n/a
+
+Skin description       	: This is your classic fisherman.  (Jaws is an action movie, no?) 
+  			  
+
+SPECIAL THANKS		: Thanks to SM for providing the model and base skin (Messiah) for this
+			  project of mine.  Slaine, I appreciate the use of Messiah's jeans
+			  and coat.  It is perfect for this skin.
+			  
+			  Thanks to the Norwegian Whalers for the excellent server and
+			  inspiration for this skin. 
+			
+			  Once again, a very special thanks to the guys at AQ 
+			  for providing hours of enjoyment.	   
+
+* Play Information *
+
+New Sounds              : NO, but I'd love to have that ship captain from the Simpsons
+			  voice for the sound clips.  Arrrr.
+
+CTF Skins               : NO
+
+VWEP Support            : NO 
+
+
+
+* Copyright / Permissions *
+QUAKE(R) and QUAKE II(R) are registered trademarks of id Software, Inc.
+This skin is not to be distributed as part of any
+commercial product.

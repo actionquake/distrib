@@ -1,0 +1,56 @@
+=============================================================================
+* General Info *
+
+Title                   : City Of Lost Heaven 3: Present Days
+
+Archive                 : retro3.zip
+
+Release Date (DD/MM/YY) : 19/04/05
+
+Author                  : Rinat Khalekov (aka Beavisss)
+Email Address           : beavisss@quake.ru
+
+Description             : Map for Action Quake (http://aq2.action-web.net).
+			
+			  Retextured Retro2 with some upgrades of bsp.
+			  
+Installation            : Unzip retro3.zip into the root of your Action Quake
+                          game folder (Quake2/action), with Subdirectories
+                          enabled (!)
+                                                    
+Additional Credits to   : Energizer for few textures and advices
+                          Wizardext for textures.
+
+=============================================================================
+* Play Info *
+
+Game                      : Action Quake (Quake2)
+Single player             : Yes (only for looking around)
+Teamplay                  : Yes
+Deathmatch 		  : Yes
+Suggested Player Load	  : 2-8
+
+New Graphics              : Yes
+New Music                 : No
+New Sounds                : No
+New Sky			  : Yes
+DLL                       : No
+Locations File		  : No
+
+* Construction Info *
+Editors Used		  : QERadiant, Wally, Photoshop 7, ArghRad, 
+			    Geoffrey DeWan's QBSP3 and QVIS3
+
+Known Bugs                : None.
+
+
+* Copyright / Permissions *
+
+Authors may NOT use this level as a base to build additional levels. 
+
+Almost all textures were remade by me. You may distribute the archive retro3.zip in 
+whatever way you see fit as long as the archive remains intact and 
+is distributed freely. It is strictly prohibited to distribute any
+of the files in this archive commercially!
+
+Enjoy.
