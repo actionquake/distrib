@@ -72,6 +72,17 @@ begin main
     action " Quit" quit
 end
 
+begin game
+    background #0000ff20
+    style --compact
+    action " Play Online " pushmenu playonline 
+    action " Browse Demos " pushmenu demos
+    blank
+    action " Settings" pushmenu settings
+    blank
+    action " Disconnect" disconnect
+end
+
 begin credits
     title "Credits"
     action "For Quake II: id Software (https://www.idsoftware.com)" ""
@@ -272,6 +283,7 @@ begin msettings
     pairs "display round stats" stats_mode disabled 0 "end of round" 1 "end of map" 2
     toggle "automatic demo recording" autorecord
     blank
+    toggle "bandage sound effect" cl_bandagesound
     pairs "bandage radio team message" bandage[radio] "disabled" disabled "I'm hit" im_hit "Cover me" cover "Taking fire..." taking_f
     field "bandage team message" bandage[say]
     field "frag team message" roundkill[say]

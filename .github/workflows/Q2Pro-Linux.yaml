@@ -3,6 +3,7 @@ name: Linux Q2Pro (64-bit)
 on:
   push:
     branches: ci
+  workflow_dispatch:
 
 jobs:
   linux_x86_64_build_q2pro:

@@ -3,6 +3,7 @@ name: Linux TNG (64-bit)
 on:
   push:
     branches: ci
+  workflow_dispatch:
 
 # on:
 #   workflow_dispatch:

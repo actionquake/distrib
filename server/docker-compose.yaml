@@ -28,10 +28,9 @@ services:
      - FULLMAPS=FALSE
      - ROTATION=actcity2,wizs,time,teamjungle
      - MAP=teamjungle
-  volumes:
+    volumes:
      - ./tp1.motd:/aq2server/action/motd.txt:ro
+     - maps:/aq2server/action/maps
 
 volumes:
   maps:
-    volumes:
-      - maps:/aq2server/action/maps
