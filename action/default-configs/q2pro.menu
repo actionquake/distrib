@@ -139,7 +139,7 @@ end
 begin bots
     title "Play with Bots"
     action "Deathmatch - Free For All" pushmenu dm_botmenu
-	action "Team Deathmatch" pushmenu tdm_botmenu
+    action "Team Deathmatch" pushmenu tdm_botmenu
     action "Teamplay" pushmenu tp_botmenu
 end
 
@@ -318,25 +318,50 @@ begin mouse
     title "Mouse Setup"
     pairs "invert mouse" m_pitch "no" "0.022" "yes" "-0.022"
     field "sensitivity" sensitivity
-    toggle "FOV sensitivity scaling" m_autosens
+    toggle "auto scale zoom sensitivity" m_autosens
     blank
-    pairs "crosshair" crosshair \
-        "cross" "1" \
-        "full cross" "2" \
-        "dotted cross" "3" \
-        "big cross" "4" \
-        "dot" "5" \
-        "big dot" "6" \
-        "double cross" "11" \
-        "double full" "12" \
-        "double dotted" "13" \
-        "double big" "14" \
-        "double dot" "15" \
-        "double big dot" "16"
+    action "choose crosshair" "pushmenu chsetup1"
+    blank
     range "crosshair red" ch_red 0.0 1.0
     range "crosshair green" ch_green 0.0 1.0
     range "crosshair blue" ch_blue 0.0 1.0
     range "crosshair alpha" ch_alpha 0.0 1.0
+end
+
+begin chsetup1
+    title "Select crosshair"
+    bitmap "ch1" "crosshair 1;popmenu;"
+    bitmap "ch2" "crosshair 2;popmenu;"
+    bitmap "ch3" "crosshair 3;popmenu;"
+    bitmap "ch4" "crosshair 4;popmenu"
+    bitmap "ch5" "crosshair 5;popmenu;"
+    bitmap "ch6" "crosshair 6;popmenu;"
+    bitmap "ch7" "crosshair 7;popmenu;"
+    bitmap "ch8" "crosshair 8;popmenu;"
+    bitmap "ch9" "crosshair 9;popmenu;"
+    bitmap "ch10" "crosshair 10;popmenu;"
+    pairs --status "Size of your crosshair" "Crosshair size" ch_scale "0.25" 0.25 "0.5" 0.5 "1" 1 "1.5" 1.5 "2" 2 "3" 3
+    blank
+    action "next page" "pushmenu chsetup2"
+    action "back" "forcemenuoff;pushmenu settings;pushmenu mouse;"
+end
+
+begin chsetup2
+    title "Select crosshair"
+    bitmap "ch11" "crosshair 11;popmenu;popmenu;"
+    bitmap "ch12" "crosshair 12;popmenu;popmenu;"
+    bitmap "ch13" "crosshair 13;popmenu;popmenu;"
+    bitmap "ch14" "crosshair 14;popmenu;popmenu;"
+    bitmap "ch15" "crosshair 15;popmenu;popmenu;"
+    bitmap "ch16" "crosshair 16;popmenu;popmenu;"
+    bitmap "ch17" "crosshair 17;popmenu;popmenu;"
+    bitmap "ch18" "crosshair 18;popmenu;popmenu;"
+    bitmap "ch19" "crosshair 19;popmenu;popmenu;"
+    bitmap "ch20" "crosshair 20;popmenu;popmenu;"
+    pairs --status "Size of your crosshair" "Crosshair size" ch_scale "0.25" 0.25 "0.5" 0.5 "1" 1 "1.5" 1.5 "2" 2 "3" 3
+    blank
+    action "previous page" "pushmenu chsetup1"
+    action "Back" "forcemenuoff;pushmenu settings;pushmenu mouse;"
 end
 
 begin sound
