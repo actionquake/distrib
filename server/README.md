@@ -29,7 +29,7 @@ Great!  Hosting a server is a great way to contribute to the community and helps
 ----
 ### Step by step
 
-1. If you have docker and docker-compose already, skip to step X
+1. If you have docker and docker-compose already, skip to step 3
 1. Upon logging into the VPS/instance (ssh, console or otherwise) gaining access to the shell, install docker and docker-compose
     * Ubuntu: https://docs.docker.com/engine/install/ubuntu/
     * Other: https://docs.docker.com/engine/install/
@@ -37,8 +37,6 @@ Great!  Hosting a server is a great way to contribute to the community and helps
     * https://docs.docker.com/engine/install/linux-postinstall/
 1. Create a directory to store your configs and go to that directory
     * `mkdir -p /opt/aqtion && cd /opt/aqtion`
-1. Pull the latest AQtion Server image
-    * `docker pull aqtiongame/server:v3`
 1. Download the example files `docker-compose.yaml`, `tp1.env` and `tp1.motd` files
     * `for file in docker-compose.yaml tp1.env tp1.motd; do wget https://raw.githubusercontent.com/actionquake/distrib/main/server/${file}; done`
 1. Edit the files downloaded to your liking, changes the team names, skins, hostname, motd.

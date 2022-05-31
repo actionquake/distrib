@@ -1,0 +1,59 @@
+=============================================================================
+* General Info *
+
+Title                   : Serebryanka
+
+Archive                 : Serebryanka.zip
+
+Release Date (DD/MM/YY) : 15/02/05
+
+Author                  : Khalekov Rinat (aka Beavisss)
+Email Address           : beavisss@quake.ru
+
+Description             : Map for Action Quake (http://aq2.action-web.net).
+			
+			  The map is kinda small, it's small part of some city.
+			  Its hard to camp here, so dont do it. :)
+
+Installation            : Unzip serebryanka.zip into the root of your Action Quake
+                          game folder (Quake2/action), with Subdirectories
+                          enabled (!)
+                                                    
+Additional Credits to   : Energizer for some textures and advices
+                          Wizardext for textures
+                          Peep for water texture
+                          Sanity for bug test
+=============================================================================
+* Play Info *
+
+Game                      : Action Quake (Quake2)
+Single player             : Yes (only for looking around)
+Teamplay                  : Yes
+Deathmatch 		  : No
+Suggested Player Load	  : 2-8
+
+New Graphics              : No
+New Music                 : No
+New Sounds                : No
+New Sky			  : No
+DLL                       : No
+Locations File		  : No
+
+* Construction Info *
+Editors Used		  : QERadiant, Wally, Photoshop 7, ArghRad, 
+			    Geoffrey DeWan's QBSP3 and QVIS3
+
+Known Bugs                : None.
+
+
+* Copyright / Permissions *
+
+Authors may NOT use this level as a base to build additional levels. 
+
+All textures and sounds not made by me are the property of their 
+respective owner. You may distribute the archive serebryanka.zip in 
+whatever way you see fit as long as the archive remains intact and 
+is distributed freely. It is strictly prohibited to distribute any
+of the files in this archive commercially!
+
+Enjoy.

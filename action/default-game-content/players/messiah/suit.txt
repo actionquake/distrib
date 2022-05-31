@@ -1,0 +1,17 @@
+12/21/98
+
+================================================================
+
+Skin Name               : Corporate Suit
+
+Authors                 : Lupus
+
+Email Address           : palmen@dlc.fi
+
+Skin description        : The basic man with a suit... Just the briefcase is missing.
+                          Perfect for government conspiracies...
+
+Programs used           : SkinED
+		
+Thanks                  : To the author of cool Don skin... And of course for Messiah 
+                          Clan for this awesome model...

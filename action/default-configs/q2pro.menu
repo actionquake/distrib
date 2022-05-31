@@ -64,6 +64,7 @@ begin main
     blank
     action " Play Online " pushmenu playonline
     action " Play Offline " pushmenu playoffline
+    action " Spectate Games " pushmenu gtvservers
     action " Browse Demos " pushmenu demos
     blank
     action " Settings" pushmenu settings
@@ -75,7 +76,8 @@ end
 begin game
     background #0000ff20
     style --compact
-    action " Play Online " pushmenu playonline 
+    action " Play Online " pushmenu playonline
+    action " Spectate Games " pushmenu gtvservers
     action " Browse Demos " pushmenu demos
     blank
     action " Settings" pushmenu settings
@@ -121,6 +123,13 @@ begin playoffline
     action " Play vs. Local Bots " pushmenu bots
 end
 
+begin gtvservers
+    title "Watch a Game In Progress"
+    action " North American GTV " "connect useast.aq2world.com:27916"
+    blank
+    action " Europe's Playground GTV " "connect 146.185.135.30:27000"
+end
+
 begin playnow
     title "Play Now"
     action "Team Play" "connect qj.aq2world.com:27901"
@@ -139,7 +148,7 @@ end
 begin bots
     title "Play with Bots"
     action "Deathmatch - Free For All" pushmenu dm_botmenu
-	action "Team Deathmatch" pushmenu tdm_botmenu
+    action "Team Deathmatch" pushmenu tdm_botmenu
     action "Teamplay" pushmenu tp_botmenu
 end
 
@@ -318,25 +327,31 @@ begin mouse
     title "Mouse Setup"
     pairs "invert mouse" m_pitch "no" "0.022" "yes" "-0.022"
     field "sensitivity" sensitivity
-    toggle "FOV sensitivity scaling" m_autosens
+    toggle "auto scale zoom sensitivity" m_autosens
     blank
-    pairs "crosshair" crosshair \
-        "cross" "1" \
-        "full cross" "2" \
-        "dotted cross" "3" \
-        "big cross" "4" \
-        "dot" "5" \
-        "big dot" "6" \
-        "double cross" "11" \
-        "double full" "12" \
-        "double dotted" "13" \
-        "double big" "14" \
-        "double dot" "15" \
-        "double big dot" "16"
+    action "choose crosshair" "pushmenu chsetup"
+    blank
     range "crosshair red" ch_red 0.0 1.0
     range "crosshair green" ch_green 0.0 1.0
     range "crosshair blue" ch_blue 0.0 1.0
     range "crosshair alpha" ch_alpha 0.0 1.0
+end
+
+begin chsetup
+    title "Select crosshair"
+    bitmap "ch1" "crosshair 1;popmenu;"
+    bitmap "ch2" "crosshair 2;popmenu;"
+    bitmap "ch3" "crosshair 3;popmenu;"
+    bitmap "ch4" "crosshair 4;popmenu"
+    bitmap "ch5" "crosshair 5;popmenu;"
+    bitmap "ch6" "crosshair 6;popmenu;"
+    bitmap "ch7" "crosshair 7;popmenu;"
+    bitmap "ch8" "crosshair 8;popmenu;"
+    bitmap "ch9" "crosshair 9;popmenu;"
+    bitmap "ch10" "crosshair 10;popmenu;"
+    pairs --status "Size of your crosshair" "Crosshair size" ch_scale "0.25" 0.25 "0.5" 0.5 "1" 1 "1.5" 1.5 "2" 2 "3" 3
+    blank
+    action "back" "forcemenuoff;pushmenu settings;pushmenu mouse;"
 end
 
 begin sound

@@ -1,0 +1,47 @@
+Title: 	bwcity
+Date: 	6 Mars 2006
+Tools: 	GTKRadiant, Worldcraft 1.6, Photoshop and Arghrad
+Author: Beavisss and WizardExt
+Email: 	akusher@gmail.com and wizardext@gmail.com
+Web: 	http://user.wh00s.net/ and http://www.wizardext.se
+
+---Credits->
+
+A-TEAM
+Id Software
+Aq2 community
+Tim Wright
+r1ch
+makro (for some inspiration)
+TTI (textures)
+
+...and everyone else we forgot. Sorry.. ^^
+
+	
+---Comments->
+
+You are in a city. It's evening, closing in on the night. It's 
+a cold weather, but the city warms you with its colorfull lighting. 
+There has been an aggressive robbery in the bank, resulting in 
+pistol fire and injures. Police is it at, but the mosquitos don't 
+seem to bothered and keep circleling the garbage at the back of the 
+restaurant. The bar is still opened, but without too much action. 
+The whole restaurant is relying on the summer, where it's a yearly 
+attractions for the visitors. If the recent accident wasn't enough, 
+the whole city feels a bit torn apart. Times where better before...
+
+A project from Beavisss and WizardExt. Took 2 weeks of hard work to 
+finish. What was first going to be a pretty small map, turned in to 
+a medium sized map, with lots of details and things to explore.
+
+We are both very proud of the map and enjoyed the process of making 
+it. No problems, other than the ordinary ones, this time. The 
+transition between the editors (GTKRadiant and Worldcraft) worked 
+flawless. A project where both inspired and motivaed each other, 
+with an honest relation.
+
+There is a new sky, but also many new textures. We hope you enjoy this 
+map as much as we did making it and also will through playing it. 
+Please look away from the rspeeds values this time and just have fun!
+
+	- Rinat "Beavisss" Khalekov and David "WizardExt" Lundvall
