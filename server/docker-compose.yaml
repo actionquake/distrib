@@ -3,7 +3,7 @@ version: "3"
 services:
   tp1:
     container_name: tp1
-    image: aqtiongame/server:v3
+    image: aqtiongame/server:v6
     ports:
       - "27910:27910/udp"
     stdin_open: true
