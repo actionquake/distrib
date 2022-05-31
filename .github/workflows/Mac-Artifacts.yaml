@@ -32,7 +32,7 @@ jobs:
       - name: Zip game contents to pkz
         working-directory: ${{ env.CFG_WORKING_DIR }}/action
         run: |
-          for makepkz in default-game-content default-mappack0 default-mappack1 default-pics default-sounds; do
+          for makepkz in default-configs default-game-content default-mappack0 default-mappack1 default-pics default-sounds; do
             cd ${makepkz}
             zip -r ../0_${makepkz}.pkz * && cd ..
             rm -rf ${makepkz}/
