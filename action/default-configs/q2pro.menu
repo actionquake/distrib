@@ -320,7 +320,7 @@ begin mouse
     field "sensitivity" sensitivity
     toggle "auto scale zoom sensitivity" m_autosens
     blank
-    action "choose crosshair" "pushmenu chsetup1"
+    action "choose crosshair" "pushmenu chsetup"
     blank
     range "crosshair red" ch_red 0.0 1.0
     range "crosshair green" ch_green 0.0 1.0
@@ -328,7 +328,7 @@ begin mouse
     range "crosshair alpha" ch_alpha 0.0 1.0
 end
 
-begin chsetup1
+begin chsetup
     title "Select crosshair"
     bitmap "ch1" "crosshair 1;popmenu;"
     bitmap "ch2" "crosshair 2;popmenu;"
@@ -342,26 +342,7 @@ begin chsetup1
     bitmap "ch10" "crosshair 10;popmenu;"
     pairs --status "Size of your crosshair" "Crosshair size" ch_scale "0.25" 0.25 "0.5" 0.5 "1" 1 "1.5" 1.5 "2" 2 "3" 3
     blank
-    action "next page" "pushmenu chsetup2"
     action "back" "forcemenuoff;pushmenu settings;pushmenu mouse;"
-end
-
-begin chsetup2
-    title "Select crosshair"
-    bitmap "ch11" "crosshair 11;popmenu;popmenu;"
-    bitmap "ch12" "crosshair 12;popmenu;popmenu;"
-    bitmap "ch13" "crosshair 13;popmenu;popmenu;"
-    bitmap "ch14" "crosshair 14;popmenu;popmenu;"
-    bitmap "ch15" "crosshair 15;popmenu;popmenu;"
-    bitmap "ch16" "crosshair 16;popmenu;popmenu;"
-    bitmap "ch17" "crosshair 17;popmenu;popmenu;"
-    bitmap "ch18" "crosshair 18;popmenu;popmenu;"
-    bitmap "ch19" "crosshair 19;popmenu;popmenu;"
-    bitmap "ch20" "crosshair 20;popmenu;popmenu;"
-    pairs --status "Size of your crosshair" "Crosshair size" ch_scale "0.25" 0.25 "0.5" 0.5 "1" 1 "1.5" 1.5 "2" 2 "3" 3
-    blank
-    action "previous page" "pushmenu chsetup1"
-    action "Back" "forcemenuoff;pushmenu settings;pushmenu mouse;"
 end
 
 begin sound
