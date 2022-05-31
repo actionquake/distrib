@@ -64,6 +64,7 @@ begin main
     blank
     action " Play Online " pushmenu playonline
     action " Play Offline " pushmenu playoffline
+    action " Spectate Games " pushmenu gtvservers
     action " Browse Demos " pushmenu demos
     blank
     action " Settings" pushmenu settings
@@ -75,7 +76,8 @@ end
 begin game
     background #0000ff20
     style --compact
-    action " Play Online " pushmenu playonline 
+    action " Play Online " pushmenu playonline
+    action " Spectate Games " pushmenu gtvservers
     action " Browse Demos " pushmenu demos
     blank
     action " Settings" pushmenu settings
@@ -119,6 +121,13 @@ begin playoffline
     action " Browse LAN Servers " pushmenu servers "broadcast://"
     blank
     action " Play vs. Local Bots " pushmenu bots
+end
+
+begin gtvservers
+    title "Watch a Game In Progress"
+    action " North American GTV " "connect useast.aq2world.com:27916"
+    blank
+    action " Europe's Playground GTV " "connect 146.185.135.30:27000"
 end
 
 begin playnow
