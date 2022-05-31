@@ -60,12 +60,14 @@ jobs:
           name: tng-win-64
           path: ${{ env.CFG_WORKING_DIR }}/action/
         
-      - name: Zip configs to pkz
-        working-directory: ${{ env.CFG_WORKING_DIR }}
+      - name: Zip game content to pkz
+        working-directory: ${{ env.CFG_WORKING_DIR }}/action
         run: |
-          cd action/default-configs/
-          zip -r ../0_default-configs.pkz * && cd ..
-          rm -rf default-configs/
+          for makepkz in default-configs default-game-content default-mappack0 default-mappack1 default-pics default-sounds; do
+            cd ${makepkz}
+            zip -r ../0_${makepkz}.pkz * && cd ..
+            rm -rf ${makepkz}/
+          done
 
       - name: Generate dist files
         run: |
