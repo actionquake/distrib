@@ -76,7 +76,8 @@ end
 begin game
     background #0000ff20
     style --compact
-    action " Play Online " pushmenu playonline 
+    action " Play Online " pushmenu playonline
+    action " Spectate Games " pushmenu gtvservers
     action " Browse Demos " pushmenu demos
     blank
     action " Settings" pushmenu settings
