@@ -29,7 +29,7 @@ Great!  Hosting a server is a great way to contribute to the community and helps
 ----
 ### Step by step
 
-1. If you have docker and docker-compose already, skip to step X
+1. If you have docker and docker-compose already, skip to step 3
 1. Upon logging into the VPS/instance (ssh, console or otherwise) gaining access to the shell, install docker and docker-compose
     * Ubuntu: https://docs.docker.com/engine/install/ubuntu/
     * Other: https://docs.docker.com/engine/install/
