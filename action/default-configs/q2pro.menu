@@ -358,6 +358,7 @@ end
 begin sound
     background sound_bkgd
     title "Sound Setup"
+    values --status "OpenAL requires installation of https://openal-soft.org/" "sound system" s_enable "none" "classic" "OpenAL"
     range "effects volume" s_volume 0 1
     values "ambient sounds" s_ambient "no" "yes" "only player's own"
     pairs "chat beep" cl_chat_sound \
