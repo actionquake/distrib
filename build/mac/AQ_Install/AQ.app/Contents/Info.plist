@@ -23,6 +23,6 @@
         <key>CFBundleVersion</key>
         <string>aq2world.com</string>
         <key>LSMinimumSystemVersion</key>
-        <string>10.10</string>
+        <string>10.6.8</string>
 </dict>
 </plist>
