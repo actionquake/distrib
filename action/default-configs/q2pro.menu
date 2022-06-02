@@ -67,6 +67,8 @@ begin main
     action " Spectate Games " pushmenu gtvservers
     action " Browse Demos " pushmenu demos
     blank
+    action " Help " pushmenu helpmenu
+    blank
     action " Settings" pushmenu settings
     //needs tested -- action " Optional Add-ons" pushmenu addonsmenu
     blank
@@ -81,9 +83,33 @@ begin game
     action " Spectate Games " pushmenu gtvservers
     action " Browse Demos " pushmenu demos
     blank
+    action " Help " pushmenu helpmenu
+    blank
     action " Settings" pushmenu settings
     blank
     action " Disconnect" disconnect
+end
+
+begin helpmenu
+	title "Help Me!"
+	action " I joined a server but I can't join a team!" ""
+	action " Press the TAB button to bring up the in-game menu" ""
+	blank
+	action " I died in one hit!  What gives?" ""
+	action " This game has realistic locational damage, getting hit in the head is deadly," ""
+	action "try ducking behind some cover or use a tactical advantage to stay alive!" ""
+	blank
+	action " I ran out of ammo, what do I do now?" ""
+	action " Drop your primary weapon (default key 'c') and find someone else's," ""
+	action "you can also KICK people by jumping at them to damage and make them drop their weapon!" ""
+	blank
+	action " How do I open doors, or bandage myself, I'm limping!" ""
+	action " Open doors with 'f' (default key) and bandage with 'e' (default key)," ""
+	action "bandaging takes 6 seconds, so run and hide until you can fight again!" ""
+	blank
+	action " I have more questions!  Help!" ""
+	action " Visit us on Discord and we'll help as much as we can!" ""
+	action "https://discord.aq2world.com/" ""
 end
 
 begin credits
