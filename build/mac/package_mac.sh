@@ -10,7 +10,7 @@
 
 DISTRIB=$1
 CURRENT_DIR=$(pwd)
-PLATFORMS=(Steam Standalone)
+PLATFORMS=(steam standalone)
 
 
 if [[ -z ${DISTRIB} ]]
