@@ -324,6 +324,9 @@ begin msettings
     field "bandage team message" bandage[say]
     field "frag team message" roundkill[say]
     blank
+    values "Show chathud" scr_chathud "off" "on - white" "on - green"
+    pairs "Duration of chathud" scr_chathud_time Stay 0 1s 1 5s 5 10s 10 15s 15
+    blank
     toggle "disable [Windows key]" win_disablewinkey
     toggle "disable [Alt]-[Tab]" win_noalttab
 end
