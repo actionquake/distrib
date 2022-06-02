@@ -3,7 +3,7 @@
 RAW_ARCH=$1
 CURRENT_DIR=$(pwd)
 PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/"
-PLATFORMS=(Steam Standalone)
+PLATFORMS=(steam standalone)
 
 if [[ -z ${RAW_ARCH} ]]
 then
@@ -103,10 +103,10 @@ do
 
     ## Build the q2pro binaries
     cd ${Q2PRO_DIR} || return
-    if [ ${PLATFORM} = "Steam" ]; then
-        export CONFIG_FILE=config_mac; echo "PLATFORM=Steam" >> config_mac; make -j2 V=1
+    if [ ${PLATFORM} = "steam" ]; then
+        export CONFIG_FILE=config_mac; echo "PLATFORM=Steam" >> config_mac; make -j4 V=1
     else
-        export CONFIG_FILE=config_mac; echo "PLATFORM=Standalone" >> config_mac; make -j2 V=1
+        export CONFIG_FILE=config_mac; echo "PLATFORM=Standalone" >> config_mac; make -j4 V=1
     fi
     build_exitcode=$?
 
