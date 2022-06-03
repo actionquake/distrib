@@ -193,6 +193,8 @@ begin dm_botmenu
     toggle --status "Players with same model are teamed up" "Teams by model" dmflags 7
     toggle --status "Immediatly respawn when dying" "Force respawn" dmflags 10
     toggle --status "Enable/disable weapon dropping" "Weapons stay after dropping" dmflags 2
+    toggle --status "Choose your starting weapon/item" dm_choose
+    toggle --status "Enable 3 second spawn protection" dm_shield 30
     blank
     action --align " Play" "forcemenuoff;teamplay 0;map credits; map $nextserver; sv addbots $sv_botdm$;"
 end
