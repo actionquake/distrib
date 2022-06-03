@@ -29,6 +29,11 @@ Great!  Hosting a server is a great way to contribute to the community and helps
 ----
 ### Step by step
 
+Use the following Docker images
+* Official: `aqtiongame/server:v6`
+* Espionage: `aqtiongame/espionage:v1`
+* ARM64: `aqtiongame/server:v1-arm64`
+
 1. If you have docker and docker-compose already, skip to step 3
 1. Upon logging into the VPS/instance (ssh, console or otherwise) gaining access to the shell, install docker and docker-compose
     * Ubuntu: https://docs.docker.com/engine/install/ubuntu/
@@ -39,10 +44,11 @@ Great!  Hosting a server is a great way to contribute to the community and helps
     * `mkdir -p /opt/aqtion && cd /opt/aqtion`
 1. Download the example files `docker-compose.yaml`, `tp1.env` and `tp1.motd` files
     * `for file in docker-compose.yaml tp1.env tp1.motd; do wget https://raw.githubusercontent.com/actionquake/distrib/main/server/${file}; done`
-1. Edit the files downloaded to your liking, changes the team names, skins, hostname, motd.
+1. Edit the files downloaded to your liking (make sure you're using the latest images!), changes the team names, skins, hostname, MOTD file.
 1. If you want to host more than one server from this docker-compose, duplicate the tp1.env and tp1.motd, for example:
-    * `cp tp1.env tdm1.env; cp tp1.motd tdm1.env`
-    * Include another service in the `docker-compose.yaml` file, changing or incrementing the port (27910, 27911, etc) don't forget the `PORT` env var!
+    * `cp tp1.env tdm1.env`
+    * `cp tp1.motd tdm1.motd`
+    * Include another service in the `docker-compose.yaml` file, changing or incrementing the port (27910, 27911, etc), don't forget the `PORT` env var!
 1. Bring your server online!
     * `docker-compose up -d`
 1. Try connecting to your server from your client in the console

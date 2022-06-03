@@ -70,7 +70,10 @@ begin main
     action " Browse Demos " pushmenu demos
     blank
     action " Help " pushmenu helpmenu
+<<<<<<< HEAD
     action " FAQ " pushmenu faq
+=======
+>>>>>>> 39d154c7555834fbcae728cee9b871d2960dbfd6
     blank
     action " Settings" pushmenu settings
     //needs tested -- action " Optional Add-ons" pushmenu addonsmenu
@@ -87,7 +90,10 @@ begin game
     action " Browse Demos " pushmenu demos
     blank
     action " Help " pushmenu helpmenu
+<<<<<<< HEAD
 
+=======
+>>>>>>> 39d154c7555834fbcae728cee9b871d2960dbfd6
     blank
     action " Settings" pushmenu settings
     blank
@@ -95,6 +101,7 @@ begin game
 end
 
 begin helpmenu
+<<<<<<< HEAD
     title "Help Me!"
     action " I joined a server but I can't join a team!" ""
     action " Press the TAB button to bring up the in-game menu" ""
@@ -114,6 +121,27 @@ begin helpmenu
     action " I have more questions!  Help!" ""
     action " Visit us on Discord and we'll help as much as we can!" ""
     action "https://discord.aq2world.com/" ""
+=======
+	title "Help Me!"
+	action " I joined a server but I can't join a team!" ""
+	action " Press the TAB button to bring up the in-game menu" ""
+	blank
+	action " I died in one hit!  What gives?" ""
+	action " This game has realistic locational damage, getting hit in the head is deadly," ""
+	action "try ducking behind some cover or use a tactical advantage to stay alive!" ""
+	blank
+	action " I ran out of ammo, what do I do now?" ""
+	action " Drop your primary weapon (default key 'c') and find someone else's," ""
+	action "you can also KICK people by jumping at them to damage and make them drop their weapon!" ""
+	blank
+	action " How do I open doors, or bandage myself, I'm limping!" ""
+	action " Open doors with 'f' (default key) and bandage with 'e' (default key)," ""
+	action "bandaging takes 6 seconds, so run and hide until you can fight again!" ""
+	blank
+	action " I have more questions!  Help!" ""
+	action " Visit us on Discord and we'll help as much as we can!" ""
+	action "https://discord.aq2world.com/" ""
+>>>>>>> 39d154c7555834fbcae728cee9b871d2960dbfd6
 end
 
 begin credits
@@ -197,6 +225,8 @@ begin dm_botmenu
     toggle --status "Players with same model are teamed up" "Teams by model" dmflags 7
     toggle --status "Immediatly respawn when dying" "Force respawn" dmflags 10
     toggle --status "Enable/disable weapon dropping" "Weapons stay after dropping" dmflags 2
+    toggle --status "Choose your starting weapon/item" dm_choose
+    toggle --status "Enable 3 second spawn protection" dm_shield 30
     blank
     action --align " Play" "forcemenuoff;teamplay 0;map credits; map $nextserver; sv addbots $sv_botdm$;"
 end

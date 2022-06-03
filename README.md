@@ -30,6 +30,7 @@ Should it be determined that assets included in this distribution are indeed unl
 ## Instructions/Installation
 
 ### Steam and Itch.io
+*It is highly recommended to use the Steam installer, it is free and will update on its own.*
 * [Steam](https://store.steampowered.com/app/1978800/AQtion/)
 * [Itch.io](https://aqtion.itch.io/aqtion)
 
