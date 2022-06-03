@@ -58,6 +58,8 @@ color active #0f90ff64
 color selection #0f90eb64
 color disabled #7f7f7f
 
+include faq.menu
+
 begin main
     title "Main Menu"`
     action " Discord - https://discord.aq2world.com" pushmenu credits
@@ -66,6 +68,9 @@ begin main
     action " Play Offline " pushmenu playoffline
     action " Spectate Games " pushmenu gtvservers
     action " Browse Demos " pushmenu demos
+    blank
+    action " Help " pushmenu helpmenu
+    action " FAQ " pushmenu faq
     blank
     action " Settings" pushmenu settings
     //needs tested -- action " Optional Add-ons" pushmenu addonsmenu
@@ -77,12 +82,38 @@ begin game
     background #0000ff20
     style --compact
     action " Play Online " pushmenu playonline
+    action " Play Offline " pushmenu playoffline
     action " Spectate Games " pushmenu gtvservers
     action " Browse Demos " pushmenu demos
+    blank
+    action " Help " pushmenu helpmenu
+
     blank
     action " Settings" pushmenu settings
     blank
     action " Disconnect" disconnect
+end
+
+begin helpmenu
+    title "Help Me!"
+    action " I joined a server but I can't join a team!" ""
+    action " Press the TAB button to bring up the in-game menu" ""
+    blank
+    action " I died in one hit!  What gives?" ""
+    action " This game has realistic locational damage, getting hit in the head is deadly," ""
+    action "try ducking behind some cover or use a tactical advantage to stay alive!" ""
+    blank
+    action " I ran out of ammo, what do I do now?" ""
+    action " Drop your primary weapon (default key 'c') and find someone else's," ""
+    action "you can also KICK people by jumping at them to damage and make them drop their weapon!" ""
+    blank
+    action " How do I open doors, or bandage myself, I'm limping!" ""
+    action " Open doors with 'f' (default key) and bandage with 'e' (default key)," ""
+    action "bandaging takes 6 seconds, so run and hide until you can fight again!" ""
+    blank
+    action " I have more questions!  Help!" ""
+    action " Visit us on Discord and we'll help as much as we can!" ""
+    action "https://discord.aq2world.com/" ""
 end
 
 begin credits
@@ -297,6 +328,9 @@ begin msettings
     field "bandage team message" bandage[say]
     field "frag team message" roundkill[say]
     blank
+    values "Show chathud" scr_chathud "off" "on - white" "on - green"
+    pairs "Duration of chathud" scr_chathud_time Stay 0 1s 1 5s 5 10s 10 15s 15
+    blank
     toggle "disable [Windows key]" win_disablewinkey
     toggle "disable [Alt]-[Tab]" win_noalttab
 end
@@ -357,6 +391,7 @@ end
 begin sound
     background sound_bkgd
     title "Sound Setup"
+    values --status "OpenAL requires installation of https://openal-soft.org/" "sound system" s_enable "none" "classic" "OpenAL"
     range "effects volume" s_volume 0 1
     values "ambient sounds" s_ambient "no" "yes" "only player's own"
     pairs "chat beep" cl_chat_sound \

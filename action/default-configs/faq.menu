@@ -1,0 +1,144 @@
+begin faq
+    background #0000ff20
+    style --compact
+    title "FAQ menu"
+    blank
+    action "What is Action Quake and why am I here?" popmenu;pushmenu why
+    blank
+    action "Now what?" popmenu;pushmenu what
+    blank
+    action "How to I change my key bindings and controls?" popmenu;pushmenu keys
+    blank
+    action "What are some of the common commands to use?" popmenu;pushmenu cmd
+    blank
+    action "What are useful commands in matchmode?" popmenu;pushmenu mcmd
+    blank
+    action "What if I only want to practise jumps and movement?" popmenu;pushmenu jump
+    blank
+    action "Close" popmenu
+end
+
+begin why
+    background #0000ff20
+    style --compact
+    title "What is Action Quake and why am I here?"
+    blank
+    blank
+    action "Action Quake is a mod for Quake II that provides realistic weaponry,      " ""
+    action "locational damage, hundreds of community-created maps and is the _actual_ " ""
+    action "father of Counter-Strike. As for why you are here, I can only imagine it's" ""
+    action "because you want to play with us!                                      " ""
+    blank
+    action "Back" popmenu;pushmenu faq
+    action "Close" popmenu
+end
+
+begin what
+    background #0000ff20
+    style --compact
+    title "Now what?"
+    blank
+    blank
+    action "Open it up and check the *Play Online* menu, there are several options:                    " ""
+    blank
+    action "Play Now -> Lets you choose preferred mode and it will take you to nearest populated server" ""
+    blank
+    action "Browse All Servers or Browse Favorite Servers -> Lets you find the server you want to join " ""
+    blank
+    action "Play Vs. Online Bots -> Will connect you to a server populated with bots                   " ""
+    blank
+    action "Or ask in the discord chat if there's anyone playing and join them.                        " ""
+    blank
+    action "Back" popmenu;pushmenu faq
+    action "Close" popmenu
+end
+
+begin keys
+    background #0000ff20
+    style --compact
+    title "How to I change my key bindings and controls?"
+    blank
+    blank
+    action "Go to the main menu (Escape key) and then                 " ""
+    action "Settings -> General Bindings                              " ""
+    action "Settings -> Weapon Bindings                               " ""
+    blank
+    action "If you'd prefer to edit a config file with a text editor, " ""
+    action "go to action/autoexec_example.cfg, edit the file by hand  " ""
+    action "or paste in your own config, then save it as autoexec.cfg." ""
+    action "" ""
+    blank
+    action "Back" popmenu;pushmenu faq
+    action "Close" popmenu
+end
+
+begin cmd
+    background #0000ff20
+    style --compact
+    title "What are some of the common commands to use?"
+    blank
+    blank
+    action "name <nickname> -> Set custom nickname                                    " ""
+    action "connect <ip> -> Connect to a server using ip:port or hostname:port        " ""
+    action "disconnect -> Disconnect from a server                                    " ""
+    action "reconnect -> Reconnect to the last connected server                       " ""
+    action "quit -> Exit the game                                                     " ""
+    action "team 1/2/3/none -> Join specific team or leave one                        " ""
+    action "stats -> Show your stats                                                  " ""
+    action "stats list -> Show players' stats list                                    " ""
+    action "stats # -> Show specific player's stats                                   " ""
+    action "votemap <mapname> -> Vote for a map                                       " ""
+    action "votekick <nickname> -> Vote for a user to be kicked                       " ""
+    action "voteconfig <configname> -> Vote for a specific mode                       " ""
+    action "votescramble -> Vote for teams to be scrambled                            " ""
+    action "ignorelist -> Show player list                                            " ""
+    action "ignore # or ignore <nickname> -> Add or remove player from your ignorelist" ""
+    blank
+    action "Back" popmenu;pushmenu faq
+    action "Close" popmenu
+end
+
+begin mcmd
+    background #0000ff20
+    style --compact
+    title "What are some of the common commands to use?"
+    blank
+    blank
+    action "captain -> Claim or release being team's captain                       " ""
+    action "sub -> Sub or unsub your team                                          " ""
+    blank
+    action "Commands for captains:                                                 " ""
+    action "ready -> Ready or unready for the matchmode                            " ""
+    action "lock -> Lock or unlock the team                                        " ""
+    action "teamname <your team name> -> Set a custom team name                    " ""
+    action "teamskin -> Change your team's player skin                             " ""
+    action "resetscores -> Send opposite team's captain request to reset scoreboard" ""
+    blank
+    action "Back" popmenu;pushmenu faq
+    action "Close" popmenu
+end
+
+begin jump
+    background #0000ff20
+    style --compact
+    title "What if I only want to practise jumps and movement?"
+    blank
+    blank
+    action "You can go to your locally created server by typing gamemap <mapname>.             " "" 
+    action "To get the list of all maps on your drive press TAB key after typing gamemap.      " ""
+    action "Another option that is better suited for jumping is jmod which is jump mod for AQ2." ""
+    action "There is no fall damage, you can't shoot other players and it provides other info  " ""
+    action "like current and highest speed. Server with jmod can be found in the server browser" ""
+    action "Just look for AQ2 JMOD - Jump around like a PRO." ""
+    blank
+    action "It has several features and its own commands:         " ""
+    action "teleporter set -> Set a custom spawn point to recall  " ""
+    action "teleporter recall -> Spawn at a custom set spawn point" ""
+    action "spawnp -> Spawn at random spawn point                 " ""
+    action "spawnp # -> Spawn at specific spawn point             " ""
+    action "lca -> Start LCA sequence                             " ""
+    action "puppet -> Place or remove a puppet on your location   " ""
+    blank
+    action "Back" popmenu;pushmenu faq
+    action "Close" popmenu
+end
