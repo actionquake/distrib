@@ -158,7 +158,7 @@ begin gtvservers
 end
 
 begin playnow
-    title "Play Now"
+    title "Find a server in your region automatically"
     action "Team Play" "connect qj.aq2world.com:27901"
     blank
     action "Deathmatch - Free For All" "connect qj.aq2world.com:27902"
