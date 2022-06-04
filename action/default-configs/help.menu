@@ -101,7 +101,6 @@ begin why
     style --compact
     title " What is Action Quake and why am I here?"
     blank
-    action ""
     action "Action Quake is a mod for Quake II that provides realistic weaponry,      " ""
     action "locational damage, hundreds of community-created maps and is the _actual_ " ""
     action "father of Counter-Strike. As for why you are here, I can only imagine it  " ""
@@ -115,7 +114,6 @@ begin what
     style --compact
     title " Now what?"
     blank
-    action ""
     action "Open it up and check the *Play Online* menu, there are several options:                    " ""
     blank
     action "Play Now -> Lets you choose preferred mode and it will take you to nearest populated server" ""
@@ -134,7 +132,6 @@ begin keys
     style --compact
     title " How to I change my key bindings and controls?"
     blank
-    action ""
     action "Go to the main menu (Escape key) and then                 " ""
     action "Settings -> General Bindings                              " ""
     action "Settings -> Weapon Bindings                               " ""
