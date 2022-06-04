@@ -30,7 +30,7 @@ Great!  Hosting a server is a great way to contribute to the community and helps
 ### Step by step
 
 Use the following Docker images
-* Official: `aqtiongame/server:v6`
+* Official: `aqtiongame/server:v7`
 * Espionage: `aqtiongame/espionage:v1`
 * ARM64: `aqtiongame/server:v1-arm64`
 
