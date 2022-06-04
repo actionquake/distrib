@@ -151,9 +151,9 @@ begin playnow
     blank
     action "3 Team" "connect qj.aq2world.com:27904"
     blank
-    action "Capture the Flag" "qj.aq2world.com:27905"
+    action "Capture the Flag" "connect qj.aq2world.com:27905"
     blank
-    action "Espionage" "qj.aq2world.com:27906"
+    action "Gangsters - Assassinate the Leader" "connect qj.aq2world.com:27906"
 end
 
 begin bots
@@ -177,8 +177,8 @@ begin dm_botmenu
     toggle --status "Players with same model are teamed up" "Teams by model" dmflags 7
     toggle --status "Immediatly respawn when dying" "Force respawn" dmflags 10
     toggle --status "Enable/disable weapon dropping" "Weapons stay after dropping" dmflags 2
-    pairs --status "Choose your starting weapon/item" "Start weapon" dm_choose "enabled" 1 "disabled" 0
-    toggle --status "Enable 3 second spawn protection" dm_shield 30
+    pairs --status "Choose your starting weapon/item" "Choose weapon/item" dm_choose "enabled" 1 "disabled" 0
+    pairs --status "Spawn protection" "Enable 3 second spawn protection" dm_shield "disabled" 0 "enabled" 30
     blank
     action --align " Play" "forcemenuoff;teamplay 0;map credits; map $nextserver; sv addbots $sv_botdm$;"
 end
@@ -447,4 +447,12 @@ end
 begin addonsmenu
     title "Optional Addons"
     action "AQ2PRO" pushmenu aq2pro
+end
+
+begin first_start
+    action "Choose your name" ""
+    blank
+    field --status "Choose your nickname" "Name" name
+    blank
+    action "save" "popmenu;pushmenu main"
 end
