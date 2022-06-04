@@ -5,7 +5,8 @@ begin helpmenu
     action " Commands " pushmenu commands
     blank
     action " Main menu " pushmenu main
-    action " close " popmenu;popmenu
+	blank
+    action " Close " popmenu;popmenu
 end
 
 begin commands
@@ -22,23 +23,23 @@ end
 begin faq
     title "FAQ"
     blank
-    action " What is Action Quake and why am I here?" popmenu;pushmenu why
+    action " What is Action Quake and why am I here?             " popmenu;pushmenu why
     blank
-    action " Now what?" popmenu;pushmenu what
+    action " Now what?                                           " popmenu;pushmenu what
     blank
-    action " How to I change my key bindings and controls?" popmenu;pushmenu keys
+    action " How to I change my key bindings and controls?       " popmenu;pushmenu keys
     blank
-    action " What if I only want to practise jumps and movement?" popmenu;pushmenu jump
+    action " What if I only want to practise jumps and movement? " popmenu;pushmenu jump
     blank
-    action " I joined a server but I can't join a team!" popmenu;pushmenu jointeam
+    action " I joined a server but I can't join a team!          " popmenu;pushmenu jointeam
     blank
-    action " I died in one hit!  What gives?" popmenu;pushmenu idied
+    action " I died in one hit!  What gives?                     " popmenu;pushmenu idied
     blank
-    action " I ran out of ammo, what do I do now?" popmenu;pushmenu ammo
+    action " I ran out of ammo, what do I do now?                " popmenu;pushmenu ammo
     blank
     action " How do I open doors, or bandage myself, I'm limping!" popmenu;pushmenu door-n-band
     blank
-    action " I have more questions!  Help!" popmenu;pushmenu morehelp
+    action " I have more questions!  Help!                       " popmenu;pushmenu morehelp
     blank
     blank
     action "Back" popmenu;pushmenu helpmenu
@@ -57,8 +58,8 @@ begin ammo
     style --compact
     action " I ran out of ammo, what do I do now?" ""
     blank
-    action " Drop your primary weapon (default key 'c') and find someone else's," ""
-    action "you can also KICK people by jumping at them to damage and make them drop their weapon!" ""
+    action "Drop your primary weapon (default key 'c') and find someone else's.                   " ""
+    action "You can also KICK people by jumping at them to damage and make them drop their weapon!" ""
     blank
     action "Back" popmenu;pushmenu faq
 end
@@ -91,7 +92,7 @@ begin idied
     action " I died in one hit!  What gives?" ""
     blank
     action "This game has realistic locational damage, getting hit in the head is deadly," ""
-    action "try ducking behind some cover or use a tactical advantage to stay alive!" ""
+    action "try ducking behind some cover or use a tactical advantage to stay alive!     " ""
     blank
     action "Back" popmenu;pushmenu faq
 end
@@ -104,7 +105,7 @@ begin why
     action "Action Quake is a mod for Quake II that provides realistic weaponry,      " ""
     action "locational damage, hundreds of community-created maps and is the _actual_ " ""
     action "father of Counter-Strike. As for why you are here, I can only imagine it  " ""
-    action "is because you want to play with us!                                      " ""
+    action "is because you want to play with us!                                   " ""
     blank
     action "Back" popmenu;pushmenu faq
 end
@@ -160,20 +161,34 @@ begin cmd
     title " What are some of the common commands to use?"
     blank
     action "name <nickname> -> Set custom nickname                                    " ""
+	blank
     action "connect <ip> -> Connect to a server using ip:port or hostname:port        " ""
+	blank
     action "disconnect -> Disconnect from a server                                    " ""
-    action "reconnect -> Reconnect to the last connected server                       " ""
-    action "quit -> Exit the game                                                     " ""
-    action "team 1/2/3/none -> Join specific team or leave one                        " ""
-    action "stats -> Show your stats                                                  " ""
-    action "stats list -> Show players' stats list                                    " ""
-    action "stats # -> Show specific player's stats                                   " ""
-    action "votemap <mapname> -> Vote for a map                                       " ""
-    action "votekick <nickname> -> Vote for a user to be kicked                       " ""
-    action "voteconfig <configname> -> Vote for a specific mode                       " ""
-    action "votescramble -> Vote for teams to be scrambled                            " ""
-    action "ignorelist -> Show player list                                            " ""
-    action "ignore # or ignore <nickname> -> Add or remove player from your ignorelist" ""
+    blank
+	action "reconnect -> Reconnect to the last connected server                       " ""
+    blank
+	action "quit -> Exit the game                                                     " ""
+    blank
+	action "team 1/2/3/none -> Join specific team or leave one                        " ""
+    blank
+	action "stats -> Show your stats                                                  " ""
+    blank
+	action "stats list -> Show players' stats list                                    " ""
+    blank
+	action "stats # -> Show specific player's stats                                   " ""
+    blank
+	action "votemap <mapname> -> Vote for a map                                       " ""
+    blank
+	action "votekick <nickname> -> Vote for a user to be kicked                       " ""
+    blank
+	action "voteconfig <configname> -> Vote for a specific mode                       " ""
+    blank
+	action "votescramble -> Vote for teams to be scrambled                            " ""
+    blank
+	action "ignorelist -> Show player list                                            " ""
+    blank
+	action "ignore # or ignore <nickname> -> Add or remove player from your ignorelist" ""
     blank
     action "Back" popmenu;pushmenu commands
 end
@@ -201,12 +216,12 @@ begin jump
     style --compact
     title " What if I only want to practise jumps and movement?"
     blank
-    action "You can go to your locally created server by typing gamemap <mapname>.             " "" 
-    action "To get the list of all maps on your drive press TAB key after typing gamemap.      " ""
-    action "Another option that is better suited for jumping is jmod which is jump mod for AQ2." ""
-    action "There is no fall damage, you can't shoot other players and it provides other info  " ""
-    action "like current and highest speed. Server with jmod can be found in the server browser" ""
-    action "Just look for AQ2 JMOD - Jump around like a PRO." ""
+    action "You can go to your locally created server by typing gamemap <mapname>.              " "" 
+    action "To get the list of all maps on your drive press TAB key after typing gamemap.       " ""
+    action "Another option that is better suited for jumping is jmod which is jump mod for AQ2. " ""
+    action "There is no fall damage, you can't shoot other players and it provides other info   " ""
+    action "like current and highest speed. Server with jmod can be found in the server browser." ""
+    action "Just look for AQ2 JMOD - Jump around like a PRO.                                    " ""
     blank
     action "It has several features and its own commands:         " ""
     action "teleporter set -> Set a custom spawn point to recall  " ""
