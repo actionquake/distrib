@@ -143,17 +143,19 @@ end
 
 begin playnow
     title "Find a server in your region automatically"
-    action "Team Play" "connect qj.aq2world.com:27901"
+    action --status "Round-based Team Play" "Team Play" "connect qj.aq2world.com:27901"
     blank
-    action "Deathmatch - Free For All" "connect qj.aq2world.com:27902"
+    action --status "Free For All!" "Deathmatch" "connect qj.aq2world.com:27902"
     blank
-    action "Team Deathmatch" "connect qj.aq2world.com:27903"
+    action --status "Deathmatch with teams!" "Team Deathmatch" "connect qj.aq2world.com:27903"
     blank
-    action "3 Team" "connect qj.aq2world.com:27904"
+    action --status "Teamplay with another team added!" "3 Team" "connect qj.aq2world.com:27904"
     blank
-    action "Capture the Flag" "connect qj.aq2world.com:27905"
+    action --status "Bring the flag back to your base!" "Capture the Flag" "connect qj.aq2world.com:27905"
     blank
-    action "Gangsters - Assassinate the Leader" "connect qj.aq2world.com:27906"
+    action --status "Kill the enemy leader to win!" "Gangsters - Assassinate the Leader" "connect qj.aq2world.com:27906"
+    blank
+    action --status "Capture the enemy's briefcase, defend your own!" "Capture the Briefcase" "connect qj.aq2world.com:27907"
 end
 
 begin bots
