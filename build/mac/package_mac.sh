@@ -42,6 +42,7 @@ do
     install q2probuilds/universal/${PLATFORM}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
     install q2probuilds/intel/${PLATFORM}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
     install q2probuilds/m1/${PLATFORM}/gamearm.so AQ_Install/AQ.app/Contents/MacOS/action/
+    rm -rf AQ_Install/AQ.app/Contents/MacOS/.dummyfile
 
     ## make q2pro executable
     chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
