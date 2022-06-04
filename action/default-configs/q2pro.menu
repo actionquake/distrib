@@ -74,8 +74,8 @@ begin main
     blank
     action " Settings" pushmenu settings
     blank
-    action " Optional Addons" pushmenu addonsmenu
-    blank
+    //action " Optional Addons" pushmenu addonsmenu
+    //blank
     action " Quit" quit
 end
 
