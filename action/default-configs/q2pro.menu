@@ -59,6 +59,7 @@ color selection #0f90eb64
 color disabled #7f7f7f
 
 include help.menu
+include aq2pro.menu
 
 begin main
     title "Main Menu"`
@@ -72,7 +73,8 @@ begin main
     action " Help " pushmenu helpmenu
     blank
     action " Settings" pushmenu settings
-    //needs tested -- action " Optional Add-ons" pushmenu addonsmenu
+    blank
+    action " Optional Addons" pushmenu addonsmenu
     blank
     action " Quit" quit
 end
@@ -88,6 +90,8 @@ begin game
     action " Help " pushmenu helpmenu
     blank
     action " Settings" pushmenu settings
+    blank
+    action " Optional Addons" pushmenu addonsmenu
     blank
     action " Disconnect" disconnect
 end
@@ -442,8 +446,5 @@ end
 
 begin addonsmenu
     title "Optional Addons"
-    action "Download the HD Textures Pack" "password hdtextures; allow_download 1; cl_http_default_url "http://gameassets.aqtiongame.com/addons/hdtextures/"; connect downloadserver.aqtiongame.com:27901"
-    blank
-    action "Download the AQtion Pro Pack" "password aqtionpropack; allow_download 1; cl_http_default_url "http://gameassets.aqtiongame.com/addons/aqtionpropack/"; connect downloadserver.aqtiongame.com:27901"
-    blank
+    action "AQ2PRO" pushmenu aq2pro
 end

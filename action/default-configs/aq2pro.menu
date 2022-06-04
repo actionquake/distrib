@@ -1,0 +1,16 @@
+//=======================
+//AQTIONs version
+//=======================
+begin aq2pro
+    title "ADDON AQ2PRO"
+    action "AQ2PO is DISABLED, do you want to activate it?" ""
+    blank
+    action --align "Yes" "popmenu; set aq2pro 1; exec pro"
+    blank
+    action --align "No" "pushmenu main"
+    blank
+    blank
+    blank
+    action "To activate aq2pro, you also need to download the pak file" ""
+    action "You can do it here: https://UrlHere" ""
+end
