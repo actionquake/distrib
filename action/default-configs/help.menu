@@ -1,0 +1,235 @@
+begin helpmenu
+    title "Help Me!"
+    action " FAQ " pushmenu faq
+    blank
+    action " Commands " pushmenu commands
+    blank
+    action " Main menu " pushmenu main
+	blank
+    action " Close " popmenu;popmenu
+end
+
+begin commands
+    title "Commands"
+    blank
+    action "Common commands" popmenu;pushmenu cmd
+    blank
+    action "Matchmode commands" popmenu;pushmenu mcmd
+    blank
+    blank
+    action "Back" popmenu;pushmenu helpmenu
+end
+
+begin faq
+    title "FAQ"
+    blank
+    action " What is Action Quake and why am I here?             " popmenu;pushmenu why
+    blank
+    action " Now what?                                           " popmenu;pushmenu what
+    blank
+    action " How to I change my key bindings and controls?       " popmenu;pushmenu keys
+    blank
+    action " What if I only want to practise jumps and movement? " popmenu;pushmenu jump
+    blank
+    action " I joined a server but I can't join a team!          " popmenu;pushmenu jointeam
+    blank
+    action " I died in one hit!  What gives?                     " popmenu;pushmenu idied
+    blank
+    action " I ran out of ammo, what do I do now?                " popmenu;pushmenu ammo
+    blank
+    action " How do I open doors, or bandage myself, I'm limping!" popmenu;pushmenu door-n-band
+    blank
+    action " I have more questions!  Help!                       " popmenu;pushmenu morehelp
+    blank
+    blank
+    action "Back" popmenu;pushmenu helpmenu
+end
+
+begin template
+    background #0000ff20
+    style --compact
+
+    blank
+    action "Back" popmenu;pushmenu faq
+end
+
+begin ammo
+    background #0000ff20
+    style --compact
+    action " I ran out of ammo, what do I do now?" ""
+    blank
+    action "Drop your primary weapon (default key 'c') and find someone else's.                   " ""
+    action "You can also KICK people by jumping at them to damage and make them drop their weapon!" ""
+    blank
+    action "Back" popmenu;pushmenu faq
+end
+
+begin door-n-band
+    background #0000ff20
+    style --compact
+    action " How do I open doors, or bandage myself, I'm limping!" ""
+    blank
+    action "Open doors with 'f' (default key) and bandage with 'e' (default key)," ""
+    action "bandaging takes 6 seconds, so run and hide until you can fight again!" ""
+    blank
+    action "Back" popmenu;pushmenu faq
+end
+
+begin morehelp
+    background #0000ff20
+    style --compact
+    action " I have more questions!  Help!" ""
+    blank
+    action "Visit us on Discord and we'll help as much as we can!" ""
+    action "https://discord.aq2world.com/" ""
+    blank
+    action "Back" popmenu;pushmenu faq
+end
+
+begin idied
+    background #0000ff20
+    style --compact
+    action " I died in one hit!  What gives?" ""
+    blank
+    action "This game has realistic locational damage, getting hit in the head is deadly," ""
+    action "try ducking behind some cover or use a tactical advantage to stay alive!     " ""
+    blank
+    action "Back" popmenu;pushmenu faq
+end
+
+begin why
+    background #0000ff20
+    style --compact
+    title " What is Action Quake and why am I here?"
+    blank
+    action "Action Quake is a mod for Quake II that provides realistic weaponry,      " ""
+    action "locational damage, hundreds of community-created maps and is the _actual_ " ""
+    action "father of Counter-Strike. As for why you are here, I can only imagine it  " ""
+    action "is because you want to play with us!                                   " ""
+    blank
+    action "Back" popmenu;pushmenu faq
+end
+
+begin what
+    background #0000ff20
+    style --compact
+    title " Now what?"
+    blank
+    action "Open it up and check the *Play Online* menu, there are several options:                    " ""
+    blank
+    action "Play Now -> Lets you choose preferred mode and it will take you to nearest populated server" ""
+    blank
+    action "Browse All Servers or Browse Favorite Servers -> Lets you find the server you want to join " ""
+    blank
+    action "Play Vs. Online Bots -> Will connect you to a server populated with bots                   " ""
+    blank
+    action "Or ask in the discord chat if there's anyone playing and join them.                        " ""
+    blank
+    action "Back" popmenu;pushmenu faq
+end
+
+begin keys
+    background #0000ff20
+    style --compact
+    title " How to I change my key bindings and controls?"
+    blank
+    action "Go to the main menu (Escape key) and then                 " ""
+    action "Settings -> General Bindings                              " ""
+    action "Settings -> Weapon Bindings                               " ""
+    blank
+    action "If you'd prefer to edit a config file with a text editor, " ""
+    action "go to action/autoexec_example.cfg, edit the file by hand  " ""
+    action "or paste in your own config, then save it as autoexec.cfg." ""
+    action "" ""
+    blank
+    action "Back" popmenu;pushmenu faq
+end
+
+begin jointeam
+    background #0000ff20
+    style --compact
+    action " I joined a server but I can't join a team!" ""
+    blank
+    action "Press the TAB button to bring up the in-game menu" ""
+    blank
+    action "Back" popmenu;pushmenu faq
+end
+
+begin cmd
+    background #0000ff20
+    style --compact
+    title " What are some of the common commands to use?"
+    blank
+    action "name <nickname> -> Set custom nickname                                    " ""
+	blank
+    action "connect <ip> -> Connect to a server using ip:port or hostname:port        " ""
+	blank
+    action "disconnect -> Disconnect from a server                                    " ""
+    blank
+	action "reconnect -> Reconnect to the last connected server                       " ""
+    blank
+	action "quit -> Exit the game                                                     " ""
+    blank
+	action "team 1/2/3/none -> Join specific team or leave one                        " ""
+    blank
+	action "stats -> Show your stats                                                  " ""
+    blank
+	action "stats list -> Show players' stats list                                    " ""
+    blank
+	action "stats # -> Show specific player's stats                                   " ""
+    blank
+	action "votemap <mapname> -> Vote for a map                                       " ""
+    blank
+	action "votekick <nickname> -> Vote for a user to be kicked                       " ""
+    blank
+	action "voteconfig <configname> -> Vote for a specific mode                       " ""
+    blank
+	action "votescramble -> Vote for teams to be scrambled                            " ""
+    blank
+	action "ignorelist -> Show player list                                            " ""
+    blank
+	action "ignore # or ignore <nickname> -> Add or remove player from your ignorelist" ""
+    blank
+    action "Back" popmenu;pushmenu commands
+end
+
+begin mcmd
+    background #0000ff20
+    style --compact
+    title " What are some of the matchmode commands to use?"
+    blank
+    action "captain -> Claim or release being team's captain                       " ""
+    action "sub -> Sub or unsub your team                                          " ""
+    blank
+    action "Commands for captains:                                                 " ""
+    action "ready -> Ready or unready for the matchmode                            " ""
+    action "lock -> Lock or unlock the team                                        " ""
+    action "teamname <your team name> -> Set a custom team name                    " ""
+    action "teamskin -> Change your team's player skin                             " ""
+    action "resetscores -> Send opposite team's captain request to reset scoreboard" ""
+    blank
+    action "Back" popmenu;pushmenu commands
+end
+
+begin jump
+    background #0000ff20
+    style --compact
+    title " What if I only want to practise jumps and movement?"
+    blank
+    action "You can go to your locally created server by typing gamemap <mapname>.              " "" 
+    action "To get the list of all maps on your drive press TAB key after typing gamemap.       " ""
+    action "Another option that is better suited for jumping is jmod which is jump mod for AQ2. " ""
+    action "There is no fall damage, you can't shoot other players and it provides other info   " ""
+    action "like current and highest speed. Server with jmod can be found in the server browser." ""
+    action "Just look for AQ2 JMOD - Jump around like a PRO.                                    " ""
+    blank
+    action "It has several features and its own commands:         " ""
+    action "teleporter set -> Set a custom spawn point to recall  " ""
+    action "teleporter recall -> Spawn at a custom set spawn point" ""
+    action "spawnp -> Spawn at random spawn point                 " ""
+    action "spawnp # -> Spawn at specific spawn point             " ""
+    action "lca -> Start LCA sequence                             " ""
+    action "puppet -> Place or remove a puppet on your location   " ""
+    blank
+    action "Back" popmenu;pushmenu faq
+end
