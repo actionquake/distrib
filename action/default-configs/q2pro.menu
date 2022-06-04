@@ -448,3 +448,11 @@ begin addonsmenu
     title "Optional Addons"
     action "AQ2PRO" pushmenu aq2pro
 end
+
+begin first_start
+    action "Choose your name" ""
+    blank
+    field --status "Choose your nickname" "Name" name
+    blank
+    action "save" "popmenu;pushmenu main"
+end
