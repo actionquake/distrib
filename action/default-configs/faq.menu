@@ -26,8 +26,8 @@ begin why
     blank
     action "Action Quake is a mod for Quake II that provides realistic weaponry,      " ""
     action "locational damage, hundreds of community-created maps and is the _actual_ " ""
-    action "father of Counter-Strike. As for why you are here, I can only imagine it's" ""
-    action "because you want to play with us!                                      " ""
+    action "father of Counter-Strike. As for why you are here, I can only imagine it  " ""
+    action "is because you want to play with us!                                      " ""
     blank
     action "Back" popmenu;pushmenu faq
     action "Close" popmenu
