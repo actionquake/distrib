@@ -127,11 +127,10 @@ do
 
     ## Generate dylib mappings
     cd ${CURRENT_DIR}
-    mkdir -p q2probuilds/${ARCH}/lib
-
-    dylibbundler -b -x "q2probuilds/${ARCH}/${PLATFORM}/q2pro" \
-            -x "q2probuilds/${ARCH}/${PLATFORM}/q2proded" \
-            -d "q2probuilds/${ARCH}/lib" -of -p @executable_path/${ARCH}lib
+    #mkdir -p q2probuilds/${ARCH}/lib
+    #dylibbundler -b -x "q2probuilds/${ARCH}/${PLATFORM}/q2pro" \
+    #        -x "q2probuilds/${ARCH}/${PLATFORM}/q2proded" \
+    #        -d "q2probuilds/${ARCH}/lib" -of -p @executable_path/${ARCH}lib
 
     ## make q2pro executable
     chmod +x q2probuilds/${ARCH}/${PLATFORM}/q2pro*
@@ -143,7 +142,7 @@ do
     rm -rf ${TNG_DIR}
 
     ## Clone repository, copy config file
-    git clone https://github.com/raptor007/aq2-tng ${TNG_DIR}
+    git clone https://github.com/actionquake/aq2-tng ${TNG_DIR}
 
     ## Apple Silicon M1 needs defined to change CC and MACHINE
     if [[ ${ARCH} = "m1" ]]; then

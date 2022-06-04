@@ -36,12 +36,13 @@ do
 
     ## Move action dir into the app for the zip file and populate AQ_Install directory
     mv ../../action AQ_Install/AQ.app/Contents/MacOS/
-    cp -r q2probuilds/intel/lib AQ_Install/AQ.app/Contents/MacOS/intellib
-    cp -r q2probuilds/m1/lib AQ_Install/AQ.app/Contents/MacOS/armlib
+    #cp -r q2probuilds/intel/lib AQ_Install/AQ.app/Contents/MacOS/intellib
+    #cp -r q2probuilds/m1/lib AQ_Install/AQ.app/Contents/MacOS/armlib
     install q2probuilds/universal/${PLATFORM}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
     install q2probuilds/universal/${PLATFORM}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
     install q2probuilds/intel/${PLATFORM}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
     install q2probuilds/m1/${PLATFORM}/gamearm.so AQ_Install/AQ.app/Contents/MacOS/action/
+    rm -rf AQ_Install/AQ.app/Contents/MacOS/.dummyfile
 
     ## make q2pro executable
     chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
