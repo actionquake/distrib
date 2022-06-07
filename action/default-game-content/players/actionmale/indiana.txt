@@ -1,0 +1,33 @@
+-----------------------------------------------------------
+Indiana Jones. Whats more to say?
+-----------------------------------------------------------
+
+Find treasures and dodge Nazis and baddies with this skin for the gangster
+model.
+
+GENERAL INFO:
+
+Skin Name:      	Indiana
+
+Model:     		Gangster (either standard or Action Quake version)
+
+Author:			Gunner
+
+Released:       	around 9-28-99
+
+Files Included: 	indiana.pcx, indiana_i.pcx, readme.txt
+
+Tools Used:		Some other guys Indi skin for Male model, QUARK,
+                        Windows Paintbrush
+
+Other misc. stuff:	If you like this skin, please check the other Indi skin,
+			available at http://guild.action-web.net, or possibly a current
+			guild pack.  Comments?  Email me at uberaction@hotmail.com
+			Otherwise, do what you want with it but just give me credit
+			somewhere, bla bla bla, you know the drill, thanks.
+
+Thanks to:	        Action Quake VWep (although the sniper is just
+			too freekin big on this model), the A-TEAM, PEPSI,
+			others.  
+
+Thats it i think.

@@ -1,0 +1,25 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ACTION QUAKE2 SKIN : "S.T.A.R.S" for the SAS                             "9/11/99" 	       				
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Skin:		STARS PPM:		SAS
+Author:		JO$H aka [DVR]EdgE
+Release date:	E-Mail:jwoz_14@yahoo.com
+URL(s):		--==Under Construction==--				
+Files:		STARS.txt, STARS.pcx, STARS_i.pcx
+Instructions:	Unzip all these files to your quake2/action/players/sas
+                directory.  (IF, that is, you're playin Action Quake) 		
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Important: 	This skin is free to use by anyone in any game. I made this skin with the 
+ 		intent on using it for Action Quake (ie. http://action.telefragged.com/)
+		but it can be used wherever the model is used. 
+Thanks:		Id software, The A-Team (oop can't call em that!!), & my brother (Mr. NO)		
+DISCLAIMER:	Use these skins as-is, ... do NOT make any modifications to this skin, nor 
+ 		should this be allowed to be a part of any type of commercially sold soft-
+		ware (unless you notify me).  This is FREE. This skin CAN however be part of any d/l skinpak, as
+		long as this txt file is with it. 
+Notes:		I made this skin so all u Resident Evil fanatics could play as the good ol' STARS police force. 
+                ENJOY!!
+---------------------------------------------------------------------------------------
+PS:		Please notify me if this skin is reviewed or added to a gallery or archive.
+		Want to use these skins for your clan? Please notify me.		
+---------------------------------------------------------------------------------------
