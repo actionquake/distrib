@@ -1,0 +1,44 @@
+ACTION QUAKE2 SKIN : "Pulp Rally" for the Action Rally                             "11/14/98" 	       				
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Skin:		Pulp Rally 
+
+PPM:		Action Rally	
+
+Author:		Lefty 2 Guns
+
+Release date:	04-09-99
+
+E-Mail:		conformordie@geocities.com
+
+Files:		pulp.pcx,pulp_i.pcx,readme.txt
+
+Instructions:	Unzip all these files to your quake2/action/players/ActionRally
+                directory.  (IF, that is, you're playin Action Quake) 
+		
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Important: 	This skin is free to use by anyone in any game. I made this skin with the 
+ 		intent on using it for Action Quake (ie. http://action.telefragged.com/)
+		but it can be used wherever the model is used. 
+
+Thanks:		nobody,i did this by myself :p
+
+DISCLAIMER:	Use these skins as-is, ... do NOT make any modifications to this skin, nor 
+ 		should this be allowed to be a part of any type of commercially sold soft-
+		ware (unless you notify me).  This is FREE. This skin CAN however be part of any d/l skinpak, as
+		long as this txt file is with it. 
+
+Notes:		um,it ain't that good but it's my first so any CREATIVE criticism would be cool.
+                thanx.
+                
+
+---------------------------------------------------------------------------------------
+
+PS:		Please notify me if this skin is reviewed or added to a gallery or archive.
+		I won't have a problem but that would be cool to know,thanx.
+		
+---------------------------------------------------------------------------------------
+
+

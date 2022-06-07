@@ -1,0 +1,25 @@
+Type: 		ActionRally ActionQuake Skin
+Name: 		Natasha
+Release Date:	20st March 1998
+Author:		Ian Waugh    
+E-Mail:		ian.waugh@virgin.net or gundam@btinternet.com
+Homepage:	No   	
+
+Files:		Natasha.pcx 	Natasha_i.pcx  
+		Natasha.txt
+
+Description: 	Natsha isn't ment to be anybody in particular, just sort of cute looking and dangerous
+
+Instructions:	Just unzip all the .pcx files into your quake2/actionquake/players/actionrally directory.
+		Do what you like with these skins, apart from stealing or selling them.
+
+Tools used:	Nst v9b2 
+		Corel Photo Paint 8
+		Md2
+
+Other:  	I can sometimes be found as "Gundam", late at night on Barrysworld server.
+		usually at the wrong end of somebody else's M4.
+		
+		The Rally Vincent mode was created by  Mark Potnick  : cloud_100@hotmail.com or mepot@cwix.com
+                Rally her self ins a Character in Kenichi Sonda's Top Manga "Gunsmith Cats", pusblished
+		in english by Dark Horse. Highly recommend by yours truly 

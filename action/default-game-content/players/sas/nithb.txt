@@ -1,0 +1,28 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ACTION QUAKE2 SKIN : "Nith_b" for SAS                          
+  "Saturday, October 2nd." 	       				
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Skin:		Nith_b
+PPM:SAS
+Author:		Jon Adamson; {DUCK}McBlood
+Release date:	Sunday, October 31st
+E-mail:McBlood@quakeclan.net
+URL(s):		http://www.quakeclan.net/aduck.			
+Files:		Nithb.pcx;Nithb_i.pcx;Nithb.txt
+Instructions:	Unzip all these files to your players/SAS directory
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Important: 	This skin is free to use by anyone in any game. I made this skin with the 
+ 		intent on using it for Action Quake (ie. http://action.telefragged.com/)
+		but it can be used for whatever purpose so long as I recieve some 
+		
+Thanks:		Id software, The A-Team, Jasc Software	
+DISCLAIMER:	Use these skins as-is, ... do NOT make any modifications to this skin, nor 
+ 		should this be allowed to be a part of any type of commercially sold soft-
+		ware (unless you notify me).  This is FREE. This skin CAN however be part of any d/l skinpak, as
+		long as this txt file is with it. 
+---------------------------------------------------------------------------------------
+PS:		Please notify me if this skin is reviewed or added to a gallery or archive.
+		Want to use these skins for your clan? Please notify me.	
+
+This is just the Nith skin I made previously except I have changed his pink pants to Blue.	
+---------------------------------------------------------------------------------------

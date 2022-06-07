@@ -1,0 +1,37 @@
+ACTION QUAKE2 SKIN : "BlackStar" for the ActionMale  PPM
+
+
+
+
+Skin:                     Blackstar
+
+PPM:                      ActionMale
+
+Author:                   Settler
+
+Release date:             November 6 1999
+
+E-Mail:                   settler@post.com
+
+URL:                      http://settler.cjb.net
+
+Programs Used:            PSP5
+
+Files:                    BlackStar.PCX, BlackStar_i.PCX, BlackStar.txt
+
+Instructions:   unzip all these files to your quake2/action/players/Spy   directory.  (IF, that is, you're playin Action Quake) 
+
+-----------------------
+
+NB:   This Skin Is The [BS] Skin, So You Cant Use It In Your Clan........
+Visit [BS] At:  http://bs.cjb.net
+
+
+
+
+----------------------
+|\   
+| \
+| | 
+| /
+|/ O  You Want More Skins?   Go to http://members.xoom.com/aq2settler/Linker.htm 
