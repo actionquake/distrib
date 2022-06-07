@@ -1,0 +1,27 @@
+,--------------------------------------------------------------------------------,
+|                                                                                |
+|  description : Action S.W.A.T. Police Skin                                     |
+|  contents    : swat.pcx, swat_i.pcx, swat.jpg, readme.txt                      |
+|  base model  : actionmale model                                                |
+|  author      : Shinobi  (shinobi@vortexq.com/mokei@mindspring.com)             |
+|  ICQ number  : 9243291                                                         |
+|  website     : ninjas.vortexq.com                                              |
+|                                                                                |
+|                                                                                |
+'---------------------------------------------,----------------------------------'
+                                              |
+                                  ,-----------'
+                                  |
+,---------------------------------'--------------------------------------------,
+|                                                                              |
+|                                                                              |
+|  Unzip these files into your quake, action/players/actionmale directory.     |
+|                                                                              |
+|                                                                              |
+|                                                                              |
+|                                                                              | 
+|                                                                              |
+|                                                                              |
+|                                                                              |
+|                                                                              |
+'------------------------------------------------------------------------------'

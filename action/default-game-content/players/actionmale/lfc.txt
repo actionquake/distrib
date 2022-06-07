@@ -1,0 +1,26 @@
+ACTION QUAKE2 SKIN : "lfc" for theactionmale or PPM
+
+
+
+
+Skin:       lfc
+
+PPM:       actionmale
+
+Author:   Settler
+
+Release date: november 1. 1999
+
+E-Mail:  settler@post.com
+
+URL:     http://members.xoom.com/aq2settler/
+
+Programs Used: PSP5
+
+Files:   lfc,lfc_i, lfc.txt
+
+Instructions:   nzip all these files to your quake2/action/players/actionmale  directory.  (IF, that is, you're playin Action Quake) 
+
+-----------------------
+
+NB:   Give me a e-mail if you want to use this skin for your clan!

@@ -1,0 +1,35 @@
+MORPHEUS:  An Action Quake2 skin for the Actionmale model
+
+
+Skin:		morpheus (from the movie "The Matrix", played by Laurence Fishburne)
+
+PPM:		Actionmale
+
+Author:		Keyser Soze
+
+Submitted:  	Aug. 22 1999
+
+E-Mail:		AQKeyserSoze@xoommail.com
+
+Webpage:	http://members.xoom.com/AQKeyserSoze  
+		(although not much there, its under construction)
+
+Files:		morpheus.pcx, morpheus_i.pcx, morpheus.txt
+
+Whadda I do???	Unzip all the files into your Quake2/action/players/ActionMale directory 
+		(or you can even use the regular Quake2 Supermale model, so I hear)
+
+Notes:		Well, the gloves and bottom of the shoes are just recolored from the
+		original skins, so thanks to the original skinners whoever you are.  
+		Soon to come, a Dojo Morpheus.  Should look better than this one.
+
+Other crap:	This skin is free and for everyones use, so please dont go 
+		out and try to sell it on the street to buy crack.  Modify it 
+		if you want, just dont make it look any worse than it already does,
+		and let me know about it.  Include it in any webpace, skinpack, or
+		CD compilation you want, just include this textfile with it.  And
+		again, it would be nice of you to let me know about it too.
+
+
+P.S.		Anyone know any secrets of making cool leather jackets?  This was my 
+		effort, with mixed results I must say.

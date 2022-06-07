@@ -1,0 +1,17 @@
+Skin For Action Quake
+
+"Leon"
+
+Skin: Leon
+
+PPM: Action Male
+
+Author: Raman Ralleigh , aka Razmataz
+
+Created: 4/7/99
+
+E-mail: raz3000@hotmail.com
+
+Files: leonreno.pcx, leonre~1.pcx, leonreno.txt
+
+Instructions: unzip to quake2/action/players/actionmale directory. Then start playing!

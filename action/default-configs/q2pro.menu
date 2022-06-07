@@ -91,8 +91,8 @@ begin game
     blank
     action " Settings" pushmenu settings
     blank
-    action " Optional Addons" pushmenu addonsmenu
-    blank
+    //action " Optional Addons" pushmenu addonsmenu
+    //blank
     action " Disconnect" disconnect
 end
 
@@ -123,8 +123,6 @@ begin playonline
     blank
     action " Browse Favorite Servers " pushmenu servers "favorites://" "file:///servers.lst"
     //action " Edit Favorite Servers " pushmenu addressbook
-    blank
-    action " Play vs. Online Bots " "connect useast.aq2world.com:27917"
 end
 
 begin playoffline
@@ -143,19 +141,25 @@ end
 
 begin playnow
     title "Find a server in your region automatically"
-    action --status "Round-based Team Play" "Team Play" "connect qj.aq2world.com:27901"
+    action --status "Round-based Team Play" "Standard Team Play" "connect qj.aq2world.com:27901"
     blank
     action --status "Free For All!" "Deathmatch" "connect qj.aq2world.com:27902"
     blank
     action --status "Deathmatch with teams!" "Team Deathmatch" "connect qj.aq2world.com:27903"
     blank
-    action --status "Teamplay with another team added!" "3 Team" "connect qj.aq2world.com:27904"
+    action --status "Teamplay with another team added!" "3 Team Teamplay" "connect qj.aq2world.com:27904"
     blank
     action --status "Bring the flag back to your base!" "Capture the Flag" "connect qj.aq2world.com:27905"
     blank
     action --status "Kill the enemy leader to win!" "Gangsters - Assassinate the Leader" "connect qj.aq2world.com:27906"
     blank
     action --status "Capture the enemy's briefcase, defend your own!" "Capture the Briefcase" "connect qj.aq2world.com:27907"
+    //blank
+    //action --status "Escort your Leader somewhere, or stop him at all costs!" "Escort the VIP" "connect qj.aq2world.com:27908"
+    //blank
+    //action --status "Defend your capture points, and assault ones you don't own to win!" "Capture and Hold" "connect qj.aq2world.com:27909"
+    blank
+    action --status "Play against bots and players!" "Versus Bots" "connect qj.aq2world.com:27912"
 end
 
 begin bots
@@ -182,7 +186,7 @@ begin dm_botmenu
     pairs --status "Choose your starting weapon/item" "Choose weapon/item" dm_choose "enabled" 1 "disabled" 0
     pairs --status "Spawn protection" "Enable 3 second spawn protection" dm_shield "disabled" 0 "enabled" 30
     blank
-    action --align " Play" "forcemenuoff;teamplay 0;map credits; map $nextserver; sv addbots $sv_botdm$;"
+    action --align " Play" "forcemenuoff;teamplay 0;set dm_choose $dm_choose;set dm_shield $dm_shield;map credits; map $nextserver; sv addbots $sv_botdm$;"
 end
 
 begin tdm_botmenu

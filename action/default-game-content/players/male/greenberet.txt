@@ -1,0 +1,43 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ACTION QUAKE2 SKIN : "Green Beret" for the male                             "04/24/99" 	       				
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Skin:		Green Beret 
+
+PPM:		male
+
+Author:		Unknown and Raymond Chang (me)
+
+Release date:	4-24-99
+
+E-Mail:		SpyderOgre@aol.com
+
+Webpage:	members.aol.com/spyderogre/page/intro.htm (It's a gamer boot camp under construction)
+		
+Files:		greenberet.txt, GreenBeret.pcx, GreenBeret_i.pcx
+
+Instructions:	Unzip all these files to your quake2/action/players/male
+                directory.  (IF, that is, you're playin Action Quake) 
+		
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Important: 	This skin is free to use by anyone in any game. I made this skin with the 
+ 		intent on using it for Quake 2 and Mods.  
+
+Thanks:		Id software, US Army, John Wayne for the movie "The Green Berets," the guys at Terror Quake 2 for the base skin I used,
+		and NPherno for NPherno's skin tool
+
+DISCLAIMER:	Should this become a part of any type of commercially sold software (unless you notify me) 
+		I will kick your ass.  This is FREE. This skin CAN however be part of any d/l skinpak, 
+		as long as this txt file is with it. 
+
+Notes:		Another awesome mod is Airquake 2.  You will find it at airquake2.converted2.com
+
+---------------------------------------------------------------------------------------
+
+PS:		Please notify me if this skin is reviewed or added to a gallery or archive.
+		Want to use these skins for your clan? Please notify me.
+		
+---------------------------------------------------------------------------------------
+
