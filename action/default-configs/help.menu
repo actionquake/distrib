@@ -1,5 +1,7 @@
 begin helpmenu
     title "Help Me!"
+    action " Getting started " pushmenu gettingstarted
+    blank
     action " FAQ " pushmenu faq
     blank
     action " Commands " pushmenu commands
@@ -45,12 +47,24 @@ begin faq
     action "Back" popmenu;pushmenu helpmenu
 end
 
-begin template
-    background #0000ff20
-    style --compact
-
+begin gettingstarted
+    title "Getting started"
     blank
-    action "Back" popmenu;pushmenu faq
+    action " To join a game, use the play now button from the Main menu [ESC] " ""
+    blank
+    action " When you have joined a game                                      " ""
+    action "   Use [TAB] to open the game menu where you chose team, weapon and  " ""
+    action "   and item if applicable                                            " ""
+    blank
+    action " Press [F1] when in a game to show the scoreboard                 " ""
+    blank
+    action " You can always press [F2] to bring up the help menu              " ""
+    blank
+    action " Press the 'console key' (between [ESC] and [TAB]) to bring up    " ""
+    action "   the console                                                      " ""
+    bitmap consolekey ""
+    blank
+    action "OK" "popmenu"
 end
 
 begin ammo

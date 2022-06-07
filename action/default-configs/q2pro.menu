@@ -460,5 +460,5 @@ begin first_start
     blank
     field --status "Choose your nickname" "Name" name
     blank
-    action "save" "popmenu;pushmenu main"
+    action "save" "popmenu;pushmenu gettingstarted"
 end
