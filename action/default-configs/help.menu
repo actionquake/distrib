@@ -2,9 +2,13 @@ begin helpmenu
     title "Help Me!"
     action " Getting started " pushmenu gettingstarted
     blank
+    action " Tutorials " pushmenu tutorials
+    blank
     action " FAQ " pushmenu faq
     blank
     action " Commands " pushmenu commands
+    blank
+
     blank
     action " Main menu " pushmenu main
 	blank
@@ -64,7 +68,27 @@ begin gettingstarted
     action "   the console                                                      " ""
     bitmap consolekey ""
     blank
-    action "OK" "popmenu"
+    action "  Are you new to this game? Check out the tutorials here " "pushmenu tutorials"
+    blank
+    blank
+    action " OK " "popmenu"
+end
+
+begin tutorials
+    title "Demo Tutorials"
+    action " How to watch demos/tutorials" "demo tutorials/AQtion-demo-guide;nextserver pushmenu tutorials"
+    blank
+    action " Bandaging - How to stop bleeding and limping" "demo tutorials/AQtion-bandaging-guide;nextserver pushmenu tutorials"
+    blank
+    action " Ladder - ascending and descending ladders" "demo tutorials/AQtion-ladder-guide;nextserver pushmenu tutorials"
+    blank
+    action " Basic Jumping" "demo tutorials/AQtion-jumping-guide;nextserver pushmenu tutorials"
+    blank
+    action " Advanced Jumping - Double jump" "demo tutorials/AQtion-double-jumping-guide;nextserver pushmenu tutorials"
+    blank
+    action " Advanced Jumping - Ramp jump" "demo tutorials/AQtion-ramp-jumping-guide;nextserver pushmenu tutorials"
+    blank
+    action "Back" popmenu;pushmenu helpmenu
 end
 
 begin ammo
