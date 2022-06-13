@@ -63,3 +63,10 @@ jobs:
           path: |
             build/gamex86.dll
             build/versions
+
+      - name: 'Post-build cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./

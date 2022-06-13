@@ -80,3 +80,9 @@ jobs:
           path: |
             ${{ env.CFG_WORKING_DIR }}/aqtion-content.zip
 
+      - name: 'Post-build cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
