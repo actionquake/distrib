@@ -226,3 +226,10 @@ jobs:
 
       - name: Update Vercel download links
         run: curl -X POST ${{ secrets.DEPLOY_API_URL }}
+
+      - name: 'Post-build cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./

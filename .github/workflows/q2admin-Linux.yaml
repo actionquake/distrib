@@ -82,3 +82,10 @@ jobs:
             build/plugins
             build/config.lua
             build/versions
+
+      - name: 'Post-build cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./

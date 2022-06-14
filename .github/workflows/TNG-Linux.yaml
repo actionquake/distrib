@@ -77,3 +77,10 @@ jobs:
           path: |
             build/gameaarch64.so
             build/versions
+
+      - name: 'Post-build cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
