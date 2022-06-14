@@ -3,7 +3,7 @@ version: "3"
 services:
   tp1:
     container_name: tp1
-    image: aqtiongame/server:v7
+    image: replace_me_with_image_reference_from_readme
     ports:
       - "27910:27910/udp"
       - "27910:27910/tcp"

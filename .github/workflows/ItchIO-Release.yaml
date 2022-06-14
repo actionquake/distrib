@@ -58,7 +58,7 @@ jobs:
       - name: Zip game content to pkz
         working-directory: ${{ env.CFG_WORKING_DIR }}/action
         run: |
-          for makepkz in default-configs default-game-content default-mappack0 default-mappack1 default-pics default-sounds; do
+          for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds; do
             cd ${makepkz}
             zip -r ../0_${makepkz}.pkz * && cd ..
             rm -rf ${makepkz}/
@@ -151,3 +151,10 @@ jobs:
         run: ./butler push aqtion-mac-universal.dmg aqtion/aqtion:mac-universal --userversion ${{ github.event.inputs.release_tag }}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+
+      - name: 'Post-build cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./

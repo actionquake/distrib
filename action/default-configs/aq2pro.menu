@@ -12,5 +12,6 @@ begin aq2pro
     blank
     blank
     action "To activate aq2pro, you also need to download the pak file" ""
-    action "You can do it here: https://UrlHere" ""
+    action "Find more information and to download/install it:" ""
+    action "https://aqtiongame.com/aq2pro" ""
 end

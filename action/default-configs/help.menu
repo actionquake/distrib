@@ -2,12 +2,16 @@ begin helpmenu
     title "Help Me!"
     action " Getting started " pushmenu gettingstarted
     blank
+    action " Tutorials " pushmenu tutorials
+    blank
     action " FAQ " pushmenu faq
     blank
     action " Commands " pushmenu commands
     blank
+
+    blank
     action " Main menu " pushmenu main
-	blank
+    blank
     action " Close " popmenu;popmenu
 end
 
@@ -64,7 +68,29 @@ begin gettingstarted
     action "   the console                                                      " ""
     bitmap consolekey ""
     blank
-    action "OK" "popmenu"
+    action "  Are you new to this game? Check out the tutorials here " "pushmenu tutorials"
+    blank
+    blank
+    action " OK " "popmenu"
+end
+
+begin tutorials
+    title "Demo Tutorials"
+    action " How to watch demos/tutorials" "demo tutorials/AQtion-demo-guide;nextserver pushmenu tutorials"
+    blank
+    action " Bandaging - How to stop bleeding and limping" "demo tutorials/AQtion-bandaging-guide;nextserver pushmenu tutorials"
+    blank
+    action " Ladder - ascending and descending ladders" "demo tutorials/AQtion-ladder-guide;nextserver pushmenu tutorials"
+    blank
+    action " Doors - opening and closing" "demo tutorials/AQtion-doors-guide;nextserver pushmenu tutorials"
+    blank
+    action " Basic Jumping" "demo tutorials/AQtion-jumping-guide;nextserver pushmenu tutorials"
+    blank
+    action " Advanced Jumping - Double jump" "demo tutorials/AQtion-double-jumping-guide;nextserver pushmenu tutorials"
+    blank
+    action " Advanced Jumping - Ramp jump" "demo tutorials/AQtion-ramp-jumping-guide;nextserver pushmenu tutorials"
+    blank
+    action "Back" popmenu;pushmenu helpmenu
 end
 
 begin ammo
@@ -175,34 +201,34 @@ begin cmd
     title " What are some of the common commands to use?"
     blank
     action "name <nickname> -> Set custom nickname                                    " ""
-	blank
+    blank
     action "connect <ip> -> Connect to a server using ip:port or hostname:port        " ""
-	blank
+    blank
     action "disconnect -> Disconnect from a server                                    " ""
     blank
-	action "reconnect -> Reconnect to the last connected server                       " ""
+    action "reconnect -> Reconnect to the last connected server                       " ""
     blank
-	action "quit -> Exit the game                                                     " ""
+    action "quit -> Exit the game                                                     " ""
     blank
-	action "team 1/2/3/none -> Join specific team or leave one                        " ""
+    action "team 1/2/3/none -> Join specific team or leave one                        " ""
     blank
-	action "stats -> Show your stats                                                  " ""
+    action "stats -> Show your stats                                                  " ""
     blank
-	action "stats list -> Show players' stats list                                    " ""
+    action "stats list -> Show players' stats list                                    " ""
     blank
-	action "stats # -> Show specific player's stats                                   " ""
+    action "stats # -> Show specific player's stats                                   " ""
     blank
-	action "votemap <mapname> -> Vote for a map                                       " ""
+    action "votemap <mapname> -> Vote for a map                                       " ""
     blank
-	action "votekick <nickname> -> Vote for a user to be kicked                       " ""
+    action "votekick <nickname> -> Vote for a user to be kicked                       " ""
     blank
-	action "voteconfig <configname> -> Vote for a specific mode                       " ""
+    action "voteconfig <configname> -> Vote for a specific mode                       " ""
     blank
-	action "votescramble -> Vote for teams to be scrambled                            " ""
+    action "votescramble -> Vote for teams to be scrambled                            " ""
     blank
-	action "ignorelist -> Show player list                                            " ""
+    action "ignorelist -> Show player list                                            " ""
     blank
-	action "ignore # or ignore <nickname> -> Add or remove player from your ignorelist" ""
+    action "ignore # or ignore <nickname> -> Add or remove player from your ignorelist" ""
     blank
     action "Back" popmenu;pushmenu commands
 end

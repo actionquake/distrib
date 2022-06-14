@@ -134,6 +134,13 @@ jobs:
             build/q2proded
             build/versions
 
+      - name: 'Post-build cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
+
   # linux_x86_64_build_q2pro_steam:
   #   #runs-on: ubuntu-latest
   #   runs-on: [self-hosted, x86]

@@ -84,3 +84,10 @@ jobs:
             build/q2pro.exe
             build/q2proded.exe
             build/versions
+
+      - name: 'Post-build cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
