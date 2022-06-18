@@ -12,12 +12,8 @@ on:
   workflow_dispatch:
     inputs:
       steam_branch:
-        type: choice
-        description: "Test branch"
-        options:
-        - playtest
-        - stattest
-      required: true
+        description: "Release version tag"
+        required: true
 
 env:
   CFG_WORKING_DIR: "config"
