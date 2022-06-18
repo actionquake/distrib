@@ -5,9 +5,19 @@ name: Steam Release
 #     tags:
 #       - 'v*'
 
+# on:
+#   workflow_dispatch:
+
 on:
   workflow_dispatch:
-
+    inputs:
+      steam_branch:
+        type: choice
+        description: "Test branch"
+        options:
+        - playtest
+        - stattest
+      required: true
 
 env:
   CFG_WORKING_DIR: "config"
@@ -140,7 +150,7 @@ jobs:
           cp ${{ env.CFG_WORKING_DIR }}/scripts/steam/*.vdf .
 
       - name: Upload All Builds
-        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build /home/github/actions-runner/_work/distrib/distrib/aqtion.vdf +quit
+        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build /home/github/actions-runner/_work/distrib/distrib/${{ github.event.inputs.steam_branch }}.vdf +quit
         env:
           STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
           STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}

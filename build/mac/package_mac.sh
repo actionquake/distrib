@@ -47,6 +47,12 @@ do
     ## make q2pro executable
     chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
 
+    ## Copy startup.py if Steam
+    if [[ ${PLATFORM} == "steam" ]]; then
+        install q2probuilds/startup.py AQ_Install/AQ.app/Contents/MacOS/startup.py
+        cp -r q2probuilds/intel/support AQ_Install/AQ.app/Contents/MacOS/
+    fi
+
     ## Create dmg file
     hdiutil create -ov ${DMG_FILENAME}.dmg -srcfolder AQ_Install -volname "AQtion"
 
