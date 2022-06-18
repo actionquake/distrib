@@ -8,12 +8,17 @@ name: Steam Release
 # on:
 #   workflow_dispatch:
 
-on:
+on: 
   workflow_dispatch:
     inputs:
       steam_branch:
-        description: "Release version tag"
+        description: 'Branch to deploy in Steam'     
         required: true
+        default: 'playtest' 
+        type: choice
+        options:
+        - playtest
+        - stattest
 
 env:
   CFG_WORKING_DIR: "config"
