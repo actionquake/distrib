@@ -29,37 +29,40 @@ do
 
     ## create MacOS dir if it does not exist
     mkdir -p AQ_Install/AQ.app/Contents/MacOS
+    mkdir -p Steam_Install
 
     ## Create universal binary from prebuilt binaries
     lipo -create -output q2probuilds/universal/${PLATFORM}/q2pro q2probuilds/intel/${PLATFORM}/q2pro q2probuilds/m1/${PLATFORM}/q2pro
     lipo -create -output q2probuilds/universal/${PLATFORM}/q2proded q2probuilds/intel/${PLATFORM}/q2proded q2probuilds/m1/${PLATFORM}/q2proded
 
     ## Move action dir into the app for the zip file and populate AQ_Install directory
-    mv ../../action AQ_Install/AQ.app/Contents/MacOS/
-    #cp -r q2probuilds/intel/lib AQ_Install/AQ.app/Contents/MacOS/intellib
-    #cp -r q2probuilds/m1/lib AQ_Install/AQ.app/Contents/MacOS/armlib
-    install q2probuilds/universal/${PLATFORM}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
-    install q2probuilds/universal/${PLATFORM}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
-    install q2probuilds/intel/${PLATFORM}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
-    install q2probuilds/m1/${PLATFORM}/gamearm.so AQ_Install/AQ.app/Contents/MacOS/action/
-    rm -rf AQ_Install/AQ.app/Contents/MacOS/.dummyfile
+    if [[ ${PLATFORM} == "standalone" ]]; then
+        mv ../../action AQ_Install/AQ.app/Contents/MacOS/
+        install q2probuilds/universal/${PLATFORM}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
+        install q2probuilds/universal/${PLATFORM}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
+        install q2probuilds/intel/${PLATFORM}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
+        install q2probuilds/m1/${PLATFORM}/gamearm.so AQ_Install/AQ.app/Contents/MacOS/action/
+        rm -rf AQ_Install/AQ.app/Contents/MacOS/.dummyfile
+        ## make q2pro executable
+        chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
 
-    ## make q2pro executable
-    chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
+        ## Create dmg file
+        hdiutil create -ov ${DMG_FILENAME}.dmg -srcfolder AQ_Install -volname "AQtion"
 
-    ## Copy startup.py if Steam
-    if [[ ${PLATFORM} == "steam" ]]; then
-        install q2probuilds/startup.py AQ_Install/AQ.app/Contents/MacOS/startup.py
-        cp -r q2probuilds/intel/support AQ_Install/AQ.app/Contents/MacOS/
-    fi
+        cd AQ_Install || return
+        zip -r ../${DMG_FILENAME}.zip AQ.app
+        cd .. || return
 
-    ## Create dmg file
-    hdiutil create -ov ${DMG_FILENAME}.dmg -srcfolder AQ_Install -volname "AQtion"
+        ## Move action folder back
+        mv AQ_Install/AQ.app/Contents/MacOS/action ../../
+    else
+        mv ../../action AQ_Install/AQ.app/Contents/MacOS/
+        install q2probuilds/universal/${PLATFORM}/q2proded Steam_Install/q2proded
+        install q2probuilds/universal/${PLATFORM}/q2pro Steam_Install/q2pro
+        install q2probuilds/intel/${PLATFORM}/gamex86_64.so Steam_Install/action/
+        install q2probuilds/m1/${PLATFORM}/gamearm.so Steam_Install/action/
+        ## make q2pro executable
+        chmod +x Steam_Install/q2pro*
 
-    cd AQ_Install || return
-    zip -r ../${DMG_FILENAME}.zip AQ.app
-    cd .. || return
-
-    ## Move action folder back
-    mv AQ_Install/AQ.app/Contents/MacOS/action ../../
+        zip -r ${DMG_FILENAME}.zip Steam_Install
 done
