@@ -11,7 +11,7 @@ Great!  Hosting a server is a great way to contribute to the community and helps
     * docker-compose, docker commands in general
 * Some flavor of 64-bit Linux
     * Known good/tested:
-        * Ubuntu 18.04 Server, Ubuntu 20.04 Server
+        * Ubuntu 18.04 Server, Ubuntu 20.04 Server, Ubuntu 22.04
         * Amazon Linux
         * Debian
     * Unknown but probably work fine
@@ -24,6 +24,7 @@ Great!  Hosting a server is a great way to contribute to the community and helps
     * [AWS](https://aws.amazon.com/) (several dozen locations)
     * [Hetzner](https://www.hetzner.com/cloud)
     * [OVH](https://www.ovhcloud.com/en/public-cloud/compute/)
+    * [vultr](https://www.vultr.com/) (inexpensive with many locations)
     * Your favorite VPS
 * **Keep in mind that these servers require very few resources; a few dozen megabytes of RAM and very little CPU, and less than 512MB of disk space just for AQtion, even with a _ton_ of maps.**
 ----
