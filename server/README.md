@@ -11,7 +11,7 @@ Great!  Hosting a server is a great way to contribute to the community and helps
     * docker-compose, docker commands in general
 * Some flavor of 64-bit Linux
     * Known good/tested:
-        * Ubuntu 18.04 Server, Ubuntu 20.04 Server, Ubuntu 22.04
+        * Ubuntu 18.04 Server, Ubuntu 20.04 Server, Ubuntu 22.04 Server
         * Amazon Linux
         * Debian
     * Unknown but probably work fine
