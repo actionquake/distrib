@@ -2,36 +2,23 @@ version: "3"
 
 services:
   tp1:
-    container_name: tp1
-    image: replace_me_with_image_reference_from_readme
-    ports:
+    container_name: teamplay1
+    image: aqtiongame/server:v12  # replace_with_image_reference_from_readme
+    ports:  # ports to map to host, cannot be in use and must correspond to same value as PORT variable in tp1.env
       - "27910:27910/udp"
       - "27910:27910/tcp"
     stdin_open: true
     tty: true
-    restart: on-failure:5
+    restart: unless-stopped
     env_file:
-     - ./tp1.env
+      - ./tp1.env  # set server parameter in env_file
     environment:
-     - PORT=27910
-     - TEAM_1_NAME=Red Rockets
-     - TEAM_2_NAME=Blue Blazes
-     - TEAM_3_NAME=Yellow Bellies
-     - TEAM_1_SKIN=male/ctf_r
-     - TEAM_2_SKIN=male/ctf_b
-     - TEAM_3_SKIN=male/ctf_y
-     - HOSTNAME=[TP1] Rojo v Azul
-     - MAXCLIENTS=11
-     - RCON_PASSWORD=replaceme!!
-     - TIMELIMIT=20
-     - FRAGLIMIT=0
-     - ROUNDLIMIT=12
-     - FULLMAPS=FALSE
-     - ROTATION=actcity2,wizs,time,teamjungle
-     - MAP=teamjungle
+      - TZ=Etc/UTC  # set your local timezone
     volumes:
-     - ./tp1.motd:/aq2server/action/motd.txt:ro
-     - maps:/aq2server/action/maps
+      - /<host_path_to_aqtion_demos>:/aq2server/action/demos  # mount to access and store demos on host
+      - /<host_path_to_aqtion_logs>:/aq2server/action/logs  # mount to access and store logs on host
+      - ./tp1.motd:/aq2server/action/motd.txt:ro
+      - maps:/aq2server/action/maps
 
 volumes:
   maps:
