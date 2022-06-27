@@ -105,10 +105,10 @@ do
     ## Build the q2pro binaries
     cd ${Q2PRO_DIR} || return
     if [ ${PLATFORM} = "steam" ]; then
-        cp ../q2pro_config_steam ${Q2PRO_DIR}/q2pro_config_steam
+        cp ../q2pro_config_steam .
         export CONFIG_FILE=q2pro_config_steam; make -j4 V=1
     else
-        cp ../q2pro_config_standalone ${Q2PRO_DIR}/q2pro_config_standalone
+        cp ../q2pro_config_standalone .
         export CONFIG_FILE=q2pro_config_standalone; make -j4 V=1
     fi
     build_exitcode=$?
