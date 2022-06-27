@@ -56,7 +56,7 @@ do
         ## Move action folder back
         mv AQ_Install/AQ.app/Contents/MacOS/action ../../
     else
-        mv ../../action AQ_Install/AQ.app/Contents/MacOS/
+        mv ../../action Steam_Install/
         install q2probuilds/universal/${PLATFORM}/q2proded Steam_Install/q2proded
         install q2probuilds/universal/${PLATFORM}/q2pro Steam_Install/q2pro
         install q2probuilds/intel/${PLATFORM}/gamex86_64.so Steam_Install/action/
