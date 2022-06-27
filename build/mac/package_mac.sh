@@ -62,7 +62,7 @@ do
         install q2probuilds/intel/${PLATFORM}/gamex86_64.so Steam_Install/action/
         install q2probuilds/m1/${PLATFORM}/gamearm.so Steam_Install/action/
         ## make q2pro executable
-        chmod +x Steam_Install/q2pro*
+        chmod +x Steam_Install/q2pro* Steam_Install/aqtion
 
         zip -r ${DMG_FILENAME}.zip Steam_Install
 done
