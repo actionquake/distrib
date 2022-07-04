@@ -57,6 +57,8 @@ do
         mv AQ_Install/AQ.app/Contents/MacOS/action ../../
     else
         mv ../../action Steam_Install/
+        lipo -create -output q2probuilds/universal/${PLATFORM}/aqtion q2probuilds/intel/${PLATFORM}/aqtion q2probuilds/m1/${PLATFORM}/aqtion
+        install q2probuilds/universal/${PLATFORM}/aqtion Steam_Install/aqtion
         install q2probuilds/universal/${PLATFORM}/q2proded Steam_Install/q2proded
         install q2probuilds/universal/${PLATFORM}/q2pro Steam_Install/q2pro
         install q2probuilds/intel/${PLATFORM}/gamex86_64.so Steam_Install/action/
