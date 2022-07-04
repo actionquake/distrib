@@ -65,4 +65,5 @@ do
         chmod +x Steam_Install/q2pro* Steam_Install/aqtion
 
         zip -r ${DMG_FILENAME}.zip Steam_Install
+    fi
 done
