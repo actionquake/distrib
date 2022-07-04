@@ -299,7 +299,7 @@ begin a_video
     range "modulation entities" gl_modulate_entities 0 10
     toggle "hardware gamma" vid_hwgamma
     range "lightmap saturation" gl_coloredlightmaps 0.0 1.0
-    pairs --status "Texture override preferences" "high quality textures" r_override_textures "use original" 0 "enabled" 1 "only HUD" 2 "all except HUD" 3
+    pairs --status "Assets override preferences (skins, textures, hud, etc)" "high quality assets" r_override_textures "use original" 0 "enabled" 1
     blank
     action --align "apply now" "popmenu; vid_restart; pushmenu settings; pushmenu video; pushmenu a_video"
 end
