@@ -11,7 +11,7 @@ Great!  Hosting a server is a great way to contribute to the community and helps
     * docker-compose, docker commands in general
 * Some flavor of 64-bit Linux
     * Known good/tested:
-        * Ubuntu 18.04 Server, Ubuntu 20.04 Server
+        * Ubuntu 18.04 Server, Ubuntu 20.04 Server, Ubuntu 22.04 Server
         * Amazon Linux
         * Debian
     * Unknown but probably work fine
@@ -24,16 +24,17 @@ Great!  Hosting a server is a great way to contribute to the community and helps
     * [AWS](https://aws.amazon.com/) (several dozen locations)
     * [Hetzner](https://www.hetzner.com/cloud)
     * [OVH](https://www.ovhcloud.com/en/public-cloud/compute/)
+    * [vultr](https://www.vultr.com/) (inexpensive with many locations)
     * Your favorite VPS
 * **Keep in mind that these servers require very few resources; a few dozen megabytes of RAM and very little CPU, and less than 512MB of disk space just for AQtion, even with a _ton_ of maps.**
 ----
 ### Step by step
 
 Use the following Docker images
-* Official: `aqtiongame/server:v10`
-* Espionage: `aqtiongame/espionage:v10`
-* ARM64 / Rasp Pi: `aqtiongame/server:v10-arm64`
-* ARM32 / Rasp Pi: `aqtiongame/server:v10-arm32`
+* Official: `aqtiongame/server:v12`
+* Espionage: `aqtiongame/espionage:v12`
+* ARM64 / Rasp Pi: `aqtiongame/server:v12-arm64`
+* ARM32 / Rasp Pi: `aqtiongame/server:v12-arm32`
 
 1. If you have docker and docker-compose already, skip to step 3
 1. Upon logging into the VPS/instance (ssh, console or otherwise) gaining access to the shell, install docker and docker-compose
