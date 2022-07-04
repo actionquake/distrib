@@ -62,12 +62,13 @@ jobs:
         working-directory: ${{ env.CFG_WORKING_DIR }}/build/mac
         run: bash package_mac.sh steam
 
-      - name: Generate Universal Steam DMG artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: mac-universal-dmg-steam
-          path: |
-            ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-universal-steam.dmg
+      # No longer packaging Steam as DMG
+      # - name: Generate Universal Steam DMG artifact
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: mac-universal-dmg-steam
+      #     path: |
+      #       ${{ env.CFG_WORKING_DIR }}/build/mac/aqtion-mac-universal-steam.dmg
 
       - name: Generate Universal Steam zip artifact
         uses: actions/upload-artifact@v3

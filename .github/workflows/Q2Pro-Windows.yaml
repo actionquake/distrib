@@ -49,7 +49,7 @@ jobs:
         working-directory: build
         run: |
           echo "PLATFORM=Steam" >> .config_windows${{ matrix.suffix }}
-          make strip -j2 V=1
+          make strip -j4 V=1
         env:
           CONFIG_FILE: ".config_windows${{ matrix.suffix }}"
 
@@ -72,7 +72,7 @@ jobs:
         run: |
           sed -i '/PLATFORM/d' .config_windows*
           make clean
-          make strip -j2 V=1
+          make strip -j4 V=1
         env:
           CONFIG_FILE: ".config_windows${{ matrix.suffix }}"
 

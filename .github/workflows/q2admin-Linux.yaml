@@ -12,11 +12,23 @@ jobs:
   linux_x86_64_build_q2admin:
     runs-on: [self-hosted, x86]
     steps:
+      - name: 'Pre-build cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
+
       - uses: actions/checkout@v3
         with:
           repository: actionquake/q2admin
           ref: aqtion
           path: build
+
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: config
 
       - name: Change references from baseq2 to action and rename config.ex.lua
         working-directory: build/src
@@ -48,11 +60,23 @@ jobs:
   linux_arm64_build_q2admin:
     runs-on: [self-hosted, ARM64]
     steps:
+      - name: 'Post-build cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
+
       - uses: actions/checkout@v3
         with:
           repository: actionquake/q2admin
           ref: aqtion
           path: build
+
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: config
 
       - name: Change references from baseq2 to action and rename config.ex.lua
         working-directory: build/src
@@ -80,10 +104,3 @@ jobs:
             build/plugins
             build/config.lua
             build/versions
-
-      - name: 'Post-build cleanup build folder'
-        run: |
-          ls -la ./
-          rm -rf ./* || true
-          rm -rf ./.??* || true
-          ls -la ./
