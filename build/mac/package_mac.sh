@@ -10,8 +10,6 @@
 
 DISTRIB=$1
 CURRENT_DIR=$(pwd)
-PLATFORMS=(steam standalone)
-
 
 if [[ -z ${DISTRIB} ]]
 then
@@ -23,51 +21,52 @@ fi
 
 echo "Current dir is ${CURRENT_DIR}"
 
-for PLATFORM in "${PLATFORMS[@]}"
-do
-    DMG_FILENAME=aqtion-mac-universal-${PLATFORM}
+## create MacOS dir if it does not exist
 
-    ## create MacOS dir if it does not exist
+## Move action dir into the app for the zip file and populate AQ_Install directory
+if [[ ${DISTRIB} == "standalone" ]]; then
     mkdir -p AQ_Install/AQ.app/Contents/MacOS
-    mkdir -p Steam_Install
-
+    DMG_FILENAME=aqtion-mac-universal-${DISTRIB}
     ## Create universal binary from prebuilt binaries
-    lipo -create -output q2probuilds/universal/${PLATFORM}/q2pro q2probuilds/intel/${PLATFORM}/q2pro q2probuilds/m1/${PLATFORM}/q2pro
-    lipo -create -output q2probuilds/universal/${PLATFORM}/q2proded q2probuilds/intel/${PLATFORM}/q2proded q2probuilds/m1/${PLATFORM}/q2proded
+    lipo -create -output q2probuilds/universal/${DISTRIB}/q2pro q2probuilds/intel/${DISTRIB}/q2pro q2probuilds/m1/${DISTRIB}/q2pro
+    lipo -create -output q2probuilds/universal/${DISTRIB}/q2proded q2probuilds/intel/${DISTRIB}/q2proded q2probuilds/m1/${DISTRIB}/q2proded
+    
+    mv ../../action AQ_Install/AQ.app/Contents/MacOS/
+    install q2probuilds/universal/${DISTRIB}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
+    install q2probuilds/universal/${DISTRIB}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
+    install q2probuilds/intel/${DISTRIB}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
+    install q2probuilds/m1/${DISTRIB}/gamearm.so AQ_Install/AQ.app/Contents/MacOS/action/
+    rm -rf AQ_Install/AQ.app/Contents/MacOS/.dummyfile
+    ## make q2pro executable
+    chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
 
-    ## Move action dir into the app for the zip file and populate AQ_Install directory
-    if [[ ${PLATFORM} == "standalone" ]]; then
-        mv ../../action AQ_Install/AQ.app/Contents/MacOS/
-        install q2probuilds/universal/${PLATFORM}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
-        install q2probuilds/universal/${PLATFORM}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
-        install q2probuilds/intel/${PLATFORM}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
-        install q2probuilds/m1/${PLATFORM}/gamearm.so AQ_Install/AQ.app/Contents/MacOS/action/
-        rm -rf AQ_Install/AQ.app/Contents/MacOS/.dummyfile
-        ## make q2pro executable
-        chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
+    ## Create dmg file
+    hdiutil create -ov ${DMG_FILENAME}.dmg -srcfolder AQ_Install -volname "AQtion"
 
-        ## Create dmg file
-        hdiutil create -ov ${DMG_FILENAME}.dmg -srcfolder AQ_Install -volname "AQtion"
+    cd AQ_Install || return
+    zip -r ../${DMG_FILENAME}.zip AQ.app
+    cd .. || return
 
-        cd AQ_Install || return
-        zip -r ../${DMG_FILENAME}.zip AQ.app
-        cd .. || return
+    ## Move action folder back
+    mv AQ_Install/AQ.app/Contents/MacOS/action ../../
+else
+    mkdir -p Steam_Install
+    DMG_FILENAME=aqtion-mac-universal-${DISTRIB}
+    ## Create universal binary from prebuilt binaries
+    lipo -create -output q2probuilds/universal/${DISTRIB}/q2pro q2probuilds/intel/${DISTRIB}/q2pro q2probuilds/m1/${DISTRIB}/q2pro
+    lipo -create -output q2probuilds/universal/${DISTRIB}/q2proded q2probuilds/intel/${DISTRIB}/q2proded q2probuilds/m1/${DISTRIB}/q2proded
+    
+    mv ../../action Steam_Install/
+    lipo -create -output q2probuilds/universal/${DISTRIB}/aqtion q2probuilds/intel/${DISTRIB}/aqtion q2probuilds/m1/${DISTRIB}/aqtion
+    install q2probuilds/universal/${DISTRIB}/aqtion Steam_Install/aqtion
+    install q2probuilds/universal/${DISTRIB}/q2proded Steam_Install/q2proded
+    install q2probuilds/universal/${DISTRIB}/q2pro Steam_Install/q2pro
+    install q2probuilds/intel/${DISTRIB}/gamex86_64.so Steam_Install/action/
+    install q2probuilds/m1/${DISTRIB}/gamearm.so Steam_Install/action/
+    ## make q2pro executable
+    chmod +x Steam_Install/q2pro* Steam_Install/aqtion
 
-        ## Move action folder back
-        mv AQ_Install/AQ.app/Contents/MacOS/action ../../
-    else
-        mv ../../action Steam_Install/
-        lipo -create -output q2probuilds/universal/${PLATFORM}/aqtion q2probuilds/intel/${PLATFORM}/aqtion q2probuilds/m1/${PLATFORM}/aqtion
-        install q2probuilds/universal/${PLATFORM}/aqtion Steam_Install/aqtion
-        install q2probuilds/universal/${PLATFORM}/q2proded Steam_Install/q2proded
-        install q2probuilds/universal/${PLATFORM}/q2pro Steam_Install/q2pro
-        install q2probuilds/intel/${PLATFORM}/gamex86_64.so Steam_Install/action/
-        install q2probuilds/m1/${PLATFORM}/gamearm.so Steam_Install/action/
-        ## make q2pro executable
-        chmod +x Steam_Install/q2pro* Steam_Install/aqtion
+    cd Steam_Install && zip -r ../${DMG_FILENAME}.zip *
 
-        zip -r ${DMG_FILENAME}.zip Steam_Install
-
-        mv Steam_Install/action ../../
-    fi
-done
+    mv action ../../../
+fi
