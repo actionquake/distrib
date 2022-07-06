@@ -42,7 +42,7 @@ jobs:
       # Standalone
       - name: Build Q2Pro
         working-directory: build
-        run: make strip -j2 V=1
+        run: make strip -j4 V=1
         env:
           CC: "gcc"
           CONFIG_FILE: ".config"
@@ -64,7 +64,7 @@ jobs:
       # Steam
       - name: Build Q2Pro Steam
         working-directory: build
-        run: make clean && echo "PLATFORM=Steam" >> .config && make strip -j2 V=1
+        run: make clean && echo "PLATFORM=Steam" >> .config && make strip -j4 V=1
         env:
           CC: "gcc"
           CONFIG_FILE: ".config"
@@ -115,7 +115,7 @@ jobs:
 
       - name: Build Q2Pro
         working-directory: build
-        run: make strip -j2 V=1
+        run: make strip -j4 V=1
         env:
           CC: "gcc"
           CONFIG_FILE: ".config"
@@ -178,7 +178,7 @@ jobs:
 
   #     - name: Build Q2Pro
   #       working-directory: build
-  #       run: make strip -j2 V=1
+  #       run: make strip -j4 V=1
   #       env:
   #         CC: "gcc"
   #         CONFIG_FILE: ".config"
