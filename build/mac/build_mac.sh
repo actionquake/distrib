@@ -106,10 +106,10 @@ do
     cd ${Q2PRO_DIR} || return
     if [ ${PLATFORM} = "steam" ]; then
         cp ../q2pro_config_steam .
-        export CONFIG_FILE=q2pro_config_steam; make -j4 V=1
+        export CONFIG_FILE=q2pro_config_steam; AQTION=TRUE make -j4 V=1
     else
         cp ../q2pro_config_standalone .
-        export CONFIG_FILE=q2pro_config_standalone; make -j4 V=1
+        export CONFIG_FILE=q2pro_config_standalone; AQTION=TRUE make -j4 V=1
     fi
     build_exitcode=$?
 
