@@ -35,6 +35,7 @@ jobs:
         run: make -j4 V=1 && mv gamex86_64.so ../gamex86_64.so
         env:
           CC: "gcc"
+          AQTION: "TRUE"
 
       - name: Generate archive
         uses: actions/upload-artifact@v3

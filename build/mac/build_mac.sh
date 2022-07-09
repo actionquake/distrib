@@ -157,7 +157,7 @@ do
     ## Build the tng binaries
     cd ${TNG_DIR}/source || return
     git checkout bots
-    make -j2 V=1
+    AQTION=TRUE make -j4 V=1
     build_exitcode=$?
 
     ## Copy files in preparation for the build step

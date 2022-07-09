@@ -19,10 +19,12 @@ services:
       - TZ=Etc/UTC
     # mounts to allow access and persist files on host, you will need to set appropriate permissions
     volumes:
-      - /<host_path_to_aqtion_demos>:/aq2server/action/demos  
-      - /<host_path_to_aqtion_logs>:/aq2server/action/logs  
       - ./tp1.motd:/aq2server/action/motd.txt:ro
       - maps:/aq2server/action/maps
+      - logs:/aq2server/action/logs
+      - demos:/aq2server/action/demos
 
 volumes:
   maps:
+  logs:
+  demos:
