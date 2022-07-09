@@ -61,6 +61,8 @@ else
     install q2probuilds/universal/${DISTRIB}/aqtion Steam_Install/aqtion
     install q2probuilds/universal/${DISTRIB}/q2proded Steam_Install/q2proded
     install q2probuilds/universal/${DISTRIB}/q2pro Steam_Install/q2pro
+    install q2probuilds/universal/${PLATFORM}/libsteam_api.dylib Steam_Install/libsteam_api.dylib
+    install q2probuilds/universal/${PLATFORM}/steam_appid.txt Steam_Install/steam_appid.txt
     install q2probuilds/intel/${DISTRIB}/gamex86_64.so Steam_Install/action/
     install q2probuilds/m1/${DISTRIB}/gamearm.so Steam_Install/action/
     ## make q2pro executable
