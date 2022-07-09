@@ -31,10 +31,10 @@ Great!  Hosting a server is a great way to contribute to the community and helps
 ### Step by step
 
 Use the following Docker images
-* Official: `aqtiongame/server:v13`
-* Espionage: `aqtiongame/espionage:v13`
-* ARM64 / Rasp Pi: `aqtiongame/server:v13-arm64`
-* ARM32 / Rasp Pi: `aqtiongame/server:v13-arm32`
+* Official: `aqtiongame/server:v20`
+* Espionage: `aqtiongame/espionage:v20`
+* ARM64 / Rasp Pi: `aqtiongame/server:v20-arm64`
+* ARM32 / Rasp Pi: `aqtiongame/server:v20-arm32`
 
 1. If you have docker and docker-compose already, skip to step 3
 1. Upon logging into the VPS/instance (ssh, console or otherwise) gaining access to the shell, install docker and docker-compose
