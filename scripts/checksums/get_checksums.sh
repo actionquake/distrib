@@ -25,8 +25,7 @@ if [[ ${compare} = "compare" ]]; then
             echo "No differences found, exiting"
             exit 0
         else
-            echo "Differences found in above files"
-            echo "Recreating zip files"
+            echo "Differences found in above files, recreating zip files"
             exit 1
         fi
     done
