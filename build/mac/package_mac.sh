@@ -58,7 +58,7 @@ else
     
     mv ../../action Steam_Install/
     lipo -create -output q2probuilds/universal/${DISTRIB}/aqtion q2probuilds/intel/${DISTRIB}/aqtion q2probuilds/m1/${DISTRIB}/aqtion
-    
+
     # Install AQtion required files
     install q2probuilds/universal/${DISTRIB}/aqtion Steam_Install/aqtion
     install q2probuilds/universal/${DISTRIB}/q2proded Steam_Install/q2proded
@@ -67,11 +67,11 @@ else
     install q2probuilds/m1/${DISTRIB}/gamearm.so Steam_Install/action/
 
     # Install Steamshim files
-    install q2probuilds/universal/${PLATFORM}/libsteam_api.dylib Steam_Install/libsteam_api.dylib
-    install q2probuilds/universal/${PLATFORM}/steam_appid.txt Steam_Install/steam_appid.txt
+    install q2probuilds/universal/${DISTRIB}/libsteam_api.dylib Steam_Install/libsteam_api.dylib
+    install q2probuilds/universal/${DISTRIB}/steam_appid.txt Steam_Install/steam_appid.txt
 
     # Install launch script until Steam fully supports Apple Silicon properly
-    install q2probuilds/universal/${PLATFORM}/launch.sh Steam_Install/launch.sh
+    install q2probuilds/universal/${DISTRIB}/launch.sh Steam_Install/launch.sh
     
     ## Make items executable
     chmod +x Steam_Install/q2pro* Steam_Install/aqtion Steam_Install/launch.sh
