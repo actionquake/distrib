@@ -31,10 +31,10 @@ Great!  Hosting a server is a great way to contribute to the community and helps
 ### Step by step
 
 Use the following Docker images
-* Official: `aqtiongame/server:v21`
-* Espionage: `aqtiongame/espionage:v21`
-* ARM64 / Rasp Pi: `aqtiongame/server:v21-arm64`
-* ARM32 / Rasp Pi: `aqtiongame/server:v21-arm32`
+* Official: `aqtiongame/server:v22`
+* Espionage: `aqtiongame/espionage:v22`
+* ARM64 / Rasp Pi: `aqtiongame/server:v22-arm64`
+* ARM32 / Rasp Pi: `aqtiongame/server:v22-arm32`
 
 1. If you have docker and docker-compose already, skip to step 3
 1. Upon logging into the VPS/instance (ssh, console or otherwise) gaining access to the shell, install docker and docker-compose
@@ -44,14 +44,14 @@ Use the following Docker images
     * https://docs.docker.com/engine/install/linux-postinstall/
 1. Create a directory to store your configs and go to that directory
     * `mkdir -p /opt/aqtion && cd /opt/aqtion`
-1. Download the example files `docker-compose.yaml`, `tp1.env` and `tp1.motd` files
-    * `for file in docker-compose.yaml tp1.env tp1.motd; do wget https://raw.githubusercontent.com/actionquake/distrib/main/server/${file}; done`
+1. Download the example files `docker-compose.yaml`, `environment` and `motd` files
+    * `for file in docker-compose.yaml tp1.env tp1.motd dm1.env dm1.motd tdm1.env tdm1.motd 3team1.env 3team1.motd; do wget https://raw.githubusercontent.com/actionquake/distrib/main/server/${file}; done`
 1. Edit the files downloaded to your liking (make sure you're using the latest images!), changes the team names, skins, hostname, MOTD file.
 1. If you want to host more than one server from this docker-compose, duplicate the tp1.env and tp1.motd, for example:
-    * `cp tp1.env tdm1.env`
-    * `cp tp1.motd tdm1.motd`
+    * `cp tp1.env ctf1.env`
+    * `cp tp1.motd ctf1.motd`
     * Include another service in the `docker-compose.yaml` file, changing or incrementing the port (27910, 27911, etc), don't forget the `PORT` env var!
-1. Bring your server online!
+1. Bring your servers online!
     * `docker-compose up -d`
 1. Try connecting to your server from your client in the console
     * `connect your.server.ip.address:27910`

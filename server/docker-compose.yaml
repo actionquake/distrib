@@ -23,6 +23,72 @@ services:
       - maps:/aq2server/action/maps
       - logs:/aq2server/action/logs
       - demos:/aq2server/action/demos
+  dm1:
+    container_name: dm1
+    image: replace_with_image_reference_from_readme
+    # ports to map to host, cannot be in use and must correspond to same value as PORT variable in dm1.env
+    ports:  
+      - "27920:27920/udp"
+      - "27920:27920/tcp"
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    # set server parameters in env_file
+    env_file:
+      - ./dm1.env  
+    # set your local timezone
+    environment:
+      - TZ=Etc/UTC
+    # mounts to allow access and persist files on host, you will need to set appropriate permissions
+    volumes:
+      - ./dm1.motd:/aq2server/action/motd.txt:ro
+      - maps:/aq2server/action/maps
+      - logs:/aq2server/action/logs
+      - demos:/aq2server/action/demos
+  tdm1:
+    container_name: tdm1
+    image: replace_with_image_reference_from_readme
+    # ports to map to host, cannot be in use and must correspond to same value as PORT variable in tdm1.env
+    ports:  
+      - "27930:27930/udp"
+      - "27930:27930/tcp"
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    # set server parameters in env_file
+    env_file:
+      - ./tdm1.env  
+    # set your local timezone
+    environment:
+      - TZ=Etc/UTC
+    # mounts to allow access and persist files on host, you will need to set appropriate permissions
+    volumes:
+      - ./tdm1.motd:/aq2server/action/motd.txt:ro
+      - maps:/aq2server/action/maps
+      - logs:/aq2server/action/logs
+      - demos:/aq2server/action/demos
+  3team1:
+    container_name: 3team1
+    image: replace_with_image_reference_from_readme
+    # ports to map to host, cannot be in use and must correspond to same value as PORT variable in 3team1.env
+    ports:  
+      - "27940:27940/udp"
+      - "27940:27940/tcp"
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    # set server parameters in env_file
+    env_file:
+      - ./3team1.env  
+    # set your local timezone
+    environment:
+      - TZ=Etc/UTC
+    # mounts to allow access and persist files on host, you will need to set appropriate permissions
+    volumes:
+      - ./3team1.motd:/aq2server/action/motd.txt:ro
+      - maps:/aq2server/action/maps
+      - logs:/aq2server/action/logs
+      - demos:/aq2server/action/demos
 
 volumes:
   maps:
