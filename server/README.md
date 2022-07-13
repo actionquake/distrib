@@ -44,7 +44,7 @@ Use the following Docker images
     * https://docs.docker.com/engine/install/linux-postinstall/
 1. Create a directory to store your configs and go to that directory
     * `mkdir -p /opt/aqtion && cd /opt/aqtion`
-1. Download the example files `docker-compose.yaml`, `tp1.env` and `tp1.motd` files
+1. Download the example files `docker-compose.yaml`, `environment` and `motd` files
     * `for file in docker-compose.yaml tp1.env tp1.motd dm1.env dm1.motd tdm1.env tdm1.motd 3team1.env 3team1.motd; do wget https://raw.githubusercontent.com/actionquake/distrib/main/server/${file}; done`
 1. Edit the files downloaded to your liking (make sure you're using the latest images!), changes the team names, skins, hostname, MOTD file.
 1. If you want to host more than one server from this docker-compose, duplicate the tp1.env and tp1.motd, for example:
