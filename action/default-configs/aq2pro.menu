@@ -5,7 +5,7 @@ begin aq2pro
     title "ADDON AQ2PRO"
     action "AQ2PO is DISABLED, do you want to activate it?" ""
     blank
-    action --align "Yes" "popmenu; set aq2pro 1; exec pro"
+    action --align "Yes" "popmenu; seta aq2pro 1; exec pro"
     blank
     action --align "No" "pushmenu main"
     blank
