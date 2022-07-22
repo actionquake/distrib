@@ -1,0 +1,56 @@
+Readme for ActionMale PPM version 1.0
+-----------------------------------------------------
+
+
+Contact original Author at: ppiselli@edlab.cs.umass.edu
+
+
+ACTION MALE
+----------
+	ActionMale is a plug-in player model for Action Quake 2.  Modelled by 
+Paolo Piselli and edited by Suislide (Dallas Frank) of the Ateam.
+
+
+USAGE
+-----
+	This PPM comes with Action Quake and is an actionquake exclusive made with the original 
+author's permission.  Please do not release this for regullar Quake2.  However, it has been 
+improved over the Supermale in various ways.  It is smoother now, without as many ridges and it
+ is also much, much closer to fitting the Male dimensions.  It has also been made to look a little
+ smaller and more realistic than the actionmale because even action stars aren't as big as He-Man.
+ You can replace the model in your supermale dir with this guys tris.md2 and still use the same 
+skins, but his weapon will be off.  There are ways around this, but I am not going to explain them.
+
+In other words, this is a changed SuperMale meant specifically for Action Quake.  If you want to 
+release him, the answer is no.  If you want to use him yourself and you know how without asking me,
+ then yes.  Have fun
+
+
+MAKING YOUR OWN ACTION STAR SKINS
+--------------------------------
+If you have made a quality skin that would suit action quake (i.e. an action star or a cop or 
+something), then please visit guild.teefragged.com to submit it.  Skins for ActionMale and 
+SuperMale are interchangable, so if you have made one for either model that is appropriate, please
+ let us know.
+
+
+VERSION HISTORY
+---------------
+Modified for Action Quake, became ActionMale (to avoid dir name conficts)
+SuperMale version 1.0 - first public release - 42 skins
+
+
+
+ORIGINAL AUTHOR'S ACKNOWLEDGEMENTS
+----------------	
+	I have to thank Gwot and Rouge13 for answering my novice questions with care.
+I must also thank those who made the Quake2 Modeller, NPherno's Skin Tool, and the
+Skinview MOD, these are all great tools which every Q2 modeller should try.  Finally, I
+have to thank all those skinners out there who spend their free time cooking up new 
+clothes for SuperMale.
+
+SUISLIDE'S ACKNOWLEDGEMENTS
+-------------------------
+	I want to thank Palo for allowing me to use and edit his model for our mod. 
+Nice guy.  I also want to thank Phillip Martin for Q2modeller, which was the most used
+ tool in editing this great model.  And um, everyone else who kicks ass.
