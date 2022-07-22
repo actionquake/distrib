@@ -53,6 +53,10 @@ jobs:
         env:
           CONFIG_FILE: ".config_windows${{ matrix.suffix }}"
 
+      - name: Copy Steamshim items
+        run: |
+          cp config/build/windows/steamshim/* build/
+
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
@@ -61,6 +65,10 @@ jobs:
             build/q2pro.exe
             build/q2proded.exe
             build/versions
+            build/aqtion.exe
+            build/steam_api.dll
+            build/steam_api64.dll
+            build/steam_appid.txt
 
       # Standalone
       ## sed commands are for removing home path (standalone doesn't need it)
