@@ -22,5 +22,7 @@ CONFIG_FIXED_LIBAL=y
 AL_CFLAGS = -framework OpenAL
 AL_LIBS = -framework OpenAL
 
+CFLAGS=-mmacosx-version-min=10.6
+
 STRIP=strip -x
 PLATFORM=Steam
