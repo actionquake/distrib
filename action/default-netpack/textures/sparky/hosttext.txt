@@ -1,0 +1,57 @@
+============= General Info: Texture WAL Files =============
+Author                  : Chris "Cap'n Sparky" Seamans
+Email Address           : semo@pil.net
+Additional Credits      : Id Software, the A-Team, Brian, Vance, and
+			  the guys who make Wally
+
+======================= Construction ======================
+Style of Textures       : Modern day textures
+Number Of Textures      : Ever-expanding
+Editor(s) used          : Wally, Adobe Photoshop
+Build Time              : A long period of time... Too long :)
+Known Bugs              : None
+
+======================== Textures ==========================
+
+The basis for the carpet texture in the president's office was
+a texture from Sonya Roberts' "Fearical", and the paintings on
+the wall in that room were from Sonya Roberts' "Artworks". A good
+deal of work was put into tweaking these textures for Q2.
+
+Most of the textures were done completely from scratch by me,
+a few were gathered from public-domain texture sites and
+converted with great difficulty to Q2.
+
+======================= Other Info =========================
+
+Wally kicks ass.
+
+Note that wood2.wal in the quake2/textures/custom directory
+is also mine. This is a stupid error on my part, but it must
+be included for my map to run properly (doh!). Do not use this
+texture yourselves! Use instead the wood textures in the
+textures/sparky directory. There should be one that is almost
+exactly the same.
+
+Furthermore, the door textures double up with mirror images.
+This is not an error on my part. Quake2 (or maybe just Qoole)
+likes to screw with textures that are "flipped" on rotating
+doors, offsetting them by about 4 pixels or so. As a result,
+I had to double up on the door textures to get them right.
+Sorry.
+
+================= Copyright / Permissions ==================
+
+Copyright (c) 1998 Chris Seamans. All rights reserved.
+
+These textures may be electronically distributed only with no
+charge to the recipient, and may not be modified in any way.
+This text file must be included with these textures.
+
+These textures may not be distributed on any CD-ROM without the
+prior, explicit written consent by Chris Seamans.
+
+These textures may be used and distributed with another user
+created map for AQ2 under the strict condition that these textures
+must go into the quake2/action/textures/sparky directory, and that
+this text file is included with them.
