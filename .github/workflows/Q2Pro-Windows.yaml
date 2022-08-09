@@ -53,9 +53,9 @@ jobs:
         env:
           CONFIG_FILE: ".config_windows${{ matrix.suffix }}"
 
-      - name: Copy Steamshim items
+      - name: Copy Integration items
         run: |
-          cp config/build/windows/steamshim/* build/
+          cp config/build/windows/integrations/* build/
 
       - name: Generate archive
         uses: actions/upload-artifact@v3

@@ -73,9 +73,9 @@ jobs:
           name: q2pro-linux-x86_64-steam
           path: ${{ env.LIN64_DIST_DIR }}/
 
-      - name: Copy steamshim files
+      - name: Copy Integration files
         run: |
-          cp ${{ env.CFG_WORKING_DIR }}/build/linux/steamshim/* ${{ env.LIN64_DIST_DIR }}/
+          cp ${{ env.CFG_WORKING_DIR }}/build/linux/integrations/* ${{ env.LIN64_DIST_DIR }}/
 
       - name: Set Linux binaries to executable
         run: |

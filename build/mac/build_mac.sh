@@ -34,7 +34,7 @@ do
     rm -rf ${Q2PRO_DIR}
 
     ## Set branch
-    aqtion_branch="aqtion"
+    aqtion_branch="discord"
     ## Clone repository, checkout aqtion branch, copy config file
     git clone -b ${aqtion_branch} https://github.com/actionquake/q2pro.git ${Q2PRO_DIR}
     ## Patch system.c patch file to make Mac paths work
