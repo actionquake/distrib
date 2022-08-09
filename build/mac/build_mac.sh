@@ -34,7 +34,7 @@ do
     rm -rf ${Q2PRO_DIR}
 
     ## Set branch
-    aqtion_branch="discord"
+    aqtion_branch="aqtion"
     ## Clone repository, checkout aqtion branch, copy config file
     git clone -b ${aqtion_branch} https://github.com/actionquake/q2pro.git ${Q2PRO_DIR}
     ## Patch system.c patch file to make Mac paths work
@@ -104,6 +104,9 @@ do
 
     ## Build the q2pro binaries
     cd ${Q2PRO_DIR} || return
+    mkdir -p extern/discord
+    wget https://dl-game-sdk.discordapp.net/2.5.6/discord_game_sdk.zip && unzip discord_game_sdk.zip -d extern/discord/
+
     if [ ${PLATFORM} = "steam" ]; then
         cp ../q2pro_config_steam .
         export CONFIG_FILE=q2pro_config_steam; make -j4 V=1
