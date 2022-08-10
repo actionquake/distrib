@@ -140,6 +140,9 @@ do
 
     ## make q2pro executable
     chmod +x q2probuilds/${ARCH}/${PLATFORM}/q2pro*
+
+    ## Tell q2pro where to find the Discord SDK dylib
+    install_name_tool -change '@rpath/discord_game_sdk.dylib' '@loader_path/discord_game_sdk.dylib' q2probuilds/${ARCH}/${PLATFORM}/q2pro*
     echo "Build script complete for Q2PRO ${ARCH}"
 
     ## build TNG
