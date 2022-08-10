@@ -28,14 +28,14 @@ if [[ ${DISTRIB} == "standalone" ]]; then
     mkdir -p AQ_Install/AQ.app/Contents/MacOS
     DMG_FILENAME=aqtion-mac-universal-${DISTRIB}
     ## Create universal binary from prebuilt binaries
-    lipo -create -output q2probuilds/universal/${DISTRIB}/q2pro q2probuilds/intel/${DISTRIB}/q2pro q2probuilds/m1/${DISTRIB}/q2pro
-    lipo -create -output q2probuilds/universal/${DISTRIB}/q2proded q2probuilds/intel/${DISTRIB}/q2proded q2probuilds/m1/${DISTRIB}/q2proded
+    lipo -create -output q2probuilds/universal/${DISTRIB}/q2pro q2probuilds/x86_64/${DISTRIB}/q2pro q2probuilds/arm64/${DISTRIB}/q2pro
+    lipo -create -output q2probuilds/universal/${DISTRIB}/q2proded q2probuilds/x86_64/${DISTRIB}/q2proded q2probuilds/arm64/${DISTRIB}/q2proded
     
     mv ../../action AQ_Install/AQ.app/Contents/MacOS/
     install q2probuilds/universal/${DISTRIB}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
     install q2probuilds/universal/${DISTRIB}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
-    install q2probuilds/intel/${DISTRIB}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
-    install q2probuilds/m1/${DISTRIB}/gamearm.so AQ_Install/AQ.app/Contents/MacOS/action/
+    install q2probuilds/x86_64/${DISTRIB}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
+    install q2probuilds/arm64/${DISTRIB}/gamearm.so AQ_Install/AQ.app/Contents/MacOS/action/
     rm -rf AQ_Install/AQ.app/Contents/MacOS/.dummyfile
     ## make q2pro executable
     chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
@@ -53,22 +53,23 @@ else
     mkdir -p Steam_Install
     DMG_FILENAME=aqtion-mac-universal-${DISTRIB}
     ## Create universal binary from prebuilt binaries
-    lipo -create -output q2probuilds/universal/${DISTRIB}/q2pro q2probuilds/intel/${DISTRIB}/q2pro q2probuilds/m1/${DISTRIB}/q2pro
-    lipo -create -output q2probuilds/universal/${DISTRIB}/q2proded q2probuilds/intel/${DISTRIB}/q2proded q2probuilds/m1/${DISTRIB}/q2proded
+    lipo -create -output q2probuilds/universal/${DISTRIB}/q2pro q2probuilds/x86_64/${DISTRIB}/q2pro q2probuilds/arm64/${DISTRIB}/q2pro
+    lipo -create -output q2probuilds/universal/${DISTRIB}/q2proded q2probuilds/x86_64/${DISTRIB}/q2proded q2probuilds/arm64/${DISTRIB}/q2proded
     
     mv ../../action Steam_Install/
-    lipo -create -output q2probuilds/universal/${DISTRIB}/aqtion q2probuilds/intel/${DISTRIB}/aqtion q2probuilds/m1/${DISTRIB}/aqtion
+    lipo -create -output q2probuilds/universal/${DISTRIB}/aqtion q2probuilds/x86_64/${DISTRIB}/aqtion q2probuilds/arm64/${DISTRIB}/aqtion
 
     # Install AQtion required files
     install q2probuilds/universal/${DISTRIB}/aqtion Steam_Install/aqtion
     install q2probuilds/universal/${DISTRIB}/q2proded Steam_Install/q2proded
     install q2probuilds/universal/${DISTRIB}/q2pro Steam_Install/q2pro
-    install q2probuilds/intel/${DISTRIB}/gamex86_64.so Steam_Install/action/
-    install q2probuilds/m1/${DISTRIB}/gamearm.so Steam_Install/action/
+    install q2probuilds/x86_64/${DISTRIB}/gamex86_64.so Steam_Install/action/
+    install q2probuilds/arm64/${DISTRIB}/gamearm.so Steam_Install/action/
 
-    # Install Steamshim files
+    # Install Steamshim and Discord lib files
     install q2probuilds/universal/${DISTRIB}/libsteam_api.dylib Steam_Install/libsteam_api.dylib
     install q2probuilds/universal/${DISTRIB}/steam_appid.txt Steam_Install/steam_appid.txt
+    install q2probuilds/universal/${DISTRIB}/discord_game_sdk.dylib Steam_Install/discord_game_sdk.dylib
 
     # Install launch script until Steam fully supports Apple Silicon properly
     install q2probuilds/universal/${DISTRIB}/launch.sh Steam_Install/launch.sh

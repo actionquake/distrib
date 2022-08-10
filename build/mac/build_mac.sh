@@ -1,24 +1,24 @@
 #!/bin/bash
 
-RAW_ARCH=$1
+#RAW_ARCH=$1  #No longer needed as script is auto-detecting
+ARCH=$(uname -m | sed -e s/i.86/i386/ -e s/amd64/x86_64/ -e s/sun4u/sparc64/ -e s/arm.*/arm/ -e s/sa110/arm/ -e s/alpha/axp/)
 CURRENT_DIR=$(pwd)
 PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/"
 PLATFORMS=(steam standalone)
 
-if [[ -z ${RAW_ARCH} ]]
+if ! ( [ ${ARCH} = 'x86_64' ] || [ ${ARCH} = "arm64" ] )
 then
-    echo "How to use this script:"
-    echo "./build_mac.sh [intel | m1]"
-    echo "Re-run with the appropriate arguments"
+    echo "Architecture not x86_64 or arm64, stopping"
+    echo "Arch found via uname -m: ${ARCH}"
     exit 1
 fi
 
-ARCH=$(echo ${RAW_ARCH} | tr '[:upper:]' '[:lower:]')
-if [[ ${ARCH} -ne "intel" || ${ARCH} -ne "m1" ]]
-then
-    echo "First argument must be one of [intel | m1]"
-    exit 1
-fi
+#ARCH=$(echo ${ARCH} | tr '[:upper:]' '[:lower:]') #No longer needed as script is auto-detecting
+# if [[ ${ARCH} -ne "intel" || ${ARCH} -ne "m1" ]]
+# then
+#     echo "First argument must be one of [intel | m1]"
+#     exit 1
+# fi
 
 echo "Building for ${ARCH}"
 echo "Current dir is ${CURRENT_DIR}"
@@ -143,6 +143,8 @@ do
 
     ## Tell q2pro where to find the Discord SDK dylib
     install_name_tool -change '@rpath/discord_game_sdk.dylib' '@loader_path/discord_game_sdk.dylib' q2probuilds/${ARCH}/${PLATFORM}/q2pro*
+
+
     echo "Build script complete for Q2PRO ${ARCH}"
 
     ## build TNG
@@ -154,7 +156,7 @@ do
     git clone https://github.com/actionquake/aq2-tng ${TNG_DIR}
 
     ## Apple Silicon M1 needs defined to change CC and MACHINE
-    if [[ ${ARCH} = "m1" ]]; then
+    if [[ ${ARCH} = "arm64" ]]; then
         #cp aq2tng_Makefile_mac_m1 ${TNG_DIR}/source/Makefile
         export TNG_BUILD_FOR=M1
         #echo "Copying m1 Makefile successful"
