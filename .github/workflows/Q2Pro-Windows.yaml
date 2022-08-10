@@ -44,6 +44,12 @@ jobs:
           cp config/build/windows/aq2pro.ico build/src/windows/res/q2pro.ico
           cp config/build/windows/aq2proded.ico build/src/windows/res/q2proded.ico
 
+      - name: Get Discord SDK files
+        working-directory: build
+        run: |
+          mkdir -p extern/discord
+          wget https://dl-game-sdk.discordapp.net/2.5.6/discord_game_sdk.zip && unzip discord_game_sdk.zip -d extern/discord/
+
       # Steam
       - name: Build Q2Pro Steam
         working-directory: build
@@ -53,9 +59,9 @@ jobs:
         env:
           CONFIG_FILE: ".config_windows${{ matrix.suffix }}"
 
-      - name: Copy Steamshim items
+      - name: Copy Integration items
         run: |
-          cp config/build/windows/steamshim/* build/
+          cp config/build/windows/integrations/* build/
 
       - name: Generate archive
         uses: actions/upload-artifact@v3

@@ -320,6 +320,7 @@ begin msettings
     field "frag team message" roundkill[say]
     blank
     values "Show chathud" scr_chathud "off" "on - white" "on - green"
+    pairs "Only show chat in chathud" cl_chat_notify "on" 0 "off" 1
     pairs "Duration of chathud" scr_chathud_time Stay 0 1s 1 5s 5 10s 10 15s 15
     blank
     toggle "disable [Windows key]" win_disablewinkey
@@ -437,16 +438,16 @@ begin wbindings
     bind "drop item" drop item
     blank
     bind "use primary weapon" use special
-    bind "use Mk23 Pistol (Single)" use mk23 pistol
-    bind "use Mk23 Pistol (Dual)" use a 2nd pistol
-    bind "use SSG Sniper Rifle" use sniper
-    bind "use MP5/10" use mp5
-    bind "use M4" use m4
-    bind "use Handcannon" use handcannon
-    bind "use M3 Shotgun" use shotgun
-    bind "use throwing knife" use throwing combat knife
-    bind "use slashing knife" use slashing combat knife
-    bind "select grenade" use m26 fragmentation grenade
+    bind "use MK23 Pistol" use MK23 Pistol
+    bind "use Dual MK23 Pistols" use Dual MK23 Pistols
+    bind "use SSG 3000 Sniper Rifle" use Sniper Rifle
+    bind "use MP5/10 Submachinegun" use MP5/10 Submachinegun
+    bind "use M4 Assault Rifle" use M4 Assault Rifle
+    bind "use Handcannon" use Handcannon
+    bind "use M3 Super 90 Assault Shotgun" use M3 Super 90 Assault Shotgun
+    bind "use throwing knife" use throwing Combat Knife
+    bind "use slashing knife" use slashing Combat Knife
+    bind "select grenade" use M26 Fragmentation Grenade
     bind "punch" punch
 end
 
