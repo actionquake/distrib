@@ -6,9 +6,9 @@ CURRENT_DIR=$(pwd)
 PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/"
 PLATFORMS=(steam standalone)
 
-if ! ( [ ${ARCH} = 'x86_64' ] || [ ${ARCH} = "arm64" ] )
+if ! ( [ ${ARCH} = 'x86_64' ] || [ ${ARCH} = "arm" ] )
 then
-    echo "Architecture not x86_64 or arm64, stopping"
+    echo "Architecture not x86_64 or arm, stopping"
     echo "Arch found via uname -m: ${ARCH}"
     exit 1
 fi
@@ -152,11 +152,13 @@ do
     ## Cleanup /tmp/q2pro
     rm -rf ${TNG_DIR}
 
+    ## Set branch
+    aqtion_branch="aqtion"
     ## Clone repository, copy config file
-    git clone https://github.com/actionquake/aq2-tng ${TNG_DIR}
+    git clone -b ${aqtion_branch} https://github.com/actionquake/aq2-tng ${TNG_DIR}
 
-    ## Apple Silicon M1 needs defined to change CC and MACHINE
-    if [[ ${ARCH} = "arm64" ]]; then
+    ## Apple Silicon needs defined to change CC and MACHINE
+    if [[ ${ARCH} = "arm" ]]; then
         #cp aq2tng_Makefile_mac_m1 ${TNG_DIR}/source/Makefile
         export TNG_BUILD_FOR=M1
         #echo "Copying m1 Makefile successful"
@@ -164,7 +166,6 @@ do
 
     ## Build the tng binaries
     cd ${TNG_DIR}/source || return
-    git checkout bots
     AQTION=TRUE make -j4 V=1
     build_exitcode=$?
 
@@ -179,5 +180,5 @@ do
     fi
 
     ## Cleanup task
-    rm -rf ${CURRENT_DIR}/${TNG_DIR}
+    #rm -rf ${CURRENT_DIR}/${TNG_DIR}
 done
