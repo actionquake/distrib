@@ -43,7 +43,7 @@ jobs:
         working-directory: build
         run: |
           mkdir -p extern/discord
-          wget https://dl-game-sdk.discordapp.net/2.5.6/discord_game_sdk.zip && unzip discord_game_sdk.zip -d extern/discord/
+          wget https://dl-game-sdk.discordapp.net/latest/discord_game_sdk.zip && unzip discord_game_sdk.zip -d extern/discord/
 
       # Standalone
       - name: Build Q2Pro
@@ -123,7 +123,7 @@ jobs:
         working-directory: build
         run: |
           mkdir -p extern/discord
-          wget https://dl-game-sdk.discordapp.net/2.5.6/discord_game_sdk.zip && unzip discord_game_sdk.zip -d extern/discord/
+          wget https://dl-game-sdk.discordapp.net/latest/discord_game_sdk.zip && unzip discord_game_sdk.zip -d extern/discord/
 
       - name: Build Q2Pro
         working-directory: build
