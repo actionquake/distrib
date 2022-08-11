@@ -49,6 +49,7 @@ jobs:
         run: |
           mkdir -p extern/discord
           wget https://dl-game-sdk.discordapp.net/latest/discord_game_sdk.zip && unzip discord_game_sdk.zip -d extern/discord/
+          sed -i 's/Windows.h/windows.h/g' extern/discord/c/discord_game_sdk.h
 
       # Steam
       - name: Build Q2Pro Steam
