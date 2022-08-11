@@ -39,7 +39,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          wget -nv https://github.com/skullernet/q2pro-mgw-sdk/releases/download/2021-09-07/q2pro-mgw-sdk.tar.gz
+          wget -nv https://github.com/skullernet/q2pro-mgw-sdk/releases/download/2022-06-14/q2pro-mgw-sdk.tar.gz
           tar xf q2pro-mgw-sdk.tar.gz
 
       - name: Get version info for q2pro

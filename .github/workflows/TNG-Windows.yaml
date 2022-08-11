@@ -24,11 +24,11 @@ jobs:
           repository: actionquake/distrib
           path: config
 
-      # This is because the Makefile doesn't recognize mingw on Linux, and we have to append a special flag at the linking step for Windows
-      # - name: Rough hack to fix Makefile
-      #   run: |
-      #     mv build/source/Makefile build/source/Makefile-original
-      #     cat config/build/windows/tng-windows-append build/source/Makefile-original > build/source/Makefile
+      - name: Install dependencies
+        working-directory: build
+        run: |
+          wget -nv https://github.com/skullernet/q2pro-mgw-sdk/releases/download/2022-06-14/q2pro-mgw-sdk.tar.gz
+          tar xf q2pro-mgw-sdk.tar.gz
 
       - name: Get version info for tng
         id: version
