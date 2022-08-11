@@ -25,6 +25,7 @@ jobs:
           path: config
 
       - name: Install dependencies
+        working-directory: build
         run: |
           wget -nv https://github.com/skullernet/q2pro-mgw-sdk/releases/download/2022-06-14/q2pro-mgw-sdk.tar.gz
           tar xf q2pro-mgw-sdk.tar.gz
