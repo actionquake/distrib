@@ -84,14 +84,14 @@ jobs:
         with:
           name: linux-amd64-deb
           path: |
-            aqtion-${{github.ref_name}}-linux-amd64.deb
+            aqtion-${GIT_TAG}-linux-amd64.deb
 
       - name: Generate Linux ARM64 deb archive
         uses: actions/upload-artifact@v3
         with:
           name: linux-arm64-deb
           path: |
-            aqtion-${{github.ref_name}}-linux-arm64.deb
+            aqtion-${GIT_TAG}-linux-arm64.deb
 
   win_x86_64_dist:
     runs-on: ubuntu-22.04
