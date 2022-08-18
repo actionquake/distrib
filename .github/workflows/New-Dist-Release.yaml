@@ -35,6 +35,7 @@ jobs:
       - name: Generate Linux deb files
         working-directory: ${{ env.DIST_DIR }}/build/linux
         run: |
+          echo ${{github.ref_name}}
           sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
           cp -r dpkg aqtion-${{github.ref_name}}-linux-amd64
           cp -r dpkg aqtion-${{github.ref_name}}-linux-arm64
