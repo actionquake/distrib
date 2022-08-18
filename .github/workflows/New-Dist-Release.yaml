@@ -8,7 +8,7 @@ on:
 env:
   AQTION_DIR: aqtion
   DIST_DIR: config
-  GIT_TAG: ${{github.ref_name}}
+  GIT_TAG: "v1.1.1"
 
 jobs:
   content_only:
@@ -17,7 +17,7 @@ jobs:
       - name: Download latest Content-only archive
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: Content-Only.yaml
+          workflow: New-Content-Release.yaml
           name: aq-content-only
 
       - name: Generate content-only zip file
@@ -35,15 +35,26 @@ jobs:
       - name: Generate Linux deb files
         working-directory: ${{ env.DIST_DIR }}/build/linux
         run: |
-          echo ${{github.ref_name}}
           sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
-          cp -r dpkg aqtion-${{github.ref_name}}-linux-amd64
-          cp -r dpkg aqtion-${{github.ref_name}}-linux-arm64
-          sed -i "s/arch_value_here/amd64/g" aqtion-${{github.ref_name}}-linux-amd64/DEBIAN/control
-          sed -i "s/arch_value_here/arm64/g" aqtion-${{github.ref_name}}-linux-arm64/DEBIAN/control
-          dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-amd64
-          dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-arm64
-          mv aqtion-${{github.ref_name}}-linux-* ../../../
+          cp -r dpkg aqtion-${GIT_TAG}-linux-amd64
+          cp -r dpkg aqtion-${GIT_TAG}-linux-arm64
+          sed -i "s/arch_value_here/amd64/g" aqtion-${GIT_TAG}-linux-amd64/DEBIAN/control
+          sed -i "s/arch_value_here/arm64/g" aqtion-${GIT_TAG}-linux-arm64/DEBIAN/control
+          dpkg-deb --build --root-owner-group aqtion-${GIT_TAG}-linux-amd64
+          dpkg-deb --build --root-owner-group aqtion-${GIT_TAG}-linux-arm64
+          mv aqtion-${GIT_TAG}-linux-* ../../../
+      # - name: Generate Linux deb files
+      #   working-directory: ${{ env.DIST_DIR }}/build/linux
+      #   run: |
+      #     echo ${{github.ref_name}}
+      #     sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
+      #     cp -r dpkg aqtion-${{github.ref_name}}-linux-amd64
+      #     cp -r dpkg aqtion-${{github.ref_name}}-linux-arm64
+      #     sed -i "s/arch_value_here/amd64/g" aqtion-${{github.ref_name}}-linux-amd64/DEBIAN/control
+      #     sed -i "s/arch_value_here/arm64/g" aqtion-${{github.ref_name}}-linux-arm64/DEBIAN/control
+      #     dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-amd64
+      #     dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-arm64
+      #     mv aqtion-${{github.ref_name}}-linux-* ../../../
 
       - name: Generate Linux x86 deb archive
         uses: actions/upload-artifact@v3
