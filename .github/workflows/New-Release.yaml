@@ -99,7 +99,7 @@ jobs:
 
       - name: Copy action content
         run: |
-          cp LICENSE aqtion/action/
+          cp ${{ env.DIST_DIR }}/LICENSE aqtion/action/
           cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
 
       - name: Compress aqtion-win
@@ -155,7 +155,7 @@ jobs:
 
       - name: Copy action content
         run: |
-          cp LICENSE aqtion/action/
+          cp ${{ env.DIST_DIR }}/LICENSE aqtion/action/
           cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
 
       - name: Compress aqtion-lin
@@ -211,7 +211,7 @@ jobs:
 
       - name: Copy action content
         run: |
-          cp LICENSE aqtion/action/
+          cp ${{ env.DIST_DIR }}/LICENSE aqtion/action/
           cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
 
       - name: Compress aqtion-lin
