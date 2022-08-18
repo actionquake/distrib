@@ -1,12 +1,9 @@
 name: Linux TNG (64-bit)
 
 on:
-  push:
-    branches: ci
+  # push:
+  #   branches: ci
   workflow_dispatch:
-
-# on:
-#   workflow_dispatch:
 
 jobs:
   linux_x86_64_build_tng:

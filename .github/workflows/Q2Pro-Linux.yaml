@@ -1,8 +1,8 @@
 name: Linux Q2Pro (64-bit)
 
 on:
-  push:
-    branches: ci
+  # push:
+  #   branches: ci
   workflow_dispatch:
 
 jobs:
