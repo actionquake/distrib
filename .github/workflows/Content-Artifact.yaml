@@ -1,8 +1,8 @@
 name: Content Artifact
 
 on:
-  push:
-    branches: ci
+  # push:
+  #   branches: ci
   workflow_dispatch:
 
 env:
