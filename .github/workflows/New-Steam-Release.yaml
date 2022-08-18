@@ -1,0 +1,71 @@
+name: New Steam Release
+
+on: 
+  workflow_dispatch:
+    inputs:
+      steam_branch:
+        description: 'Branch to deploy in Steam'     
+        required: true
+        default: 'playtest' 
+        type: choice
+        options:
+        - playtest
+        - stattest
+
+env:
+  CFG_WORKING_DIR: "config"
+  RELEASE_DIST_DIR: "release"
+  MAC_DIST_DIR: "mac-universal-dist"
+
+jobs:      
+  steam_release:
+    runs-on: [self-hosted, x86] ##  Must run on self-hosted due to Steam login credential weirdness
+    steps:
+      - name: 'Cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
+
+      - name: Download latest release packages
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow_conclusion: success
+          workflow: New-Dist-Release.yaml
+          name: aqtion-release
+          path: ${{ env.RELEASE_DIST_DIR }}/
+
+      - name: Look around
+        run: |
+          ls -l
+          ls -l ${{ env.RELEASE_DIST_DIR }}/
+          
+      ## Mac Universal
+      - name: Download latest Mac Universal artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Mac-Artifacts.yaml
+          name: mac-universal-zip-steam
+
+      - name: Copy action content (Mac Universal)
+        run: |
+          unzip aqtion-mac-universal-steam.zip -d ${{ env.MAC_DIST_DIR }}/
+
+      # ## Upload to Steam
+      # - name: Copy VDF scripts
+      #   run: |
+      #     cp ${{ env.CFG_WORKING_DIR }}/scripts/steam/*.vdf .
+
+      # - name: Upload All Builds
+      #   run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build /home/github/actions-runner/_work/distrib/distrib/${{ inputs.steam_branch }}.vdf +quit
+      #   env:
+      #     STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
+      #     STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
+
+      # - name: 'Post-build cleanup build folder'
+      #   run: |
+      #     ls -la ./
+      #     rm -rf ./* || true
+      #     rm -rf ./.??* || true
+      #     ls -la ./
