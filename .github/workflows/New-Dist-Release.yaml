@@ -84,14 +84,14 @@ jobs:
         with:
           name: linux-amd64-deb
           path: |
-            aqtion-${{github.ref_name}}-linux-amd64.deb
+            aqtion-${GIT_TAG}-linux-amd64.deb
 
       - name: Generate Linux ARM64 deb archive
         uses: actions/upload-artifact@v3
         with:
           name: linux-arm64-deb
           path: |
-            aqtion-${{github.ref_name}}-linux-arm64.deb
+            aqtion-${GIT_TAG}-linux-arm64.deb
 
   win_x86_64_dist:
     runs-on: ubuntu-22.04
@@ -291,7 +291,6 @@ jobs:
         working-directory: ${{ env.DIST_DIR }}/build/mac
         run: |
           bash package_mac.sh standalone
-          mv aqtion-mac-universal-standalone.dmg aqtion-${{github.ref_name}}-mac-universal.dmg
 
       - name: Generate Universal Standalone DMG artifact
         uses: actions/upload-artifact@v3
