@@ -291,7 +291,6 @@ jobs:
         working-directory: ${{ env.DIST_DIR }}/build/mac
         run: |
           bash package_mac.sh standalone
-          mv aqtion-mac-universal-standalone.dmg aqtion-${{github.ref_name}}-mac-universal.dmg
 
       - name: Generate Universal Standalone DMG artifact
         uses: actions/upload-artifact@v3
