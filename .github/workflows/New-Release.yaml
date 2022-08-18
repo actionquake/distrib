@@ -239,7 +239,7 @@ jobs:
           mv aqtion-mac-universal-standalone.dmg aqtion-${{github.ref_name}}-mac-universal.dmg
 
   push_to_release:
-    needs: ["mac-dist", "lin-dist", "win-dist", "linux_deb", "content_only"]
+    needs: ["mac_dist", "lin_dist", "win_dist", "linux_deb", "content_only"]
     runs-on: ubuntu-22.04
     steps:
 
