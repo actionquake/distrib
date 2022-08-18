@@ -1,8 +1,8 @@
 name: New Content Release
 
 on:
-  push:
-    branches: ci
+  # push:
+  #   branches: ci
   workflow_dispatch:
 
 env:
