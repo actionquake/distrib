@@ -63,6 +63,9 @@ jobs:
           dpkg-deb --build --root-owner-group aqtion-${GIT_TAG}-linux-amd64
           dpkg-deb --build --root-owner-group aqtion-${GIT_TAG}-linux-arm64
           mv aqtion-${GIT_TAG}-linux-* ../../../
+
+          ls -l
+          ls -l ../../../
       # - name: Generate Linux deb files
       #   working-directory: ${{ env.DIST_DIR }}/build/linux
       #   run: |
@@ -261,17 +264,60 @@ jobs:
             aqtion-${{github.ref_name}}-linux-arm64.tar.gz
 
   mac_dist:
-    runs-on: ubuntu-22.04
+    runs-on: macos-latest
     steps:
-      - name: Download latest Mac Univesal DMG
-        uses: dawidd6/action-download-artifact@v2
+      - name: Checkout distrib
+        uses: actions/checkout@v3
         with:
-          workflow: Mac-Artifacts.yaml
-          name: mac-universal-dmg-standalone
+          repository: actionquake/distrib
+          path: ${{ env.DIST_DIR }}
 
-      - name: Rename Mac Artifact to include version
+      - name: Copy the license file into all directories
+        working-directory: ${{ env.DIST_DIR }}
         run: |
+          cp LICENSE build/mac/AQ_Install/AQ.app/Contents/Resources/
+
+      - name: Zip game contents to pkz
+        working-directory: ${{ env.DIST_DIR }}/action
+        run: |
+          for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds; do
+            cd ${makepkz}
+            zip -r ../0_${makepkz}.pkz * && cd ..
+            rm -rf ${makepkz}/
+          done
+
+      # Standalone
+      - name: Generate Mac Standalone artifacts
+        working-directory: ${{ env.DIST_DIR }}/build/mac
+        run: |
+          bash package_mac.sh standalone
           mv aqtion-mac-universal-standalone.dmg aqtion-${{github.ref_name}}-mac-universal.dmg
+
+      - name: Generate Universal Standalone DMG artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-universal-dmg-standalone
+          path: |
+            ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-standalone.dmg
+
+      - name: Generate Universal Standalone zip artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-universal-zip-standalone
+          path: |
+            ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-standalone.zip
+
+      # Steam
+      - name: Generate Mac Steam artifacts
+        working-directory: ${{ env.DIST_DIR }}/build/mac
+        run: bash package_mac.sh steam
+
+      - name: Generate Universal Steam zip artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-universal-zip-steam
+          path: |
+            ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-steam.zip
 
   push_to_release:
     needs: ["mac_dist", "lin_x86_64_dist", "win_x86_64_dist", "lin_arm64_dist", "linux_deb", "content_only"]
