@@ -1,0 +1,268 @@
+name: New Dist Release
+
+on:
+  push:
+    branches: ci
+  workflow_dispatch:
+
+env:
+  AQTION_DIR: aqtion
+  DIST_DIR: config
+  GIT_TAG: ${{github.ref_name}}
+
+jobs:
+  content_only:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Download latest Content-only archive
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Content-Only.yaml
+          name: aq-content-only
+
+      - name: Generate content-only zip file
+        run: |
+          mv aqtion-content.zip aqtion-content-${{github.ref_name}}.zip
+
+  linux_deb:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.DIST_DIR }}
+
+      - name: Generate Linux deb files
+        working-directory: ${{ env.DIST_DIR }}/build/linux
+        run: |
+          sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
+          cp -r dpkg aqtion-${{github.ref_name}}-linux-amd64
+          cp -r dpkg aqtion-${{github.ref_name}}-linux-arm64
+          sed -i "s/arch_value_here/amd64/g" aqtion-${{github.ref_name}}-linux-amd64/DEBIAN/control
+          sed -i "s/arch_value_here/arm64/g" aqtion-${{github.ref_name}}-linux-arm64/DEBIAN/control
+          dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-amd64
+          dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-arm64
+          mv aqtion-${{github.ref_name}}-linux-* ../../../
+
+      - name: Generate Linux x86 deb archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-amd64-deb
+          path: |
+            aqtion-${{github.ref_name}}-linux-amd64.deb
+
+      - name: Generate Linux ARM64 deb archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-arm64-deb
+          path: |
+            aqtion-${{github.ref_name}}-linux-arm64.deb
+
+  win_x86_64_dist:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.DIST_DIR }}
+
+      # - name: Generate checksum file
+      #   working-directory: ${{ env.DIST_DIR }}/action
+      #   run: |
+      #     find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
+
+      - name: Generate directory structure
+        run: |
+          mkdir -p ${{ env.AQTION_DIR }}/action
+
+      - name: Zip game content to pkz
+        working-directory: ${{ env.DIST_DIR }}/action
+        run: |
+          for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds; do
+            cd ${makepkz}
+            zip -r ../0_${makepkz}.pkz * && cd ..
+            rm -rf ${makepkz}/
+          done
+
+      - name: Download and extract latest Windows Q2Pro Release
+        run: |
+          wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-msvc-x64.zip
+          unzip q2pro-msvc-x64.zip -d ${{ env.AQTION_DIR }}
+
+      - name: Copy external libraries for Q2Pro
+        run: |
+          cp ${{ env.DIST_DIR }}/build/windows/integrations/* ${{ env.AQTION_DIR }}
+
+      - name: Download and extract latest Windows TNG Release
+        run: |
+          wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/tng-win-64.zip
+          unzip tng-win-64.zip -d ${{ env.AQTION_DIR }}/action/
+
+      - name: Copy action content
+        run: |
+          cp ${{ env.DIST_DIR }}/LICENSE aqtion/action/
+          cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
+
+      - name: Compress aqtion-win
+        run: |
+          zip -r aqtion-${{github.ref_name}}-windows-x86_64.zip ${{ env.AQTION_DIR }}/*
+
+      - name: Upload aqtion-win archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: "aqtion-win_x86_64"
+          path: |
+            aqtion-${{github.ref_name}}-windows-x86_64.zip
+
+  lin_x86_64_dist:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.DIST_DIR }}
+
+      # - name: Generate checksum file
+      #   working-directory: ${{ env.DIST_DIR }}/action
+      #   run: |
+      #     find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
+
+      - name: Generate directory structure
+        run: |
+          mkdir -p ${{ env.AQTION_DIR }}/action
+
+      - name: Zip game content to pkz
+        working-directory: ${{ env.DIST_DIR }}/action
+        run: |
+          for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds; do
+            cd ${makepkz}
+            zip -r ../0_${makepkz}.pkz * && cd ..
+            rm -rf ${makepkz}/
+          done
+
+      - name: Download and extract latest Linux x64 Q2Pro Release
+        run: |
+          wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-gcc.zip
+          unzip q2pro-lin-gcc.zip -d ${{ env.AQTION_DIR }}
+          chmod +x ${{ env.AQTION_DIR }}/q2pro*
+
+      - name: Copy external libraries for Q2Pro
+        run: |
+          cp ${{ env.DIST_DIR }}/build/linux/integrations/* ${{ env.AQTION_DIR }}
+
+      - name: Download and extract latest Linux x64 TNG Release
+        run: |
+          wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/tng-lin-x86_64.zip
+          unzip tng-lin-x86_64.zip -d ${{ env.AQTION_DIR }}/action/
+
+      - name: Copy action content
+        run: |
+          cp ${{ env.DIST_DIR }}/LICENSE ${{ env.AQTION_DIR }}/action/
+          cp -r ${{ env.DIST_DIR }}/action/* ${{ env.AQTION_DIR }}/action/
+
+      - name: Compress aqtion-lin
+        run: |
+          tar czpf aqtion-${{github.ref_name}}-linux-x86_64.tar.gz ${{ env.AQTION_DIR }}/*
+
+      - name: Upload aqtion-lin archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: "aqtion-lin_x86_64"
+          path: |
+            aqtion-${{github.ref_name}}-linux-x86_64.tar.gz
+
+  lin_arm64_dist:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.DIST_DIR }}
+
+      # - name: Generate checksum file
+      #   working-directory: ${{ env.DIST_DIR }}/action
+      #   run: |
+      #     find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
+
+      - name: Generate directory structure
+        run: |
+          mkdir -p ${{ env.AQTION_DIR }}/action
+
+      - name: Zip game content to pkz
+        working-directory: ${{ env.DIST_DIR }}/action
+        run: |
+          for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds; do
+            cd ${makepkz}
+            zip -r ../0_${makepkz}.pkz * && cd ..
+            rm -rf ${makepkz}/
+          done
+
+      - name: Download and extract latest Linux ARM64 Q2Pro Release
+        run: |
+          wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-arm64.zip
+          unzip q2pro-lin-arm64.zip -d ${{ env.AQTION_DIR }}
+          chmod +x ${{ env.AQTION_DIR }}/q2pro*
+
+      - name: Copy external libraries for Q2Pro
+        run: |
+          cp ${{ env.DIST_DIR }}/build/linux/integrations/* ${{ env.AQTION_DIR }}
+
+      - name: Download and extract latest Linux ARM64 TNG Release
+        run: |
+          wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/tng-lin-arm64.zip
+          unzip tng-lin-arm64.zip -d ${{ env.AQTION_DIR }}/action/
+
+      - name: Copy action content
+        run: |
+          cp ${{ env.DIST_DIR }}/LICENSE ${{ env.AQTION_DIR }}/action/
+          cp -r ${{ env.DIST_DIR }}/action/* ${{ env.AQTION_DIR }}/action/
+
+      - name: Compress aqtion-lin
+        run: |
+          tar czpf aqtion-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.AQTION_DIR }}/*
+
+      - name: Upload aqtion-lin archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: "aqtion-lin_arm64"
+          path: |
+            aqtion-${{github.ref_name}}-linux-arm64.tar.gz
+
+  mac_dist:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Download latest Mac Univesal DMG
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: Mac-Artifacts.yaml
+          name: mac-universal-dmg-standalone
+
+      - name: Rename Mac Artifact to include version
+        run: |
+          mv aqtion-mac-universal-standalone.dmg aqtion-${{github.ref_name}}-mac-universal.dmg
+
+  push_to_release:
+    needs: ["mac_dist", "lin_x86_64_dist", "win_x86_64_dist", "lin_arm64_dist", "linux_deb", "content_only"]
+    runs-on: ubuntu-22.04
+    steps:
+
+
+      - name: Upload dist tarball to release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          body_path: 
+          tag_name: ${{github.ref_name}}
+          files: |
+            aqtion-${{github.ref_name}}-linux-arm64.deb
+            aqtion-${{github.ref_name}}-linux-amd64.deb
+            aqtion-${{github.ref_name}}-linux-arm64.tar.gz
+            aqtion-${{github.ref_name}}-linux-amd64.tar.gz
+            aqtion-${{github.ref_name}}-windows-x64.zip
+            aqtion-${{github.ref_name}}-windows-i386.zip
+            aqtion-content-${{github.ref_name}}.zip
+            aqtion-${{github.ref_name}}-mac-universal.dmg
+
+      - name: Update Vercel download links
+        run: curl -X POST ${{ secrets.DEPLOY_API_URL }}

@@ -186,7 +186,7 @@ begin dm_botmenu
     pairs --status "Choose your starting weapon/item" "Choose weapon/item" dm_choose "enabled" 1 "disabled" 0
     pairs --status "Spawn protection" "Enable 3 second spawn protection" dm_shield "disabled" 0 "enabled" 30
     blank
-    action --align " Play" "forcemenuoff;teamplay 0;set dm_choose $dm_choose;set dm_shield $dm_shield;map credits; map $nextserver; sv addbots $sv_botdm$;"
+    action --align " Play" "forcemenuoff; ltk_loadbots 1; teamplay 0;set dm_choose $dm_choose;set dm_shield $dm_shield;map credits; map $nextserver; sv addbots $sv_botdm$;"
 end
 
 begin tdm_botmenu
@@ -202,7 +202,7 @@ begin tdm_botmenu
     field --integer --status "frag limit" --width 2 fraglimit
     blank
     range "bot skill" ltk_skill 0 10
-    action --align " Play" "forcemenuoff; map credits; teamplay 0; teamdm 1 ; allweapon $allweapon; allitem $allitem; dmflags $dmflags; map $nextserver;sv addbots $sv_bot1$ 1;sv addbots $sv_bot2$;"
+    action --align " Play" "forcemenuoff; map credits; ltk_loadbots 1; teamplay 0; teamdm 1 ; allweapon $allweapon; allitem $allitem; dmflags $dmflags; map $nextserver;sv addbots $sv_bot1$ 1;sv addbots $sv_bot2$;"
 end
 
 begin tp_botmenu
@@ -218,7 +218,7 @@ begin tp_botmenu
     field --integer --status "frag limit" --width 2 fraglimit
     blank
     range "bot skill" ltk_skill 0 10
-    action --align " Play" "forcemenuoff; map credits; teamplay 1; use_3teams 0 ; allweapon $allweapon; allitem $allitem; dmflags $dmflags; map $nextserver;sv addbots $sv_bot1$ 1;sv addbots $sv_bot2$;"
+    action --align " Play" "forcemenuoff; map credits; ltk_loadbots 1; teamplay 1; use_3teams 0 ; allweapon $allweapon; allitem $allitem; dmflags $dmflags; map $nextserver;sv addbots $sv_bot1$ 1;sv addbots $sv_bot2$;"
 end
 
 begin settings
