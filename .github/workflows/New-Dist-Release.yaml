@@ -277,22 +277,62 @@ jobs:
     needs: ["mac_dist", "lin_x86_64_dist", "win_x86_64_dist", "lin_arm64_dist", "linux_deb", "content_only"]
     runs-on: ubuntu-22.04
     steps:
-      - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+      - name: Get Mac Universal DMG artifact
+        uses: dawidd6/action-download-artifact@v2
         with:
-          body_path: 
-          tag_name: ${{github.ref_name}}
-          files: |
-            aqtion-${{github.ref_name}}-linux-arm64.deb
-            aqtion-${{github.ref_name}}-linux-amd64.deb
-            aqtion-${{github.ref_name}}-linux-arm64.tar.gz
-            aqtion-${{github.ref_name}}-linux-amd64.tar.gz
-            aqtion-${{github.ref_name}}-windows-x64.zip
-            aqtion-${{github.ref_name}}-windows-i386.zip
-            aqtion-content-${{github.ref_name}}.zip
-            aqtion-${{github.ref_name}}-mac-universal.dmg
+          workflow_conclusion: success
+          name: mac-universal-dmg-standalone
 
-      - name: Update Vercel download links
-        run: curl -X POST ${{ secrets.DEPLOY_API_URL }}
+      - name: Get Linux ARM64 artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow_conclusion: success
+          name: aqtion-lin_arm64
+
+      - name: Get Linux x86_64 artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow_conclusion: success
+          name: aqtion-lin_x86_64
+
+      - name: Get Windows x86_64 artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow_conclusion: success
+          name: aqtion-win_x86_64
+
+      - name: Get Linux DEB artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow_conclusion: success
+          name: linux-arm64-deb
+
+      - name: Get content-only artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow_conclusion: success
+          name: aq-content-only
+   
+      - name: Look around
+        run: |
+          ls -l
+
+      # - name: Upload dist tarball to release
+      #   uses: softprops/action-gh-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ github.token }}
+      #   with:
+      #     body_path: 
+      #     tag_name: ${{github.ref_name}}
+      #     files: |
+      #       aqtion-${{github.ref_name}}-linux-arm64.deb
+      #       aqtion-${{github.ref_name}}-linux-amd64.deb
+      #       aqtion-${{github.ref_name}}-linux-arm64.tar.gz
+      #       aqtion-${{github.ref_name}}-linux-amd64.tar.gz
+      #       aqtion-${{github.ref_name}}-windows-x64.zip
+      #       aqtion-${{github.ref_name}}-windows-i386.zip
+      #       aqtion-content-${{github.ref_name}}.zip
+      #       aqtion-${{github.ref_name}}-mac-universal.dmg
+
+      # - name: Update Vercel download links
+      #   run: curl -X POST ${{ secrets.DEPLOY_API_URL }}
