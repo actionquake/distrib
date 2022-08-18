@@ -29,7 +29,7 @@ jobs:
           mv aqtion-content.zip aqtion-content-${{github.ref_name}}.zip
 
   linux_deb:
-    runs-on: ubuntu.22.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Generate Linux deb files
         working-directory: ${{ env.DIST_DIR }}/build/linux
@@ -104,7 +104,7 @@ jobs:
 
       - name: Compress aqtion-win
         run: |
-          zip -r aqtion-${{github.ref_name}}-windows-x86_64.zip aqtion
+          zip -r aqtion-${{github.ref_name}}-windows-x86_64.zip aqtion/*
 
       - name: Upload aqtion-win archive
         uses: actions/upload-artifact@v3
@@ -160,7 +160,7 @@ jobs:
 
       - name: Compress aqtion-lin
         run: |
-          tar czpf aqtion-${{github.ref_name}}-linux-x86_64.tar.gz aqtion
+          tar czpf aqtion-${{github.ref_name}}-linux-x86_64.tar.gz aqtion/*
 
       - name: Upload aqtion-lin archive
         uses: actions/upload-artifact@v3
@@ -216,7 +216,7 @@ jobs:
 
       - name: Compress aqtion-lin
         run: |
-          tar czpf aqtion-${{github.ref_name}}-linux-arm64.tar.gz aqtion
+          tar czpf aqtion-${{github.ref_name}}-linux-arm64.tar.gz aqtion/*
 
       - name: Upload aqtion-lin archive
         uses: actions/upload-artifact@v3

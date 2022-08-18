@@ -3,9 +3,7 @@ name: Content Artifact
 on:
   push:
     branches: ci
-
-# on:
-#   workflow_dispatch:
+  workflow_dispatch:
 
 env:
   CFG_WORKING_DIR: "config"
