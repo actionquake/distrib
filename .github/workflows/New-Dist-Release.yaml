@@ -39,7 +39,7 @@ jobs:
 
       - name: Copy additional content
         run: |
-          cp ${{ env.DIST_DIR }}/LICENSE ${{ env.DIST_DIR }}
+          cp ${{ env.DIST_DIR }}/LICENSE ${{ env.AQTION_DIR }}
 
       - name: Zip dist files
         run: |
