@@ -268,6 +268,12 @@ jobs:
         with:
           name: aqtion-${{github.ref_name}}-content-only
           skip_unpack: true
+
+      - name: Unzip Mac and Deb archives
+        run: |
+          unzip aqtion-${{github.ref_name}}-mac-universal
+          unzip linux-${{github.ref_name}}-x86_64-deb
+          unzip linux-${{github.ref_name}}-arm64-deb
    
       - name: Look around
         run: |
