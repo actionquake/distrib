@@ -32,6 +32,11 @@ jobs:
             zip -r ../0_${makepkz}.pkz * && cd ..
             rm -rf ${makepkz}/
           done
+      
+      # - name: Generate checksum file
+      #   working-directory: ${{ env.DIST_DIR }}/action
+      #   run: |
+      #     find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
 
       - name: Download all library files for Windows, Linux and Linux ARM
         run: |
@@ -41,10 +46,6 @@ jobs:
         run: |
           cp ${{ env.DIST_DIR }}/LICENSE ${{ env.AQTION_DIR }}
           cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
-
-      # - name: Zip dist files
-      #   run: |
-      #     cd ${{ env.DIST_DIR }} && zip -r aqtion-content.zip versions action/
 
       - name: Upload aqtion content artifact
         uses: actions/upload-artifact@v3
@@ -88,12 +89,12 @@ jobs:
       #     dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-arm64
       #     mv aqtion-${{github.ref_name}}-linux-* ../../../
 
-      - name: Generate Linux x86 deb archive
+      - name: Generate Linux x86_64 deb archive
         uses: actions/upload-artifact@v3
         with:
-          name: linux-amd64-deb
+          name: linux-x86_64-deb
           path: |
-            aqtion-v1.1.1-linux-amd64.deb 
+            aqtion-v1.1.1-linux-x86_64.deb 
 ### FIX THESE  ###
       - name: Generate Linux ARM64 deb archive
         uses: actions/upload-artifact@v3
@@ -111,24 +112,6 @@ jobs:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
 
-      # - name: Generate checksum file
-      #   working-directory: ${{ env.DIST_DIR }}/action
-      #   run: |
-      #     find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
-
-      # - name: Generate directory structure
-      #   run: |
-      #     mkdir -p ${{ env.AQTION_DIR }}/action
-
-      # - name: Zip game content to pkz
-      #   working-directory: ${{ env.DIST_DIR }}/action
-      #   run: |
-      #     for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds; do
-      #       cd ${makepkz}
-      #       zip -r ../0_${makepkz}.pkz * && cd ..
-      #       rm -rf ${makepkz}/
-      #     done
-
       - name: Get aqtion-content
         uses: actions/download-artifact@v3
         with:
@@ -144,25 +127,7 @@ jobs:
         run: |
           cp ${{ env.DIST_DIR }}/build/windows/integrations/* ${{ env.AQTION_DIR }}
 
-      # - name: Add files to archive and rename
-      #   run: |
-      #     zip -r aqtion-${{github.ref_name}}-windows-x86_64.zip aqtion/*
-
-      # - name: Download and extract latest Windows TNG Release
-      #   run: |
-      #     wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/tng-win-64.zip
-      #     unzip tng-win-64.zip -d ${{ env.AQTION_DIR }}/action/
-
-      # - name: Copy action content
-      #   run: |
-      #     cp ${{ env.DIST_DIR }}/LICENSE aqtion/action/
-      #     cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
-
-      # - name: Compress aqtion-win
-      #   run: |
-      #     zip -r aqtion-${{github.ref_name}}-windows-x86_64.zip ${{ env.AQTION_DIR }}/*
-
-      - name: Upload aqtion-win archive
+      - name: Upload aqtion-windows-x86_64 archive
         uses: actions/upload-artifact@v3
         with:
           name: aqtion-${{github.ref_name}}-windows-x86_64
@@ -177,11 +142,6 @@ jobs:
         with:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
-
-      # - name: Generate checksum file
-      #   working-directory: ${{ env.DIST_DIR }}/action
-      #   run: |
-      #     find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
 
       - name: Get aqtion-content
         uses: actions/download-artifact@v3
@@ -199,21 +159,7 @@ jobs:
         run: |
           cp ${{ env.DIST_DIR }}/build/linux/integrations/* ${{ env.AQTION_DIR }}
 
-      # - name: Download and extract latest Linux x64 TNG Release
-      #   run: |
-      #     wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/tng-lin-x86_64.zip
-      #     unzip tng-lin-x86_64.zip -d ${{ env.AQTION_DIR }}/action/
-
-      # - name: Copy action content
-      #   run: |
-      #     cp ${{ env.DIST_DIR }}/LICENSE ${{ env.AQTION_DIR }}/action/
-      #     cp -r ${{ env.DIST_DIR }}/action/* ${{ env.AQTION_DIR }}/action/
-
-      # - name: Compress aqtion-lin
-      #   run: |
-      #     tar czpf aqtion-${{github.ref_name}}-linux-x86_64.tar.gz ${{ env.AQTION_DIR }}/*
-
-      - name: Upload aqtion-lin archive
+      - name: Upload aqtion-linux-x86_64 archive
         uses: actions/upload-artifact@v3
         with:
           name: aqtion-${{github.ref_name}}-linux-x86_64
@@ -229,10 +175,32 @@ jobs:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
 
-      # - name: Generate checksum file
-      #   working-directory: ${{ env.DIST_DIR }}/action
-      #   run: |
-      #     find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
+      - name: Get aqtion-content
+        uses: actions/download-artifact@v3
+        with:
+          name: aq-content-only
+          path: ${{ env.AQTION_DIR }}
+
+      - name: Copy external libraries for Q2Pro
+        run: |
+          cp ${{ env.DIST_DIR }}/build/linux/integrations/* ${{ env.AQTION_DIR }}
+
+      - name: Upload aqtion-linux-arm64 archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: aqtion-${{github.ref_name}}-linux-arm64
+          path: |
+            ${{ env.AQTION_DIR }}/*
+
+  mac_dist:
+    needs: content_only
+    runs-on: macos-latest
+    steps:
+      - name: Checkout distrib
+        uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.DIST_DIR }}
 
       - name: Get aqtion-content
         uses: actions/download-artifact@v3
@@ -240,141 +208,73 @@ jobs:
           name: aq-content-only
           path: ${{ env.AQTION_DIR }}
 
-      # - name: Generate directory structure
-      #   run: |
-      #     mkdir -p ${{ env.AQTION_DIR }}/action
-
-      # - name: Zip game content to pkz
-      #   working-directory: ${{ env.DIST_DIR }}/action
-      #   run: |
-      #     for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds; do
-      #       cd ${makepkz}
-      #       zip -r ../0_${makepkz}.pkz * && cd ..
-      #       rm -rf ${makepkz}/
-      #     done
-
-      # - name: Download and extract latest Linux ARM64 Q2Pro Release
-      #   run: |
-      #     wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-arm64.zip
-      #     unzip q2pro-lin-arm64.zip -d ${{ env.AQTION_DIR }}
-      #     chmod +x ${{ env.AQTION_DIR }}/q2pro*
-
-      - name: Copy external libraries for Q2Pro
+      # Standalone
+      - name: Generate Mac Standalone artifacts
+        working-directory: ${{ env.DIST_DIR }}/build/mac
         run: |
-          cp ${{ env.DIST_DIR }}/build/linux/integrations/* ${{ env.AQTION_DIR }}
+          bash package_mac.sh standalone
 
-      # - name: Download and extract latest Linux ARM64 TNG Release
-      #   run: |
-      #     wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/tng-lin-arm64.zip
-      #     unzip tng-lin-arm64.zip -d ${{ env.AQTION_DIR }}/action/
-
-      # - name: Copy action content
-      #   run: |
-      #     cp ${{ env.DIST_DIR }}/LICENSE ${{ env.AQTION_DIR }}/action/
-      #     cp -r ${{ env.DIST_DIR }}/action/* ${{ env.AQTION_DIR }}/action/
-
-      # - name: Compress aqtion-lin
-      #   run: |
-      #     tar czpf aqtion-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.AQTION_DIR }}/*
-
-      - name: Upload aqtion-lin archive
+      - name: Generate Universal Standalone DMG artifact
         uses: actions/upload-artifact@v3
         with:
-          name: aqtion-${{github.ref_name}}-linux-arm64.tar.gz
+          name: mac-${{github.ref_name}}-universal-standalone
           path: |
-            ${{ env.AQTION_DIR }}/*
+            ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-standalone.dmg
 
-  # mac_dist:
-  #   runs-on: macos-latest
-  #   steps:
-  #     - name: Checkout distrib
-  #       uses: actions/checkout@v3
-  #       with:
-  #         repository: actionquake/distrib
-  #         path: ${{ env.DIST_DIR }}
+      # Steam
+      - name: Generate Mac Steam artifacts
+        working-directory: ${{ env.DIST_DIR }}/build/mac
+        run: bash package_mac.sh steam
 
-  #     - name: Copy the license file into all directories
-  #       working-directory: ${{ env.DIST_DIR }}
-  #       run: |
-  #         cp LICENSE build/mac/AQ_Install/AQ.app/Contents/Resources/
+      - name: Generate Universal Steam zip artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-universal-zip-steam
+          path: |
+            ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-steam.zip
 
-  #     - name: Zip game contents to pkz
-  #       working-directory: ${{ env.DIST_DIR }}/action
-  #       run: |
-  #         for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds; do
-  #           cd ${makepkz}
-  #           zip -r ../0_${makepkz}.pkz * && cd ..
-  #           rm -rf ${makepkz}/
-  #         done
+  push_to_release:
+    needs: ["mac_dist", "lin_x86_64_dist", "win_x86_64_dist", "lin_arm64_dist", "linux_deb", "content_only"]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Get Mac Universal DMG artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: mac-${{github.ref_name}}-universal-standalone
 
-  #     # Standalone
-  #     - name: Generate Mac Standalone artifacts
-  #       working-directory: ${{ env.DIST_DIR }}/build/mac
-  #       run: |
-  #         bash package_mac.sh standalone
+      - name: Get Linux ARM64 artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: aqtion-${{github.ref_name}}-linux-arm64
 
-  #     - name: Generate Universal Standalone DMG artifact
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: mac-universal-dmg-standalone
-  #         path: |
-  #           ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-standalone.dmg
+      - name: Get Linux x86_64 artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: aqtion-${{github.ref_name}}-linux-x86_64
 
-  #     # Steam
-  #     - name: Generate Mac Steam artifacts
-  #       working-directory: ${{ env.DIST_DIR }}/build/mac
-  #       run: bash package_mac.sh steam
+      - name: Get Windows x86_64 artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: aqtion-${{github.ref_name}}-windows-x86_64
 
-  #     - name: Generate Universal Steam zip artifact
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: mac-universal-zip-steam
-  #         path: |
-  #           ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-steam.zip
+      - name: Get Linux x86_64 DEB artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: linux-x86_64-deb
 
-  # push_to_release:
-  #   needs: ["mac_dist", "lin_x86_64_dist", "win_x86_64_dist", "lin_arm64_dist", "linux_deb", "content_only"]
-  #   runs-on: ubuntu-22.04
-  #   steps:
-  #     - name: Get Mac Universal DMG artifact
-  #       uses: dawidd6/action-download-artifact@v2
-  #       with:
-  #         workflow_conclusion: success
-  #         name: mac-universal-dmg-standalone
+      - name: Get Linux arm64 DEB artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: linux-arm64-deb
 
-  #     - name: Get Linux ARM64 artifact
-  #       uses: dawidd6/action-download-artifact@v2
-  #       with:
-  #         workflow_conclusion: success
-  #         name: aqtion-lin_arm64
-
-  #     - name: Get Linux x86_64 artifact
-  #       uses: dawidd6/action-download-artifact@v2
-  #       with:
-  #         workflow_conclusion: success
-  #         name: aqtion-lin_x86_64
-
-  #     - name: Get Windows x86_64 artifact
-  #       uses: dawidd6/action-download-artifact@v2
-  #       with:
-  #         workflow_conclusion: success
-  #         name: aqtion-win_x86_64
-
-  #     - name: Get Linux DEB artifact
-  #       uses: dawidd6/action-download-artifact@v2
-  #       with:
-  #         workflow_conclusion: success
-  #         name: linux-arm64-deb
-
-  #     - name: Get content-only artifact
-  #       uses: dawidd6/action-download-artifact@v2
-  #       with:
-  #         workflow_conclusion: success
-  #         name: aq-content-only
+      - name: Get content-only artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: aq-content-only
    
-  #     - name: Look around
-  #       run: |
-  #         ls -l
+      - name: Look around
+        run: |
+          ls -l
 
       # - name: Upload dist tarball to release
       #   uses: softprops/action-gh-release@v1
