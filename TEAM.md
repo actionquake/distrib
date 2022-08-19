@@ -6,10 +6,12 @@ The team identified here are officially or unofficially supporting the initiativ
 
 * Web Devs
   * [Gimp](https://github.com/ktross) (https://aqtiongame.com)
-  * [darksaint](https://github.com/darkshade9) (https://aq2world.com)
+  * [darksaint](https://github.com/darkshade9) (https://forums.aq2world.com)
+  * dox (https://aq2world.com)
 * Game Devs
   * [Raptor007](https://github.com/Raptor007) *unofficially
   * [Reki](https://github.com/Iceman12k) *unofficially
+  * [ReKTeK](https://github.com/ReKTeK) *unofficially
 * Art and Media
   * Videos
     * matic
@@ -24,7 +26,8 @@ The team identified here are officially or unofficially supporting the initiativ
     * [darksaint](https://github.com/darkshade9)
     * matic
 * Community Leaders
-  * TBD
+  * North America
+    * Ferrick
 * Distribution and Repository Management
   * Steam, Itch.io, Standalone
     * [darksaint](https://github.com/darkshade9)
