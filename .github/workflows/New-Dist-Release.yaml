@@ -37,9 +37,10 @@ jobs:
         run: |
           for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64; do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/action/; rm -rf ${FILE}.zip; done
 
-      - name: Copy additional content
+      - name: Copy aqtion content
         run: |
           cp ${{ env.DIST_DIR }}/LICENSE ${{ env.AQTION_DIR }}
+          cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
 
       # - name: Zip dist files
       #   run: |
@@ -92,14 +93,14 @@ jobs:
         with:
           name: linux-amd64-deb
           path: |
-            aqtion-${GIT_TAG}-linux-amd64.deb
-
+            aqtion-v1.1.1-linux-amd64.deb 
+### FIX THESE  ###
       - name: Generate Linux ARM64 deb archive
         uses: actions/upload-artifact@v3
         with:
           name: linux-arm64-deb
           path: |
-            aqtion-${GIT_TAG}-linux-arm64.deb
+            aqtion-v1.1.1-linux-arm64.deb
 
   win_x86_64_dist:
     needs: content_only
