@@ -70,7 +70,7 @@ jobs:
           cp -r dpkg aqtion-${GIT_TAG}-linux-arm64
           sed -i "s/arch_value_here/amd64/g" aqtion-${GIT_TAG}-linux-amd64/DEBIAN/control
           sed -i "s/arch_value_here/arm64/g" aqtion-${GIT_TAG}-linux-arm64/DEBIAN/control
-          dpkg-deb --build --root-owner-group aqtion-${GIT_TAG}-linux-amd64
+          dpkg-deb --build --root-owner-group aqtion-${GIT_TAG}-linux-x86_64
           dpkg-deb --build --root-owner-group aqtion-${GIT_TAG}-linux-arm64
           mv aqtion-${GIT_TAG}-linux-* ../../../
 
@@ -229,7 +229,7 @@ jobs:
       - name: Generate Universal Steam zip artifact
         uses: actions/upload-artifact@v3
         with:
-          name: mac-universal-zip-steam
+          name: mac-${{github.ref_name}}-universal-steam
           path: |
             ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-steam.zip
 
