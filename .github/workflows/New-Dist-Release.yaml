@@ -231,7 +231,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           name: aqtion-${{github.ref_name}}-mac-universal
-          skip_unpack: true
+          skip_unpack: false
 
       - name: Get Linux ARM64 artifact
         uses: dawidd6/action-download-artifact@v2
@@ -255,13 +255,13 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           name: linux-${{github.ref_name}}-x86_64-deb
-          skip_unpack: true
+          skip_unpack: false
 
       - name: Get Linux arm64 DEB artifact
         uses: dawidd6/action-download-artifact@v2
         with:
           name: linux-${{github.ref_name}}-arm64-deb
-          skip_unpack: true
+          skip_unpack: false
 
       - name: Get content-only artifact
         uses: dawidd6/action-download-artifact@v2
@@ -288,7 +288,6 @@ jobs:
             aqtion-${{github.ref_name}}-windows-x86_64.zip
             linux-${{github.ref_name}}-x86_64.deb
             linux-${{github.ref_name}}-arm64.deb
-
 
       # - name: Update Vercel download links
       #   run: curl -X POST ${{ secrets.DEPLOY_API_URL }}
