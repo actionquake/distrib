@@ -31,7 +31,8 @@ if [[ ${DISTRIB} == "standalone" ]]; then
     lipo -create -output q2probuilds/universal/${DISTRIB}/q2pro q2probuilds/x86_64/${DISTRIB}/q2pro q2probuilds/arm64/${DISTRIB}/q2pro
     lipo -create -output q2probuilds/universal/${DISTRIB}/q2proded q2probuilds/x86_64/${DISTRIB}/q2proded q2probuilds/arm64/${DISTRIB}/q2proded
     
-    mv ../../action AQ_Install/AQ.app/Contents/MacOS/
+    #mv ../../action AQ_Install/AQ.app/Contents/MacOS/
+    mv ../../../aqtion/action AQ_Install/AQ.app/Contents/MacOS/
     install q2probuilds/universal/${DISTRIB}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
     install q2probuilds/universal/${DISTRIB}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
     install q2probuilds/x86_64/${DISTRIB}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
@@ -43,9 +44,9 @@ if [[ ${DISTRIB} == "standalone" ]]; then
     ## Create dmg file
     hdiutil create -ov ${DMG_FILENAME}.dmg -srcfolder AQ_Install -volname "AQtion"
 
-    cd AQ_Install || return
-    zip -r ../${DMG_FILENAME}.zip AQ.app
-    cd .. || return
+    # cd AQ_Install || return
+    # zip -r ../${DMG_FILENAME}.zip AQ.app
+    # cd .. || return
 
     ## Move action folder back
     mv AQ_Install/AQ.app/Contents/MacOS/action ../../
@@ -56,7 +57,8 @@ else
     lipo -create -output q2probuilds/universal/${DISTRIB}/q2pro q2probuilds/x86_64/${DISTRIB}/q2pro q2probuilds/arm64/${DISTRIB}/q2pro
     lipo -create -output q2probuilds/universal/${DISTRIB}/q2proded q2probuilds/x86_64/${DISTRIB}/q2proded q2probuilds/arm64/${DISTRIB}/q2proded
     
-    mv ../../action Steam_Install/
+    #mv ../../action Steam_Install/
+    mv ../../../aqtion/action Steam_Install/
     lipo -create -output q2probuilds/universal/${DISTRIB}/aqtion q2probuilds/x86_64/${DISTRIB}/aqtion q2probuilds/arm64/${DISTRIB}/aqtion
 
     # Install AQtion required files
