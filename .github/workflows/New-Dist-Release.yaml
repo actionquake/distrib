@@ -41,16 +41,16 @@ jobs:
         run: |
           cp ${{ env.DIST_DIR }}/LICENSE ${{ env.AQTION_DIR }}
 
-      - name: Zip dist files
-        run: |
-          cd ${{ env.DIST_DIR }} && zip -r aqtion-content.zip versions action/
+      # - name: Zip dist files
+      #   run: |
+      #     cd ${{ env.DIST_DIR }} && zip -r aqtion-content.zip versions action/
 
       - name: Generate archive
         uses: actions/upload-artifact@v3
         with:
           name: aq-content-only
           path: |
-            ${{ env.DIST_DIR }}/aqtion-content.zip
+            ${{ env.AQTION_DIR }}
 
   linux_deb:
     runs-on: ubuntu-22.04
@@ -131,7 +131,6 @@ jobs:
       - name: Get aqtion-content
         uses: actions/download-artifact@v3
         with:
-          workflow_conclusion: success
           name: aq-content-only
 
       - name: Download and extract latest Windows Q2Pro Release
