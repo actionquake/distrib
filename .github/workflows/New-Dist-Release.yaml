@@ -228,39 +228,46 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Get Mac Universal DMG artifact
-        uses: actions/download-artifact@v3
+        uses: dawidd6/action-download-artifact@v2
         with:
           name: aqtion-${{github.ref_name}}-mac-universal
+          skip_unpack: true
 
       - name: Get Linux ARM64 artifact
-        uses: actions/download-artifact@v3
+        uses: dawidd6/action-download-artifact@v2
         with:
           name: aqtion-${{github.ref_name}}-linux-arm64
+          skip_unpack: true
 
       - name: Get Linux x86_64 artifact
-        uses: actions/download-artifact@v3
+        uses: dawidd6/action-download-artifact@v2
         with:
           name: aqtion-${{github.ref_name}}-linux-x86_64
+          skip_unpack: true
 
       - name: Get Windows x86_64 artifact
-        uses: actions/download-artifact@v3
+        uses: dawidd6/action-download-artifact@v2
         with:
           name: aqtion-${{github.ref_name}}-windows-x86_64
+          skip_unpack: true
 
       - name: Get Linux x86_64 DEB artifact
-        uses: actions/download-artifact@v3
+        uses: dawidd6/action-download-artifact@v2
         with:
           name: linux-${{github.ref_name}}-x86_64-deb
+          skip_unpack: true
 
       - name: Get Linux arm64 DEB artifact
-        uses: actions/download-artifact@v3
+        uses: dawidd6/action-download-artifact@v2
         with:
           name: linux-${{github.ref_name}}-arm64-deb
+          skip_unpack: true
 
       - name: Get content-only artifact
-        uses: actions/download-artifact@v3
+        uses: dawidd6/action-download-artifact@v2
         with:
           name: aqtion-${{github.ref_name}}-content-only
+          skip_unpack: true
    
       - name: Look around
         run: |
