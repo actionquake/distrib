@@ -33,7 +33,11 @@ jobs:
         run: |
           for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64; do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/action/; rm -rf ${FILE}.zip; done
 
-      - name: Generate dist files
+      - name: Copy additional content
+        run: |
+          cp ${{ env.DIST_DIR }}/LICENSE aqtion/action/
+
+      - name: Zip dist files
         run: |
           cd ${{ env.DIST_DIR }} && zip -r aqtion-content.zip versions action/
 
@@ -94,6 +98,7 @@ jobs:
             aqtion-${GIT_TAG}-linux-arm64.deb
 
   win_x86_64_dist:
+    needs: content_only
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -106,18 +111,24 @@ jobs:
       #   run: |
       #     find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
 
-      - name: Generate directory structure
-        run: |
-          mkdir -p ${{ env.AQTION_DIR }}/action
+      # - name: Generate directory structure
+      #   run: |
+      #     mkdir -p ${{ env.AQTION_DIR }}/action
 
-      - name: Zip game content to pkz
-        working-directory: ${{ env.DIST_DIR }}/action
-        run: |
-          for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds; do
-            cd ${makepkz}
-            zip -r ../0_${makepkz}.pkz * && cd ..
-            rm -rf ${makepkz}/
-          done
+      # - name: Zip game content to pkz
+      #   working-directory: ${{ env.DIST_DIR }}/action
+      #   run: |
+      #     for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds; do
+      #       cd ${makepkz}
+      #       zip -r ../0_${makepkz}.pkz * && cd ..
+      #       rm -rf ${makepkz}/
+      #     done
+
+      - name: Get aqtion-content
+        uses: actions/download-artifact@v3
+        with:
+          workflow_conclusion: success
+          name: aq-content-only
 
       - name: Download and extract latest Windows Q2Pro Release
         run: |
@@ -128,19 +139,24 @@ jobs:
         run: |
           cp ${{ env.DIST_DIR }}/build/windows/integrations/* ${{ env.AQTION_DIR }}
 
-      - name: Download and extract latest Windows TNG Release
+      - name: Add files to archive and rename
         run: |
-          wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/tng-win-64.zip
-          unzip tng-win-64.zip -d ${{ env.AQTION_DIR }}/action/
+          zip -ur aqtion-content.zip aqtion/*
+          mv aqtion-content.zip aqtion-${{github.ref_name}}-windows-x86_64.zip
 
-      - name: Copy action content
-        run: |
-          cp ${{ env.DIST_DIR }}/LICENSE aqtion/action/
-          cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
+      # - name: Download and extract latest Windows TNG Release
+      #   run: |
+      #     wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/tng-win-64.zip
+      #     unzip tng-win-64.zip -d ${{ env.AQTION_DIR }}/action/
 
-      - name: Compress aqtion-win
-        run: |
-          zip -r aqtion-${{github.ref_name}}-windows-x86_64.zip ${{ env.AQTION_DIR }}/*
+      # - name: Copy action content
+      #   run: |
+      #     cp ${{ env.DIST_DIR }}/LICENSE aqtion/action/
+      #     cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
+
+      # - name: Compress aqtion-win
+      #   run: |
+      #     zip -r aqtion-${{github.ref_name}}-windows-x86_64.zip ${{ env.AQTION_DIR }}/*
 
       - name: Upload aqtion-win archive
         uses: actions/upload-artifact@v3
@@ -298,13 +314,6 @@ jobs:
           name: mac-universal-dmg-standalone
           path: |
             ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-standalone.dmg
-
-      - name: Generate Universal Standalone zip artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: mac-universal-zip-standalone
-          path: |
-            ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-standalone.zip
 
       # Steam
       - name: Generate Mac Steam artifacts
