@@ -281,13 +281,13 @@ jobs:
           body_path: 
           tag_name: ${{github.ref_name}}
           files: |
-            aqtion-${{github.ref_name}}-content-only
-            aqtion-${{github.ref_name}}-mac-universal
-            aqtion-${{github.ref_name}}-linux-arm64
-            aqtion-${{github.ref_name}}-linux-x86_64
-            aqtion-${{github.ref_name}}-windows-x86_64
-            linux-${{github.ref_name}}-x86_64-deb
-            linux-${{github.ref_name}}-arm64-deb
+            aqtion-${{github.ref_name}}-content-only.zip
+            aqtion-${{github.ref_name}}-mac-universal.dmg
+            aqtion-${{github.ref_name}}-linux-arm64.zip
+            aqtion-${{github.ref_name}}-linux-x86_64.zip
+            aqtion-${{github.ref_name}}-windows-x86_64.zip
+            linux-${{github.ref_name}}-x86_64.deb
+            linux-${{github.ref_name}}-arm64.deb
 
 
       # - name: Update Vercel download links
