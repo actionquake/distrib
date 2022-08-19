@@ -229,7 +229,7 @@ jobs:
       - name: Generate Universal Steam zip artifact
         uses: actions/upload-artifact@v3
         with:
-          name: mac-universal-zip-steam
+          name: mac-${{github.ref_name}}-universal-steam
           path: |
             ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-steam.zip
 

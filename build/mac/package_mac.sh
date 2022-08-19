@@ -79,7 +79,7 @@ else
     ## Make items executable
     chmod +x Steam_Install/q2pro* Steam_Install/aqtion Steam_Install/launch.sh
 
-    cd Steam_Install && zip -r ../${DMG_FILENAME}.zip *
+    #cd Steam_Install && zip -r ../${DMG_FILENAME}.zip *
 
     ##mv action ../../../
 fi
