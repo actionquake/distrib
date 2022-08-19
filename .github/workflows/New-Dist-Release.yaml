@@ -212,7 +212,7 @@ jobs:
       - name: Generate Mac Standalone artifacts
         working-directory: ${{ env.DIST_DIR }}/build/mac
         run: |
-          bash package_mac.sh standalone
+          bash -x package_mac.sh standalone
 
       - name: Generate Universal Standalone DMG artifact
         uses: actions/upload-artifact@v3
@@ -224,7 +224,7 @@ jobs:
       # Steam
       - name: Generate Mac Steam artifacts
         working-directory: ${{ env.DIST_DIR }}/build/mac
-        run: bash package_mac.sh steam
+        run: bash -x package_mac.sh steam
 
       - name: Generate Universal Steam zip artifact
         uses: actions/upload-artifact@v3
