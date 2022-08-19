@@ -66,9 +66,9 @@ jobs:
         working-directory: ${{ env.DIST_DIR }}/build/linux
         run: |
           sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
-          cp -r dpkg aqtion-${GIT_TAG}-linux-amd64
+          cp -r dpkg aqtion-${GIT_TAG}-linux-x86_64
           cp -r dpkg aqtion-${GIT_TAG}-linux-arm64
-          sed -i "s/arch_value_here/amd64/g" aqtion-${GIT_TAG}-linux-amd64/DEBIAN/control
+          sed -i "s/arch_value_here/x86_64/g" aqtion-${GIT_TAG}-linux-x86_64/DEBIAN/control
           sed -i "s/arch_value_here/arm64/g" aqtion-${GIT_TAG}-linux-arm64/DEBIAN/control
           dpkg-deb --build --root-owner-group aqtion-${GIT_TAG}-linux-x86_64
           dpkg-deb --build --root-owner-group aqtion-${GIT_TAG}-linux-arm64
@@ -231,7 +231,7 @@ jobs:
         with:
           name: mac-${{github.ref_name}}-universal-steam
           path: |
-            ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-steam.zip
+            ${{ env.DIST_DIR }}/build/mac/Steam_Install
 
   push_to_release:
     needs: ["mac_dist", "lin_x86_64_dist", "win_x86_64_dist", "lin_arm64_dist", "linux_deb", "content_only"]
