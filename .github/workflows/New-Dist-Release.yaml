@@ -269,11 +269,12 @@ jobs:
           name: aqtion-${{github.ref_name}}-content-only
           skip_unpack: true
 
-      - name: Unzip Mac and Deb archives
+      - name: Unzip Mac and Deb archives, rename
         run: |
           unzip aqtion-${{github.ref_name}}-mac-universal
           unzip linux-${{github.ref_name}}-x86_64-deb
           unzip linux-${{github.ref_name}}-arm64-deb
+          mv aqtion-mac-universal-standalone.dmg aqtion-${{github.ref_name}}-mac-universal.dmg
    
       - name: Look around
         run: |
@@ -292,8 +293,8 @@ jobs:
             aqtion-${{github.ref_name}}-linux-arm64.zip
             aqtion-${{github.ref_name}}-linux-x86_64.zip
             aqtion-${{github.ref_name}}-windows-x86_64.zip
-            linux-${{github.ref_name}}-x86_64.deb
-            linux-${{github.ref_name}}-arm64.deb
+            aqtion-${{github.ref_name}}-linux-x86_64.deb
+            aqtion-${{github.ref_name}}-linux-arm64.deb
 
       # - name: Update Vercel download links
       #   run: curl -X POST ${{ secrets.DEPLOY_API_URL }}
