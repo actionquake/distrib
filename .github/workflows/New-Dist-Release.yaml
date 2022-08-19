@@ -138,6 +138,9 @@ jobs:
           wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-msvc-x64.zip
           unzip q2pro-msvc-x64.zip -d ${{ env.AQTION_DIR }}
 
+      - name: look
+        run: ls -l
+
       - name: Copy external libraries for Q2Pro
         run: |
           cp ${{ env.DIST_DIR }}/build/windows/integrations/* ${{ env.AQTION_DIR }}
