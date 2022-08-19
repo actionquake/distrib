@@ -11,7 +11,6 @@
         "Depots"
         {
                 "1978801"       "aqtion_win64_app_build.vdf"
-                "1978802"       "aqtion_win32_app_build.vdf"
                 "1978803"       "aqtion_lin64_app_build.vdf"
                 "1978804"       "aqtion_mac_universal_app_build.vdf"
         }
