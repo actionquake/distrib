@@ -1,9 +1,14 @@
 name: New Dist Release
 
-on:
+# on:
+#   push:
+#     branches: ci
+#   workflow_dispatch:
+
+on:  
   push:
-    branches: ci
-  workflow_dispatch:
+    tags:
+      - 'v*'
 
 env:
   AQTION_DIR: aqtion
