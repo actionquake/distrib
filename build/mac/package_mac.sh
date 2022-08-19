@@ -49,7 +49,7 @@ if [[ ${DISTRIB} == "standalone" ]]; then
     # cd .. || return
 
     ## Move action folder back
-    mv AQ_Install/AQ.app/Contents/MacOS/action ../../
+    ##mv AQ_Install/AQ.app/Contents/MacOS/action ../../
 else
     mkdir -p Steam_Install
     DMG_FILENAME=aqtion-mac-universal-${DISTRIB}
@@ -81,5 +81,5 @@ else
 
     cd Steam_Install && zip -r ../${DMG_FILENAME}.zip *
 
-    mv action ../../../
+    ##mv action ../../../
 fi
