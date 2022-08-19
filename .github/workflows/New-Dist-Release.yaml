@@ -46,7 +46,7 @@ jobs:
       #   run: |
       #     cd ${{ env.DIST_DIR }} && zip -r aqtion-content.zip versions action/
 
-      - name: Generate archive
+      - name: Upload aqtion content artifact
         uses: actions/upload-artifact@v3
         with:
           name: aq-content-only
@@ -144,9 +144,9 @@ jobs:
         run: |
           cp ${{ env.DIST_DIR }}/build/windows/integrations/* ${{ env.AQTION_DIR }}
 
-      - name: Add files to archive and rename
-        run: |
-          zip -r aqtion-${{github.ref_name}}-windows-x86_64.zip aqtion/*
+      # - name: Add files to archive and rename
+      #   run: |
+      #     zip -r aqtion-${{github.ref_name}}-windows-x86_64.zip aqtion/*
 
       # - name: Download and extract latest Windows TNG Release
       #   run: |
@@ -165,9 +165,9 @@ jobs:
       - name: Upload aqtion-win archive
         uses: actions/upload-artifact@v3
         with:
-          name: "aqtion-win_x86_64"
+          name: aqtion-${{github.ref_name}}-windows-x86_64
           path: |
-            aqtion-${{github.ref_name}}-windows-x86_64.zip
+            ${{ env.AQTION_DIR }}/*
 
   lin_x86_64_dist:
     needs: content_only
@@ -209,16 +209,16 @@ jobs:
       #     cp ${{ env.DIST_DIR }}/LICENSE ${{ env.AQTION_DIR }}/action/
       #     cp -r ${{ env.DIST_DIR }}/action/* ${{ env.AQTION_DIR }}/action/
 
-      - name: Compress aqtion-lin
-        run: |
-          tar czpf aqtion-${{github.ref_name}}-linux-x86_64.tar.gz ${{ env.AQTION_DIR }}/*
+      # - name: Compress aqtion-lin
+      #   run: |
+      #     tar czpf aqtion-${{github.ref_name}}-linux-x86_64.tar.gz ${{ env.AQTION_DIR }}/*
 
       - name: Upload aqtion-lin archive
         uses: actions/upload-artifact@v3
         with:
-          name: "aqtion-lin_x86_64"
+          name: aqtion-${{github.ref_name}}-linux-x86_64
           path: |
-            aqtion-${{github.ref_name}}-linux-x86_64.tar.gz
+            ${{ env.AQTION_DIR }}/*
 
   lin_arm64_dist:
     needs: content_only
@@ -273,16 +273,16 @@ jobs:
       #     cp ${{ env.DIST_DIR }}/LICENSE ${{ env.AQTION_DIR }}/action/
       #     cp -r ${{ env.DIST_DIR }}/action/* ${{ env.AQTION_DIR }}/action/
 
-      - name: Compress aqtion-lin
-        run: |
-          tar czpf aqtion-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.AQTION_DIR }}/*
+      # - name: Compress aqtion-lin
+      #   run: |
+      #     tar czpf aqtion-${{github.ref_name}}-linux-arm64.tar.gz ${{ env.AQTION_DIR }}/*
 
       - name: Upload aqtion-lin archive
         uses: actions/upload-artifact@v3
         with:
-          name: "aqtion-lin_arm64"
+          name: aqtion-${{github.ref_name}}-linux-arm64.tar.gz
           path: |
-            aqtion-${{github.ref_name}}-linux-arm64.tar.gz
+            ${{ env.AQTION_DIR }}/*
 
   # mac_dist:
   #   runs-on: macos-latest
