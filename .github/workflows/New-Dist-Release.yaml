@@ -138,6 +138,9 @@ jobs:
           wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-msvc-x64.zip
           unzip q2pro-msvc-x64.zip -d ${{ env.AQTION_DIR }}
 
+      - name: look
+        run: ls -l
+
       - name: Copy external libraries for Q2Pro
         run: |
           cp ${{ env.DIST_DIR }}/build/windows/integrations/* ${{ env.AQTION_DIR }}
@@ -282,97 +285,97 @@ jobs:
           path: |
             aqtion-${{github.ref_name}}-linux-arm64.tar.gz
 
-  mac_dist:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout distrib
-        uses: actions/checkout@v3
-        with:
-          repository: actionquake/distrib
-          path: ${{ env.DIST_DIR }}
+  # mac_dist:
+  #   runs-on: macos-latest
+  #   steps:
+  #     - name: Checkout distrib
+  #       uses: actions/checkout@v3
+  #       with:
+  #         repository: actionquake/distrib
+  #         path: ${{ env.DIST_DIR }}
 
-      - name: Copy the license file into all directories
-        working-directory: ${{ env.DIST_DIR }}
-        run: |
-          cp LICENSE build/mac/AQ_Install/AQ.app/Contents/Resources/
+  #     - name: Copy the license file into all directories
+  #       working-directory: ${{ env.DIST_DIR }}
+  #       run: |
+  #         cp LICENSE build/mac/AQ_Install/AQ.app/Contents/Resources/
 
-      - name: Zip game contents to pkz
-        working-directory: ${{ env.DIST_DIR }}/action
-        run: |
-          for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds; do
-            cd ${makepkz}
-            zip -r ../0_${makepkz}.pkz * && cd ..
-            rm -rf ${makepkz}/
-          done
+  #     - name: Zip game contents to pkz
+  #       working-directory: ${{ env.DIST_DIR }}/action
+  #       run: |
+  #         for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds; do
+  #           cd ${makepkz}
+  #           zip -r ../0_${makepkz}.pkz * && cd ..
+  #           rm -rf ${makepkz}/
+  #         done
 
-      # Standalone
-      - name: Generate Mac Standalone artifacts
-        working-directory: ${{ env.DIST_DIR }}/build/mac
-        run: |
-          bash package_mac.sh standalone
+  #     # Standalone
+  #     - name: Generate Mac Standalone artifacts
+  #       working-directory: ${{ env.DIST_DIR }}/build/mac
+  #       run: |
+  #         bash package_mac.sh standalone
 
-      - name: Generate Universal Standalone DMG artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: mac-universal-dmg-standalone
-          path: |
-            ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-standalone.dmg
+  #     - name: Generate Universal Standalone DMG artifact
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: mac-universal-dmg-standalone
+  #         path: |
+  #           ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-standalone.dmg
 
-      # Steam
-      - name: Generate Mac Steam artifacts
-        working-directory: ${{ env.DIST_DIR }}/build/mac
-        run: bash package_mac.sh steam
+  #     # Steam
+  #     - name: Generate Mac Steam artifacts
+  #       working-directory: ${{ env.DIST_DIR }}/build/mac
+  #       run: bash package_mac.sh steam
 
-      - name: Generate Universal Steam zip artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: mac-universal-zip-steam
-          path: |
-            ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-steam.zip
+  #     - name: Generate Universal Steam zip artifact
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: mac-universal-zip-steam
+  #         path: |
+  #           ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-steam.zip
 
-  push_to_release:
-    needs: ["mac_dist", "lin_x86_64_dist", "win_x86_64_dist", "lin_arm64_dist", "linux_deb", "content_only"]
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Get Mac Universal DMG artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow_conclusion: success
-          name: mac-universal-dmg-standalone
+  # push_to_release:
+  #   needs: ["mac_dist", "lin_x86_64_dist", "win_x86_64_dist", "lin_arm64_dist", "linux_deb", "content_only"]
+  #   runs-on: ubuntu-22.04
+  #   steps:
+  #     - name: Get Mac Universal DMG artifact
+  #       uses: dawidd6/action-download-artifact@v2
+  #       with:
+  #         workflow_conclusion: success
+  #         name: mac-universal-dmg-standalone
 
-      - name: Get Linux ARM64 artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow_conclusion: success
-          name: aqtion-lin_arm64
+  #     - name: Get Linux ARM64 artifact
+  #       uses: dawidd6/action-download-artifact@v2
+  #       with:
+  #         workflow_conclusion: success
+  #         name: aqtion-lin_arm64
 
-      - name: Get Linux x86_64 artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow_conclusion: success
-          name: aqtion-lin_x86_64
+  #     - name: Get Linux x86_64 artifact
+  #       uses: dawidd6/action-download-artifact@v2
+  #       with:
+  #         workflow_conclusion: success
+  #         name: aqtion-lin_x86_64
 
-      - name: Get Windows x86_64 artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow_conclusion: success
-          name: aqtion-win_x86_64
+  #     - name: Get Windows x86_64 artifact
+  #       uses: dawidd6/action-download-artifact@v2
+  #       with:
+  #         workflow_conclusion: success
+  #         name: aqtion-win_x86_64
 
-      - name: Get Linux DEB artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow_conclusion: success
-          name: linux-arm64-deb
+  #     - name: Get Linux DEB artifact
+  #       uses: dawidd6/action-download-artifact@v2
+  #       with:
+  #         workflow_conclusion: success
+  #         name: linux-arm64-deb
 
-      - name: Get content-only artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow_conclusion: success
-          name: aq-content-only
+  #     - name: Get content-only artifact
+  #       uses: dawidd6/action-download-artifact@v2
+  #       with:
+  #         workflow_conclusion: success
+  #         name: aq-content-only
    
-      - name: Look around
-        run: |
-          ls -l
+  #     - name: Look around
+  #       run: |
+  #         ls -l
 
       # - name: Upload dist tarball to release
       #   uses: softprops/action-gh-release@v1
