@@ -8,7 +8,7 @@ on:
 env:
   AQTION_DIR: aqtion
   DIST_DIR: config
-  GIT_TAG: "v1.1.1"
+  GIT_TAG: ${{github.ref_name}}
 
 jobs:
   content_only:
@@ -50,7 +50,7 @@ jobs:
       - name: Upload aqtion content artifact
         uses: actions/upload-artifact@v3
         with:
-          name: aq-content-only
+          name: aqtion-${{github.ref_name}}-content-only
           path: |
             ${{ env.AQTION_DIR }}
 
@@ -66,42 +66,27 @@ jobs:
         working-directory: ${{ env.DIST_DIR }}/build/linux
         run: |
           sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
-          cp -r dpkg aqtion-${GIT_TAG}-linux-x86_64
-          cp -r dpkg aqtion-${GIT_TAG}-linux-arm64
-          sed -i "s/arch_value_here/x86_64/g" aqtion-${GIT_TAG}-linux-x86_64/DEBIAN/control
-          sed -i "s/arch_value_here/arm64/g" aqtion-${GIT_TAG}-linux-arm64/DEBIAN/control
-          dpkg-deb --build --root-owner-group aqtion-${GIT_TAG}-linux-x86_64
-          dpkg-deb --build --root-owner-group aqtion-${GIT_TAG}-linux-arm64
-          mv aqtion-${GIT_TAG}-linux-* ../../../
-
-          ls -l
-          ls -l ../../../
-      # - name: Generate Linux deb files
-      #   working-directory: ${{ env.DIST_DIR }}/build/linux
-      #   run: |
-      #     echo ${{github.ref_name}}
-      #     sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
-      #     cp -r dpkg aqtion-${{github.ref_name}}-linux-amd64
-      #     cp -r dpkg aqtion-${{github.ref_name}}-linux-arm64
-      #     sed -i "s/arch_value_here/amd64/g" aqtion-${{github.ref_name}}-linux-amd64/DEBIAN/control
-      #     sed -i "s/arch_value_here/arm64/g" aqtion-${{github.ref_name}}-linux-arm64/DEBIAN/control
-      #     dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-amd64
-      #     dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-arm64
-      #     mv aqtion-${{github.ref_name}}-linux-* ../../../
+          cp -r dpkg aqtion-${{github.ref_name}}-linux-x86_64
+          cp -r dpkg aqtion-${{github.ref_name}}-linux-arm64
+          sed -i "s/arch_value_here/x86_64/g" aqtion-${{github.ref_name}}-linux-x86_64/DEBIAN/control
+          sed -i "s/arch_value_here/arm64/g" aqtion-${{github.ref_name}}-linux-arm64/DEBIAN/control
+          dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-x86_64
+          dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-arm64
+          mv aqtion-${{github.ref_name}}-linux-* ../../../
 
       - name: Generate Linux x86_64 deb archive
         uses: actions/upload-artifact@v3
         with:
-          name: linux-x86_64-deb
+          name: linux-${{github.ref_name}}-x86_64-deb
           path: |
-            aqtion-v1.1.1-linux-x86_64.deb 
-### FIX THESE  ###
+            aqtion-${{github.ref_name}}-linux-x86_64.deb 
+
       - name: Generate Linux ARM64 deb archive
         uses: actions/upload-artifact@v3
         with:
-          name: linux-arm64-deb
+          name: linux-${{github.ref_name}}-arm64-deb
           path: |
-            aqtion-v1.1.1-linux-arm64.deb
+            aqtion-${{github.ref_name}}-linux-arm64.deb
 
   win_x86_64_dist:
     needs: content_only
@@ -115,7 +100,7 @@ jobs:
       - name: Get aqtion-content
         uses: actions/download-artifact@v3
         with:
-          name: aq-content-only
+          name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
 
       - name: Download and extract latest Windows Q2Pro Release
@@ -146,7 +131,7 @@ jobs:
       - name: Get aqtion-content
         uses: actions/download-artifact@v3
         with:
-          name: aq-content-only
+          name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
 
       - name: Download and extract latest Linux x64 Q2Pro Release
@@ -178,7 +163,7 @@ jobs:
       - name: Get aqtion-content
         uses: actions/download-artifact@v3
         with:
-          name: aq-content-only
+          name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
 
       - name: Copy external libraries for Q2Pro
@@ -205,7 +190,7 @@ jobs:
       - name: Get aqtion-content
         uses: actions/download-artifact@v3
         with:
-          name: aq-content-only
+          name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
 
       # Standalone
@@ -217,7 +202,7 @@ jobs:
       - name: Generate Universal Standalone DMG artifact
         uses: actions/upload-artifact@v3
         with:
-          name: mac-${{github.ref_name}}-universal-standalone
+          name: aqtion-${{github.ref_name}}-mac-universal
           path: |
             ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-standalone.dmg
 
@@ -240,7 +225,7 @@ jobs:
       - name: Get Mac Universal DMG artifact
         uses: actions/download-artifact@v3
         with:
-          name: mac-${{github.ref_name}}-universal-standalone
+          name: aqtion-${{github.ref_name}}-mac-universal
 
       - name: Get Linux ARM64 artifact
         uses: actions/download-artifact@v3
@@ -260,38 +245,38 @@ jobs:
       - name: Get Linux x86_64 DEB artifact
         uses: actions/download-artifact@v3
         with:
-          name: linux-x86_64-deb
+          name: linux-${{github.ref_name}}-x86_64-deb
 
       - name: Get Linux arm64 DEB artifact
         uses: actions/download-artifact@v3
         with:
-          name: linux-arm64-deb
+          name: linux-${{github.ref_name}}-arm64-deb
 
       - name: Get content-only artifact
         uses: actions/download-artifact@v3
         with:
-          name: aq-content-only
+          name: aqtion-${{github.ref_name}}-content-only
    
       - name: Look around
         run: |
           ls -l
 
-      # - name: Upload dist tarball to release
-      #   uses: softprops/action-gh-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ github.token }}
-      #   with:
-      #     body_path: 
-      #     tag_name: ${{github.ref_name}}
-      #     files: |
-      #       aqtion-${{github.ref_name}}-linux-arm64.deb
-      #       aqtion-${{github.ref_name}}-linux-amd64.deb
-      #       aqtion-${{github.ref_name}}-linux-arm64.tar.gz
-      #       aqtion-${{github.ref_name}}-linux-amd64.tar.gz
-      #       aqtion-${{github.ref_name}}-windows-x64.zip
-      #       aqtion-${{github.ref_name}}-windows-i386.zip
-      #       aqtion-content-${{github.ref_name}}.zip
-      #       aqtion-${{github.ref_name}}-mac-universal.dmg
+      - name: Upload dist tarball to release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          body_path: 
+          tag_name: ${{github.ref_name}}
+          files: |
+            aqtion-${{github.ref_name}}-content-only
+            aqtion-${{github.ref_name}}-mac-universal
+            aqtion-${{github.ref_name}}-linux-arm64
+            aqtion-${{github.ref_name}}-linux-x86_64
+            aqtion-${{github.ref_name}}-windows-x86_64
+            linux-${{github.ref_name}}-x86_64-deb
+            linux-${{github.ref_name}}-arm64-deb
+
 
       # - name: Update Vercel download links
       #   run: curl -X POST ${{ secrets.DEPLOY_API_URL }}
