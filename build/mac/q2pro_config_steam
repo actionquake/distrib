@@ -26,5 +26,4 @@ AL_LIBS = -framework OpenAL
 CFLAGS=-mmacosx-version-min=10.6
 
 STRIP=strip -x
-PLATFORM=Steam
 USE_AQTION=y
