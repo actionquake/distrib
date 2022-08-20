@@ -105,7 +105,9 @@ do
     ## Build the q2pro binaries
     cd ${Q2PRO_DIR} || return
     mkdir -p extern/discord
-    wget https://dl-game-sdk.discordapp.net/2.5.6/discord_game_sdk.zip && unzip discord_game_sdk.zip -d extern/discord/
+
+    ## Uncomment if in the future somehow Discord fixes their lib naming scheme?
+    #wget https://dl-game-sdk.discordapp.net/2.5.6/discord_game_sdk.zip && unzip discord_game_sdk.zip -d extern/discord/
 
     if [ ${PLATFORM} = "steam" ]; then
         cp ../q2pro_config_steam .
@@ -166,7 +168,7 @@ do
 
     ## Build the tng binaries
     cd ${TNG_DIR}/source || return
-    AQTION=TRUE make -j4 V=1
+    USE_AQTION=1 make -j4 V=1
     build_exitcode=$?
 
     ## Copy files in preparation for the build step
