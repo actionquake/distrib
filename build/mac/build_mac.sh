@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #RAW_ARCH=$1  #No longer needed as script is auto-detecting
-ARCH=$(uname -m | sed -e s/i.86/i386/ -e s/amd64/x86_64/ -e s/sun4u/sparc64/ -e s/arm.*/arm/ -e s/sa110/arm/ -e s/alpha/axp/)
+ARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/amd64/x86_64/' -e 's/sun4u/sparc64/' -e 's/arm.*/arm/' -e 's/sa110/arm/' -e 's/alpha/axp/')
 CURRENT_DIR=$(pwd)
 PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/"
 PLATFORMS=(steam standalone)
@@ -40,9 +40,9 @@ do
 
     ## Build the q2pro binaries
     cd ${Q2PRO_DIR} || return
-    mkdir -p extern/discord
 
     ## Uncomment if in the future somehow Discord fixes their lib naming scheme?
+    #mkdir -p extern/discord
     #wget https://dl-game-sdk.discordapp.net/2.5.6/discord_game_sdk.zip && unzip discord_game_sdk.zip -d extern/discord/
 
     if [ ${PLATFORM} = "steam" ]; then

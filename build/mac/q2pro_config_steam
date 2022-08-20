@@ -23,7 +23,7 @@ CONFIG_FIXED_LIBAL=y
 AL_CFLAGS = -framework OpenAL
 AL_LIBS = -framework OpenAL
 
-CFLAGS=-mmacosx-version-min=10.6
+CFLAGS=-mmacosx-version-min=10.7
 
 STRIP=strip -x
 USE_AQTION=y
