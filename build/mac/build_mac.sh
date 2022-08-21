@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#RAW_ARCH=$1  #No longer needed as script is auto-detecting
 ARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/amd64/x86_64/' -e 's/sun4u/sparc64/' -e 's/arm.*/arm/' -e 's/sa110/arm/' -e 's/alpha/axp/')
 CURRENT_DIR=$(pwd)
 PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/"
@@ -12,13 +11,6 @@ then
     echo "Arch found via uname -m: ${ARCH}"
     exit 1
 fi
-
-#ARCH=$(echo ${ARCH} | tr '[:upper:]' '[:lower:]') #No longer needed as script is auto-detecting
-# if [[ ${ARCH} -ne "intel" || ${ARCH} -ne "m1" ]]
-# then
-#     echo "First argument must be one of [intel | m1]"
-#     exit 1
-# fi
 
 echo "Building for ${ARCH}"
 echo "Current dir is ${CURRENT_DIR}"
@@ -117,5 +109,5 @@ do
     fi
 
     ## Cleanup task
-    #rm -rf ${CURRENT_DIR}/${TNG_DIR}
+    rm -rf ${CURRENT_DIR}/${TNG_DIR}
 done
