@@ -58,7 +58,7 @@ else
     lipo -create -output q2probuilds/universal/${DISTRIB}/q2proded q2probuilds/x86_64/${DISTRIB}/q2proded q2probuilds/arm64/${DISTRIB}/q2proded
     
     #mv ../../action Steam_Install/
-    cp ../../../aqtion/action Steam_Install/
+    cp -r ../../../aqtion/action Steam_Install/
     lipo -create -output q2probuilds/universal/${DISTRIB}/aqtion q2probuilds/x86_64/${DISTRIB}/aqtion q2probuilds/arm64/${DISTRIB}/aqtion
 
     # Install AQtion required files

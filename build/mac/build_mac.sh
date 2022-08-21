@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #RAW_ARCH=$1  #No longer needed as script is auto-detecting
-ARCH=$(uname -m | sed -e s/i.86/i386/ -e s/amd64/x86_64/ -e s/sun4u/sparc64/ -e s/arm.*/arm/ -e s/sa110/arm/ -e s/alpha/axp/)
+ARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/amd64/x86_64/' -e 's/sun4u/sparc64/' -e 's/arm.*/arm/' -e 's/sa110/arm/' -e 's/alpha/axp/')
 CURRENT_DIR=$(pwd)
 PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/"
 PLATFORMS=(steam standalone)
@@ -37,75 +37,13 @@ do
     aqtion_branch="aqtion"
     ## Clone repository, checkout aqtion branch, copy config file
     git clone -b ${aqtion_branch} https://github.com/actionquake/q2pro.git ${Q2PRO_DIR}
-    ## Patch system.c patch file to make Mac paths work
-
-    ## This is only needed if you are using the main branch of q2pro ##
-
-#     patch -u ${Q2PRO_DIR}/src/unix/system.c << EOF
-# --- system.c	2022-04-25 23:05:48.000000000 -0400
-# +++ system.c.mac	2022-04-25 23:09:42.000000000 -0400
-# @@ -282,6 +282,22 @@
-#      signal(SIGPIPE, SIG_IGN);
-#      signal(SIGUSR1, hup_handler);
- 
-# +    #ifdef __APPLE__
-# +	// set AQ.app/Contents/Resources as basedir
-# +	char path[MAX_OSPATH], *c;
-# +	unsigned int i = sizeof(path);
-# +
-# +	if (_NSGetExecutablePath(path, &i) > -1) {
-# +		if ((c = strstr(path, "AQ.app"))) {
-# +			strcpy(c, "AQ.app/Contents/MacOS");
-# +			Cvar_FullSet("basedir", path, CVAR_NOSET, FROM_CODE);
-# +
-# +			strcpy(c, "AQ.app/Contents/MacOS");
-# +			Cvar_FullSet("libdir", path, CVAR_NOSET, FROM_CODE);
-# +		}
-# +	}
-# +    #endif
-# +
-#      // basedir <path>
-#      // allows the game to run from outside the data tree
-#      sys_basedir = Cvar_Get("basedir", DATADIR, CVAR_NOSET);
-# EOF
-
-
-    ## Patch common.h & q2pro/src/common/common.c to rename q2pro to AQtion
-#     patch -u ${Q2PRO_DIR}/inc/common/common.h << EOF
-# --- common.h.orig
-# +++ common.h
-# @@ -26,10 +26,10 @@
-#  // common.h -- definitions common between client and server, but not game.dll
-#  //
- 
-# -#define PRODUCT         "Q2PRO"
-# +#define PRODUCT         "AQtion"
- 
-#  #if USE_CLIENT
-# -#define APPLICATION     "q2pro"
-# +#define APPLICATION     "AQtion (${PLATFORM})"
-#  #else
-#  #define APPLICATION     "q2proded"
-#  #endif
-# EOF
-
-#     patch -u ${Q2PRO_DIR}/src/common/common.c << EOF
-# --- common.c.orig
-# +++ common.c
-# @@ -1031,7 +1031,7 @@
- 
-#      Com_Printf("====== " PRODUCT " RELEASEVERSION initialized ======\n\n");
-#      Com_LPrintf(PRINT_NOTICE, APPLICATION " " VERSION ", " __DATE__ "\n");
-# -    Com_Printf("https://aqt\n\n");
-# +    Com_Printf("https://github.com/skullernet/q2proasdfasdfsadf\n\n");
- 
-#      time(&com_startTime);
-# EOF
 
     ## Build the q2pro binaries
     cd ${Q2PRO_DIR} || return
-    mkdir -p extern/discord
-    wget https://dl-game-sdk.discordapp.net/2.5.6/discord_game_sdk.zip && unzip discord_game_sdk.zip -d extern/discord/
+
+    ## Uncomment if in the future somehow Discord fixes their lib naming scheme?
+    #mkdir -p extern/discord
+    #wget https://dl-game-sdk.discordapp.net/2.5.6/discord_game_sdk.zip && unzip discord_game_sdk.zip -d extern/discord/
 
     if [ ${PLATFORM} = "steam" ]; then
         cp ../q2pro_config_steam .
@@ -142,9 +80,8 @@ do
     chmod +x q2probuilds/${ARCH}/${PLATFORM}/q2pro*
 
     ## Tell q2pro where to find the Discord SDK dylib
-    install_name_tool -change '@rpath/discord_game_sdk.dylib' '@loader_path/discord_game_sdk.dylib' q2probuilds/${ARCH}/${PLATFORM}/q2pro*
-
-
+    install_name_tool -change '@rpath/discord_game_sdk.dylib' '@loader_path/discord_game_sdk.dylib' q2probuilds/${ARCH}/${PLATFORM}/q2pro
+    
     echo "Build script complete for Q2PRO ${ARCH}"
 
     ## build TNG
@@ -166,7 +103,7 @@ do
 
     ## Build the tng binaries
     cd ${TNG_DIR}/source || return
-    AQTION=TRUE make -j4 V=1
+    USE_AQTION=1 make -j4 V=1
     build_exitcode=$?
 
     ## Copy files in preparation for the build step

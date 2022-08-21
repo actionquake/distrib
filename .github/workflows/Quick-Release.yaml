@@ -1,12 +1,12 @@
 name: Quick Release
 
-on:  
-  push:
-    tags:
-      - 'v*'
+# on:  
+#   push:
+#     tags:
+#       - 'v*'
 
-# on:
-#   workflow_dispatch:
+on:
+  workflow_dispatch:
 #     inputs:
 #       release_tag:
 #         description: "Release version tag"

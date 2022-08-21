@@ -11,10 +11,14 @@ on:
         options:
         - playtest
         - stattest
+      release_tag:
+        description: "Release version tag (ex: v1.2.3)"
+        required: true
 
 env:
   CFG_WORKING_DIR: "config"
-  RELEASE_DIST_DIR: "release"
+  LIN64_DIST_DIR: "linux-x64-dist"
+  WIN64_DIST_DIR: "windows-x64-dist"
   MAC_DIST_DIR: "mac-universal-dist"
 
 jobs:      
@@ -28,29 +32,39 @@ jobs:
           rm -rf ./.??* || true
           ls -la ./
 
-      - name: Download latest release packages
+      - name: Download Linux release package
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow_conclusion: success
           workflow: New-Dist-Release.yaml
-          name: aqtion-release
-          path: ${{ env.RELEASE_DIST_DIR }}/
+          name: aqtion-${{ inputs.release_tag }}-linux-x86_64
+          skip_unpack: true
+          path: ${{ env.LIN64_DIST_DIR }}/
+
+      - name: Download Windows release package
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow_conclusion: success
+          workflow: New-Dist-Release.yaml
+          name: aqtion-${{ inputs.release_tag }}-windows-x86_64
+          skip_unpack: true
+          path: ${{ env.WIN64_DIST_DIR }}/
+
+      - name: Download Mac release package
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow_conclusion: success
+          workflow: New-Dist-Release.yaml
+          name: aqtion-${{ inputs.release_tag }}-mac-universal-steam
+          skip_unpack: true
+          path: ${{ env.MAC_DIST_DIR }}/
 
       - name: Look around
         run: |
           ls -l
-          ls -l ${{ env.RELEASE_DIST_DIR }}/
-          
-      ## Mac Universal
-      - name: Download latest Mac Universal artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: Mac-Artifacts.yaml
-          name: mac-universal-zip-steam
-
-      - name: Copy action content (Mac Universal)
-        run: |
-          unzip aqtion-mac-universal-steam.zip -d ${{ env.MAC_DIST_DIR }}/
+          ls -l ${{ env.LIN64_DIST_DIR }}/
+          ls -l ${{ env.WIN64_DIST_DIR }}/
+          ls -l ${{ env.MAC_DIST_DIR }}/
 
       # ## Upload to Steam
       # - name: Copy VDF scripts
