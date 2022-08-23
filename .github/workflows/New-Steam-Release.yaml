@@ -38,8 +38,8 @@ jobs:
           workflow_conclusion: success
           workflow: New-Dist-Release.yaml
           name: aqtion-${{ inputs.release_tag }}-linux-x86_64
-          skip_unpack: false
-          path: ${{ env.LIN64_DIST_DIR }}/
+          skip_unpack: true
+          #path: ${{ env.LIN64_DIST_DIR }}/
 
       - name: Download Windows release package
         uses: dawidd6/action-download-artifact@v2
@@ -47,8 +47,8 @@ jobs:
           workflow_conclusion: success
           workflow: New-Dist-Release.yaml
           name: aqtion-${{ inputs.release_tag }}-windows-x86_64
-          skip_unpack: false
-          path: ${{ env.WIN64_DIST_DIR }}/
+          skip_unpack: true
+          #path: ${{ env.WIN64_DIST_DIR }}/
 
       - name: Download Mac release package
         uses: dawidd6/action-download-artifact@v2
@@ -56,7 +56,14 @@ jobs:
           workflow_conclusion: success
           workflow: New-Dist-Release.yaml
           name: aqtion-${{ inputs.release_tag }}-mac-universal-steam
-          skip_unpack: false
+          skip_unpack: true
+          #path: ${{ env.MAC_DIST_DIR }}/
+
+      - name: Unzip files for Steam upload
+        run: |
+          unzip aqtion-${{ inputs.release_tag }}-linux-x86_64.zip -d ${{ env.LIN64_DIST_DIR }}/
+          unzip aqtion-${{ inputs.release_tag }}-windows-x86_64.zip -d ${{ env.WIN64_DIST_DIR }}/
+          unzip aqtion-${{ inputs.release_tag }}-mac-universal-steam.zip -d ${{ env.MAC_DIST_DIR }}/
 
       - name: Look around
         run: |
