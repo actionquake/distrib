@@ -151,7 +151,7 @@ jobs:
 
       - name: Generate release artifact
         run: |
-          zip -r aqtion-${{github.ref_name}}-windows-x86_64 ${{ env.AQTION_DIR }}
+          zip -r aqtion-${{github.ref_name}}-windows-x86_64.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1
@@ -197,7 +197,7 @@ jobs:
 
       - name: Generate release artifact
         run: |
-          zip -r aqtion-${{github.ref_name}}-linux-x86_64 ${{ env.AQTION_DIR }}
+          zip -r aqtion-${{github.ref_name}}-linux-x86_64.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1
@@ -237,7 +237,7 @@ jobs:
 
       - name: Generate release artifact
         run: |
-          zip -r aqtion-${{github.ref_name}}-linux-arm64 ${{ env.AQTION_DIR }}
+          zip -r aqtion-${{github.ref_name}}-linux-arm64.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1
