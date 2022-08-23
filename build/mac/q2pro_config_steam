@@ -18,12 +18,12 @@ CONFIG_DISCORD=y
 CONFIG_GAME_BASE=action
 CONFIG_GAME_DEFAULT=action
 
-CONFIG_OPENAL=y
+#CONFIG_OPENAL=y
 CONFIG_FIXED_LIBAL=y
 AL_CFLAGS = -framework OpenAL
 AL_LIBS = -framework OpenAL
 
-CFLAGS=-mmacosx-version-min=10.6
+CFLAGS=-mmacosx-version-min=10.7
 
 STRIP=strip -x
-PLATFORM=Steam
+USE_AQTION=y

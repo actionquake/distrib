@@ -6,6 +6,12 @@
 ### If you're trying to compile a Mac version, use the `build_mac.sh` script
 ##
 
+#####################################################################
+#
+#  This script is deprecated, do not use
+# 
+#####################################################################
+
 RAW_ARCH=$1
 CURRENT_DIR=$(pwd)
 

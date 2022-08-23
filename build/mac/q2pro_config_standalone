@@ -11,23 +11,21 @@ CONFIG_MVD_CLIENT=y
 CONFIG_VARIABLE_SERVER_FPS=y
 CONFIG_CLIENT_GTV=y
 CONFIG_PACKETDUP=y
-CONFIG_MAC_STANDALONE=y
 CONFIG_DISCORD=y
 #CONFIG_TESTS=n
 #CONFIG_DEBUG=n
 #CFLAGS=-Werror   # OpenAL-related warnings can be ignored
 CONFIG_GAME_BASE=action
 CONFIG_GAME_DEFAULT=action
+CONFIG_PATH_DATA=./AQ.app/Contents/MacOS
+CONFIG_PATH_HOME=~/aqtion
 
-CONFIG_OPENAL=y
+#CONFIG_OPENAL=y
 CONFIG_FIXED_LIBAL=y
 AL_CFLAGS = -framework OpenAL
 AL_LIBS = -framework OpenAL
 
-CONFIG_PATH_DATA=./AQ.app/Contents/MacOS
-CONFIG_PATH_HOME=~/aqtion
-
-CFLAGS=-mmacosx-version-min=10.6
+CFLAGS=-mmacosx-version-min=10.7
 
 STRIP=strip -x
-PLATFORM=Standalone
+USE_AQTION=y
