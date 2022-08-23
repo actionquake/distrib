@@ -38,7 +38,7 @@ jobs:
           workflow_conclusion: success
           workflow: New-Dist-Release.yaml
           name: aqtion-${{ inputs.release_tag }}-linux-x86_64
-          skip_unpack: true
+          skip_unpack: false
           path: ${{ env.LIN64_DIST_DIR }}/
 
       - name: Download Windows release package
@@ -47,7 +47,7 @@ jobs:
           workflow_conclusion: success
           workflow: New-Dist-Release.yaml
           name: aqtion-${{ inputs.release_tag }}-windows-x86_64
-          skip_unpack: true
+          skip_unpack: false
           path: ${{ env.WIN64_DIST_DIR }}/
 
       - name: Download Mac release package
@@ -56,8 +56,7 @@ jobs:
           workflow_conclusion: success
           workflow: New-Dist-Release.yaml
           name: aqtion-${{ inputs.release_tag }}-mac-universal-steam
-          skip_unpack: true
-          path: ${{ env.MAC_DIST_DIR }}/
+          skip_unpack: false
 
       - name: Look around
         run: |
@@ -66,20 +65,20 @@ jobs:
           ls -l ${{ env.WIN64_DIST_DIR }}/
           ls -l ${{ env.MAC_DIST_DIR }}/
 
-      # ## Upload to Steam
-      # - name: Copy VDF scripts
-      #   run: |
-      #     cp ${{ env.CFG_WORKING_DIR }}/scripts/steam/*.vdf .
+      ## Upload to Steam
+      - name: Copy VDF scripts
+        run: |
+          cp ${{ env.CFG_WORKING_DIR }}/scripts/steam/*.vdf .
 
-      # - name: Upload All Builds
-      #   run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build /home/github/actions-runner/_work/distrib/distrib/${{ inputs.steam_branch }}.vdf +quit
-      #   env:
-      #     STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
-      #     STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
+      - name: Upload All Builds
+        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build /home/github/actions-runner/_work/distrib/distrib/${{ inputs.steam_branch }}.vdf +quit
+        env:
+          STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
+          STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
 
-      # - name: 'Post-build cleanup build folder'
-      #   run: |
-      #     ls -la ./
-      #     rm -rf ./* || true
-      #     rm -rf ./.??* || true
-      #     ls -la ./
+      - name: 'Post-build cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
