@@ -32,6 +32,17 @@ jobs:
           rm -rf ./.??* || true
           ls -la ./
 
+      - name: Checkout distrib
+        uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.CFG_WORKING_DIR }}
+
+      # - name: Generate checksum file
+      #   working-directory: ${{ env.CFG_WORKING_DIR }}/action
+      #   run: |
+      #     find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
+
       - name: Download Linux release package
         uses: dawidd6/action-download-artifact@v2
         with:
