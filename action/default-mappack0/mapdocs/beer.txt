@@ -1,0 +1,79 @@
+================================================================================
+* LEVEL INFORMATION *
+--------------------------------------------------------------------------------
+TITLE                   : The Pub with Beer
+FILENAME                : beer.zip
+AUTHOR                  : =][WetWired][= (Brent Waller)
+DATE                    : 11/11/99
+GAME                    : Action Quake II
+EMAIL ADDRESS           : wetwired@hypermax.net.au
+HOMEPAGE URL            : http://www.quakeclan.net/consortium
+ 
+--------------------------------------------------------------------------------
+* LEVEL DESCRIPTION *
+--------------------------------------------------------------------------------
+This is the sequel of sorts to my original map, "The Pub With No Beer" for Action Quake II, this one like the last is based on another pub I know the Forest Hill Hotel...and is actually RIGHT across the road from the one in "The Pub With No Beer"
+--------------------------------------------------------------------------------
+SINGLE PLAYER           : No.
+CO-OPERATIVE            : No.
+DEATHMATCH              : No.
+ACTION QUAKE II         : Teamplay and Deathmatch.
+NEW TEXTURES            : Yes.
+NEW SOUNDS              : Yes.
+ 
+--------------------------------------------------------------------------------
+* CONSTRUCTION *
+--------------------------------------------------------------------------------
+MAP BASE                : None.
+PREFABS USED            : Tables and Chairs
+EDITOR(S) USED          : QOOLE 2.50
+ 
+OTHER UTILITIES USED    : Arghrad 2.01, Wally 1.42 Beta, Paintshop Pro 4, Photosuite, Fireworks 2.
+KNOWN BUGS              : None known
+ 
+MAP BUILD TIME		: A week and a coupla hours (I shit you not!)
+COMPILE MACHINE         : Pentium 200 MMX, 48Mb of RAM
+ 
+QBSP2    TIME           : 12 Seconds
+VIS      TIME           : 15180 Seconds (4 Hours, 13 Minutes)
+Arghrad  TIME           : 2156 Seconds (35 Minutes, 56 Seconds)
+ 
+--------------------------------------------------------------------------------
+* OTHER LEVELS BY THE AUTHOR *
+--------------------------------------------------------------------------------
+ACTION QUAKE II         : co-authored "Inside the Matrix" (matrix.zip) with TIGEReye
+			: "The Pub With No Beer" (nobeer.zip)
+ 
+--------------------------------------------------------------------------------
+* SPECIAL INSTRUCTIONS / ADDITIONAL INFORMATION *
+-------------------------------------------------------------------------------
+If you want to use any of the textures in this map, e-mail me to find out which ones I actually made :).
+--------------------------------------------------------------------------------
+* CREDITS *
+--------------------------------------------------------------------------------
+ID Software			: For making the base code for the A-Team to bend and improve.
+The A-Team              	: For making Action Quake 2, and not fucking it up :).
+The Guys who made Qoole 	: For making a buggy program that is piss easy to use.
+The Consortium			: To JINX and Deadpool for testing and comments, and the rest of the gang for hanging around looking good. Deadpool, JINX, Drake, ^Smurf^, Morphic, FatAlbert and OpTiX
+FiReWaLKer [TDm]		: Who thinks he deserves a mention cause he told me how to make animated textures.
+Sinner				: For his textures.
+Sean (sean@dpsoft.com)		: For his textures too.
+JoNaS (Jonas_Jax@hotmail.com)   : For the kick arse sky.
+Patient X                       : For testing my map on my LAN.
+ 
+ 
+================================================================================
+* COPYRIGHT / PERMISSIONS *
+--------------------------------------------------------------------------------
+Authors MAY NOT use this level as a base to build additional levels.
+ 
+You MUST NOT distribute this level UNLESS you INCLUDE THIS FILE WITH
+NO MODIFICATIONS. If you don't co-operate, then DON'T DISTRIBUTE IT
+IN ANY FORM.
+
+This LEVEL may be distributed ONLY over the Internet and/or BBS systems.
+You are NOT authorized to put this LEVEL on any CD or distribute it in
+any way without my written permission.
+
+Action Quake II (C) 1998-99 The A-Team.
+Quake 2 (C) 1998-99 id Software. All rights reserved.

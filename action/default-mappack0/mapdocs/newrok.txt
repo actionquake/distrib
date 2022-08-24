@@ -1,0 +1,24 @@
+Title: 	newrok
+Date: 	7 January 2012
+Tools: 	GtkRadiant, ARGH! tools, Adobe Photoshop
+Email: 	wizardext@gmail.com
+Web: 	http://www.wizardext.se/
+
+Credits: 	
+
+	Supreme
+	Zakath
+	Jennika Cederholm
+	clan eyeCandy (thanks guys for everything!)
+	R1CH
+	NRGizer
+	Tim Wright
+	A-TEAM
+	Id Software
+	
+Comments: 	A modified version of my favorite AQ2 map. I started it early 2010 or even earlier..? 
+	  	It has gone through a lot of iterations. A lot of good feedback from playtesting 
+	  	it for hours. Have fun! :)
+
+	
+	- David "WizardExt" Lundvall

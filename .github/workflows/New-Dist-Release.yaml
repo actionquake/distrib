@@ -142,6 +142,11 @@ jobs:
         run: |
           cp ${{ env.DIST_DIR }}/build/windows/integrations/* ${{ env.AQTION_DIR }}
 
+      - name: Gather md5sum on files
+        run: |
+          md5sum ${{ env.AQTION_DIR }}/*.*
+          md5sum ${{ env.AQTION_DIR }}/action/gamex*
+
       - name: Upload aqtion-windows-x86_64 archive
         uses: actions/upload-artifact@v3
         with:
@@ -188,6 +193,11 @@ jobs:
         run: |
           cp ${{ env.DIST_DIR }}/build/linux/integrations/* ${{ env.AQTION_DIR }}
 
+      - name: Gather md5sum on files
+        run: |
+          md5sum ${{ env.AQTION_DIR }}/*.*
+          md5sum ${{ env.AQTION_DIR }}/action/gamex*
+
       - name: Upload aqtion-linux-x86_64 archive
         uses: actions/upload-artifact@v3
         with:
@@ -227,6 +237,11 @@ jobs:
       - name: Copy external libraries for Q2Pro
         run: |
           cp ${{ env.DIST_DIR }}/build/linux/integrations/* ${{ env.AQTION_DIR }}
+
+      - name: Gather md5sum on files
+        run: |
+          md5sum ${{ env.AQTION_DIR }}/*.*
+          md5sum ${{ env.AQTION_DIR }}/action/gamex*
 
       - name: Upload aqtion-linux-arm64 archive
         uses: actions/upload-artifact@v3
