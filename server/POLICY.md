@@ -17,7 +17,7 @@ Thank you for your interest in the AQ2World Official Server Program!  Your appro
     * RCON passwords
 7. Not abuse my ability to administrate other members' servers, including but not limited to:
     * Kicking/banning players unless necessary
-    * Turn off, delete, modify or restart servers not owned by you unless requested by the other of those servers to do so (See server tags to find the owners)
+    * Turn off, delete, modify or restart servers not owned by you unless requested by the owner of those servers to do so (See server tags in the adminpanel to find the owners)
 8. Update your servers as soon as possible when new releases are available.  They are announced in the **#server-admins** channel.  This includes:
     * Participation in testing new server releases before they are released, if requested
     * Adjusting server settings or adding/removing features if deemed necessary to maintain a consistent player experience
