@@ -9,9 +9,9 @@ The team identified here are officially or unofficially supporting the initiativ
   * [darksaint](https://github.com/darkshade9) (https://forums.aq2world.com)
   * dox (https://aq2world.com)
 * Game Devs
-  * [Raptor007](https://github.com/Raptor007) *unofficially
-  * [Reki](https://github.com/Iceman12k) *unofficially
-  * [ReKTeK](https://github.com/ReKTeK) *unofficially
+  * [Raptor007](https://github.com/Raptor007)
+  * [Reki](https://github.com/Iceman12k)
+  * [ReKTeK](https://github.com/ReKTeK)
 * Art and Media
   * Videos
     * matic

@@ -1,8 +1,3 @@
-* [![Linux Q2Pro (64-bit)](https://github.com/actionquake/distrib/actions/workflows/Q2Pro-Linux.yaml/badge.svg)](https://github.com/actionquake/distrib/actions/workflows/Q2Pro-Linux.yaml)
-* [![Windows Q2Pro (32/64-bit)](https://github.com/actionquake/distrib/actions/workflows/Q2Pro-Windows.yaml/badge.svg)](https://github.com/actionquake/distrib/actions/workflows/Q2Pro-Windows.yaml)
-* [![TNG Linux (64-bit)](https://github.com/actionquake/distrib/actions/workflows/TNG-Linux.yaml/badge.svg)](https://github.com/actionquake/distrib/actions/workflows/TNG-Linux.yaml)
-* [![TNG Windows (32/64-bit)](https://github.com/actionquake/distrib/actions/workflows/TNG-Windows.yaml/badge.svg)](https://github.com/actionquake/distrib/actions/workflows/TNG-Windows.yaml)
-
 # AQtion Base Installation
 
 ## License considerations
@@ -18,11 +13,12 @@ https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 Should it be determined that assets included in this distribution are indeed unlicensed for use, the maintainers of this repository will make expedited and thorough adjustments to this distribution repository to remove said assets and replace with appropriate content.  Please leave a message as a Github Issue containing links and references to the content, and we will respond as soon as we can.
 
 ## Requirements
-* A computer built within the last 25 years :)
-* Windows XP, Vista, 7, 8, 10 and probably 11 are all compatible, 32 and 64-bit
-* Mac OS (Intel and M1)
+* 64-bit Windows Vista, 7, 8, 10 and probably 11 are all compatible
+* Mac OS 10.7+ (Intel and Apple Silicon supported)
 * 64-bit x86 and ARM Linux with a video card and sound card
-* Essentially, if you are able to run Quake II, you can run AQtion.  We do not provide direct support for running Quake II as there are over 20 years of forum posts and articles on how to use it, but if you are running into problems with this specific release, contact us
+* Video card compatible with OpenGL 3 drivers
+### Notes
+* We do not provide direct support for running Quake II as there are over 20 years of forum posts and articles on how to use it, but if you are running into problems with this specific release, contact us
 * If there's a special request for 32-bit Linux or something, open an Issue!
 
 ---
@@ -47,13 +43,13 @@ If you wish to use your RTX card with Quake II
 ---
 
 ### Standalone Install
-#### Mac (Intel and M1)
+#### Mac (Intel and Apple Silicon)
 1. Install [Brew](https://brew.sh/) if you do not already have it
-1. Install [OpenAL](https://formulae.brew.sh/formula/openal-soft) and [SDL2](https://formulae.brew.sh/formula/sdl2) if you do not already have it
+1. Install the following packages
+  * `brew install libpng jpeg sdl2 openal-soft zlib curl`
 1. Download the .dmg release package for your architecture
 1. Drag AQ to the Applications directory
 1. Double-click `AQ` to launch
-1. Downloaded and custom content will exist in `~/aqtion`
 
 #### Windows
 1. Download the latest release zip file
@@ -71,24 +67,23 @@ If you wish to use your RTX card with Quake II
 1. In your Terminal, navigate to the extracted directory and launch `q2pro`
 
 #### All platforms
-1. Join us in [Discord](https://discord.gg/aq2world) and find some people to play with
+1. Join us in [Discord](https://discord.aq2world.com) and find some people to play with
 
 ---
 
 ## Contact
 * Github Issues in this repository
-* [Discord](https://discord.gg/aq2world) ask for @Mods
+* [Discord](https://discord.aq2world.com) ask for @Mods
 
 ## Contribute
-1. Clone this repository
+1. Fork this repository
 1. Checkout a new branch
 1. Commit your modifications/additions
 1. Submit pull request
-* Notes: 
-    * 'Official' releases via this distribution done in `pkz` files for game content (maps, etc)
 
 ## Site Links
 * [AQ2World](https://www.aq2world.com)
+* [AQtiongame](https://www.aqtiongame.com)
 * [AQ2Suomi](https://www.aq2suomi.com)
 
 ## Credits
@@ -97,10 +92,12 @@ If you wish to use your RTX card with Quake II
 * The [TNG team](http://aq2-tng.sourceforge.net/) who took over the project after 1.52 and had maintained and updated it till 2011
 * The [AQDT team](https://assets.aq2world.com/archive/websites/aqdt.fear.net/) who created their own variant and produced Espionage Tournament Edition
 * [Skuller](https://skuller.net/q2pro/) for the highly-acclaimed [q2pro](https://github.com/skullernet/q2pro)
-* [Raptor007](https://github.com/raptor007) and [hifi](https://github.com/hifi) who have [taken over development](https://github.com/aq2-tng/aq2-tng) after the TNG team, and all forked repos who continuously improve this repository, and to [Reki](https://github.com/Iceman12k) for his development contributions (and Midnight Guns!)
+* [Raptor007](https://github.com/raptor007) and [hifi](https://github.com/hifi) who have [taken over development](https://github.com/aq2-tng/aq2-tng) after the TNG team, and all forked repos who continuously improve this repository
+* [Reki](https://github.com/Iceman12k) for his development contributions (and Midnight Guns!)
+* [ReKTeK](https://github.com/ReKTeK) for his development contributions
 * [hifi](https://github.com/hifi) for q2admin, LUA and MVD support and all forked repos who continuously improve this repository
 * Mappers [stan0x](https://github.com/stan0x), **Quimby**, [WizardExt](https://www.wizardext.se/), **WetWired**, **Beavisss**, [pauhi](https://github.com/Ntuk) and **Ruskprick** for the included maps in this distribution
-* The [AQ2World Discord mod team](https://discord.gg/aq2world) for assisting, testing and contributing to this distribution, and keeping the scene alive
+* The [AQ2World Discord mod team](https://discord.aq2world.com) for assisting, testing and contributing to this distribution, and keeping the scene alive
 * Every single mapper, sound designer, texture creator, model maker, skin artist and community contributor to this project since its inception in the late 90s, without your 600+ maps and gigabytes of content, we'd still be playing vanilla Q2.
 * All past, present and future players who for we do this all for, please keep the scene alive!
 * The unforgotten and likely uncontactable community members who built and maintained sites to promote the mod and the community, your sites will be forever archived at [AQ2World](https://www.aq2world.com)
