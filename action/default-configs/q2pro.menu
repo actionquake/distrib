@@ -325,6 +325,9 @@ begin msettings
     blank
     toggle "disable [Windows key]" win_disablewinkey
     toggle "disable [Alt]-[Tab]" win_noalttab
+    blank
+    pairs "discord integration" cl_discord "disabled" 0 "enabled" 1
+    pairs "allow discord friends to join your game" cl_discord_accept_join_requests "prompt first" 0 "auto" 1
 end
 
 begin gsettings
