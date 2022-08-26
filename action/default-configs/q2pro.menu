@@ -319,12 +319,15 @@ begin msettings
     field "bandage team message" bandage[say]
     field "frag team message" roundkill[say]
     blank
-    values "Show chathud" scr_chathud "off" "on - white" "on - green"
-    pairs "Only show chat in chathud" cl_chat_notify "on" 0 "off" 1
-    pairs "Duration of chathud" scr_chathud_time Stay 0 1s 1 5s 5 10s 10 15s 15
+    values "show chathud" scr_chathud "off" "on - white" "on - green"
+    pairs "only show chat in chathud" cl_chat_notify "on" 0 "off" 1
+    pairs "duration of chathud" scr_chathud_time Stay 0 1s 1 5s 5 10s 10 15s 15
     blank
     toggle "disable [Windows key]" win_disablewinkey
     toggle "disable [Alt]-[Tab]" win_noalttab
+    blank
+    pairs "discord integration" cl_discord "disabled" 0 "enabled" 1
+    pairs "allow discord friends to join your game" cl_discord_accept_join_requests "prompt first" 0 "auto" 1
 end
 
 begin gsettings
