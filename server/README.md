@@ -18,7 +18,7 @@ Great!  Hosting a server is a great way to contribute to the community and helps
         * CentOS/Fedora
 * A recent or latest version of Docker and Docker-Compose
 * Reasonable bandwidth (10MBit+)
-* Ability to open UDP port 27910 (and more if hosting multiple) to the Internet
+* Ability to open UDP port 27910 (and more if hosting multiple) to the Internet (TCP on the same port to support remote GTV/MVD)
 * Suggested providers:
     * [DigitalOcean](https://www.digitalocean.com) (relatively inexpensive)
     * [AWS](https://aws.amazon.com/) (several dozen locations)
@@ -27,17 +27,18 @@ Great!  Hosting a server is a great way to contribute to the community and helps
     * [vultr](https://www.vultr.com/) (inexpensive with many locations)
     * Your favorite VPS
 * **Keep in mind that these servers require very few resources; a few dozen megabytes of RAM and very little CPU, and less than 512MB of disk space just for AQtion, even with a _ton_ of maps.**
+* **Windows hosts will likely work fine, but are not within the scope of this document.  If someone wants to document a clean method to host via Windows, we welcome that contribution.**
 ----
 ### Step by step
 
 Use the following Docker images
-* Official: `aqtiongame/server:v27`
+* Official: `aqtiongame/server:v33`
 * Espionage: `aqtiongame/espionage:v27`
-* ARM64 / Rasp Pi: `aqtiongame/server:v27-arm64`
-* ARM32 / Rasp Pi: `aqtiongame/server:v27-arm32`
+* ARM64 / Rasp Pi: `aqtiongame/server:v33-arm64`
+* ARM32 / Rasp Pi: `aqtiongame/server:v33-arm32`
 
 1. If you have docker and docker-compose already, skip to step 3
-1. Upon logging into the VPS/instance (ssh, console or otherwise) gaining access to the shell, install docker and docker-compose
+1. Upon logging into the VPS/instance (ssh, console or otherwise) gaining access to the shell, install `docker` and `docker-compose`
     * Ubuntu: https://docs.docker.com/engine/install/ubuntu/
     * Other: https://docs.docker.com/engine/install/
 1. Create a user that will run these containers, for security purposes
