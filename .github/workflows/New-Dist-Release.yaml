@@ -1,10 +1,3 @@
-name: New Dist Release
-
-# on:
-#   push:
-#     branches: ci
-#   workflow_dispatch:
-
 on:  
   push:
     tags:
@@ -14,6 +7,8 @@ env:
   AQTION_DIR: aqtion
   DIST_DIR: config
   GIT_TAG: ${{github.ref_name}}
+
+name: Distribution Release
 
 jobs:
   content_only:
