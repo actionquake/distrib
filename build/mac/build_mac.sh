@@ -95,7 +95,7 @@ do
 
     ## Build the tng binaries
     cd ${TNG_DIR}/source || return
-    USE_AQTION=1 make -j4 V=1
+    USE_AQTION=TRUE make -j4 V=1
     build_exitcode=$?
 
     ## Copy files in preparation for the build step
