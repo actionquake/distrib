@@ -1,0 +1,64 @@
++--------------------------------------------------------------------+
+|							             |
+|                     AQ2World Proudly Presents:                     |
+|                                                                    |
+|   .-----------------------------------------------------------.    |
+|   |                    ___   ___ ___   ___                     |   |
+|   |           ___.----|   \./   |   \./   |.-------.           |   |
+|   |          |        :         :         :     ___/           |   |
+|   |          |        :         :         :    /               |   |
+|   |          |        :    .    :    .    :    '---.           |   |
+|   |          |___|\___|___| |___|___| |___|\_______/           |   |
+|   |                                                            |   |
+|   |    n 9 9 's  M a p - M a k i n g  C o m p e t i t i o n    |   |
+|   |                                                            |   |
+|   '============================================================'   |
+|   |  Introduction                                              |   |
+|   |                                                            |   |
+|   |  This is one of nine maps entered into n99's 2004          |   |
+|   |  Map-Making Competition, a 100 euro prized event. As the   |   |
+|   |  main organizer and sole sponsor of this event I wish you  |   |
+|   |  happy fragging on this quality Action Quake 2 map.        |   |
+|   |  Keep the game alive!	                                 |   |
+|   |                                                            |   |
+|   |                                                     - n99  |   |
+|   '============================================================'   |
+|   |  General Information                                       |   |
+|   |                                                            |   |
+|   |  Title                    Simplicity                       |   |
+|   |                                                            |   |
+|   |  Archive		        simplicity.zip                   |   |
+|   |                                                            |   |
+|   |  Release Date (DD/MM/YY)  01/12/04                         |   |
+|   |                                                            |   |
+|   |  Author                   Stian Dahl aka Flunx             |   |
+|   |  Authors Email            serflunx@yahoo.no                |   |
+|   |                                                            |   |
+|   |  Installation             unzip to you action folder       |   |
+|   |                                                            |   |
+|   |  Description		Small simplistic city map        |   |
+|   |                                                            |   |
+|   |  Additional Credits	wiz, zak and rusk for textures   |   |
+|   |                                                            |   |
+|   |  Authors Comments         Have fun playing! I sure did :-) |   |
+|   |				(mail me if you want 32bit tex)  |   |
+|   |                                                            |   |
+|   |  Suggested Player Load    4-10                             |   |
+|   |                                                            |   |
+|   '============================================================'   |
+|   |  Construction                                              |   |
+|   |                                                            |   |
+|   |  Used Tools		<QuArK, Wally, Arghrad 3.0 osv>  |   |
+|   |                                                            |   |
+|   |  New Textures             <Yes, 90% new made from skratch> |   |
+|   |  New Sounds               <No>                             |   |
+|   |  New Sky                  <No>                             |   |
+|   |  Locations File           <No (Maybe later)>               |   |
+|   |                                                            |   |
+|   |  Number Of Spawnpoints    <4>                              |   |
+|   |                                                            |   |
+|   '------------------------------------------------------------'   |
+|                                                                    |
+|          #nMMC / #AQ2World at QuakeNet | www.AQ2World.com          |
+|                                                                    |
++--------------------------------------------------------------------+
