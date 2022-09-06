@@ -63,7 +63,7 @@ include aq2pro.menu
 
 begin main
     title "Main Menu"`
-    action " Discord - https://discord.aq2world.com" pushmenu credits
+    action " Discord - https://discord.aq2world.com  " pushmenu credits
     blank
     action " Play Online " pushmenu playonline
     action " Play Offline " pushmenu playoffline
@@ -72,11 +72,11 @@ begin main
     blank
     action " Help " pushmenu helpmenu
     blank
-    action " Settings" pushmenu settings
+    action " Settings  " pushmenu settings
     blank
-    action " Optional Addons" pushmenu addonsmenu
+    action " Optional Addons  " pushmenu addonsmenu
     blank
-    action " Quit" quit
+    action " Quit  " quit
 end
 
 begin game
@@ -89,11 +89,11 @@ begin game
     blank
     action " Help " pushmenu helpmenu
     blank
-    action " Settings" pushmenu settings
+    action " Settings  " pushmenu settings
     blank
-    action " Optional Addons" pushmenu addonsmenu
+    action " Optional Addons  " pushmenu addonsmenu
     blank
-    action " Disconnect" disconnect
+    action " Disconnect  " disconnect
 end
 
 begin credits
