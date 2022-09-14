@@ -275,18 +275,18 @@ jobs:
           name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
 
-      # Standalone
-      - name: Generate Mac Standalone artifacts
-        working-directory: ${{ env.DIST_DIR }}/build/mac
-        run: |
-          bash -x package_mac.sh standalone
+      # # Standalone
+      # - name: Generate Mac Standalone artifacts
+      #   working-directory: ${{ env.DIST_DIR }}/build/mac
+      #   run: |
+      #     bash -x package_mac.sh standalone
 
-      - name: Generate Universal Standalone DMG artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: aqtion-${{github.ref_name}}-mac-universal
-          path: |
-            ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-standalone.dmg
+      # - name: Generate Universal Standalone DMG artifact
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: aqtion-${{github.ref_name}}-mac-universal
+      #     path: |
+      #       ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-standalone.dmg
 
       # Steam
       - name: Generate Mac Steam artifacts
@@ -302,7 +302,7 @@ jobs:
 
       - name: Generate release artifact
         run: |
-          mv ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-standalone.dmg aqtion-${{github.ref_name}}-mac-universal.dmg
+          mv ${{ env.DIST_DIR }}/build/mac/aqtion-${{github.ref_name}}-mac-universal-steam.zip aqtion-${{github.ref_name}}-mac-universal.zip
 
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1
@@ -312,7 +312,7 @@ jobs:
           body_path: 
           tag_name: ${{github.ref_name}}
           files: |
-            aqtion-${{github.ref_name}}-mac-universal.dmg
+            aqtion-${{github.ref_name}}-mac-universal.zip
 
 
   push_to_release:
