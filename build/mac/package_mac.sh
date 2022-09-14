@@ -32,7 +32,7 @@ if [[ ${DISTRIB} == "standalone" ]]; then
     lipo -create -output q2probuilds/universal/${DISTRIB}/q2proded q2probuilds/x86_64/${DISTRIB}/q2proded q2probuilds/arm64/${DISTRIB}/q2proded
     
     #mv ../../action AQ_Install/AQ.app/Contents/MacOS/
-    cp -r ../../aqtion/action AQ_Install/AQ.app/Contents/MacOS/
+    cp -r ../../action AQ_Install/AQ.app/Contents/MacOS/
     install q2probuilds/universal/${DISTRIB}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
     install q2probuilds/universal/${DISTRIB}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
     install q2probuilds/x86_64/${DISTRIB}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
