@@ -302,7 +302,7 @@ jobs:
 
       - name: Generate release artifact
         run: |
-          zip -r aqtion-${{github.ref_name}}-mac-universal.zip ${{ env.DIST_DIR }}/build/mac/Steam_Install/*
+          cd ${{ env.DIST_DIR }}/build/mac/Steam_Install && zip -r ../../../../aqtion-${{github.ref_name}}-mac-universal.zip *
 
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1
