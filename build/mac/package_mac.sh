@@ -37,6 +37,7 @@ if [[ ${DISTRIB} == "standalone" ]]; then
     install q2probuilds/universal/${DISTRIB}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
     install q2probuilds/x86_64/${DISTRIB}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
     install q2probuilds/arm64/${DISTRIB}/gamearm.so AQ_Install/AQ.app/Contents/MacOS/action/
+    install q2probuilds/universal/${DISTRIB}/discord_game_sdk.dylib AQ_Install/AQ.app/Contents/MacOS/discord_game_sdk.dylib
     cp -R q2probuilds/universal/libs AQ_Install/AQ.app/Contents/MacOS/
     rm -rf AQ_Install/AQ.app/Contents/MacOS/.dummyfile
     ## make q2pro executable
