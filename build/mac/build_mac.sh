@@ -30,6 +30,12 @@ do
     ## Clone repository, checkout aqtion branch, copy config file
     git clone -b ${aqtion_branch} https://github.com/actionquake/q2pro.git ${Q2PRO_DIR}
 
+    ## Apple Silicon needs some exctra libs in source img dir
+    if [[ ${ARCH} = "arm" ]]; then
+        cp /opt/homebrew/Cellar/jpeg/9e/include/j*.h ./q2pro/src/refresh/
+        sed -i -- 's/<jpeglib.h>/"jpeglib.h"/g' q2pro/src/refresh/images.c
+    fi
+
     ## Build the q2pro binaries
     cd ${Q2PRO_DIR} || return
 
