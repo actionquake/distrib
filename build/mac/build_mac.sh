@@ -30,6 +30,12 @@ do
     ## Clone repository, checkout aqtion branch, copy config file
     git clone -b ${aqtion_branch} https://github.com/actionquake/q2pro.git ${Q2PRO_DIR}
 
+    ## Apple Silicon needs some exctra libs in source img dir
+    if [[ ${ARCH} = "arm" ]]; then
+        cp /opt/homebrew/Cellar/jpeg/9e/include/j*.h ./q2pro/src/refresh/
+        sed -i -- 's/<jpeglib.h>/"jpeglib.h"/g' q2pro/src/refresh/images.c
+    fi
+
     ## Build the q2pro binaries
     cd ${Q2PRO_DIR} || return
 
@@ -72,7 +78,7 @@ do
     chmod +x q2probuilds/${ARCH}/${PLATFORM}/q2pro*
 
     ## Tell q2pro where to find the Discord SDK dylib
-    install_name_tool -change '@rpath/discord_game_sdk.dylib' '@loader_path/discord_game_sdk.dylib' q2probuilds/${ARCH}/${PLATFORM}/q2pro
+    install_name_tool -change '@rpath/discord_game_sdk.dylib' '@executable_path/discord_game_sdk.dylib' q2probuilds/${ARCH}/${PLATFORM}/q2pro
     
     echo "Build script complete for Q2PRO ${ARCH}"
 
@@ -95,7 +101,7 @@ do
 
     ## Build the tng binaries
     cd ${TNG_DIR}/source || return
-    USE_AQTION=1 make -j4 V=1
+    USE_AQTION=TRUE make -j4 V=1
     build_exitcode=$?
 
     ## Copy files in preparation for the build step

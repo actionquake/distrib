@@ -32,11 +32,13 @@ if [[ ${DISTRIB} == "standalone" ]]; then
     lipo -create -output q2probuilds/universal/${DISTRIB}/q2proded q2probuilds/x86_64/${DISTRIB}/q2proded q2probuilds/arm64/${DISTRIB}/q2proded
     
     #mv ../../action AQ_Install/AQ.app/Contents/MacOS/
-    cp -r ../../../aqtion/action AQ_Install/AQ.app/Contents/MacOS/
+    cp -r ../../action AQ_Install/AQ.app/Contents/MacOS/
     install q2probuilds/universal/${DISTRIB}/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
     install q2probuilds/universal/${DISTRIB}/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
     install q2probuilds/x86_64/${DISTRIB}/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
     install q2probuilds/arm64/${DISTRIB}/gamearm.so AQ_Install/AQ.app/Contents/MacOS/action/
+    install q2probuilds/universal/${DISTRIB}/discord_game_sdk.dylib AQ_Install/AQ.app/Contents/MacOS/discord_game_sdk.dylib
+    cp -R q2probuilds/universal/libs AQ_Install/AQ.app/Contents/MacOS/
     rm -rf AQ_Install/AQ.app/Contents/MacOS/.dummyfile
     ## make q2pro executable
     chmod +x AQ_Install/AQ.app/Contents/MacOS/q2pro*
@@ -72,6 +74,9 @@ else
     install q2probuilds/universal/${DISTRIB}/libsteam_api.dylib Steam_Install/libsteam_api.dylib
     install q2probuilds/universal/${DISTRIB}/steam_appid.txt Steam_Install/steam_appid.txt
     install q2probuilds/universal/${DISTRIB}/discord_game_sdk.dylib Steam_Install/discord_game_sdk.dylib
+
+    # Copy universal libraries
+    cp -R q2probuilds/universal/libs Steam_Install/
 
     # Install launch script until Steam fully supports Apple Silicon properly
     install q2probuilds/universal/${DISTRIB}/launch.sh Steam_Install/launch.sh
