@@ -1,23 +1,18 @@
-name: Butler (Itch.io) Release
-
-# on:  
-#   push:
-#     tags:
-#       - 'v*'
-
 on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: "Release version tag"
+        description: "Release version tag (ex: v1.2.3)"
         required: true
+
+name: Butler (Itch.io) Release
 
 env:
   CFG_WORKING_DIR: "config"
   LIN64_DIST_DIR: "linux-x64-dist"
   LINARM64_DIST_DIR: "linux-arm64-dist"
   WIN64_DIST_DIR: "windows-x64-dist"
-  WIN32_DIST_DIR: "windows-i386-dist"
+  MAC_DIST_DIR: "mac-universal-dist"
 
 jobs:      
   butler_release:
@@ -43,112 +38,63 @@ jobs:
           chmod +x butler
           ./butler -V
 
-      - name: Generate checksum file
-        working-directory: ${{ env.CFG_WORKING_DIR }}/action
-        run: |
-          find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
+      # - name: Generate checksum file
+      #   working-directory: ${{ env.CFG_WORKING_DIR }}/action
+      #   run: |
+      #     find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
 
-      - name: Generate dist directories
-        run: |
-          mkdir -p ${{ env.LINARM64_DIST_DIR }}/action
-          mkdir -p ${{ env.LIN64_DIST_DIR }}/action
-          mkdir -p ${{ env.WIN64_DIST_DIR }}/action
-          mkdir -p ${{ env.WIN32_DIST_DIR }}/action
-
-      - name: Zip game content to pkz
-        working-directory: ${{ env.CFG_WORKING_DIR }}/action
-        run: |
-          for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds; do
-            cd ${makepkz}
-            zip -r ../0_${makepkz}.pkz * && cd ..
-            rm -rf ${makepkz}/
-          done
-          
       ## Linux x86_64
-      - name: Download latest Linux amd64 deb artifact
+      - name: Download Linux release package
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: Quick-Release.yaml
-          name: linux-amd64-deb
+          workflow_conclusion: success
+          workflow: New-Dist-Release.yaml
+          name: aqtion-${{ inputs.release_tag }}-linux-x86_64
+          skip_unpack: true
 
       ## Linux ARM64
-      - name: Download latest Linux arm64 deb artifact
+      - name: Download Linux release package
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: Quick-Release.yaml
-          name: linux-arm64-deb
+          workflow_conclusion: success
+          workflow: New-Dist-Release.yaml
+          name: aqtion-${{ inputs.release_tag }}-linux-arm64
+          skip_unpack: true
 
-      ## Win32
-      - name: Download latest Win32 Q2Pro artifacts
+      ## Windows x86_64
+      - name: Download Windows release package
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: Q2Pro-Windows.yaml
-          name: q2pro-win-32-standalone
-          path: ${{ env.WIN32_DIST_DIR }}/
-
-      - name: Download latest Win32 TNG artifacts
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: TNG-Windows.yaml
-          name: tng-win-32
-          path: ${{ env.WIN32_DIST_DIR }}/action/
-
-      - name: Copy action content
-        run: |
-          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN32_DIST_DIR }}/action/
-
-      ## Win64
-      - name: Download latest Win64 Q2Pro artifacts
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: Q2Pro-Windows.yaml
-          name: q2pro-win-64-standalone
-          path: ${{ env.WIN64_DIST_DIR }}/
-
-      - name: Download latest Win64 TNG artifacts
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: TNG-Windows.yaml
-          name: tng-win-64
-          path: ${{ env.WIN64_DIST_DIR }}/action/
-
-      - name: Copy action content
-        run: |
-          cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN64_DIST_DIR }}/action/
+          workflow_conclusion: success
+          workflow: New-Dist-Release.yaml
+          name: aqtion-${{ inputs.release_tag }}-windows-x86_64
 
       ## Mac
-      - name: Download latest Mac Universal zip
+      - name: Download Mac release package
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: Mac-Artifacts.yaml
-          name: mac-universal-zip-standalone
-      
-      - name: Rename Mac artifact
-        run: |
-          mv aqtion-mac-universal-standalone.zip aqtion-mac-universal.zip
-      
+          workflow_conclusion: success
+          workflow: New-Dist-Release.yaml
+          name: aqtion-${{ inputs.release_tag }}-mac-universal
+          skip_unpack: true
+
       - name: Butler Push Win64
-        run: ./butler push ${{ env.WIN64_DIST_DIR }} aqtion/aqtion:windows-x64 --userversion ${{ github.event.inputs.release_tag }}
-        env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-      
-      - name: Butler Push Win32
-        run: ./butler push ${{ env.WIN32_DIST_DIR }} aqtion/aqtion:windows-i386 --userversion ${{ github.event.inputs.release_tag }}
+        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-windows-x86_64.zip aqtion/aqtion:windows-x64 --userversion ${{ github.event.inputs.release_tag }}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
       
       - name: Butler Push Lin64 x86
-        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-linux-amd64.deb aqtion/aqtion:linux-x64 --userversion ${{ github.event.inputs.release_tag }}
+        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-linux-x86_64.zip aqtion/aqtion:linux-x64 --userversion ${{ github.event.inputs.release_tag }}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
       - name: Butler Push Lin64 ARM
-        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-linux-arm64.deb aqtion/aqtion:linux-arm --userversion ${{ github.event.inputs.release_tag }}
+        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-linux-arm64.zip aqtion/aqtion:linux-arm --userversion ${{ github.event.inputs.release_tag }}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
       
       - name: Butler Push Mac Universal
-        run: ./butler push aqtion-mac-universal.zip aqtion/aqtion:mac-universal --userversion ${{ github.event.inputs.release_tag }}
+        run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-mac-universal.zip aqtion/aqtion:mac-universal --userversion ${{ github.event.inputs.release_tag }}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
