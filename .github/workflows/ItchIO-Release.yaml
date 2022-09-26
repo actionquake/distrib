@@ -117,15 +117,15 @@ jobs:
           cp -r ${{ env.CFG_WORKING_DIR }}/action/* ${{ env.WIN64_DIST_DIR }}/action/
 
       ## Mac
-      - name: Download latest Mac Universal DMG
+      - name: Download latest Mac Universal zip
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: Mac-Artifacts.yaml
-          name: mac-universal-dmg-standalone
+          name: mac-universal-zip-standalone
       
       - name: Rename Mac artifact
         run: |
-          mv aqtion-mac-universal-standalone.dmg aqtion-mac-universal.dmg
+          mv aqtion-mac-universal-standalone.zip aqtion-mac-universal.zip
       
       - name: Butler Push Win64
         run: ./butler push ${{ env.WIN64_DIST_DIR }} aqtion/aqtion:windows-x64 --userversion ${{ github.event.inputs.release_tag }}
@@ -148,7 +148,7 @@ jobs:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
       
       - name: Butler Push Mac Universal
-        run: ./butler push aqtion-mac-universal.dmg aqtion/aqtion:mac-universal --userversion ${{ github.event.inputs.release_tag }}
+        run: ./butler push aqtion-mac-universal.zip aqtion/aqtion:mac-universal --userversion ${{ github.event.inputs.release_tag }}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
