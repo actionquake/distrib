@@ -68,6 +68,7 @@ jobs:
           workflow_conclusion: success
           workflow: New-Dist-Release.yaml
           name: aqtion-${{ inputs.release_tag }}-windows-x86_64
+          skip_unpack: true
 
       ## Mac
       - name: Download Mac release package
@@ -78,6 +79,10 @@ jobs:
           name: aqtion-${{ inputs.release_tag }}-mac-universal
           skip_unpack: true
 
+      - name: Look around
+        run: ls -l
+
+        
       - name: Butler Push Win64
         run: ./butler push aqtion-${{ github.event.inputs.release_tag }}-windows-x86_64.zip aqtion/aqtion:windows-x64 --userversion ${{ github.event.inputs.release_tag }}
         env:
