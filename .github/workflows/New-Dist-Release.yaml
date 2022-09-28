@@ -82,7 +82,7 @@ jobs:
           sed -i "s/version_value_here/${GIT_TAG:1}/g" dpkg/DEBIAN/control
           cp -r dpkg aqtion-${{github.ref_name}}-linux-x86_64
           cp -r dpkg aqtion-${{github.ref_name}}-linux-arm64
-          sed -i "s/arch_value_here/x86_64/g" aqtion-${{github.ref_name}}-linux-x86_64/DEBIAN/control
+          sed -i "s/arch_value_here/amd64/g" aqtion-${{github.ref_name}}-linux-x86_64/DEBIAN/control
           sed -i "s/arch_value_here/arm64/g" aqtion-${{github.ref_name}}-linux-arm64/DEBIAN/control
           dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-x86_64
           dpkg-deb --build --root-owner-group aqtion-${{github.ref_name}}-linux-arm64
