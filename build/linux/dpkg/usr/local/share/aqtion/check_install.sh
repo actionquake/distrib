@@ -26,6 +26,17 @@ else
     exit 1
 fi
 
+## This script uses unzip, check
+if command -v unzip &> /dev/null
+then
+    :
+else
+    echo "unzip not found, please install unzip"
+    echo "Run this and retry:"
+    echo "sudo apt-get update && sudo apt-get install unzip -y"
+    exit 1
+fi
+
 ## Functions
 check_for_install () {
     INSTALLED_VERSION=$(grep -s installed_version ${AQTION_DIR}/versions | cut -f 2 -d "=")
@@ -80,7 +91,7 @@ download_aqtion () {
 
     if [[ ${ARCH} = "x86_64" ]]
     then
-        LINUX_ARCH="amd64"
+        LINUX_ARCH="x86_64"
     elif [[ ${ARCH} = "aarch64" ]]
     then
         LINUX_ARCH="arm64"
@@ -91,13 +102,13 @@ download_aqtion () {
         return 1
     fi
 
-    ## Tarball name "aqtion-VERSION-linux-ARCH.tar.gz"
+    ## Zipfile name "aqtion-VERSION-linux-ARCH.zip"
 
     LATEST_VERSION=$(curl -q -s ${DISTRIB_URL} | grep browser_download_url | cut -d '"' -f 4 | grep ${LINUX_ARCH} | grep -v deb | head -n 1 | cut -d "/" -f 8)
-    LATEST_PACKAGE="aqtion-${LATEST_VERSION}-linux-${LINUX_ARCH}.tar.gz"
+    LATEST_PACKAGE="aqtion-${LATEST_VERSION}-linux-${LINUX_ARCH}.zip"
     echo "Downloading AQtion ${LATEST_VERSION} ..."
-    curl --progress-bar -q -s -L -o /tmp/aqtion_${LATEST_VERSION}.tar.gz "https://github.com/actionquake/distrib/releases/download/${LATEST_VERSION}/${LATEST_PACKAGE}"
-    extracttar=$(tar xzf /tmp/aqtion_${LATEST_VERSION}.tar.gz -C "${AQTION_DIR}" --strip-components=1)
+    curl --progress-bar -q -s -L -o /tmp/aqtion_${LATEST_VERSION}.zip "https://github.com/actionquake/distrib/releases/download/${LATEST_VERSION}/${LATEST_PACKAGE}"
+    extractzip=$(unzip /tmp/aqtion_${LATEST_VERSION}.zip -d "${HOME}")
     if [[ $? = "0" ]]
     then
         update_version_number ${LATEST_VERSION}
