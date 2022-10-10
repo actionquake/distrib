@@ -16,6 +16,5 @@ for dir in ${directoryArray[@]}; do
         echo ${dir} >> diff_found.tmp
     else
         echo "# No differences found between this commit and the last, exiting #"
-        exit 0
     fi
 done
