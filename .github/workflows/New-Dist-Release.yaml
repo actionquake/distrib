@@ -44,7 +44,7 @@ jobs:
 
       - name: Make all libraries executable
         run: |
-          chmod +x ${{ env.CFG_WORKING_DIR }}/action/game*
+          chmod +x ${{ env.DIST_DIR }}/action/game*
 
       - name: Copy aqtion content
         run: |
