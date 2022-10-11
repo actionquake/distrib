@@ -31,7 +31,7 @@ function checkExistingFiles() {
 }
 
 echo "Comparing ${directory} checksums..."
-#differences=$(diff ${directory}.chksum compare/${directory}.chksum)
+differences=$(diff ${directory}.chksum compare/${directory}.chksum)
 
 checkExistingFiles
 if [[ ${?} = 0 ]]; then

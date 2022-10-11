@@ -31,6 +31,10 @@ jobs:
         run: |
           for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64; do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip && unzip -o ${FILE}.zip -d ${{ env.CFG_WORKING_DIR }}/action/; rm -rf ${FILE}.zip; done
 
+      - name: Make all libraries executable
+        run: |
+          chmod +x ${{ env.CFG_WORKING_DIR }}/action/game*
+
       - name: Generate dist files
         run: |
           cd ${{ env.CFG_WORKING_DIR }} && zip -r aqtion-content.zip versions action/
