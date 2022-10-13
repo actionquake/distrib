@@ -1,0 +1,28 @@
+A Sky for Half-Life!
+*------------------*
+  *--------------*
+Sky Name:	  g_night
+Autor Name:	  JoNaS
+Autor's Email:	  Jonas_Jax@hotmail.com
+Program used:	  3D Studio MAX
+********************Note by WetWired - Edited to work in Quake 2********************
+
+Installation instructions:
+  Just unzip all of the ".tga" files into your Half-Life\valve\gfx\env directory.
+********************Note by WetWired - unzips into your Quake2\action\env directory********************
+
+
+Additional Info (just stuff I wanted to say):
+  I just made this sky for fun, I never used it, and don't think I ever will (I sadly kinda stopped mapping for HL) but hope that someone will use it soon :)!
+
+
+A Request (PLEASE READ THIS):
+  If you use this sky on your map, could you please send me a version of your map (or a place where I can download it???) - you don't even have to give me credit for it! You can also use it in your MOD, no prob, but here as well, could you please mail me? I just wanna know if my sky gets used or not!!!
+Thanks!
+
+
+*Permission*
+  Hey, you can use my sky, edit it a bit, do whatever you want but you MAY NOT declare it as your own work and MAY NOT sell it in any way without my permission!
+  Other than that - just have fun :)
+  
+********************Note by WetWired - Edited to work in Quake 2********************

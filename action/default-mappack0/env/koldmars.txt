@@ -1,0 +1,31 @@
+=====================================================================
+* Date : 1/11/04
+* File : koldmars.zip
+* Author : kold 
+* Email Address : koldone@msn.com
+* URL : http://www.chilledout.net
+=====================================================================
+
+* Installation *
+
+Point this baby at what ever mod dir you like, etc .. quake2/baseq2/  
+the zip will do the rest for you .
+
+to use this sky in Quake 2 , drop down the console and type : sky Koldmars_
+
+=====================================================================
+
+* Copyright info *
+
+NON-commercial use only (either on its own or as a part of a product).
+In other case you have to obtain my written permision.
+
+You may modify for your own needs just give me a credit and let me know. 
+
+You MAY distribute this file through any electronic network (internet,
+local BBS etc.), provided you include this file and leave the 
+zip archive intact.
+
+
+thanks for downloading this env , i hope you have as much fun using it as i did making it :)
+
