@@ -27,14 +27,13 @@ DMG_FILENAME=aqtion-mac-universal-${DISTRIB}
 lipo -create -output q2probuilds/universal/q2pro q2probuilds/x86_64/q2pro q2probuilds/arm64/q2pro
 lipo -create -output q2probuilds/universal/q2proded q2probuilds/x86_64/q2proded q2probuilds/arm64/q2proded
 
-## Tell q2pro where to find the bundled dylibs
-install_name_tool -change '@rpath/discord_game_sdk.dylib' '@loader_path/libs/discord_game_sdk.dylib' q2probuilds/universal/q2pro
-install_name_tool -change '/usr/local/opt/sdl2/lib/libSDL2-2.0.0.dylib' '@loader_path/libs/libSDL2-2.0.0.dylib' q2probuilds/universal/q2pro
-install_name_tool -change '/usr/lib/libcurl.4.dylib' '@loader_path/libs/libcurl.4.dylib' q2probuilds/universal/q2pro
-install_name_tool -change '/usr/lib/libz.1.dylib' '@loader_path/libs/libz.1.dylib' q2probuilds/universal/q2pro
-install_name_tool -change '/usr/local/opt/libpng/lib/libpng16.16.dylib' '@loader_path/libs/libpng16.16.dylib' q2probuilds/universal/q2pro
-install_name_tool -change '/usr/local/opt/jpeg-turbo/lib/libjpeg.8.dylib' '@loader_path/libs/libjpeg.8.dylib' q2probuilds/universal/q2pro
-
+## Tell q2pro where to find the bundled dylibs - need a verified developer account for this to work cleanly
+# install_name_tool -change '@rpath/discord_game_sdk.dylib' '@loader_path/libs/discord_game_sdk.dylib' q2probuilds/universal/q2pro
+# install_name_tool -change '/usr/local/opt/sdl2/lib/libSDL2-2.0.0.dylib' '@loader_path/libs/libSDL2-2.0.0.dylib' q2probuilds/universal/q2pro
+# install_name_tool -change '/usr/lib/libcurl.4.dylib' '@loader_path/libs/libcurl.4.dylib' q2probuilds/universal/q2pro
+# install_name_tool -change '/usr/lib/libz.1.dylib' '@loader_path/libs/libz.1.dylib' q2probuilds/universal/q2pro
+# install_name_tool -change '/usr/local/opt/libpng/lib/libpng16.16.dylib' '@loader_path/libs/libpng16.16.dylib' q2probuilds/universal/q2pro
+# install_name_tool -change '/usr/local/opt/jpeg-turbo/lib/libjpeg.8.dylib' '@loader_path/libs/libjpeg.8.dylib' q2probuilds/universal/q2pro
 
 ## Move action dir into the app for the zip file and populate AQ_Install directory
 if [[ ${DISTRIB} == "standalone" ]]; then
