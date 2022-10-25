@@ -240,6 +240,12 @@ jobs:
           name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
 
+      - name: Download and extract latest Linux arm64 Q2Pro Release
+        run: |
+          wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/ q2pro-lin-arm64.zip
+          unzip  q2pro-lin-arm64.zip -d ${{ env.AQTION_DIR }}
+          chmod +x ${{ env.AQTION_DIR }}/q2pro*
+
       - name: Copy external libraries for Q2Pro
         run: |
           cp ${{ env.DIST_DIR }}/build/linux/integrations/* ${{ env.AQTION_DIR }}
