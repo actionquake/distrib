@@ -172,12 +172,12 @@ end
 begin dm_botmenu
     title "Deathmatch Flags"
     strings "map" nextserver $com_maplist
-    field --integer --status "Bot count" --width 2 "Bot count" sv_botdm
+    //field --integer --status "Bot count" --width 2 "Bot count" sv_botdm
     blank
     toggle "spawn with all weapons" allweapon
     toggle "spawn with all items" allitem
-    field --integer --status "time limit in minutes" --width 2 "time limit in minutes" bottimelimit
-    field --integer --status "frag limit" --width 2 "frag limit" botfraglimit
+    //field --integer --status "time limit in minutes" --width 2 "time limit in minutes" bottimelimit
+    //field --integer --status "frag limit" --width 2 "frag limit" botfraglimit
     blank
     toggle --status "Players with same skin are teamed up" "Teams by skin" dmflags 6
     toggle --status "Players with same model are teamed up" "Teams by model" dmflags 7
@@ -186,30 +186,30 @@ begin dm_botmenu
     pairs --status "Choose your starting weapon/item" "Choose weapon/item" dm_choose "enabled" 1 "disabled" 0
     pairs --status "Spawn protection" "Enable 3 second spawn protection" dm_shield "disabled" 0 "enabled" 30
     blank
-    action --align " Play" "forcemenuoff;seta ltk_loadbots 1;seta teamplay 0;seta timelimit $bottimelimit;seta fraglimit $botfraglimit; seta dm_choose $dm_choose;seta dm_shield $dm_shield;map credits; map $nextserver; sv addbots $sv_botdm$;"
+    action --align " Play" "forcemenuoff;seta ltk_loadbots 1;seta maxclients 16; seta teamplay 0;seta timelimit 20;seta fraglimit 50; seta dm_choose 0;seta dm_shield 30;seta allweapon $allweapon;seta allitem $allitem;map credits; map $nextserver; sv addbots 8;"
 end
 
 begin tdm_botmenu
     strings "map" nextserver $com_maplist
     blank
-    field --integer --status "Add bots to the Blue Team" --width 2 "Add bots to Blue Team" sv_bot1
-    field --integer --status "Add bots to the Red Team" --width 2 "Add bots to Red Team" sv_bot2
-    blank
+    //field --integer --status "Add bots to the Blue Team" --width 2 "Add bots to Blue Team" sv_bot1
+    //field --integer --status "Add bots to the Red Team" --width 2 "Add bots to Red Team" sv_bot2
+    //blank
     toggle "spawn with all weapons" allweapon
     toggle "spawn with all items" allitem
     pairs "friendly fire" dmflags on 1044 off 768
-    field --integer --status "time limit in minutes" --width 2 "time limit in minutes" bottimelimit
-    field --integer --status "frag limit" --width 2 "frag limit" botfraglimit
+    //field --integer --status "time limit in minutes" --width 2 "time limit in minutes" bottimelimit
+    //field --integer --status "frag limit" --width 2 "frag limit" botfraglimit
     blank
     range "bot skill" ltk_skill 0 10
-    action --align " Play" "forcemenuoff; map credits;seta ltk_loadbots 1;seta teamplay 0;seta teamdm 1;seta timelimit $bottimelimit;seta fraglimit $botfraglimit;seta allweapon $allweapon;seta allitem $allitem;seta dmflags $dmflags; map $nextserver;sv addbots $sv_bot1$ 1;sv addbots $sv_bot2$;"
+    action --align " Play" "forcemenuoff; map credits;seta ltk_loadbots 1;seta teamplay 0;seta maxclients 16;seta teamdm 1;seta timelimit 20;seta fraglimit 50;seta allweapon $allweapon;seta allitem $allitem;seta dmflags $dmflags; map $nextserver;sv addbots 4 1;sv addbots 4 2;"
 end
 
 begin tp_botmenu
     strings "map" nextserver $com_maplist
-    blank
-    field --integer --status "Add bots to the Blue Team" --width 2 "Add bots to Blue Team" sv_bot1
-    field --integer --status "Add bots to the Red Team" --width 2 "Add bots to Red Team" sv_bot2
+    //blank
+    //field --integer --status "Add bots to the Blue Team" --width 2 "Add bots to Blue Team" sv_bot1
+    //field --integer --status "Add bots to the Red Team" --width 2 "Add bots to Red Team" sv_bot2
     blank
     toggle "spawn with all weapons" allweapon
     toggle "spawn with all items" allitem
@@ -218,7 +218,7 @@ begin tp_botmenu
     field --integer --status "frag limit" --width 2 "frag limit" botfraglimit
     blank
     range "bot skill" ltk_skill 0 10
-    action --align " Play" "forcemenuoff; map credits;seta ltk_loadbots 1;seta teamplay 1;seta use_3teams 0;seta timelimit $bottimelimit;seta fraglimit $botfraglimit;seta allweapon $allweapon;seta allitem $allitem;seta dmflags $dmflags; map $nextserver;sv addbots $sv_bot1$ 1;sv addbots $sv_bot2$;"
+    action --align " Play" "forcemenuoff; map credits;seta ltk_loadbots 1;seta teamplay 1;seta use_3teams 0;seta teamdm 0;seta timelimit 20;seta fraglimit 50;seta allweapon $allweapon;seta allitem $allitem;seta dmflags $dmflags; map $nextserver;sv addbots 4 1;sv addbots 4 2;"
 end
 
 begin settings
