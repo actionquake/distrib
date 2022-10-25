@@ -191,6 +191,12 @@ jobs:
       - name: Copy external libraries for Q2Pro
         run: |
           cp ${{ env.DIST_DIR }}/build/linux/integrations/* ${{ env.AQTION_DIR }}
+          mkdir ${{ env.AQTION_DIR }}/libs
+          cp ${{ env.DIST_DIR }}/build/linux/libs/x86/* ${{ env.AQTION_DIR }}/libs/
+
+      - name: patchelf path to bundled libraries
+        run: |
+          patchelf --replace-needed libjpeg.so.8 ./libs/libjpeg.so.8 ${{ env.AQTION_DIR }}/q2pro
 
       - name: Gather md5sum on files
         run: |
@@ -236,6 +242,12 @@ jobs:
       - name: Copy external libraries for Q2Pro
         run: |
           cp ${{ env.DIST_DIR }}/build/linux/integrations/* ${{ env.AQTION_DIR }}
+          mkdir ${{ env.AQTION_DIR }}/libs
+          cp ${{ env.DIST_DIR }}/build/linux/libs/arm64/* ${{ env.AQTION_DIR }}/libs/
+
+      - name: patchelf path to bundled libraries
+        run: |
+          patchelf --replace-needed libjpeg.so.8 ./libs/libjpeg.so.8 ${{ env.AQTION_DIR }}/q2pro
 
       - name: Gather md5sum on files
         run: |
