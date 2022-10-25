@@ -1,9 +1,23 @@
 #!/bin/bash
 
+# If you need to have jpeg first in your PATH, run:
+#   echo 'export PATH="/usr/local/opt/jpeg/bin:$PATH"' >> /Users/dino/.bash_profile
+
+# For compilers to find jpeg you may need to set:
+#   export LDFLAGS="-L/usr/local/opt/jpeg/lib"
+#   export CPPFLAGS="-I/usr/local/opt/jpeg/include"
+
+# For pkg-config to find jpeg you may need to set:
+#   export PKG_CONFIG_PATH="/usr/local/opt/jpeg/lib/pkgconfig"
+
+PLATFORMS=(steam standalone)
 ARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/amd64/x86_64/' -e 's/sun4u/sparc64/' -e 's/arm.*/arm/' -e 's/sa110/arm/' -e 's/alpha/axp/')
 CURRENT_DIR=$(pwd)
 PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/"
-PLATFORMS=(steam standalone)
+
+# libjpeg9 support
+LDFLAGS="-L/usr/local/opt/jpeg/lib"
+CPPFLAGS="-I/usr/local/opt/jpeg/include"
 
 if ! ( [ ${ARCH} = 'x86_64' ] || [ ${ARCH} = "arm" ] )
 then
