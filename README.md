@@ -6,7 +6,6 @@ Every effort has been made to ensure that no licensed, copyrighted and/or tradem
 https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 
 - Quake II source code: https://github.com/skullernet/q2pro (Game Engine)
-- Quake II 3.14 Demo: http://tastyspleen.net/quake/downloads/q2-314-demo-x86.exe (Demo Content)
 - Action Quake source code: https://github.com/aq2-tng/aq2-tng (Action Quake Libraries)
 - The worldwide community of contributors over the decades: (Action Quake Content)
 
