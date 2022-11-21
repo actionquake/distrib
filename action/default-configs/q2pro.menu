@@ -427,6 +427,7 @@ begin bindings
     bind "bandage" bandage
     bind "open/close door" opendoor
     bind "reload" reload
+    bind "irvision" irvision
     blank
     action "Weapon Binds" pushmenu wbindings
     action "Game Settings and Binds" pushmenu gsettings
