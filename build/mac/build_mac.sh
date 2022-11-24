@@ -17,7 +17,6 @@ PKG_CONFIG_PATH="/usr/local/Cellar/openal-soft/1.21.1/lib/pkgconfig/"
 
 # libjpeg9 support
 LDFLAGS="-L/usr/local/opt/jpeg/lib"
-CPPFLAGS="-I/usr/local/opt/jpeg/include"
 
 if ! ( [ ${ARCH} = 'x86_64' ] || [ ${ARCH} = "arm" ] )
 then
