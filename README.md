@@ -1,3 +1,9 @@
+
+![Discord Banner 2](https://discordapp.com/api/guilds/800353014384820234/widget.png?style=banner2)
+[![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/aq2worlddotcom) [![Twitch](https://img.shields.io/badge/Twitch-%239146FF.svg?style=for-the-badge&logo=Twitch&logoColor=white)](https://www.twitch.tv/lightscameraaqtion) [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)]((https://www.youtube.com/@lightscameraAQtion)) [![Steam](https://img.shields.io/badge/steam-%23000000.svg?style=for-the-badge&logo=steam&logoColor=white)](https://store.steampowered.com/app/1978800/AQtion)
+
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black) ![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0) ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+---
 # AQtion Base Installation
 
 ## License considerations
@@ -24,10 +30,11 @@ Should it be determined that assets included in this distribution are indeed unl
 
 ## Instructions/Installation
 
-### Steam and Itch.io
-*It is highly recommended to use the Steam installer, it is free and will update on its own.*
-* [Steam](https://store.steampowered.com/app/1978800/AQtion/)
-* [Itch.io](https://aqtion.itch.io/aqtion)
+### Steam
+[![Steam Install](misc/images/aqtionsteam.png)](https://store.steampowered.com/app/1978800/AQtion)
+*It is highly recommended to use the Steam installer, it is free and will update on its own with the most recent content and features.*
+
+---
 
 ### RTX compatibility
 If you wish to use your RTX card with Quake II
@@ -42,13 +49,10 @@ If you wish to use your RTX card with Quake II
 ---
 
 ### Standalone Install
-#### Mac (Intel and Apple Silicon)
-1. Install [Brew](https://brew.sh/) if you do not already have it
-1. Install the following packages
-  * `brew install libpng jpeg sdl2 openal-soft zlib curl`
-1. Download the .dmg release package for your architecture
-1. Drag AQ to the Applications directory
-1. Double-click `AQ` to launch
+While these installs are available, they are not the recommended method.  Use at your own inconvenience.
+
+#### Itch.io
+* [Itch.io](https://aqtion.itch.io/aqtion)
 
 #### Windows
 1. Download the latest release zip file
@@ -65,8 +69,9 @@ If you wish to use your RTX card with Quake II
 1. Extract to `~/aqtion` (`/home/YOUR_USERNAME/aqtion`)
 1. In your Terminal, navigate to the extracted directory and launch `q2pro`
 
-#### All platforms
-1. Join us in [Discord](https://discord.aq2world.com) and find some people to play with
+#### Need help or have questions?
+1. Join us in [Discord](https://discord.aq2world.com)
+1. Check out the [Steam guides](https://steamcommunity.com/app/1978800/guides/)
 
 ---
 
@@ -80,10 +85,11 @@ If you wish to use your RTX card with Quake II
 1. Commit your modifications/additions
 1. Submit pull request
 
-## Site Links
+## Links
 * [AQ2World](https://www.aq2world.com)
 * [AQtiongame](https://www.aqtiongame.com)
 * [AQ2Suomi](https://www.aq2suomi.com)
+* [Forums](https://forums.aq2world.com)
 
 ## Credits
 * [id Software](https://www.idsoftware.com) who created the original Quake II engine and brought upon us many endless nights of fragging, gibbing and lagging until our parents told us to go to bed
@@ -96,6 +102,8 @@ If you wish to use your RTX card with Quake II
 * [ReKTeK](https://github.com/ReKTeK) for his development contributions
 * [hifi](https://github.com/hifi) for q2admin, LUA and MVD support and all forked repos who continuously improve this repository
 * Mappers [stan0x](https://github.com/stan0x), **Quimby**, [WizardExt](https://www.wizardext.se/), **WetWired**, **Beavisss**, [pauhi](https://github.com/Ntuk) and **Ruskprick** for the included maps in this distribution
+* **Black Monk** and the [Reaction Quake 3](https://rq3.com/) [team](https://github.com/ReactionQuake3/reaction) for allowing us to use some of their models for our content updates
+* [Jehar](https://twitter.com/Jehar) and the amazing folks at [Tastyspleen](http://tastyspleen.net/) and [TastyspleenTV](twitch.tv/tastyspleentv) on Twitch for broadcasting some amazing events and being the cornerstone of Quake II gaming
 * The [AQ2World Discord mod team](https://discord.aq2world.com) for assisting, testing and contributing to this distribution, and keeping the scene alive
 * Every single mapper, sound designer, texture creator, model maker, skin artist and community contributor to this project since its inception in the late 90s, without your 600+ maps and gigabytes of content, we'd still be playing vanilla Q2.
 * All past, present and future players who for we do this all for, please keep the scene alive!
