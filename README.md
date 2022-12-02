@@ -33,14 +33,10 @@ Should it be determined that assets included in this distribution are indeed unl
 
 ### Steam
 [![Steam Install](misc/images/aqtionsteam.png)](https://store.steampowered.com/app/1978800/AQtion)
+
 *It is highly recommended to use the Steam installer, it is free and will update on its own with the most recent content and features.*
 
 ---
-
-### RTX compatibility
-If you wish to use your RTX card with Quake II
-1. Install the RTX package for your platform [NVIDIA/Q2RTX](https://github.com/NVIDIA/Q2RTX/releases)
-1. Follow the below instructions
 
 ### Existing Quake II installations
 1. Download the aqtion-content zip file and extract the `action` directory into the same directory where `baseq2` exists (in the same directory as your Quake II executable)
