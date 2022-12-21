@@ -312,8 +312,6 @@ begin msettings
     toggle "automatic downloads" allow_download
     blank
     pairs "display round stats" stats_mode disabled 0 "end of round" 1 "end of map" 2
-    toggle "automatic demo recording" autorecord
-    blank
     toggle "bandage sound effect" cl_bandagesound
     pairs "bandage radio team message" bandage[radio] "disabled" disabled "I'm hit" im_hit "Cover me" cover "Taking fire..." taking_f
     field "bandage team message" bandage[say]
