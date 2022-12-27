@@ -43,7 +43,7 @@ jobs:
         run: |
           for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64; \
           do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip \
-          && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/baseaq/; \
+          && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/baseaq/ \
           && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/action/; \
           rm -rf ${FILE}.zip; done
 
