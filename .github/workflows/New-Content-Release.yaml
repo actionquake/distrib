@@ -23,7 +23,7 @@ jobs:
         run: |
           for makepkz in pak0 pak1; do
             cd ${makepkz}
-            zip -r ../0_${makepkz}.pkz * && cd ..
+            zip -r ../${makepkz}.pkz * && cd ..
             rm -rf ${makepkz}/
           done
 
@@ -42,7 +42,7 @@ jobs:
 
       - name: Generate dist files
         run: |
-          cd ${{ env.DIST_DIR }} && zip -r aqtion-content.zip versions baseaq/
+          cd ${{ env.DIST_DIR }} && zip -r aqtion-content.zip versions baseaq/ action/
 
       - name: Generate archive
         uses: actions/upload-artifact@v3
