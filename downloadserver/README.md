@@ -34,3 +34,6 @@ Additionally, .paks will be downloaded as soon as they are queued and will block
 The @ prefix is redundant with pak files and will cause an error if used. Note that any files that were queued with the @ prefix with the same names as baseq2 files will be removed once a pak has finished downloading when the queue is revalidated. 
 
 Thus, it isn't a good idea to mix both pak files and @-prefixed files. You may wish to use FileListFinder to generate a filelist-compatible list of specified files under a root directory (useful for map/mod authors).
+
+###
+This file should not be needed in the downloadserver in general
