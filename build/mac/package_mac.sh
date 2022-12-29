@@ -39,11 +39,15 @@ install_name_tool -change '@rpath/discord_game_sdk.dylib' '@loader_path/discord_
 if [[ ${DISTRIB} == "standalone" ]]; then
     mkdir -p AQ_Install/AQ.app/Contents/MacOS
     
+    cp -r ../../baseaq AQ_Install/AQ.app/Contents/MacOS/
     cp -r ../../action AQ_Install/AQ.app/Contents/MacOS/
+
     install q2probuilds/universal/q2proded AQ_Install/AQ.app/Contents/MacOS/q2proded
     install q2probuilds/universal/q2pro AQ_Install/AQ.app/Contents/MacOS/q2pro
     install q2probuilds/x86_64/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/action/
     install q2probuilds/arm64/gamearm.so AQ_Install/AQ.app/Contents/MacOS/action/
+    install q2probuilds/x86_64/gamex86_64.so AQ_Install/AQ.app/Contents/MacOS/baseaq/
+    install q2probuilds/arm64/gamearm.so AQ_Install/AQ.app/Contents/MacOS/baseaq/
     install q2probuilds/universal/libs/discord_game_sdk.dylib AQ_Install/AQ.app/Contents/MacOS/discord_game_sdk.dylib
     #cp -R q2probuilds/universal/libs AQ_Install/AQ.app/Contents/MacOS/
     rm -rf AQ_Install/AQ.app/Contents/MacOS/.dummyfile
@@ -55,6 +59,7 @@ if [[ ${DISTRIB} == "standalone" ]]; then
 else
     mkdir -p Steam_Install
     
+    cp -r ../../../aqtion/baseaq Steam_Install/
     cp -r ../../../aqtion/action Steam_Install/
     lipo -create -output q2probuilds/universal/aqtion q2probuilds/x86_64/aqtion q2probuilds/arm64/aqtion
 
@@ -62,6 +67,8 @@ else
     install q2probuilds/universal/aqtion Steam_Install/aqtion
     install q2probuilds/universal/q2proded Steam_Install/q2proded
     install q2probuilds/universal/q2pro Steam_Install/q2pro
+    install q2probuilds/x86_64/gamex86_64.so Steam_Install/baseaq/
+    install q2probuilds/arm64/gamearm.so Steam_Install/baseaq/
     install q2probuilds/x86_64/gamex86_64.so Steam_Install/action/
     install q2probuilds/arm64/gamearm.so Steam_Install/action/
 
