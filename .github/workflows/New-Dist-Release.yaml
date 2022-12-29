@@ -291,15 +291,17 @@ jobs:
           name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
 
-      - name: Download and extract latest Mac Q2Pro Releases
+      - name: Download and extract latest Mac x86_64 Q2Pro
         run: |
           mkdir x86_64
           wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-darwin-x86_64.zip
-          unzip q2pro-darwin-x86_64.zip -d x86_64
+          unzip q2pro-darwin-x86_64.zip -d x86_64/
 
+      - name: Download and extract latest Mac arm64 Q2Pro
+        run: |
           mkdir arm64
           wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-darwin-arm64.zip
-          unzip q2pro-darwin-arm64.zip -d arm64
+          unzip q2pro-darwin-arm64.zip -d arm64/
  
       # # Standalone
       # - name: Generate Mac Standalone artifacts
@@ -324,10 +326,10 @@ jobs:
 
       - name: Copy the libraries and startup script
         run: |
-          install ${{ env.DIST_DIR }}/mac/steam/libsteam_api.dylib  ${{ env.AQTION_DIR }}/libsteam_api.dylib
-          install ${{ env.DIST_DIR }}/mac/steam/steam_appid.txt  ${{ env.AQTION_DIR }}/steam_appid.txt
-          install ${{ env.DIST_DIR }}/mac/q2probuilds/universal/libs/discord_game_sdk.dylib  ${{ env.AQTION_DIR }}/discord_game_sdk.dylib
-          install ${{ env.DIST_DIR }}/mac/steam/launch.sh  ${{ env.AQTION_DIR }}/launch.sh
+          install ${{ env.DIST_DIR }}/mac/steam/libsteam_api.dylib ${{ env.AQTION_DIR }}/libsteam_api.dylib
+          install ${{ env.DIST_DIR }}/mac/steam/steam_appid.txt ${{ env.AQTION_DIR }}/steam_appid.txt
+          install ${{ env.DIST_DIR }}/mac/q2probuilds/universal/libs/discord_game_sdk.dylib ${{ env.AQTION_DIR }}/discord_game_sdk.dylib
+          install ${{ env.DIST_DIR }}/mac/steam/launch.sh ${{ env.AQTION_DIR }}/launch.sh
           chmod +x ${{ env.AQTION_DIR }}/q2pro* ${{ env.AQTION_DIR }}/aqtion ${{ env.AQTION_DIR }}/launch.sh
 
       # - name: Generate Mac Steam artifacts
