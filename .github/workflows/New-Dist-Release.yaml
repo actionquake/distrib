@@ -291,6 +291,16 @@ jobs:
           name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
 
+      - name: Download and extract latest Mac Q2Pro Releases
+        run: |
+          mkdir x86_64
+          wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-darwin-x86_64.zip
+          unzip q2pro-darwin-x86_64.zip -d x86_64
+
+          mkdir arm64
+          wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-darwin-arm64.zip
+          unzip q2pro-darwin-arm64.zip -d arm64
+ 
       # # Standalone
       # - name: Generate Mac Standalone artifacts
       #   working-directory: ${{ env.DIST_DIR }}/build/mac
@@ -305,20 +315,35 @@ jobs:
       #       ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-standalone.dmg
 
       # Steam
-      - name: Generate Mac Steam artifacts
-        working-directory: ${{ env.DIST_DIR }}/build/mac
-        run: bash -x package_mac.sh steam
+      - name: Generate Universal Mac binaries
+        run: |
+          lipo -create -output ${{ env.AQTION_DIR }}/q2pro x86_64/q2pro arm64/q2pro
+          lipo -create -output ${{ env.AQTION_DIR }}/q2proded x86_64/q2proded arm64/q2proded
+          lipo -create -output ${{ env.AQTION_DIR }}/aqtion ${{ env.DIST_DIR }}/mac/q2probuilds/x86_64/aqtion ${{ env.DIST_DIR }}/mac/q2probuilds/arm64/aqtion
+          install_name_tool -change '@rpath/discord_game_sdk.dylib' '@loader_path/discord_game_sdk.dylib' ${{ env.AQTION_DIR }}/q2pro
+
+      - name: Copy the libraries and startup script
+        run: |
+          install ${{ env.DIST_DIR }}/mac/steam/libsteam_api.dylib  ${{ env.AQTION_DIR }}/libsteam_api.dylib
+          install ${{ env.DIST_DIR }}/mac/steam/steam_appid.txt  ${{ env.AQTION_DIR }}/steam_appid.txt
+          install ${{ env.DIST_DIR }}/mac/q2probuilds/universal/libs/discord_game_sdk.dylib  ${{ env.AQTION_DIR }}/discord_game_sdk.dylib
+          install ${{ env.DIST_DIR }}/mac/steam/launch.sh  ${{ env.AQTION_DIR }}/launch.sh
+          chmod +x ${{ env.AQTION_DIR }}/q2pro* ${{ env.AQTION_DIR }}/aqtion ${{ env.AQTION_DIR }}/launch.sh
+
+      # - name: Generate Mac Steam artifacts
+      #   working-directory: ${{ env.DIST_DIR }}/build/mac
+      #   run: bash -x package_mac.sh steam
 
       - name: Generate Universal Steam zip artifact
         uses: actions/upload-artifact@v3
         with:
           name: aqtion-${{github.ref_name}}-mac-universal
           path: |
-            ${{ env.DIST_DIR }}/build/mac/Steam_Install
+            ${{ env.AQTION_DIR }}/*
 
       - name: Generate release artifact
         run: |
-          cd ${{ env.DIST_DIR }}/build/mac/Steam_Install && zip -r ../../../../aqtion-${{github.ref_name}}-mac-universal.zip *
+          zip -r aqtion-${{github.ref_name}}-mac-universal.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1

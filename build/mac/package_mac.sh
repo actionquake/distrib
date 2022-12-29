@@ -64,9 +64,12 @@ else
     lipo -create -output q2probuilds/universal/aqtion q2probuilds/x86_64/aqtion q2probuilds/arm64/aqtion
 
     # Install AQtion required files
+    ## Binaries
     install q2probuilds/universal/aqtion Steam_Install/aqtion
     install q2probuilds/universal/q2proded Steam_Install/q2proded
     install q2probuilds/universal/q2pro Steam_Install/q2pro
+
+    ## Game libraries
     install q2probuilds/x86_64/gamex86_64.so Steam_Install/baseaq/
     install q2probuilds/arm64/gamearm.so Steam_Install/baseaq/
     install q2probuilds/x86_64/gamex86_64.so Steam_Install/action/
