@@ -321,7 +321,7 @@ jobs:
         run: |
           lipo -create -output ${{ env.AQTION_DIR }}/q2pro x86_64/q2pro arm64/q2pro
           lipo -create -output ${{ env.AQTION_DIR }}/q2proded x86_64/q2proded arm64/q2proded
-          lipo -create -output ${{ env.AQTION_DIR }}/aqtion ${{ env.DIST_DIR }}/mac/q2probuilds/x86_64/aqtion ${{ env.DIST_DIR }}/mac/q2probuilds/arm64/aqtion
+          cp ${{ env.DIST_DIR }}/mac/q2probuilds/universal/aqtion ${{ env.AQTION_DIR }}/aqtion
           install_name_tool -change '@rpath/discord_game_sdk.dylib' '@loader_path/discord_game_sdk.dylib' ${{ env.AQTION_DIR }}/q2pro
 
       - name: Copy the libraries and startup script
