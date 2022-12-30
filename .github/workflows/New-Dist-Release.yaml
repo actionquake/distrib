@@ -321,15 +321,15 @@ jobs:
         run: |
           lipo -create -output ${{ env.AQTION_DIR }}/q2pro x86_64/q2pro arm64/q2pro
           lipo -create -output ${{ env.AQTION_DIR }}/q2proded x86_64/q2proded arm64/q2proded
-          cp ${{ env.DIST_DIR }}/mac/q2probuilds/universal/aqtion ${{ env.AQTION_DIR }}/aqtion
+          cp ${{ env.DIST_DIR }}/build/mac/q2probuilds/universal/aqtion ${{ env.AQTION_DIR }}/aqtion
           install_name_tool -change '@rpath/discord_game_sdk.dylib' '@loader_path/discord_game_sdk.dylib' ${{ env.AQTION_DIR }}/q2pro
 
       - name: Copy the libraries and startup script
         run: |
-          install ${{ env.DIST_DIR }}/mac/steam/libsteam_api.dylib ${{ env.AQTION_DIR }}/libsteam_api.dylib
-          install ${{ env.DIST_DIR }}/mac/steam/steam_appid.txt ${{ env.AQTION_DIR }}/steam_appid.txt
-          install ${{ env.DIST_DIR }}/mac/q2probuilds/universal/libs/discord_game_sdk.dylib ${{ env.AQTION_DIR }}/discord_game_sdk.dylib
-          install ${{ env.DIST_DIR }}/mac/steam/launch.sh ${{ env.AQTION_DIR }}/launch.sh
+          install ${{ env.DIST_DIR }}/build//mac/steam/libsteam_api.dylib ${{ env.AQTION_DIR }}/libsteam_api.dylib
+          install ${{ env.DIST_DIR }}/build//mac/steam/steam_appid.txt ${{ env.AQTION_DIR }}/steam_appid.txt
+          install ${{ env.DIST_DIR }}/build//mac/q2probuilds/universal/libs/discord_game_sdk.dylib ${{ env.AQTION_DIR }}/discord_game_sdk.dylib
+          install ${{ env.DIST_DIR }}/build//mac/steam/launch.sh ${{ env.AQTION_DIR }}/launch.sh
           chmod +x ${{ env.AQTION_DIR }}/q2pro* ${{ env.AQTION_DIR }}/aqtion ${{ env.AQTION_DIR }}/launch.sh
 
       # - name: Generate Mac Steam artifacts
