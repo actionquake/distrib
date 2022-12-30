@@ -52,10 +52,11 @@ jobs:
           chmod +x ${{ env.DIST_DIR }}/baseaq/game*
           chmod +x ${{ env.DIST_DIR }}/action/game*
 
-      - name: Copy aqtion content
+      - name: Copy content
         run: |
           cp ${{ env.DIST_DIR }}/LICENSE ${{ env.AQTION_DIR }}
           cp -r ${{ env.DIST_DIR }}/baseaq/* aqtion/baseaq/
+          cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
 
       - name: Upload aqtion content artifact
         uses: actions/upload-artifact@v3
