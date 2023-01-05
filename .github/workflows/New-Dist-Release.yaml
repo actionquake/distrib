@@ -22,14 +22,15 @@ jobs:
 
       - name: Generate directory structure
         run: |
+          mkdir -p ${{ env.AQTION_DIR }}/baseaq
           mkdir -p ${{ env.AQTION_DIR }}/action
 
       - name: Zip game content to pkz
-        working-directory: ${{ env.DIST_DIR }}/action
+        working-directory: ${{ env.DIST_DIR }}/baseaq
         run: |
-          for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-sounds; do
+          for makepkz in pak0 pak1; do
             cd ${makepkz}
-            zip -r ../0_${makepkz}.pkz * && cd ..
+            zip -r ../${makepkz}.pkz * && cd ..
             rm -rf ${makepkz}/
           done
       
@@ -40,15 +41,21 @@ jobs:
 
       - name: Download all library files for Windows, Linux and Linux ARM
         run: |
-          for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64; do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/action/; rm -rf ${FILE}.zip; done
+          for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64 tng-darwin-x86_64 tng-darwin-arm64; \
+          do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip \
+          && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/baseaq/ \
+          && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/action/; \
+          rm -rf ${FILE}.zip; done
 
       - name: Make all libraries executable
         run: |
+          chmod +x ${{ env.DIST_DIR }}/baseaq/game*
           chmod +x ${{ env.DIST_DIR }}/action/game*
 
-      - name: Copy aqtion content
+      - name: Copy content
         run: |
           cp ${{ env.DIST_DIR }}/LICENSE ${{ env.AQTION_DIR }}
+          cp -r ${{ env.DIST_DIR }}/baseaq/* aqtion/baseaq/
           cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
 
       - name: Upload aqtion content artifact
@@ -141,10 +148,10 @@ jobs:
         run: |
           cp ${{ env.DIST_DIR }}/build/windows/integrations/* ${{ env.AQTION_DIR }}
 
-      - name: Gather md5sum on files
-        run: |
-          md5sum ${{ env.AQTION_DIR }}/*.*
-          md5sum ${{ env.AQTION_DIR }}/action/gamex*
+      # - name: Gather md5sum on files
+      #   run: |
+      #     md5sum ${{ env.AQTION_DIR }}/*.*
+      #     md5sum ${{ env.AQTION_DIR }}/action/gamex*
 
       - name: Upload aqtion-windows-x86_64 archive
         uses: actions/upload-artifact@v3
@@ -192,10 +199,10 @@ jobs:
         run: |
           cp ${{ env.DIST_DIR }}/build/linux/integrations/* ${{ env.AQTION_DIR }}
 
-      - name: Gather md5sum on files
-        run: |
-          md5sum ${{ env.AQTION_DIR }}/*.*
-          md5sum ${{ env.AQTION_DIR }}/action/gamex*
+      # - name: Gather md5sum on files
+      #   run: |
+      #     md5sum ${{ env.AQTION_DIR }}/*.*
+      #     md5sum ${{ env.AQTION_DIR }}/action/gamex*
 
       - name: Upload aqtion-linux-x86_64 archive
         uses: actions/upload-artifact@v3
@@ -243,10 +250,10 @@ jobs:
         run: |
           cp ${{ env.DIST_DIR }}/build/linux/integrations/* ${{ env.AQTION_DIR }}
 
-      - name: Gather md5sum on files
-        run: |
-          md5sum ${{ env.AQTION_DIR }}/*.*
-          md5sum ${{ env.AQTION_DIR }}/action/gamex*
+      # - name: Gather md5sum on files
+      #   run: |
+      #     md5sum ${{ env.AQTION_DIR }}/*.*
+      #     md5sum ${{ env.AQTION_DIR }}/action/gamex*
 
       - name: Upload aqtion-linux-arm64 archive
         uses: actions/upload-artifact@v3
@@ -285,6 +292,18 @@ jobs:
           name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
 
+      - name: Download and extract latest Mac x86_64 Q2Pro
+        run: |
+          mkdir x86_64
+          wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-darwin-x86_64.zip
+          unzip q2pro-darwin-x86_64.zip -d x86_64/
+
+      - name: Download and extract latest Mac arm64 Q2Pro
+        run: |
+          mkdir arm64
+          wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-darwin-arm64.zip
+          unzip q2pro-darwin-arm64.zip -d arm64/
+ 
       # # Standalone
       # - name: Generate Mac Standalone artifacts
       #   working-directory: ${{ env.DIST_DIR }}/build/mac
@@ -299,20 +318,35 @@ jobs:
       #       ${{ env.DIST_DIR }}/build/mac/aqtion-mac-universal-standalone.dmg
 
       # Steam
-      - name: Generate Mac Steam artifacts
-        working-directory: ${{ env.DIST_DIR }}/build/mac
-        run: bash -x package_mac.sh steam
+      - name: Generate Universal Mac binaries
+        run: |
+          lipo -create -output ${{ env.AQTION_DIR }}/q2pro x86_64/q2pro arm64/q2pro
+          lipo -create -output ${{ env.AQTION_DIR }}/q2proded x86_64/q2proded arm64/q2proded
+          cp ${{ env.DIST_DIR }}/build/mac/q2probuilds/universal/aqtion ${{ env.AQTION_DIR }}/aqtion
+          install_name_tool -change '@rpath/discord_game_sdk.dylib' '@loader_path/discord_game_sdk.dylib' ${{ env.AQTION_DIR }}/q2pro
+
+      - name: Copy the libraries and startup script
+        run: |
+          install ${{ env.DIST_DIR }}/build//mac/steam/libsteam_api.dylib ${{ env.AQTION_DIR }}/libsteam_api.dylib
+          install ${{ env.DIST_DIR }}/build//mac/steam/steam_appid.txt ${{ env.AQTION_DIR }}/steam_appid.txt
+          install ${{ env.DIST_DIR }}/build//mac/q2probuilds/universal/libs/discord_game_sdk.dylib ${{ env.AQTION_DIR }}/discord_game_sdk.dylib
+          install ${{ env.DIST_DIR }}/build//mac/steam/launch.sh ${{ env.AQTION_DIR }}/launch.sh
+          chmod +x ${{ env.AQTION_DIR }}/q2pro* ${{ env.AQTION_DIR }}/aqtion ${{ env.AQTION_DIR }}/launch.sh
+
+      # - name: Generate Mac Steam artifacts
+      #   working-directory: ${{ env.DIST_DIR }}/build/mac
+      #   run: bash -x package_mac.sh steam
 
       - name: Generate Universal Steam zip artifact
         uses: actions/upload-artifact@v3
         with:
           name: aqtion-${{github.ref_name}}-mac-universal
           path: |
-            ${{ env.DIST_DIR }}/build/mac/Steam_Install
+            ${{ env.AQTION_DIR }}/*
 
       - name: Generate release artifact
         run: |
-          cd ${{ env.DIST_DIR }}/build/mac/Steam_Install && zip -r ../../../../aqtion-${{github.ref_name}}-mac-universal.zip *
+          zip -r aqtion-${{github.ref_name}}-mac-universal.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
         uses: softprops/action-gh-release@v1
