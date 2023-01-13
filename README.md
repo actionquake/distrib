@@ -90,7 +90,7 @@ While these installs are available, they are not the recommended method.  Use at
 
 ## Credits
 * [id Software](https://www.idsoftware.com) who created the original Quake II engine and brought upon us many endless nights of fragging, gibbing and lagging until our parents told us to go to bed
-* The [original A-Team](http://assets.aq2world.com/archive/websites/action.telefragged.com/) who designed, coded, tested and released this awesome mod
+* The [original A-Team](http://assets.aq2world.com/archive/websites/action.telefragged.com/) who designed, coded and tested this awesome mod
 * The [TNG team](http://aq2-tng.sourceforge.net/) who took over the project after 1.52 and had maintained and updated it till 2011
 * The [AQDT team](https://assets.aq2world.com/archive/websites/aqdt.fear.net/) who created their own variant and produced Espionage Tournament Edition
 * [Skuller](https://skuller.net/q2pro/) for the highly-acclaimed [q2pro](https://github.com/skullernet/q2pro)
