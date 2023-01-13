@@ -99,7 +99,6 @@ While these installs are available, they are not the recommended method.  Use at
 * [ReKTeK](https://github.com/ReKTeK) for his development contributions
 * [hifi](https://github.com/hifi) for q2admin, LUA and MVD support and all forked repos who continuously improve this repository
 * Mappers [stan0x](https://github.com/stan0x), **Quimby**, [WizardExt](https://www.wizardext.se/), **WetWired**, **Beavisss**, [pauhi](https://github.com/Ntuk) and **Ruskprick** for the included maps in this distribution
-* **Black Monk** and the [Reaction Quake 3](https://rq3.com/) [team](https://github.com/ReactionQuake3/reaction) for allowing us to use some of their models for our content updates
 * [Jehar](https://twitter.com/Jehar) and the amazing folks at [Tastyspleen](http://tastyspleen.net/) and [TastyspleenTV](twitch.tv/tastyspleentv) on Twitch for broadcasting some amazing events and being the cornerstone of Quake II gaming
 * The [AQ2World Discord mod team](https://discord.aq2world.com) for assisting, testing and contributing to this distribution, and keeping the scene alive
 * Every single mapper, sound designer, texture creator, model maker, skin artist and community contributor to this project since its inception in the late 90s, without your 600+ maps and gigabytes of content, we'd still be playing vanilla Q2.
@@ -112,3 +111,16 @@ While these installs are available, they are not the recommended method.  Use at
     * [AQ Spinoffs](https://assets.aq2world.com/archive/websites/aqmods.telefragged.com)
     * [Mr. Ska's Pro Shop](https://assets.aq2world.com/archive/websites/proshop.fear.net)
     * [AQ: Gangsters](https://assets.aq2world.com/archive/websites/www.planetquake.com/gangsters)
+
+
+## Asset Credits
+* **Black Monk** and the [Reaction Quake 3](https://rq3.com/) [team](https://github.com/ReactionQuake3/reaction) for allowing us to use some of their assets for our content updates
+* Sounds:
+    * Creative Commons 0
+        * https://freesound.org/people/nioczkus/sounds/396331/
+        * https://freesound.org/people/pawsound/sounds/154841/
+        * https://freesound.org/people/Rodzuz/sounds/393901/
+        * https://freesound.org/people/unfa/sounds/199526/
+    * Attribution 4.0
+        * https://freesound.org/people/Benboncan/sounds/81970/
+        * https://freesound.org/people/artchoma/sounds/456524/
