@@ -369,7 +369,7 @@ begin chsetup
     bitmap "ch1" "crosshair 1;popmenu;"
     bitmap "ch2" "crosshair 2;popmenu;"
     bitmap "ch3" "crosshair 3;popmenu;"
-    bitmap "ch4" "crosshair 4;popmenu"
+    bitmap "ch4" "crosshair 4;popmenu;"
     bitmap "ch5" "crosshair 5;popmenu;"
     bitmap "ch6" "crosshair 6;popmenu;"
     bitmap "ch7" "crosshair 7;popmenu;"
@@ -394,6 +394,20 @@ begin sound
         alternative misc/talk1.wav \
         misc/talk_user.wav misc/talk_user.wav
     action --align "test chat beep" "stopsound; popmenu; pushmenu sound; echo playing $cl_chat_sound; play $cl_chat_sound"
+	blank
+	action " Adjustable Weapon Sounds " ""
+    blank
+    action --status "MK23 Pistols" "MK23 Pistols" "toggle cl_mk23_sound 0 1 2 3 4 5 6 7 8 9; play weapons/mk23fire${cl_mk23_sound}"
+	blank
+	action --status "MP5/10" "MP5/10" "toggle cl_mp5_sound 0 1 2 3 4 5 6 7 8 9; play weapons/mp5fire${cl_mp5_sound}"
+	blank
+	action --status "M4A1" "M4A1" "toggle cl_m4_sound 0 1 2 3 4 5 6 7 8 9; play weapons/m4a1fire${cl_m4_sound}"
+	blank
+	action --status "M3 Shotgun" "M3 Shotgun" "toggle cl_m3_sound 0 1 2 3 4 5 6 7 8 9; play weapons/shotgf1b${cl_m3_sound}"
+	blank
+	action --status "Handcannon" "Handcannon" "toggle cl_hc_sound 0 1 2 3 4 5 6 7 8 9; play weapons/cannon_fire${cl_hc_sound}"
+	blank
+	action --status "Sniper Rifle" "Sniper Rifle" "toggle cl_ssg_sound 0 1 2 3 4 5 6 7 8 9; play weapons/ssgfire${cl_ssg_sound}"
 end
 
 begin bindings
