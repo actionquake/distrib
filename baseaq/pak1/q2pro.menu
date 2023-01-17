@@ -387,6 +387,7 @@ begin sound
     values --status "OpenAL requires installation of https://openal-soft.org/" "sound system" s_enable "none" "classic" "OpenAL"
     range "effects volume" s_volume 0 1
     values "ambient sounds" s_ambient "no" "yes" "only player's own"
+    values --status "uses more step (12) and landing (8) sounds than default" "new movement sounds" cl_new_movement_sounds "no" "yes"
     pairs "chat beep" cl_chat_sound \
         disabled "" \
         default misc/talk.wav \
