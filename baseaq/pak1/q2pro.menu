@@ -480,6 +480,8 @@ begin sound
         "kablam" 7 \
         "blast" 8 \
         "papow" 9
+
+    /* 
     blank
     range "MK23 Pistol" cl_mk23_sound 0 9 1
     range "MP5/10 Submachinegun" cl_mp5_sound 0 9 1
@@ -487,19 +489,17 @@ begin sound
     range "M3 Assault Shotgun" cl_m3_sound 0 9 1
     range "Handcannon" cl_hc_sound 0 9 1
     range "SSG 3000 Sniper Rifle" cl_ssg_sound 0 9 1
+    */
+
     blank
     action " Testing Area " ""
-    action "MK23 Pistol" "play weapons/mk23fire${cl_mk23_sound}"
-	blank
-	action "MP5/10 Submachinegun" "play weapons/mp5fire${cl_mp5_sound}"
-	blank
-	action "M4 Assault Rifle" "play weapons/m4a1fire${cl_m4_sound}"
-	blank
-	action "M3 Shotgun" "play weapons/shotgf1b${cl_m3_sound}"
-	blank
-	action "Handcannon" "play weapons/cannon_fire${cl_hc_sound}"
-	blank
-	action "Sniper Rifle" "play weapons/ssgfire${cl_ssg_sound}"
+    blank
+    action " MK23 Pistol" "stopsound; popmenu; pushmenu sound;play weapons/mk23fire${cl_mk23_sound}"
+	action " MP5/10 Submachinegun" "stopsound; popmenu; pushmenu sound;play weapons/mp5fire${cl_mp5_sound}"
+	action " M4 Assault Rifle" "stopsound; popmenu; pushmenu sound;play weapons/m4a1fire${cl_m4_sound}"
+	action " M3 Shotgun" "stopsound; popmenu; pushmenu sound;play weapons/shotgf1b${cl_m3_sound}"
+	action " Handcannon" "stopsound; popmenu; pushmenu sound;play weapons/cannon_fire${cl_hc_sound}"
+	action " Sniper Rifle" "stopsound; popmenu; pushmenu sound;play weapons/ssgfire${cl_ssg_sound}"
 end
 
 begin bindings
