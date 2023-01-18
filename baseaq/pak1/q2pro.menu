@@ -181,7 +181,7 @@ begin dm_botmenu
     pairs --status "Choose your starting weapon/item" "Choose weapon/item" dm_choose "enabled" 1 "disabled" 0
     pairs --status "Spawn protection" "Enable 3 second spawn protection" dm_shield "disabled" 0 "enabled" 30
     blank
-    action "- Additional Game Settings -" pushmenu gameflags
+    action " Additional Game Settings " pushmenu gameflags
     blank
     action --align " Play" "forcemenuoff;set ltk_loadbots 1;set maxclients 16; set teamplay 0; set dm_choose 0;set dm_shield 30;set allweapon $allweapon;set allitem $allitem; map $nextserver force"
 end
@@ -197,7 +197,7 @@ begin team_botmenu
     field --integer --status "0 - no time limit" --width 3 "time limit" timelimit
     field --integer --status "0 - no frag limit" --width 3 "frag limit" fraglimit
     blank
-    action "- Additional Game Settings -" pushmenu gameflags
+    action " Additional Game Settings " pushmenu gameflags
     blank
     action --align " Play" "forcemenuoff;set ltk_loadbots 1;set maxclients 16;if $teammode == 1 then teamdm 0 else teamdm 1;set allweapon $allweapon;set allitem $allitem; map $nextserver force"
 end
@@ -481,7 +481,6 @@ begin sound
         "blast" 8 \
         "papow" 9
     blank
-
     range "MK23 Pistol" cl_mk23_sound 0 9 1
     range "MP5/10 Submachinegun" cl_mp5_sound 0 9 1
     range "M4 Assault Rifle" cl_m4_sound 0 9 1
@@ -489,17 +488,18 @@ begin sound
     range "Handcannon" cl_hc_sound 0 9 1
     range "SSG 3000 Sniper Rifle" cl_ssg_sound 0 9 1
     blank
-    action --status "MK23 Pistols" "MK23 Pistols" "toggle cl_mk23_sound 0 1 2 3 4 5 6 7 8 9; play weapons/mk23fire${cl_mk23_sound}"
+    action " Testing Area " ""
+    action "MK23 Pistol" "play weapons/mk23fire${cl_mk23_sound}"
 	blank
-	action --status "MP5/10" "MP5/10" "toggle cl_mp5_sound 0 1 2 3 4 5 6 7 8 9; play weapons/mp5fire${cl_mp5_sound}"
+	action "MP5/10 Submachinegun" "play weapons/mp5fire${cl_mp5_sound}"
 	blank
-	action --status "M4A1" "M4A1" "toggle cl_m4_sound 0 1 2 3 4 5 6 7 8 9; play weapons/m4a1fire${cl_m4_sound}"
+	action "M4 Assault Rifle" "play weapons/m4a1fire${cl_m4_sound}"
 	blank
-	action --status "M3 Shotgun" "M3 Shotgun" "toggle cl_m3_sound 0 1 2 3 4 5 6 7 8 9; play weapons/shotgf1b${cl_m3_sound}"
+	action "M3 Shotgun" "play weapons/shotgf1b${cl_m3_sound}"
 	blank
-	action --status "Handcannon" "Handcannon" "toggle cl_hc_sound 0 1 2 3 4 5 6 7 8 9; play weapons/cannon_fire${cl_hc_sound}"
+	action "Handcannon" "play weapons/cannon_fire${cl_hc_sound}"
 	blank
-	action --status "Sniper Rifle" "Sniper Rifle" "toggle cl_ssg_sound 0 1 2 3 4 5 6 7 8 9; play weapons/ssgfire${cl_ssg_sound}"
+	action "Sniper Rifle" "play weapons/ssgfire${cl_ssg_sound}"
 end
 
 begin bindings
