@@ -114,7 +114,7 @@ While these installs are available, they are not the recommended method.  Use at
 
 
 ## Asset Credits
-* **Black Monk** and the [Reaction Quake 3](https://rq3.com/) [team](https://github.com/ReactionQuake3/reaction) for allowing us to use some of their assets for our content updates
+* **Black Monk** and the [Reaction](https://rq3.com/) [team](https://github.com/ReactionQuake3/reaction) for allowing us to use some of their assets for our content updates
 * Sounds:
     * Creative Commons 0
         * https://freesound.org/people/nioczkus/sounds/396331/
@@ -124,3 +124,5 @@ While these installs are available, they are not the recommended method.  Use at
     * Attribution 4.0
         * https://freesound.org/people/Benboncan/sounds/81970/
         * https://freesound.org/people/artchoma/sounds/456524/
+* The UNQ2 Megapack
+  * https://drive.google.com/file/d/1gjNw7Y16bcnp-04HLIRsPB8vwJwF-Yj5/view?usp=share_link
