@@ -1,0 +1,40 @@
+Classic Sounds
+
+cannon_fire.wav
+cannon_fire0.wav
+m4a1fire.wav
+m4a1fire0.wav
+mk23fire.wav
+mk23fire0.wav
+mp5fire.wav
+mp5fire1.wav
+shotgf1b.wav
+shotgf1b0.wav
+ssgfire.wav
+ssgfire0.wav
+
+Unknown / Mega Sound Pack?
+cannon_fire2.wav
+m4a1fire2.wav
+mk23fire3.wav
+mp5fire3.wav
+shotgf1b2.wav
+ssgfire2.wav
+
+
+
+AQ2Pro Pack
+cannon_fire3.wav
+m4a1fire3.wav
+mk23fire4.wav
+mp5fire4.wav
+shotgf1b3.wav
+ssgfire3.wav
+
+Reaction Pack
+cannon_fire4.wav
+m4a1fire4.wav
+mk23fire5.wav
+mp5fire5.wav
+shotgf1b4.wav
+ssgfire4.wav
