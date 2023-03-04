@@ -8,6 +8,7 @@ Distribution changes
       - Assets affected are game .wal textures, a good deal of sound effects, models, and player skins.  If you own a retail copy of Quake II ([which we highly recommend picking up if you haven't played it!](https://store.steampowered.com/app/2320/Quake_II/)), you can copy the pak files over from `baseq2` into `action` to restore the original sounds, skins and textures.  For more details, see below under Game changes.
   - Rearranged where files live, structurally. This consolidates files better for general management.  Main game files are now located in `baseaq`, while downloads and custom paks/pkz file should still go into `action`
     - Consolidated all content into a single pkz file (`pak0.pkz`), configs moved to `pak1.pkz` in `baseaq`
+  - Mac game libs are now a `.dylib` extension
 
 Game changes
 - Removed all Quake II retail player skins
@@ -28,6 +29,7 @@ Game changes
   - F6 removes all bots
   - F7 adds 1 bot
   - F8 removes 1 bot
+- Fixed bug where `gl_brightness` made darkmatch too bright.  Now forces `gl_brightness` to `0` if server has darkmatch enabled.
 
 Q2Pro Engine changes
 - MAX_ENTITIES from 256 -> 1024
