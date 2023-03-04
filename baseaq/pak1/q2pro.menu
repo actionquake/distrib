@@ -316,12 +316,15 @@ begin screen
     pairs "HUD scale" scr_scale auto 0 1x 1 2x 2 3x 3 4x 4
     pairs "console scale" con_scale auto 0 1x 1 2x 2 4x 4
     pairs "menu scale" ui_scale auto 0 1x 1 2x 2 3x 3 4x 4
+    pairs "player indicators" cl_indicators disabled 0 "spectator only" 1 teammates 2
+    pairs "enhanced spectator HUD" cl_spectatorhud disabled 0 enabled 1
 end
 
 begin msettings
     background msettings_bkgd
     title "Misc Settings"
     pairs "gun handedness" cl_gun "do not show" 0 "same as hand" 1 "force right hand" 2 "force left hand" 3
+    pairs "gamestate extrapolation" cl_xerp disabled 0 "ping based" 1 "frametime/2" 2
     blank
     toggle "automatic downloads" allow_download
     blank
@@ -406,6 +409,7 @@ begin sound
     values "ambient sounds" s_ambient "no" "yes" "only player's own"
     values --status "uses more step (12) and landing (8) sounds than default" "new movement sounds" cl_new_movement_sounds "no" "yes"
     toggle "underwater effect" s_underwater
+    toggle "enhanced footsteps" cl_new_movement_sounds
     pairs "chat beep" cl_chat_sound \
         disabled "" \
         default misc/talk.wav \

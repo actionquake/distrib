@@ -1,30 +1,31 @@
 AQtion v1.3 Release Notes
-
+---
 A big callout to all of the AQ2World Team for this massive update!  We couldn't have done it without you!
 
-Distribution changes
+Distribution / Asset changes
 - Main game asset changes:
   - All assets from Quake II Retail and Demo have been removed or replaced.  In most cases, the files that existed in this distribution weren't even needed, like enemy AI models.  Those that AQtion needed were replaced with high quality replacements.  
       - Assets affected are game .wal textures, a good deal of sound effects, models, and player skins.  If you own a retail copy of Quake II ([which we highly recommend picking up if you haven't played it!](https://store.steampowered.com/app/2320/Quake_II/)), you can copy the pak files over from `baseq2` into `action` to restore the original sounds, skins and textures.  For more details, see below under Game changes.
   - Rearranged where files live, structurally. This consolidates files better for general management.  Main game files are now located in `baseaq`, while downloads and custom paks/pkz file should still go into `action`
     - Consolidated all content into a single pkz file (`pak0.pkz`), configs moved to `pak1.pkz` in `baseaq`
   - Mac game libs are now a `.dylib` extension
+  - Removed all Quake II retail player skins
+  - Replaced several hundred old .wal textures
+  - Replaced idle sound effects
+  - Replaced 10-1 countdown announcer
+  - Replaced footstep sound effects
+    - Larger variety of footstep and hard landing sounds are now available with the toggle `cl_new_movement_sounds`
+  - Replaced damage sound effects (fall, hit, death sounds)
+  - Replaced grenade explosion effects
+  - Replaced dozens of ambient map sounds
+  - Added a bunch of new player skins
+  - New gib and on-ground item models (big thanks to the Reaction 3 team!)
 
-Game changes
-- Removed all Quake II retail player skins
-- Replaced several hundred old .wal textures
-- Replaced idle sound effects
-- Replaced 10-1 countdown announcer
-- Replaced footstep sound effects
-  - More footstep and hard landing sounds are now available with the toggle `cl_new_movement_sounds`
-- Replaced damage sound effects (fall, hit, death sounds)
-- Replaced grenade explosion effects
-- Replaced almo
-- Added toggleable weapon sounds to q2pro (via llsound) and menu options.  This is only enabled if the server has `llsound 1`.
+AQ2-TNG Game changes
+
+- Added adjustable weapon sounds (via llsound) and menu options.  This is only enabled if the server has `llsound 1`.
   - [See this document snippet for config details](https://github.com/actionquake/aq2-tng/blob/aqtion/TNG-manual.txt#L189-L199)
-- New gib and on-ground item models (big thanks to the Reaction 3 team!)
 - Added `irvision` to menu as bindable
-- Added a bunch of new player skins
 - Added default binds for bot management (rebind-able)
   - F6 removes all bots
   - F7 adds 1 bot
@@ -34,20 +35,20 @@ Game changes
 Q2Pro Engine changes
 - MAX_ENTITIES from 256 -> 1024
 - MAX_FILE_HANDLES from 32 -> 1024
-- sv_max_packet_entities default value is 128 (default Quake II client max) but can be set to 0 (unlimited), this mostly affects maps with large open areas
-- ogg commands consolidated (ogg info|play|stop)
-- remotemode turns client into rcon-only mode, all commands issued by this client are considered forwarded as rcon
+- `sv_max_packet_entities` default value is 128 (default Quake II client max) but can be set to 0 (unlimited), this mostly affects maps with large open areas
+- ogg commands consolidated (`ogg info|play|stop`)
+- `remotemode` turns client into rcon-only mode, all commands issued by this client are considered forwarded as rcon
 - Exec'ing config files after game dir change, autoexec.cfg is executed after default.cfg and config.cfg/q2config.cfg
 - MVD seeking allows to percentage rather than just timespec (50% is halfway through, for example)
 - Forces minimum version of Windows to Vista
 - Console buffer search, now you can search your command history
 - Fixed a crash when server names were too long
-- Crouch prediction with sv_fps correction, it works great now
+- Crouch prediction with `sv_fps` correction, it works great now
 - Protocol 38 had the following changes:
   - Made ghud per client instead of global, and raised the elementlimit to 200
   - Added CvarSync to poll cvar values from the client as the gamedll needs
   - Teammate Indicators:
-    - Enabled with `use_indicators` on the server, and `cl_indicators on the client` (1 for spec, 2 for teammates), arrows are drawn above players, but their head must be visible for the arrows to appear
+    - Enabled with `use_indicators` on the server, and `cl_indicators` on the client (1 for spec, 2 for teammates), arrows are drawn above players, but their head must be visible for the arrows to appear
   - Gamestate Extrapolation:
     - Toggled with `use_xerp` on the server, and `cl_xerp` on the client (1 for auto xerp based on ping/antilag, 2 for FRAMETIME/2 xerp)
     - xerp will be automatically disabled if `sv_antilag_interp` is enabled.  
