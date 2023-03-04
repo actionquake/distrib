@@ -35,13 +35,20 @@ AQ2-TNG Game changes
 Q2Pro Engine changes
 - MAX_ENTITIES from 256 -> 1024
 - MAX_FILE_HANDLES from 32 -> 1024
+- Downloading `.pkz` files larger than 2 GiB are supported now
+- Loading `.pkz` files over 4GiB and ZIP64 archives are supported now
 - `sv_max_packet_entities` default value is 128 (default Quake II client max) but can be set to 0 (unlimited), this mostly affects maps with large open areas
 - ogg commands consolidated (`ogg info|play|stop`)
 - `remotemode` turns client into rcon-only mode, all commands issued by this client are considered forwarded as rcon
 - Exec'ing config files after game dir change, autoexec.cfg is executed after default.cfg and config.cfg/q2config.cfg
 - MVD seeking allows to percentage rather than just timespec (50% is halfway through, for example)
-- Forces minimum version of Windows to Vista
+- Forces minimum version of Windows to 7
 - Console buffer search, now you can search your command history
+- Client-side gun offset settings (`cl_gun_x`, `cl_gun_y`, `cl_gun_z`)
+- `con_auto_chat` adjusts how to handle mistyped commands
+  - `0` handle as regular command
+  - `1` sends typed entry as chat
+  - `2` sends type entry as team chat
 - Fixed a crash when server names were too long
 - Crouch prediction with `sv_fps` correction, it works great now
 - Protocol 38 had the following changes:

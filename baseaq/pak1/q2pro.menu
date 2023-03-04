@@ -325,6 +325,7 @@ begin msettings
     title "Misc Settings"
     pairs "gun handedness" cl_gun "do not show" 0 "same as hand" 1 "force right hand" 2 "force left hand" 3
     pairs "gamestate extrapolation" cl_xerp disabled 0 "ping based" 1 "frametime/2" 2
+    pairs "mistyped console commands" con_auto_chat "as command" 0 "as chat" 1 "as team chat" 2
     blank
     toggle "automatic downloads" allow_download
     blank
