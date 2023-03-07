@@ -12,6 +12,7 @@ Distribution / Asset changes
   - Removed all Quake II retail player skins
   - Replaced several hundred old .wal textures
   - Replaced idle sound effects
+  - Replaced elevator/platform sounds
   - Replaced 10-1 countdown announcer
   - Replaced footstep sound effects
     - Larger variety of footstep and hard landing sounds are now available with the toggle `cl_new_movement_sounds`
@@ -31,6 +32,20 @@ AQ2-TNG Game changes
   - F7 adds 1 bot
   - F8 removes 1 bot
 - Fixed bug where `gl_brightness` made darkmatch too bright.  Now forces `gl_brightness` to `0` if server has darkmatch enabled.
+- Teammate Indicators:
+  - Enabled with `use_indicators` on the server, and `cl_indicators` on the client (1 for spec, 2 for teammates), arrows are drawn above players, but their head must be visible for the arrows to appear
+- Gamestate Extrapolation:
+    - Toggled with `use_xerp` on the server, and `cl_xerp` on the client (1 for auto xerp based on ping/antilag, 2 for FRAMETIME/2 xerp)
+    - xerp will be automatically disabled if `sv_antilag_interp` is enabled.  
+    - xerp will automatically add ping time to value if `sv_antilag` is disabled
+    - this is a purely visual effect, hitboxes are unchanged, though depending on the amount of extrapolation, this may look strange
+- IR Vision:
+  - Toggled with `new_irvision` on the server, teammates no longer highlight, only enemies
+- CvarSync:
+  - the game dll can now specify cvars the client should send to the server, this replaces the old and buggy setu system that abused userinfo
+- Spectator Overlay:
+  - using protocol 38 and an updated client allows for a new spechud using the Ghud system
+  - also fixed `cl_spectatorhud` not working properly
 
 Q2Pro Engine changes
 - MAX_ENTITIES from 256 -> 1024
@@ -54,17 +69,4 @@ Q2Pro Engine changes
 - Protocol 38 had the following changes:
   - Made ghud per client instead of global, and raised the elementlimit to 200
   - Added CvarSync to poll cvar values from the client as the gamedll needs
-  - Teammate Indicators:
-    - Enabled with `use_indicators` on the server, and `cl_indicators` on the client (1 for spec, 2 for teammates), arrows are drawn above players, but their head must be visible for the arrows to appear
-  - Gamestate Extrapolation:
-    - Toggled with `use_xerp` on the server, and `cl_xerp` on the client (1 for auto xerp based on ping/antilag, 2 for FRAMETIME/2 xerp)
-    - xerp will be automatically disabled if `sv_antilag_interp` is enabled.  
-    - xerp will automatically add ping time to value if `sv_antilag` is disabled
-    - this is a purely visual effect, hitboxes are unchanged, though depending on the amount of extrapolation, this may look strange
-  - IR Vision:
-    - Toggled with `new_irvision` on the server, teammates no longer highlight, only enemies
-  - CvarSync:
-    - the game dll can now specify cvars the client should send to the server, this replaces the old and buggy setu system that abused userinfo
-  - Spectator Overlay:
-    - using protocol 38 and an updated client allows for a new spechud using the Ghud system
-    - also fixed `cl_spectatorhud` not working properly
+  
