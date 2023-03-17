@@ -50,7 +50,7 @@ AQ2-TNG Game changes
 Q2Pro Engine changes
 - MAX_ENTITIES from 256 -> 1024
 - MAX_FILE_HANDLES from 32 -> 1024
-- Downloading `.pkz` files larger than 2 GiB are supported now
+- Downloading `.pkz` files larger than 2GiB are supported now
 - Loading `.pkz` files over 4GiB and ZIP64 archives are supported now
 - `sv_max_packet_entities` default value is 128 (default Quake II client max) but can be set to 0 (unlimited), this mostly affects maps with large open areas
 - ogg commands consolidated (`ogg info|play|stop`)

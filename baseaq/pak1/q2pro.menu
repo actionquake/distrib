@@ -425,66 +425,54 @@ begin sound
         "Reaction" 2 \
         "AQ2Pro" 3 \
         "Raptor" 4 \
-        "pow" 5 \
-        "crack" 6 \
-        "kablam" 7 \
-        "blast" 8 \
-        "Custom" 9
+        "bAron" 5 \
+        "keffo" 6 \
+        "Custom" 7
     
     pairs --status "MP5/10 Submachinegun" "MP5/10 Submachinegun" cl_mp5_sound "AQtion" 0 \
         "Classic" 1 \
         "Reaction" 2 \
         "AQ2Pro" 3 \
         "Raptor" 4 \
-        "pow" 5 \
-        "crack" 6 \
-        "kablam" 7 \
-        "blast" 8 \
-        "Custom" 9
+        "bAron" 5 \
+        "keffo" 6 \
+        "Custom" 7
     
     pairs --status "M4 Assault Rifle" "M4 Assault Rifle" cl_m4_sound "AQtion" 0 \
         "Classic" 1 \
         "Reaction" 2 \
         "AQ2Pro" 3 \
         "Raptor" 4 \
-        "pow" 5 \
-        "crack" 6 \
-        "kablam" 7 \
-        "blast" 8 \
-        "Custom" 9
+        "bAron" 5 \
+        "keffo" 6 \
+        "Custom" 7
 
     pairs --status "M3 Assault Shotgun" "M3 Assault Shotgun" cl_m3_sound "AQtion" 0 \
         "Classic" 1 \
         "Reaction" 2 \
         "AQ2Pro" 3 \
         "Raptor" 4 \
-        "pow" 5 \
-        "crack" 6 \
-        "kablam" 7 \
-        "blast" 8 \
-        "Custom" 9
+        "bAron" 5 \
+        "keffo" 6 \
+        "Custom" 7
 
     pairs --status "Handcannon" "Handcannon" cl_hc_sound "AQtion" 0 \
         "Classic" 1 \
         "Reaction" 2 \
         "AQ2Pro" 3 \
         "Raptor" 4 \
-        "pow" 5 \
-        "crack" 6 \
-        "kablam" 7 \
-        "blast" 8 \
-        "Custom" 9
+        "bAron" 5 \
+        "keffo" 6 \
+        "Custom" 7
 
     pairs --status "SSG 3000 Sniper Rifle" "SSG 3000 Sniper Rifle" cl_ssg_sound "AQtion" 0 \
         "Classic" 1 \
         "Reaction" 2 \
         "AQ2Pro" 3 \
         "Raptor" 4 \
-        "pow" 5 \
-        "crack" 6 \
-        "kablam" 7 \
-        "blast" 8 \
-        "Custom" 9
+        "bAron" 5 \
+        "keffo" 6 \
+        "Custom" 7
 
     /* 
     blank
