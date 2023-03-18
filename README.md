@@ -19,12 +19,12 @@ https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 Should it be determined that assets included in this distribution are indeed unlicensed for use, the maintainers of this repository will make expedited and thorough adjustments to this distribution repository to remove said assets and replace with appropriate content.  Please leave a message as a Github Issue containing links and references to the content, and we will respond as soon as we can.
 
 ## Requirements
-* 64-bit Windows Vista, 7, 8, 10 and probably 11 are all compatible
+* 64-bit Windows 7 and above
 * Mac OS 10.7+ (Intel and Apple Silicon supported)
 * 64-bit x86 and ARM Linux with a video card and sound card
 * Video card compatible with OpenGL 3 drivers
 ### Notes
-* We do not provide direct support for running Quake II as there are over 20 years of forum posts and articles on how to use it, but if you are running into problems with this specific release, contact us
+* We do not provide direct support for running Quake II in general, as there are over 20 years of forum posts and articles on how to use it, but if you are running into problems with this specific release, contact us on Discord!
 * If there's a special request for 32-bit Linux or something, open an Issue!
 
 ---
@@ -45,7 +45,7 @@ Should it be determined that assets included in this distribution are indeed unl
 
 ---
 
-### Standalone Install
+### Standalone Install (non-Steam)
 While these installs are available, they are not the recommended method.  Use at your own inconvenience.
 
 #### Itch.io
