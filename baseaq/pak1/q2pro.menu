@@ -423,82 +423,82 @@ begin sound
     pairs --status "MK23 Pistol" "MK23 Pistol" cl_mk23_sound \
         "Custom" 0 \
         "AQtion" 1 \
-        "Classic" 1 \
-        "Reaction" 2 \
-        "AQ2Pro" 3 \
-        "Raptor" 4 \
-        "bAron" 5 \
-        "keffo" 6
+        "Classic" 2 \
+        "Reaction" 3 \
+        "AQ2Pro" 4 \
+        "Raptor" 5 \
+        "keffo" 6 \
+        "bAron" 7
     
-    pairs --status "MP5/10 Submachinegun" "MP5/10 Submachinegun" cl_mp5_sound
+    pairs --status "MP5/10 Submachinegun" "MP5/10 Submachinegun" cl_mp5_sound \
         "Custom" 0 \
         "AQtion" 1 \
-        "Classic" 1 \
-        "Reaction" 2 \
-        "AQ2Pro" 3 \
-        "Raptor" 4 \
-        "bAron" 5 \
-        "keffo" 6
+        "Classic" 2 \
+        "Reaction" 3 \
+        "AQ2Pro" 4 \
+        "Raptor" 5 \
+        "keffo" 6 \
+        "bAron" 7
     
-    pairs --status "M4 Assault Rifle" "M4 Assault Rifle" cl_m4_sound
+    pairs --status "M4 Assault Rifle" "M4 Assault Rifle" cl_m4_sound \
         "Custom" 0 \
         "AQtion" 1 \
-        "Classic" 1 \
-        "Reaction" 2 \
-        "AQ2Pro" 3 \
-        "Raptor" 4 \
-        "bAron" 5 \
-        "keffo" 6
+        "Classic" 2 \
+        "Reaction" 3 \
+        "AQ2Pro" 4 \
+        "Raptor" 5 \
+        "keffo" 6 \
+        "bAron" 7
 
-    pairs --status "M3 Assault Shotgun" "M3 Assault Shotgun" cl_m3_sound
+    pairs --status "M3 Assault Shotgun" "M3 Assault Shotgun" cl_m3_sound \
         "Custom" 0 \
         "AQtion" 1 \
-        "Classic" 1 \
-        "Reaction" 2 \
-        "AQ2Pro" 3 \
-        "Raptor" 4 \
-        "bAron" 5 \
-        "keffo" 6
+        "Classic" 2 \
+        "Reaction" 3 \
+        "AQ2Pro" 4 \
+        "Raptor" 5 \
+        "keffo" 6 \
+        "bAron" 7
 
-    pairs --status "Handcannon" "Handcannon" cl_hc_sound
+    pairs --status "Handcannon" "Handcannon" cl_hc_sound \
         "Custom" 0 \
         "AQtion" 1 \
-        "Classic" 1 \
-        "Reaction" 2 \
-        "AQ2Pro" 3 \
-        "Raptor" 4 \
-        "bAron" 5 \
-        "keffo" 6
+        "Classic" 2 \
+        "Reaction" 3 \
+        "AQ2Pro" 4 \
+        "Raptor" 5 \
+        "keffo" 6 \
+        "bAron" 7
 
-    pairs --status "SSG 3000 Sniper Rifle" "SSG 3000 Sniper Rifle" cl_ssg_sound
+    pairs --status "SSG 3000 Sniper Rifle" "SSG 3000 Sniper Rifle" cl_ssg_sound \
         "Custom" 0 \
         "AQtion" 1 \
-        "Classic" 1 \
-        "Reaction" 2 \
-        "AQ2Pro" 3 \
-        "Raptor" 4 \
-        "bAron" 5 \
-        "keffo" 6
+        "Classic" 2 \
+        "Reaction" 3 \
+        "AQ2Pro" 4 \
+        "Raptor" 5 \
+        "keffo" 6 \
+        "bAron" 7
 
     /* 
     blank
-    range "MK23 Pistol" cl_mk23_sound 0 6 1
-    range "MP5/10 Submachinegun" cl_mp5_sound 0 6 1
-    range "M4 Assault Rifle" cl_m4_sound 0 6 1
-    range "M3 Assault Shotgun" cl_m3_sound 0 6 1
-    range "Handcannon" cl_hc_sound 0 6 1
-    range "SSG 3000 Sniper Rifle" cl_ssg_sound 0 6 1
+    range "MK23 Pistol" cl_mk23_sound 1 7 1
+    range "MP5/10 Submachinegun" cl_mp5_sound 1 7 1
+    range "M4 Assault Rifle" cl_m4_sound 1 7 1
+    range "M3 Assault Shotgun" cl_m3_sound 1 7 1
+    range "Handcannon" cl_hc_sound 1 7 1
+    range "SSG 3000 Sniper Rifle" cl_ssg_sound 1 7 1
     */
 
     blank
     action " Testing Area " ""
     blank
-    action " MK23 Pistol" "stopsound; popmenu; pushmenu sound;play weapons/mk23fire${cl_mk23_sound}"
-	action " MP5/10 Submachinegun" "stopsound; popmenu; pushmenu sound;play weapons/mp5fire${cl_mp5_sound}"
-	action " M4 Assault Rifle" "stopsound; popmenu; pushmenu sound;play weapons/m4a1fire${cl_m4_sound}"
-	action " M3 Shotgun" "stopsound; popmenu; pushmenu sound;play weapons/shotgf1b${cl_m3_sound}"
-	action " Handcannon" "stopsound; popmenu; pushmenu sound;play weapons/cannon_fire${cl_hc_sound}"
-	action " Sniper Rifle" "stopsound; popmenu; pushmenu sound;play weapons/ssgfire${cl_ssg_sound}"
+    action " MK23 Pistol" "stopsound; popmenu; pushmenu sound;if 0 isin ${cl_mk23_sound} then play weapons/mk23fire else play weapons/mk23fire${cl_mk23_sound}"
+    action " MP5/10 Submachinegun" "stopsound; popmenu; pushmenu sound;if 0 isin ${cl_mp5_sound} then play weapons/mp5fire else play weapons/mp5fire${cl_mp5_sound}"
+    action " M4 Assault Rifle" "stopsound; popmenu; pushmenu sound;if 0 isin ${cl_m4_sound} then play weapons/m4a1fire else play weapons/m4a1fire${cl_m4_sound}"
+    action " M3 Shotgun" "stopsound; popmenu; pushmenu sound;if 0 isin ${cl_m3_sound} then play weapons/shotgf1b else play weapons/shotgf1b${cl_m3_sound}"
+    action " Handcannon" "stopsound; popmenu; pushmenu sound;if 0 isin ${cl_hc_sound} then play weapons/cannon_fire else play weapons/cannon_fire${cl_hc_sound}"
+    action " Sniper Rifle" "stopsound; popmenu; pushmenu sound;if 0 isin ${cl_ssg_sound} then play weapons/ssgfire else play weapons/ssgfire${cl_ssg_sound}"
 end
 
 begin bindings
