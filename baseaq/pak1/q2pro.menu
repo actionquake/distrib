@@ -420,68 +420,74 @@ begin sound
 	blank
 	action " Adjustable Weapon Sounds " ""
     blank
-    pairs --status "MK23 Pistol" "MK23 Pistol" cl_mk23_sound "AQtion" 0 \
+    pairs --status "MK23 Pistol" "MK23 Pistol" cl_mk23_sound \
+        "Custom" 0 \
+        "AQtion" 1 \
         "Classic" 1 \
         "Reaction" 2 \
         "AQ2Pro" 3 \
         "Raptor" 4 \
         "bAron" 5 \
-        "keffo" 6 \
-        "Custom" 7
+        "keffo" 6
     
-    pairs --status "MP5/10 Submachinegun" "MP5/10 Submachinegun" cl_mp5_sound "AQtion" 0 \
+    pairs --status "MP5/10 Submachinegun" "MP5/10 Submachinegun" cl_mp5_sound
+        "Custom" 0 \
+        "AQtion" 1 \
         "Classic" 1 \
         "Reaction" 2 \
         "AQ2Pro" 3 \
         "Raptor" 4 \
         "bAron" 5 \
-        "keffo" 6 \
-        "Custom" 7
+        "keffo" 6
     
-    pairs --status "M4 Assault Rifle" "M4 Assault Rifle" cl_m4_sound "AQtion" 0 \
+    pairs --status "M4 Assault Rifle" "M4 Assault Rifle" cl_m4_sound
+        "Custom" 0 \
+        "AQtion" 1 \
         "Classic" 1 \
         "Reaction" 2 \
         "AQ2Pro" 3 \
         "Raptor" 4 \
         "bAron" 5 \
-        "keffo" 6 \
-        "Custom" 7
+        "keffo" 6
 
-    pairs --status "M3 Assault Shotgun" "M3 Assault Shotgun" cl_m3_sound "AQtion" 0 \
+    pairs --status "M3 Assault Shotgun" "M3 Assault Shotgun" cl_m3_sound
+        "Custom" 0 \
+        "AQtion" 1 \
         "Classic" 1 \
         "Reaction" 2 \
         "AQ2Pro" 3 \
         "Raptor" 4 \
         "bAron" 5 \
-        "keffo" 6 \
-        "Custom" 7
+        "keffo" 6
 
-    pairs --status "Handcannon" "Handcannon" cl_hc_sound "AQtion" 0 \
+    pairs --status "Handcannon" "Handcannon" cl_hc_sound
+        "Custom" 0 \
+        "AQtion" 1 \
         "Classic" 1 \
         "Reaction" 2 \
         "AQ2Pro" 3 \
         "Raptor" 4 \
         "bAron" 5 \
-        "keffo" 6 \
-        "Custom" 7
+        "keffo" 6
 
-    pairs --status "SSG 3000 Sniper Rifle" "SSG 3000 Sniper Rifle" cl_ssg_sound "AQtion" 0 \
+    pairs --status "SSG 3000 Sniper Rifle" "SSG 3000 Sniper Rifle" cl_ssg_sound
+        "Custom" 0 \
+        "AQtion" 1 \
         "Classic" 1 \
         "Reaction" 2 \
         "AQ2Pro" 3 \
         "Raptor" 4 \
         "bAron" 5 \
-        "keffo" 6 \
-        "Custom" 7
+        "keffo" 6
 
     /* 
     blank
-    range "MK23 Pistol" cl_mk23_sound 0 9 1
-    range "MP5/10 Submachinegun" cl_mp5_sound 0 9 1
-    range "M4 Assault Rifle" cl_m4_sound 0 9 1
-    range "M3 Assault Shotgun" cl_m3_sound 0 9 1
-    range "Handcannon" cl_hc_sound 0 9 1
-    range "SSG 3000 Sniper Rifle" cl_ssg_sound 0 9 1
+    range "MK23 Pistol" cl_mk23_sound 0 6 1
+    range "MP5/10 Submachinegun" cl_mp5_sound 0 6 1
+    range "M4 Assault Rifle" cl_m4_sound 0 6 1
+    range "M3 Assault Shotgun" cl_m3_sound 0 6 1
+    range "Handcannon" cl_hc_sound 0 6 1
+    range "SSG 3000 Sniper Rifle" cl_ssg_sound 0 6 1
     */
 
     blank
