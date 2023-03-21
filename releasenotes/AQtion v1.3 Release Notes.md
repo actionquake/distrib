@@ -18,6 +18,7 @@ Distribution / Asset changes
     - Larger variety of footstep and hard landing sounds are now available with the toggle `cl_new_movement_sounds`
   - Replaced damage sound effects (fall, hit, death sounds)
   - Replaced grenade explosion effects
+  - Replaced smoke model and skin (bullets hitting wall effect)
   - Replaced dozens of ambient map sounds
   - Added a bunch of new player skins
   - New gib and on-ground item models (big thanks to the Reaction 3 team!)
