@@ -191,8 +191,12 @@ jobs:
 
       - name: Download and extract latest Linux x64 Q2Pro Release
         run: |
-          wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-gcc.zip
-          unzip q2pro-lin-gcc.zip -d ${{ env.AQTION_DIR }}
+          mkdir -p wayland nonwayland
+          wget -P nonwayland -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-gcc.zip
+          wget -P wayland -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-wayland-gcc.zip
+          unzip -o wayland/q2pro-lin-wayland-gcc.zip -d ${{ env.AQTION_DIR }}
+          mv ${{ env.AQTION_DIR }}/q2pro ${{ env.AQTION_DIR }}/q2pro-wayland
+          unzip -o nonwayland/q2pro-lin-gcc.zip -d ${{ env.AQTION_DIR }}
           chmod +x ${{ env.AQTION_DIR }}/q2pro*
 
       - name: Copy external libraries for Q2Pro
