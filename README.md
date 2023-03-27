@@ -126,3 +126,4 @@ While these installs are available, they are not the recommended method.  Use at
         * https://freesound.org/people/artchoma/sounds/456524/
 * The UNQ2 Megapack
   * https://drive.google.com/file/d/1gjNw7Y16bcnp-04HLIRsPB8vwJwF-Yj5/view?usp=share_link
+* **Alex Axelsson** For new minelight model/skin replacements
