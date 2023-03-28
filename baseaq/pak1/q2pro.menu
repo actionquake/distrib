@@ -412,7 +412,7 @@ begin sound
     range "effects volume" s_volume 0 1
     range "sound latency" s_mixahead 0.05 0.2
     values "ambient sounds" s_ambient "no" "yes" "only player's own"
-    values --status "uses more step (12) and landing (8) sounds than default" "enhanced footsteps" cl_new_movement_sounds "no" "yes"
+    values --status "uses more step (12) and landing (8) sounds than default" "enhanced footsteps" cl_enhanced_footsteps "no" "yes"
     toggle "underwater effect" s_underwater
     pairs "chat beep" cl_chat_sound \
         disabled "" \
