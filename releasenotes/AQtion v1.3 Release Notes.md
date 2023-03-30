@@ -15,7 +15,7 @@ Distribution / Asset changes
   - Replaced elevator/platform sounds
   - Replaced 10-1 countdown announcer
   - Replaced footstep sound effects
-    - Larger variety of footstep and hard landing sounds are now available with the toggle `cl_new_movement_sounds`
+    - Larger variety of footstep and hard landing sounds are now available with the toggle `cl_enhanced_footsteps`
   - Replaced damage sound effects (fall, hit, death sounds)
   - Replaced grenade explosion effects
   - Replaced smoke model and skin (bullets hitting wall effect)
@@ -70,4 +70,8 @@ Q2Pro Engine changes
 - Protocol 38 had the following changes:
   - Made ghud per client instead of global, and raised the elementlimit to 200
   - Added CvarSync to poll cvar values from the client as the gamedll needs
+- Adjusted colorations in the Server Browser
+  - Shows servers with antilag enabled, servers populated with bots, and so forth
+- Support for Linux X11 and Wayland
+  - Choose which one to use in Steam
   
