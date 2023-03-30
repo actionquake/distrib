@@ -17,8 +17,9 @@ Distribution / Asset changes
   - Replaced footstep sound effects
     - Larger variety of footstep and hard landing sounds are now available with the toggle `cl_enhanced_footsteps`
   - Replaced damage sound effects (fall, hit, death sounds)
-  - Replaced grenade explosion effects
+  - Replaced grenade bounce sound and explosion effects
   - Replaced smoke model and skin (bullets hitting wall effect)
+  - Replaced medkit (did you know Action Quake used a medkit, if enabled?)
   - Replaced dozens of ambient map sounds
   - Added a bunch of new player skins
   - New gib and on-ground item models (big thanks to the Reaction 3 team!)
@@ -40,13 +41,17 @@ AQ2-TNG Game changes
     - xerp will be automatically disabled if `sv_antilag_interp` is enabled.  
     - xerp will automatically add ping time to value if `sv_antilag` is disabled
     - this is a purely visual effect, hitboxes are unchanged, though depending on the amount of extrapolation, this may look strange
-- IR Vision:
-  - Toggled with `new_irvision` on the server, teammates no longer highlight, only enemies
+- IR Vision (server side):
+  - Toggled with `new_irvision` on the server; teammates no longer highlight, only enemies
 - CvarSync:
   - the game dll can now specify cvars the client should send to the server, this replaces the old and buggy setu system that abused userinfo
 - Spectator Overlay:
   - using protocol 38 and an updated client allows for a new spechud using the Ghud system
   - also fixed `cl_spectatorhud` not working properly
+- Sniper zoom compensation (server-side):
+  - Reduced delay frames for higher ping players.  Remains 6 frames (600ms) for all players under 80ms ping.  Above 80ms and per every 80ms beyond, reduce delay frames by 1, up to a maximum of 3 reduced frames.  This can be enabled on the server via `zoom_comp`
+- Attract mode (server-side):
+  - Automatically maintains a minimum count of LTK bots at all times.  Reduces 1 LTK bot per real human player.  Meant to be used to get games started by having people join servers and having something to shoot at.  See the TNG Manual for more details.
 
 Q2Pro Engine changes
 - MAX_ENTITIES from 256 -> 1024
