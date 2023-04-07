@@ -79,4 +79,8 @@ Q2Pro Engine changes
   - Shows servers with antilag enabled, servers populated with bots, and so forth
 - Support for Linux X11 and Wayland
   - Choose which one to use in Steam
+- Enhancements to the server UI
+  - Wider column to view mapname
+  - Enabled colors based on ping, if the server has bots in it, and so forth
+
   
