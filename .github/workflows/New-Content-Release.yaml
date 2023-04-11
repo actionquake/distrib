@@ -27,6 +27,11 @@ jobs:
             rm -rf ${makepkz}/
           done
 
+      - name: Copy premade pkz's into baseaq
+        working-directory: ${{ env.DIST_DIR }}
+        run: |
+          mv paks/zz_billboard_textures.pkz baseaq/zz_billboard_textures.pkz
+
       - name: Download all library files for Windows, Linux and Linux ARM
         run: |
           for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64 tng-darwin-x86_64 tng-darwin-arm64; \
