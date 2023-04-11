@@ -1,10 +1,10 @@
 "AppBuild"
 {
         "AppID" "1978800" // your AppID
-        "Desc" "AQtion AppBuild - Stattest" // internal description for this build
+        "Desc" "AQtion AppBuild - Alpha" // internal description for this build
         "BuildOutput" "output/" // build output folder for build logs and build cache files
         "contentroot" ""
-        "SetLive" "stattest"
+        "SetLive" "alpha"
         "Preview" "0"
         "local" ""
 
