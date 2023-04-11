@@ -1,0 +1,46 @@
+Title: 	bwcity 2
+Date: 	6 June 2006
+Tools: 	GTKRadiant, Worldcraft 1.6, Photoshop and Arghrad
+Author: Beavisss, WizardExt, Kurupt
+Email: 	akusher@gmail.com, wizardext@gmail.com, kurupt@planet.nl
+Web: 	http://aq2mw.wh00s.net/, http://www.wizardext.se
+			and http://www.mrzl.nl/
+
+---Credits->
+
+A-TEAM
+Id Software
+Aq2 community
+Tim Wright
+r1ch
+TTI (textures)
+
+...and everyone else we forgot. Sorry.. ^^
+
+	
+---Comments->
+
+You are in a city and it's night. The weather is cold, and so is 
+the city. It isn't what it used to be. What was once an overall 
+normal and peaceful place has turned into something the complete 
+opposite. Gangs, drugs, abondoned houses and a police force no 
+longer in control.
+
+It features a lot of new graphics with quality textures, but also 
+a lot of brush based details. There are a lot of interesting areas 
+to explore - trainstation, office buildings, garage, containers, 
+factory and more. Together with this there are good ambient sounds 
+to add that extra feeling.
+
+The map is fast paced, jumpfriendly and good looking. What more is 
+there to want? There are a lot of different routes offering different 
+scenarios - long view distances, close combat, speed...
+So there are many ways to suprise and attack the enemy.
+
+The process of making bwcity2 has been very long and frustrating, but 
+also very exciting and fun. It has been ups and downs like any other 
+larger project, but we are all very proud about the result.
+
+
+	- Rinat "Beavisss" Khalekov, David "WizardExt" Lundvall
+			and Marcel "Kurupt" Visser

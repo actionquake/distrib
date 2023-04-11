@@ -1,0 +1,29 @@
+
+Quake 2 Skin-Sting3        					      1/20/98
+
+
+Author:		Michael Wojnar
+
+E-Mail:		thewoj@hotmail.com
+
+Homepage: 	http://www.superior.net/~thewoj    	
+
+Files:		wcwsting3.pcx    wcwsting3_i.pcx			
+
+Instructions:	Place both of these files into your 
+	        quake2/baseq2/players/male directory
+
+Description: 	My third version of Sting, now with more realistic clothing
+
+Other:		Paint Shop Pro 4.12 was used to make this skin.
+
+"When a man's heart is full of deceit, it burns up...dies...and a dark shadow 
+falls over his soul. From the ashes of a once great man, has risen a curse, a
+wrong that must be righted. We look to the skies for a vindicator, someone to
+strike fear into the black hearts of the same men who created him. The battle
+between good and evil has begun. Against an army of shadows comes a dark 
+warrior, the purveyor of good, with a voice of silence, and a mission of 
+justice. This is Sting." -WCW Clash Of The Champions, 8/21/97
+		
+
+		

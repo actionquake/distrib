@@ -19,25 +19,35 @@ jobs:
           path: ${{ env.DIST_DIR }}
 
       - name: Zip game content to pkz
-        working-directory: ${{ env.DIST_DIR }}/action
+        working-directory: ${{ env.DIST_DIR }}/baseaq
         run: |
-          for makepkz in default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds; do
+          for makepkz in pak0 pak1; do
             cd ${makepkz}
-            zip -r ../0_${makepkz}.pkz * && cd ..
+            zip -r ../${makepkz}.pkz * && cd ..
             rm -rf ${makepkz}/
           done
 
+      - name: Copy premade pkz's into baseaq
+        working-directory: ${{ env.DIST_DIR }}
+        run: |
+          mv paks/zz_billboard_textures.pkz baseaq/zz_billboard_textures.pkz
+
       - name: Download all library files for Windows, Linux and Linux ARM
         run: |
-          for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64; do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/action/; rm -rf ${FILE}.zip; done
+          for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64 tng-darwin-x86_64 tng-darwin-arm64; \
+          do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip \
+          && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/baseaq/ \
+          && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/action/ \
+          ; done
 
       - name: Make all libraries executable
         run: |
+          chmod +x ${{ env.DIST_DIR }}/baseaq/game*
           chmod +x ${{ env.DIST_DIR }}/action/game*
 
       - name: Generate dist files
         run: |
-          cd ${{ env.DIST_DIR }} && zip -r aqtion-content.zip versions action/
+          cd ${{ env.DIST_DIR }} && zip -r aqtion-content.zip versions baseaq/ action/
 
       - name: Generate archive
         uses: actions/upload-artifact@v3

@@ -1,0 +1,28 @@
+Title: 	terminal
+Date: 	7 January 2012
+Tools: 	GtkRadiant, ARGH! tools, Adobe Photoshop
+Email: 	wizardext@gmail.com
+Web: 	http://www.wizardext.se/
+
+Credits: 	
+
+	Schmung
+	Jennika Cederholm
+	clan eyeCandy (thanks guys for everything!)
+	R1CH
+	NRGizer
+	Tim Wright
+	A-TEAM
+	Id Software
+	
+Comments: 	Based on the map airport. I wanted to make the map a bit more all-around. 
+		Easier to navigate, better balance and improved visuals. 
+
+		I started making it somewhere in 2010. So it has taken quite some time to finish it. 
+		I have playtested it for hours with clan eyeCandy. In the end I decided to change the 
+		visuals with all new textures and also some layout/geometry changes.
+
+		So here it is, have fun! :)
+
+	
+	- David "WizardExt" Lundvall
