@@ -27,10 +27,10 @@ jobs:
             rm -rf ${makepkz}/
           done
 
-      - name: Copy premade pkz's into baseaq
+      - name: Copy premade pkz's into action
         working-directory: ${{ env.DIST_DIR }}
         run: |
-          mv paks/zz_billboard_textures.pkz baseaq/zz_billboard_textures.pkz
+          mv paks/zz_billboard_textures.pkz action/zz_billboard_textures.pkz
 
       - name: Download all library files for Windows, Linux and Linux ARM
         run: |
