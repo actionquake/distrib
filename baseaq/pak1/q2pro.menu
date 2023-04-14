@@ -120,8 +120,8 @@ end
 
 begin playonline
     title "Play Online"
-    action " Play Now! " pushmenu playnow
-    blank
+    //action " Play Now! " pushmenu playnow
+    //blank
     //action " Browse Official Servers " pushmenu servers "https://raw.githubusercontent.com/darkshade9/aq2world/master/docs/official/official-servers.txt"
     action " Browse All Servers " pushmenu servers "http://q2servers.com/?g=action&raw=1"
     blank
@@ -143,28 +143,29 @@ begin gtvservers
     action " Europe's Playground GTV " "connect 146.185.135.30:27000"
 end
 
-begin playnow
-    title "Find a server in your region automatically"
-    action --status "Round-based Team Play" "Standard Team Play" "connect qj.aq2world.com:27901"
-    blank
-    action --status "Free For All!" "Deathmatch" "connect qj.aq2world.com:27902"
-    blank
-    action --status "Deathmatch with teams!" "Team Deathmatch" "connect qj.aq2world.com:27903"
-    blank
-    action --status "Teamplay with another team added!" "3 Team Teamplay" "connect qj.aq2world.com:27904"
-    blank
-    action --status "Bring the flag back to your base!" "Capture the Flag" "connect qj.aq2world.com:27905"
-    blank
-    action --status "Kill the enemy leader to win!" "Gangsters - Assassinate the Leader" "connect qj.aq2world.com:27906"
-    blank
-    action --status "Capture the enemy's briefcase, defend your own!" "Capture the Briefcase" "connect qj.aq2world.com:27907"
+// Deprecated
+//begin playnow
+//    title "Find a server in your region automatically"
+//    action --status "Round-based Team Play" "Standard Team Play" "connect qj.aq2world.com:27901"
+//    blank
+//    action --status "Free For All!" "Deathmatch" "connect qj.aq2world.com:27902"
+//    blank
+//    action --status "Deathmatch with teams!" "Team Deathmatch" "connect qj.aq2world.com:27903"
+//    blank
+//    action --status "Teamplay with another team added!" "3 Team Teamplay" "connect qj.aq2world.com:27904"
+//    blank
+//    action --status "Bring the flag back to your base!" "Capture the Flag" "connect qj.aq2world.com:27905"
+//    blank
+//    action --status "Kill the enemy leader to win!" "Gangsters - Assassinate the Leader" "connect qj.aq2world.com:27906"
+//    blank
+//    action --status "Capture the enemy's briefcase, defend your own!" "Capture the Briefcase" "connect qj.aq2world.com:27907"
     //blank
     //action --status "Escort your Leader somewhere, or stop him at all costs!" "Escort the VIP" "connect qj.aq2world.com:27908"
     //blank
     //action --status "Defend your capture points, and assault ones you don't own to win!" "Capture and Hold" "connect qj.aq2world.com:27909"
-    blank
-    action --status "Play against bots and players!" "Versus Bots" "connect qj.aq2world.com:27912"
-end
+//    blank
+//    action --status "Play against bots and players!" "Versus Bots" "connect qj.aq2world.com:27912"
+//end
 
 begin bots
     title "Play with Bots"
