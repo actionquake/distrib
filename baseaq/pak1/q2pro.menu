@@ -65,7 +65,7 @@ begin main
     title "Main Menu"`
     action " Discord - https://discord.aq2world.com  " pushmenu credits
     blank
-    action " Play Now! " "connect qj.aq2world.com:27912"
+    action " Play Now! " "connect playnow.aq2world.com:27905"
     blank
     action " Play Online " pushmenu playonline
     action " Play Offline (Bots) " pushmenu playoffline

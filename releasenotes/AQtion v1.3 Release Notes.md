@@ -34,6 +34,7 @@ AQ2-TNG Game changes
   - F7 adds 1 bot
   - F8 removes 1 bot
 - Fixed bug where `gl_brightness` made darkmatch too bright.  Now forces `gl_brightness` to `0` if server has darkmatch enabled.
+- Fixed a bug with `scr_scale` where the sniper scope would be off-center
 - Teammate Indicators:
   - Enabled with `use_indicators` on the server, and `cl_indicators` on the client (1 for spec, 2 for teammates), arrows are drawn above players, but their head must be visible for the arrows to appear
 - Gamestate Extrapolation:
@@ -59,13 +60,14 @@ Q2Pro Engine changes
 - Downloading `.pkz` files larger than 2GiB are supported now
 - Loading `.pkz` files over 4GiB and ZIP64 archives are supported now
 - `sv_max_packet_entities` default value is 128 (default Quake II client max) but can be set to 0 (unlimited), this mostly affects maps with large open areas
-- ogg commands consolidated (`ogg info|play|stop`)
+- .ogg support with commands (`ogg info|play|stop`)
 - `remotemode` turns client into rcon-only mode, all commands issued by this client are considered forwarded as rcon
 - Exec'ing config files after game dir change, autoexec.cfg is executed after default.cfg and config.cfg/q2config.cfg
 - MVD seeking allows to percentage rather than just timespec (50% is halfway through, for example)
 - Forces minimum version of Windows to 7
 - Console buffer search, now you can search your command history
-- Client-side gun offset settings (`cl_gun_x`, `cl_gun_y`, `cl_gun_z`)
+- Stereo sound supported
+- Client-side gun view and offset settings (`cl_gun_fov`, `cl_gun_x`, `cl_gun_y`, `cl_gun_z`)
 - `con_auto_chat` adjusts how to handle mistyped commands
   - `0` handle as regular command
   - `1` sends typed entry as chat
@@ -82,5 +84,3 @@ Q2Pro Engine changes
 - Enhancements to the server UI
   - Wider column to view mapname
   - Enabled colors based on ping, if the server has bots in it, and so forth
-
-  
