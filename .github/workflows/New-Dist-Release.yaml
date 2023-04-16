@@ -39,7 +39,7 @@ jobs:
         run: |
           for makepkz in pak0 pak1; do
             cd ${makepkz}
-            zip -r ../${makepkz}.pkz * && cd ..
+            python $GITHUB_WORKSPACE/${{ env.DIST_DIR }}/scripts/pkz/pkz.py ../${makepkz}.pkz * && cd ..
             rm -rf ${makepkz}/
           done
 
