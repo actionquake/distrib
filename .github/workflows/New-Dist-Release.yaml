@@ -20,6 +20,15 @@ jobs:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
 
+      - name: Fetch additional history
+        working-directory: ${{ env.DIST_DIR }}
+        run: |
+          # Set up partial clone support
+          git config remote.origin.promisor true
+          git config remote.origin.partialclonefilter blob:none
+          # Now fetches history (but not blobs!)
+          git fetch --unshallow
+
       - name: Generate directory structure
         run: |
           mkdir -p ${{ env.AQTION_DIR }}/baseaq
