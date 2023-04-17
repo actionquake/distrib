@@ -20,6 +20,15 @@ jobs:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
 
+      - name: Fetch additional history
+        working-directory: ${{ env.DIST_DIR }}
+        run: |
+          # Set up partial clone support
+          git config remote.origin.promisor true
+          git config remote.origin.partialclonefilter blob:none
+          # Now fetches history (but not blobs!)
+          git fetch --unshallow
+
       - name: Generate directory structure
         run: |
           mkdir -p ${{ env.AQTION_DIR }}/baseaq
@@ -30,7 +39,7 @@ jobs:
         run: |
           for makepkz in pak0 pak1; do
             cd ${makepkz}
-            zip -r ../${makepkz}.pkz * && cd ..
+            python $GITHUB_WORKSPACE/${{ env.DIST_DIR }}/scripts/pkz/pkz.py ../${makepkz}.pkz * && cd ..
             rm -rf ${makepkz}/
           done
 
