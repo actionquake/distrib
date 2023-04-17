@@ -59,9 +59,10 @@ def get_git_commit_timestamp(fn):
 
 # Assemble list of files, asynchronously obtain timestamps
 executor = concurrent.futures.ThreadPoolExecutor()
-all_files = []
-for fn in sorted(resolve_file_args(args.files)):
-    all_files.append((fn, executor.submit(get_git_commit_timestamp, fn)))
+all_files = list(executor.map(lambda fn: (fn, get_git_commit_timestamp(fn)), resolve_file_args(args.files)))
+# Sort list of files by modification date, so new files always get added to the end
+# Suggested by ndit-dev here: https://github.com/actionquake/distrib/pull/289#issuecomment-1510476461
+all_files.sort(key=lambda file_and_timestamp: (file_and_timestamp[1], file_and_timestamp[0]))
 
 # Compress all files into ZIPm with timestamps obtained from the git history
 with zipfile.ZipFile(args.pkzfile, "w") as pkz:
@@ -69,7 +70,6 @@ with zipfile.ZipFile(args.pkzfile, "w") as pkz:
         print(f"{fn} ...")
         sys.stdout.flush()
         entry = zipfile.ZipInfo.from_file(fn)
-        timestamp = timestamp.result()
         entry.date_time = (timestamp.year, timestamp.month,timestamp.day, timestamp.hour, timestamp.minute, timestamp.second)
         with open(fn, "rb") as input_file:
             pkz.writestr(entry, input_file.read(), compress_type=zipfile.ZIP_DEFLATED, compresslevel=9)
