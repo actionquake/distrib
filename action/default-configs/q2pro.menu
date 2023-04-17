@@ -1,468 +1,0 @@
-/*
-This is example menu definition file for Q2PRO.
-
-File format is line based, whitespace is ignored.  C and C++ style comments are
-supported.  Long lines can be broken into multiple ones by escaping linefeed
-characters with backslashes.
-
-Lines are macro expanded at script load time just as usual console commands.
-Any cvars and macros can be referenced.
-
-Duplicate menu entries override previous ones.  Built-in menus ('demos',
-'servers' and 'players') can not be overridden.  When user presses ESC while
-disconnected, 'main' menu is pushed.  When user presses ESC while spawned in
-game, 'game' menu is pushed if it is found, otherwise 'main' menu is pushed.
-
-Supported keywords and their syntax:
-
-include <filename>
-
-background <color|image>
-font <image>
-cursor <image>
-weapon <model>
-
-color <state> <color>
-
-begin <menuname>
-   title <menutitle>
-   banner <image>
-   background <color|image>
-   plaque <plaque> [logo]
-
-   range <name> <cvar> <min> <max> [step]
-
-   pairs <name> <cvar> <string1> <value1> [...]
-   values <name> <cvar> <string1> [...]
-   strings <name> <cvar> <value1> [...]
-   toggle <name> <cvar> [~][bit]
-
-   bind <name> <command>
-   action <name> <command>
-   bitmap <image> <command>
-   savegame <slot>
-   loadgame <slot>
-   blank
-
-   field [options] <name> <cvar>
-end
-*/
-
-background mainmenu_bkgd
-font conchars
-weapon w_sniper.md2
-cursor ch1
-
-color normal #0f90eb64
-color active #0f90ff64
-color selection #0f90eb64
-color disabled #7f7f7f
-
-include help.menu
-include aq2pro.menu
-
-begin main
-    title "Main Menu"`
-    action " Discord - https://discord.aq2world.com  " pushmenu credits
-    blank
-    action " Play Online " pushmenu playonline
-    action " Play Offline " pushmenu playoffline
-    action " Spectate Games " pushmenu gtvservers
-    action " Browse Demos " pushmenu demos
-    blank
-    action " Help " pushmenu helpmenu
-    blank
-    action " Settings  " pushmenu settings
-    blank
-    action " Optional Addons  " pushmenu addonsmenu
-    blank
-    action " Quit  " quit
-end
-
-begin game
-    background #0000ff20
-    style --compact
-    action " Play Online " pushmenu playonline
-    action " Play Offline " pushmenu playoffline
-    action " Spectate Games " pushmenu gtvservers
-    action " Browse Demos " pushmenu demos
-    blank
-    action " Help " pushmenu helpmenu
-    blank
-    action " Settings  " pushmenu settings
-    blank
-    action " Optional Addons  " pushmenu addonsmenu
-    blank
-    action " Disconnect  " disconnect
-end
-
-begin credits
-    title "Credits"
-    action "For Quake II: id Software (https://www.idsoftware.com)" ""
-    action "For the original game: The A-Team" ""
-    action "For continuing the legacy: The TNG Team" ""
-    action "For awesome game modes: The AQDT" ""
-    blank
-    action "For Q2Pro: Skuller (https://skuller.net/q2pro)" ""
-    action "For TNG support: Raptor007, hifi and Reki" ""
-    blank
-    action " Discord Mod Team" ""
-    action "bAron - darksaint - dmc - dox - FragBait" ""
-    action "KaniZ - keffo - matic - QuimBy - Rezet" ""
-    action "Royce - stan0x - TgT - vrol" ""
-    blank
-    action "And you, for playing with us!" ""
-end
-
-begin playonline
-    title "Play Online"
-    action " Play Now! " pushmenu playnow
-    blank
-    //action " Browse Official Servers " pushmenu servers "https://raw.githubusercontent.com/darkshade9/aq2world/master/docs/official/official-servers.txt"
-    action " Browse All Servers " pushmenu servers "http://q2servers.com/?g=action&raw=1"
-    blank
-    action " Browse Favorite Servers " pushmenu servers "favorites://" "file:///servers.lst"
-    //action " Edit Favorite Servers " pushmenu addressbook
-end
-
-begin playoffline
-    title "Play Offline"
-    action " Browse LAN Servers " pushmenu servers "broadcast://"
-    blank
-    action " Play vs. Local Bots " pushmenu bots
-end
-
-begin gtvservers
-    title "Watch a Game In Progress"
-    action " North American GTV " "connect useast.aq2world.com:27916"
-    blank
-    action " Europe's Playground GTV " "connect 146.185.135.30:27000"
-end
-
-begin playnow
-    title "Find a server in your region automatically"
-    action --status "Round-based Team Play" "Standard Team Play" "connect qj.aq2world.com:27901"
-    blank
-    action --status "Free For All!" "Deathmatch" "connect qj.aq2world.com:27902"
-    blank
-    action --status "Deathmatch with teams!" "Team Deathmatch" "connect qj.aq2world.com:27903"
-    blank
-    action --status "Teamplay with another team added!" "3 Team Teamplay" "connect qj.aq2world.com:27904"
-    blank
-    action --status "Bring the flag back to your base!" "Capture the Flag" "connect qj.aq2world.com:27905"
-    blank
-    action --status "Kill the enemy leader to win!" "Gangsters - Assassinate the Leader" "connect qj.aq2world.com:27906"
-    blank
-    action --status "Capture the enemy's briefcase, defend your own!" "Capture the Briefcase" "connect qj.aq2world.com:27907"
-    //blank
-    //action --status "Escort your Leader somewhere, or stop him at all costs!" "Escort the VIP" "connect qj.aq2world.com:27908"
-    //blank
-    //action --status "Defend your capture points, and assault ones you don't own to win!" "Capture and Hold" "connect qj.aq2world.com:27909"
-    blank
-    action --status "Play against bots and players!" "Versus Bots" "connect qj.aq2world.com:27912"
-end
-
-begin bots
-    title "Play with Bots"
-    action "Deathmatch - Free For All" pushmenu dm_botmenu
-    action "Team Deathmatch" pushmenu tdm_botmenu
-    action "Teamplay" pushmenu tp_botmenu
-end
-
-begin dm_botmenu
-    title "Deathmatch Flags"
-    strings "map" nextserver $com_maplist
-    //field --integer --status "Bot count" --width 2 "Bot count" sv_botdm
-    blank
-    toggle "spawn with all weapons" allweapon
-    toggle "spawn with all items" allitem
-    //field --integer --status "time limit in minutes" --width 2 "time limit in minutes" bottimelimit
-    //field --integer --status "frag limit" --width 2 "frag limit" botfraglimit
-    blank
-    toggle --status "Players with same skin are teamed up" "Teams by skin" dmflags 6
-    toggle --status "Players with same model are teamed up" "Teams by model" dmflags 7
-    toggle --status "Immediatly respawn when dying" "Force respawn" dmflags 10
-    toggle --status "Enable/disable weapon dropping" "Weapons stay after dropping" dmflags 2
-    pairs --status "Choose your starting weapon/item" "Choose weapon/item" dm_choose "enabled" 1 "disabled" 0
-    pairs --status "Spawn protection" "Enable 3 second spawn protection" dm_shield "disabled" 0 "enabled" 30
-    blank
-    action --align " Play" "forcemenuoff;seta ltk_loadbots 1;seta maxclients 16; seta teamplay 0;seta timelimit 20;seta fraglimit 50; seta dm_choose 0;seta dm_shield 30;seta allweapon $allweapon;seta allitem $allitem;map credits; map $nextserver; sv addbots 8;"
-end
-
-begin tdm_botmenu
-    strings "map" nextserver $com_maplist
-    blank
-    //field --integer --status "Add bots to the Blue Team" --width 2 "Add bots to Blue Team" sv_bot1
-    //field --integer --status "Add bots to the Red Team" --width 2 "Add bots to Red Team" sv_bot2
-    //blank
-    toggle "spawn with all weapons" allweapon
-    toggle "spawn with all items" allitem
-    pairs "friendly fire" dmflags on 1044 off 768
-    //field --integer --status "time limit in minutes" --width 2 "time limit in minutes" bottimelimit
-    //field --integer --status "frag limit" --width 2 "frag limit" botfraglimit
-    blank
-    range "bot skill" ltk_skill 0 10
-    action --align " Play" "forcemenuoff; map credits;seta ltk_loadbots 1;seta teamplay 0;seta maxclients 16;seta teamdm 1;seta timelimit 20;seta fraglimit 50;seta allweapon $allweapon;seta allitem $allitem;seta dmflags $dmflags; map $nextserver;sv addbots 4 1;sv addbots 4 2;"
-end
-
-begin tp_botmenu
-    strings "map" nextserver $com_maplist
-    //blank
-    //field --integer --status "Add bots to the Blue Team" --width 2 "Add bots to Blue Team" sv_bot1
-    //field --integer --status "Add bots to the Red Team" --width 2 "Add bots to Red Team" sv_bot2
-    blank
-    toggle "spawn with all weapons" allweapon
-    toggle "spawn with all items" allitem
-    pairs "friendly fire" dmflags on 1044 off 768
-    field --integer --status "time limit in minutes" --width 2 "time limit in minutes" bottimelimit
-    field --integer --status "frag limit" --width 2 "frag limit" botfraglimit
-    blank
-    range "bot skill" ltk_skill 0 10
-    action --align " Play" "forcemenuoff; map credits;seta ltk_loadbots 1;seta teamplay 1;seta use_3teams 0;seta teamdm 0;seta timelimit 20;seta fraglimit 50;seta allweapon $allweapon;seta allitem $allitem;seta dmflags $dmflags; map $nextserver;sv addbots 4 1;sv addbots 4 2;"
-end
-
-begin settings
-    background settings_bkgd
-    title "Settings"
-    action "Player Setup" pushmenu players
-    action "General Bindings" pushmenu bindings
-    action "Weapon Bindings" pushmenu wbindings
-    action "Game Settings" pushmenu gsettings
-    action "Misc Settings" pushmenu msettings
-    blank
-    action "Video Setup" pushmenu video
-    action "Sound Setup" pushmenu sound
-    action "Mouse Setup" pushmenu mouse
-    blank
-end
-
-begin addressbook
-    title "Address Book"
-    //banner m_banner_addressbook
-    field --width 32 --center adr0
-    field --width 32 --center adr1
-    field --width 32 --center adr2
-    field --width 32 --center adr3
-    field --width 32 --center adr4
-    field --width 32 --center adr5
-    field --width 32 --center adr6
-    field --width 32 --center adr7
-    field --width 32 --center adr8
-    field --width 32 --center adr9
-    field --width 32 --center adr10
-    field --width 32 --center adr11
-    field --width 32 --center adr12
-    field --width 32 --center adr13
-    field --width 32 --center adr14
-    field --width 32 --center adr15
-end
-
-begin video
-    background video_bkgd
-    title "Video Setup"
-    values "fullscreen resolution" vid_fullscreen windowed $vid_modelist
-    field "windowed size" vid_geometry
-    toggle "widescreen mode" cl_adjustfov
-    toggle "vertical sync" gl_swapinterval
-    range "gamma" vid_gamma 1.3 0.3
-    range "brightness" gl_brightness 0 0.10
-    blank
-    pairs "hud scaling" scr_scale auto 0 1x 1 2x 2 3x 3 4x 4
-    pairs "menu scaling" ui_scale auto 0 1x 1 2x 2 3x 3 4x 4
-    pairs "console scaling" con_scale auto 0 1x 1 2x 2 3x 3 4x 4
-    blank
-    toggle "font shadow" gl_fontshadow
-    blank
-    action --align "apply changes now" "popmenu; vid_restart; pushmenu settings; pushmenu video"
-    blank
-    action "Advanced Video Setup" pushmenu a_video
-end
-
-begin a_video
-    background a_video_bkgd
-    title "Advanced Video Setup"
-    pairs "separate frame rates" cl_async yes 1 no 0
-    field "physics frame rate" cl_maxfps
-    field "rendering frame rate" r_maxfps
-    blank
-    range "particle scale" gl_partscale 0 5
-    toggle "particle style" gl_partstyle
-    pairs "particle shape" gl_partshape circle 0 square 1 full_circle 2 
-    pairs "celshading" gl_celshading none 0 basic 1 strong 2 full 3
-    blank
-    toggle --status "changes how gl_modulate, gl_brightness and intensity parameters work to prevent §washed out colors" "GLSL Rendering" gl_shaders
-    toggle --status "Toggles color adjustments when events trigger screen flashes" Polyblend gl_polyblend
-    blank
-    pairs "dynamic lightmap" gl_dynamic disabled 0 enabled 1 partial 2
-    range "saturation" gl_saturation 0.0 1.0
-    pairs "modulation" gl_modulate none 0 normal 1 bright 2
-    range "modulation entities" gl_modulate_entities 0 10
-    toggle "hardware gamma" vid_hwgamma
-    range "lightmap saturation" gl_coloredlightmaps 0.0 1.0
-    pairs --status "Assets override preferences (skins, textures, hud, etc)" "high quality assets" r_override_textures "use original" 0 "enabled" 1
-    blank
-    action --align "apply now" "popmenu; vid_restart; pushmenu settings; pushmenu video; pushmenu a_video"
-end
-
-begin msettings
-    background msettings_bkgd
-    title "Misc Settings"
-    pairs "gun handedness" cl_gun "do not show" 0 "same as hand" 1 "force right hand" 2 "force left hand" 3
-    blank
-    toggle "automatic downloads" allow_download
-    blank
-    pairs "display round stats" stats_mode disabled 0 "end of round" 1 "end of map" 2
-    toggle "automatic demo recording" autorecord
-    blank
-    toggle "bandage sound effect" cl_bandagesound
-    pairs "bandage radio team message" bandage[radio] "disabled" disabled "I'm hit" im_hit "Cover me" cover "Taking fire..." taking_f
-    field "bandage team message" bandage[say]
-    field "frag team message" roundkill[say]
-    blank
-    values "show chathud" scr_chathud "off" "on - white" "on - green"
-    pairs "only show chat in chathud" cl_chat_notify "on" 0 "off" 1
-    pairs "duration of chathud" scr_chathud_time Stay 0 1s 1 5s 5 10s 10 15s 15
-    blank
-    toggle "disable [Windows key]" win_disablewinkey
-    toggle "disable [Alt]-[Tab]" win_noalttab
-    blank
-    pairs "discord integration" cl_discord "disabled" 0 "enabled" 1
-    pairs "allow discord friends to join your game" cl_discord_accept_join_requests "prompt first" 0 "auto" 1
-end
-
-begin gsettings
-    background gsettings_bkgd
-    title "Game Settings and Binds"
-    bind "ctf - drop flag" drop flag
-    bind "matchmode - ready toggle" ready
-    bind "matchmode - lock team" lock
-    bind "matchmode - unlock team" unlock
-    bind "espionage - volunteer" volunteer
-    bind "darkmode - flashlight" flashlight
-    blank
-    bind "sniper zoom in" lens in
-    bind "sniper zoom out" lens out
-    bind "sniper zoom to 1x" lens 1
-    blank
-    bind "screenshot" screenshot
-    pairs "screenshot format" gl_screenshot_format png png jpg jpg tga tga
-    bind "restore score on rejoin" ghost
-    toggle "auto join same team" auto_join
-    toggle "auto equip same equipment" auto_equip
-end
-
-begin mouse
-    background mouse_bkgd
-    title "Mouse Setup"
-    pairs "invert mouse" m_pitch "no" "0.022" "yes" "-0.022"
-    field "sensitivity" sensitivity
-    toggle "auto scale zoom sensitivity" m_autosens
-    blank
-    action "choose crosshair" "pushmenu chsetup"
-    blank
-    range "crosshair red" ch_red 0.0 1.0
-    range "crosshair green" ch_green 0.0 1.0
-    range "crosshair blue" ch_blue 0.0 1.0
-    range "crosshair alpha" ch_alpha 0.0 1.0
-end
-
-begin chsetup
-    title "Select crosshair"
-    bitmap "ch1" "crosshair 1;popmenu;"
-    bitmap "ch2" "crosshair 2;popmenu;"
-    bitmap "ch3" "crosshair 3;popmenu;"
-    bitmap "ch4" "crosshair 4;popmenu"
-    bitmap "ch5" "crosshair 5;popmenu;"
-    bitmap "ch6" "crosshair 6;popmenu;"
-    bitmap "ch7" "crosshair 7;popmenu;"
-    bitmap "ch8" "crosshair 8;popmenu;"
-    bitmap "ch9" "crosshair 9;popmenu;"
-    bitmap "ch10" "crosshair 10;popmenu;"
-    pairs --status "Size of your crosshair" "Crosshair size" ch_scale "0.25" 0.25 "0.5" 0.5 "1" 1 "1.5" 1.5 "2" 2 "3" 3
-    blank
-    action "back" "forcemenuoff;pushmenu settings;pushmenu mouse;"
-end
-
-begin sound
-    background sound_bkgd
-    title "Sound Setup"
-    values --status "OpenAL requires installation of https://openal-soft.org/" "sound system" s_enable "none" "classic" "OpenAL"
-    range "effects volume" s_volume 0 1
-    values "ambient sounds" s_ambient "no" "yes" "only player's own"
-    pairs "chat beep" cl_chat_sound \
-        disabled "" \
-        default misc/talk.wav \
-        alternative misc/talk1.wav \
-        misc/talk_user.wav misc/talk_user.wav
-    action --align "test chat beep" "stopsound; popmenu; pushmenu sound; echo playing $cl_chat_sound; play $cl_chat_sound"
-end
-
-begin bindings
-    background bindings_bkgd
-    title "General Bindings"
-    action " It is recommended that every one of these binds are set " ""
-    bind "move forward" +forward
-    bind "move backward" +back
-    bind "strafe left" +moveleft
-    bind "strafe right" +moveright
-    bind "jump" +moveup
-    bind "duck" +movedown
-    bind "fire weapon" +attack
-    bind "switch to next weapon" weapnext
-    bind "switch to previous weapon" weapprev
-    bind "walk (quiet movement)" +speed
-    blank
-    bind "show scores" score
-    bind "show stats" stats list
-    bind "main menu" inven
-    bind "voting menu" menu
-    blank
-    bind "menu up" invprev
-    bind "menu down" invnext
-    bind "menu select" invuse
-    blank
-    bind "world chat" messagemode 
-    bind "team chat" messagemode2
-    blank
-    bind "bandage" bandage
-    bind "open/close door" opendoor
-    bind "reload" reload
-    blank
-    action "Weapon Binds" pushmenu wbindings
-    action "Game Settings and Binds" pushmenu gsettings
-end
-
-begin wbindings
-    background wbindings_bkgd
-    title "Weapon Bindings"
-    bind "change weapon mode (burst/auto)" weapon
-    bind "sniper zoom" lens
-    bind "drop current weapon" drop weapon
-    bind "drop item" drop item
-    blank
-    bind "use primary weapon" use special
-    bind "use MK23 Pistol" use MK23 Pistol
-    bind "use Dual MK23 Pistols" use Dual MK23 Pistols
-    bind "use SSG 3000 Sniper Rifle" use Sniper Rifle
-    bind "use MP5/10 Submachinegun" use MP5/10 Submachinegun
-    bind "use M4 Assault Rifle" use M4 Assault Rifle
-    bind "use Handcannon" use Handcannon
-    bind "use M3 Super 90 Assault Shotgun" use M3 Super 90 Assault Shotgun
-    bind "use throwing knife" use throwing Combat Knife
-    bind "use slashing knife" use slashing Combat Knife
-    bind "select grenade" use M26 Fragmentation Grenade
-    bind "punch" punch
-end
-
-begin addonsmenu
-    title "Optional Addons"
-    action "AQ2PRO" pushmenu aq2pro
-end
-
-begin first_start
-    action "Choose your name" ""
-    blank
-    field --status "Choose your nickname" "Name" name
-    blank
-    action "save" "popmenu;pushmenu gettingstarted"
-end

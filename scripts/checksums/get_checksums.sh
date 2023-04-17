@@ -2,7 +2,7 @@
 
 compare=$1
 
-directoryArray=(default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-pics default-sounds)
+directoryArray=(default-configs default-game-content default-hdtextures default-mappack0 default-mappack1 default-sounds)
 
 function buildChecksumFiles() {
     for directory in "${directoryArray[@]}"; do

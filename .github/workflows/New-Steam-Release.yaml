@@ -4,11 +4,11 @@ on:
       steam_branch:
         description: 'Branch to deploy in Steam'     
         required: true
-        default: 'playtest' 
+        default: 'alpha' 
         type: choice
         options:
         - playtest
-        - stattest
+        - alpha
       release_tag:
         description: "Release version tag (ex: v1.2.3)"
         required: true

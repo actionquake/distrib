@@ -1,0 +1,89 @@
+================================================================
+Title                   : Habs
+Author                  : Pascal "NORDS" Brulotte
+Email Address           : nords@laval.com
+ICQ			: 753314
+
+Made in CANADA
+
+Description             : Montreal Canadien Quake2 skin
+
+Files			: habs.pcx, habs_i.pcx, habs.txt
+
+Additional Credits to   : id Software for rocking my life
+                          
+                          
+Build Time              : 1/2 days  
+Date			: February 9, 1998
+================================================================
+
+INSTALLATION
+
+   Just unzip the files contained in the archive, to your
+   Quake2 male folder. 
+
+   Ex: C:/quake/baseq2/players/male
+
+
+WHAT IS THIS ?
+
+   Its the uniform of the Montreal Canadien, 
+   the NHL (NATIONAL HOCKEY LEAGUE) ICE HOCKEY CLUB 
+   (for those who did not know :).
+   
+WHY USING THAT SKIN ?
+
+   Fight in group agains other sport(s) teams EX: The Montreal Canadien
+   again the Quebec Nordiques :)
+
+COMMENTS
+
+   Feel free to distribute this skin to everybody. But please :) give 
+   credit to my work .. please please :) hihi Thanks
+
+
+
+
+
+================================================================
+Titre                   : Habs
+Auteur                  : Pascal "NORDS" Brulotte
+Courier Electronique    : nords@laval.com
+ICQ			: 753314
+
+Fait au CANADA
+
+Description             : skin pour Quake2 du Canadien de Montreal
+
+Fichiers		: habs.pcx, habs_i.pcx, habs.txt
+
+Merite additionnel      : a id Software qui me permet de me defouler
+                          
+                          
+Fait en                 : demi journee
+Date  			: 9 fevrier 1998
+================================================================
+
+INSTALLATION
+
+   Seulement deziper le fichier contenu dans cette archive, vers votre 
+   repertoire male dans Quake2. 
+
+   Ex: C:/quake/baseq2/players/male
+
+
+QU'EST-CE QUE C'EST ?
+
+   C'est l'uniforme du Canadien de Montreal dans la LNH 
+   (LIGUE NATIONALE DE HOCKEY) un club de hockey sur glace 
+   (pour ceux qui ne le sauraient pas :).
+   
+POURQUOI UTILISER CETTE SKIN ?
+
+   Pour combattre d'autres groupes d'equipes de sport(s) EX: 
+   Le Canadien de Montreal contre Les Nordiques de Quebec :)
+
+COMMENTAIRE
+
+   Ne vous genez pas de distribuer cette skin a tout le monde. 
+   Mais SVP :) donnez-moi le merite de mon travail ... svp svp :) HAHA Merci
