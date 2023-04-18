@@ -34,6 +34,7 @@ arguments = argparse.ArgumentParser()
 arguments.add_argument('pkzfile', metavar='PKZFILE', help="name of .pkz file to create")
 arguments.add_argument('files', metavar='FILE', nargs='+', help="file to add to .pak file")
 args = arguments.parse_args()
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 def resolve_file_args(files):
     """Returns an iterator that provides all files, including those in subdirectories, from the given paths"""
@@ -67,7 +68,8 @@ all_files.sort(key=lambda file_and_timestamp: (file_and_timestamp[1], file_and_t
 # Compress all files into ZIPm with timestamps obtained from the git history
 with zipfile.ZipFile(args.pkzfile, "w") as pkz:
     for fn, timestamp in all_files:
-        print(f"{fn} ...")
+        if DEBUG:
+            print(f"{fn} ...")
         sys.stdout.flush()
         entry = zipfile.ZipInfo.from_file(fn)
         entry.date_time = (timestamp.year, timestamp.month,timestamp.day, timestamp.hour, timestamp.minute, timestamp.second)
