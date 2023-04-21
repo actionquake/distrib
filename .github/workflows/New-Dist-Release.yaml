@@ -201,20 +201,20 @@ jobs:
           path: ${{ env.DIST_DIR }}
 
       - name: Get aqtion-content
-          uses: actions/download-artifact@v3
-          with:
-            name: aqtion-${{github.ref_name}}-content-only
-            path: ${{ env.AQTION_DIR }}
+        uses: actions/download-artifact@v3
+        with:
+          name: aqtion-${{github.ref_name}}-content-only
+          path: ${{ env.AQTION_DIR }}
 
       - name: Download and extract latest Linux x64 Q2Pro Release
-          run: |
-            mkdir -p wayland x11
-            wget -P x11 -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-gcc.zip
-            wget -P wayland -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-wayland-gcc.zip
-            unzip -o wayland/q2pro-lin-wayland-gcc.zip -d ${{ env.AQTION_DIR }}
-            mv ${{ env.AQTION_DIR }}/q2pro ${{ env.AQTION_DIR }}/q2pro-wayland
-            unzip -o x11/q2pro-lin-gcc.zip -d ${{ env.AQTION_DIR }}
-            chmod +x ${{ env.AQTION_DIR }}/q2pro*
+        run: |
+          mkdir -p wayland x11
+          wget -P x11 -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-gcc.zip
+          wget -P wayland -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-wayland-gcc.zip
+          unzip -o wayland/q2pro-lin-wayland-gcc.zip -d ${{ env.AQTION_DIR }}
+          mv ${{ env.AQTION_DIR }}/q2pro ${{ env.AQTION_DIR }}/q2pro-wayland
+          unzip -o x11/q2pro-lin-gcc.zip -d ${{ env.AQTION_DIR }}
+          chmod +x ${{ env.AQTION_DIR }}/q2pro*
 
       - name: Copy external libraries for Q2Pro
         run: |
@@ -232,14 +232,14 @@ jobs:
           cache-key: flatpak-builder-${{ github.sha }}
 
       - name: Upload dist flatpak to release
-          uses: softprops/action-gh-release@v1
-          env:
-            GITHUB_TOKEN: ${{ github.token }}
-          with:
-            body_path: 
-            tag_name: ${{github.ref_name}}
-            files: |
-              ${{ env.DIST_DIR }}/scripts/flatpak/aqtion-${{github.ref_name}}-linux_x86_64.flatpak
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          body_path: 
+          tag_name: ${{github.ref_name}}
+          files: |
+            ${{ env.DIST_DIR }}/scripts/flatpak/aqtion-${{github.ref_name}}-linux_x86_64.flatpak
 
 
   lin_x86_64_dist:
