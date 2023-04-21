@@ -4,7 +4,7 @@ runtime-version: '22.08'
 x-gl-version: &gl-version '1.4'
 x-gl-versions: &gl-versions 22.08;22.08-extra;1.4
 sdk: org.freedesktop.Sdk
-#command: aqtion
+command: flatpak-wrapper
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -12,6 +12,7 @@ finish-args:
   - --socket=pulseaudio
   - --device=all
   - --talk-name=org.freedesktop.Flatpak
+  - --filesystem=xdg-run/app/com.discordapp.Discord:create
   - --filesystem=home
 
 cleanup:
@@ -46,21 +47,10 @@ modules:
     build-commands:
       - |
         set -e
-        mv aqtion/aqtion /app/bin/aqtion
-        cp  /app/lib/libjpeg.so.8 /app/bin/aqtion/libjpeg.so.8
+        mv aqtion/* /app/bin/
+        cp  /app/lib/libjpeg.so.8 /app/bin/libjpeg.so.8
+        ln -s ~/.var/app/com.aqtiongame.aqtion/data/config.cfg /app/bin/action/config.cfg
     sources:
-      - type: archive
-        strip-components: 0
-        dest: aqtion
-        path: aqtion-linux-x86_64.zip
+      - type: dir
+        path: aqtion
 
-  - name: aqtion-run
-    build-options:
-      strip: false
-      no-debuginfo: true
-    buildsystem: simple
-    build-commands:
-      - |
-        set -e
-        mv /app/bin/aqtion/action $XDG_DATA_HOME/aqtion/
-        ln -s $XDG_DATA_HOME/aqtion/action /app/bin/aqtion/action

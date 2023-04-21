@@ -188,6 +188,60 @@ jobs:
           files: |
             aqtion-${{github.ref_name}}-windows-x86_64.zip
 
+  lin_x86_64_flatpak:
+    name: "Linux x86_64 Flatpak"
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-44
+      options: --privileged
+    steps:
+    - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.DIST_DIR }}
+
+    - name: Get aqtion-content
+        uses: actions/download-artifact@v3
+        with:
+          name: aqtion-${{github.ref_name}}-content-only
+          path: ${{ env.AQTION_DIR }}
+
+    - name: Download and extract latest Linux x64 Q2Pro Release
+        run: |
+          mkdir -p wayland x11
+          wget -P x11 -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-gcc.zip
+          wget -P wayland -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-wayland-gcc.zip
+          unzip -o wayland/q2pro-lin-wayland-gcc.zip -d ${{ env.AQTION_DIR }}
+          mv ${{ env.AQTION_DIR }}/q2pro ${{ env.AQTION_DIR }}/q2pro-wayland
+          unzip -o x11/q2pro-lin-gcc.zip -d ${{ env.AQTION_DIR }}
+          chmod +x ${{ env.AQTION_DIR }}/q2pro*
+
+    - name: Copy external libraries for Q2Pro
+      run: |
+        cp ${{ env.DIST_DIR }}/build/linux/integrations/* ${{ env.AQTION_DIR }}
+
+    - name: Move aqtion directory for flatpak
+      run: |
+        mv ${{ env.AQTION_DIR }} ${{ env.DIST_DIR }}/scripts/flatpak/
+
+    - uses: flatpak/flatpak-github-actions/flatpak-builder@v6.1
+      working-directory: ${{ env.DIST_DIR }}/scripts/flatpak/
+      with:
+        bundle: aqtion-${{github.ref_name}}-linux_x86_64.flatpak
+        manifest-path: com.aqtiongame.aqtion.yml
+        cache-key: flatpak-builder-${{ github.sha }}
+
+    - name: Upload dist flatpak to release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          body_path: 
+          tag_name: ${{github.ref_name}}
+          files: |
+            ${{ env.DIST_DIR }}/scripts/flatpak/aqtion-${{github.ref_name}}-linux_x86_64.flatpak
+
+
   lin_x86_64_dist:
     needs: content_only
     runs-on: ubuntu-22.04
