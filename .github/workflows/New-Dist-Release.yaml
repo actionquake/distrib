@@ -196,9 +196,9 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v3
-          with:
-            repository: actionquake/distrib
-            path: ${{ env.DIST_DIR }}
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.DIST_DIR }}
 
       - name: Get aqtion-content
           uses: actions/download-artifact@v3
