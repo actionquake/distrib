@@ -39,6 +39,58 @@ modules:
         url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/2.1.3.tar.gz
         sha256: dbda0c685942aa3ea908496592491e5ec8160d2cf1ec9d5fd5470e50768e7859
 
+  - name: libpng
+    buildsystem: cmake-ninja
+    sources: &libpng_sources
+      - type: archive
+        url: https://github.com/glennrp/libpng/archive/v1.6.35.tar.gz
+        sha256: 6d59d6a154ccbb772ec11772cb8f8beb0d382b61e7ccc62435bf7311c9f4b210
+
+  - name: q2pro  # Credit to fishxz - https://github.com/flathub/com.github.skullernet.q2pro
+    buildsystem: meson
+    builddir: true
+    build-options:
+      config-opts:
+        - --auto-features=enabled
+        - --fatal-meson-warnings
+        - -Danticheat-server=true
+        - -Dclient-gtv=true
+        - -Dpacketdup-hack=true
+        - -Dtests=false
+        - -Dvariable-fps=true
+        - -Dwerror=false
+        - -Daqtion-build=true
+        - -Ddiscord-sdk=true
+        - -Dhomedir=/var/data
+        - -Dwindows-crash-dumps=disabled
+        - -Dwayland=disabled
+        - -Dwrap_mode=nofallback
+    post-install:
+      - install -Dm775 ../flatpak-wrapper -t ${FLATPAK_DEST}/bin/
+      - install -Dm644 ../aqtion.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
+      - install -Dm644 ../com.aqtiongame.aqtion.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - desktop-file-edit --set-key=Exec --set-value='flatpak-wrapper +connect %u' ${FLATPAK_BUILDER_BUILDDIR}/src/unix/res/q2pro.desktop
+      - desktop-file-edit --add-mime-type=x-scheme-handler/quake2 ${FLATPAK_BUILDER_BUILDDIR}/src/unix/res/q2pro.desktop
+      - install -Dm644 ${FLATPAK_BUILDER_BUILDDIR}/src/unix/res/q2pro.desktop -t ${FLATPAK_DEST}/share/applications
+    sources:
+      - type: git
+        url: https://github.com/actionquake/q2pro.git
+        tag: 1e8937e
+        commit: 0f2fdf545aabc67ee8e6ffcf654497009be5f525
+        x-checker-data:
+          type: git
+      - type: file
+        path: com.aqtiongame.aqtion.metainfo.xml
+      - type: file
+        path: aqtion.svg
+      - type: script
+        dest-filename: flatpak-wrapper
+        commands:
+          - ls ${XDG_DATA_HOME}/baseaq/pak0.pak || zenity --error --text "Game data
+            missing, please download from https://github.com/actionquake/distrib/releases and 
+            add to:\n${XDG_DATA_HOME}/baseaq/" --ok-label "Close" --width=400
+          - /app/bin/q2pro "$@"
+
   - name: aqtion-install
     build-options:
       strip: false
@@ -47,10 +99,10 @@ modules:
     build-commands:
       - |
         set -e
-        mv aqtion/* /app/bin/
-        cp  /app/lib/libjpeg.so.8 /app/bin/libjpeg.so.8
-        ln -s ~/.var/app/com.aqtiongame.aqtion/data/config.cfg /app/bin/action/config.cfg
+        mv aqtion/* /var/data/
+        rm -rf aqtion
     sources:
-      - type: dir
-        path: aqtion
-
+      - type: archive
+        path: $XDG_DATA_HOME
+        url: https://github.com/actionquake/distrib/releases/download/v1.3.5-rc6/aqtion-v1.3.5-rc6-content-only.zip
+        sha256: cce716068e753d81ce57a613afdd9f199e813e0fe98b5ee5fb26bfd2421a219f
