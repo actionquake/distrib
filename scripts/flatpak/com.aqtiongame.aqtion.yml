@@ -7,11 +7,11 @@ sdk: org.freedesktop.Sdk
 command: flatpak-wrapper
 finish-args:
   - --share=ipc
-  - --socket=x11
+  - --socket=wayland
+  - --socket=fallback-x11
   - --share=network
   - --socket=pulseaudio
   - --device=all
-  - --talk-name=org.freedesktop.Flatpak
   - --filesystem=xdg-run/app/com.discordapp.Discord:create
   - --filesystem=home
 
