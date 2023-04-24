@@ -23,6 +23,7 @@ cleanup:
   - /app/bin/rdjpgcom
   - /app/bin/tjbench
   - /app/bin/wrjpgcom
+  - /app/bin/patchelf
   - "*.a"
   - "*.la"
 
@@ -58,6 +59,15 @@ modules:
       - make
       - make install
 
+  - name: discord_sdk
+    buildsystem: simple
+    sources:
+      - type: file
+        url: https://github.com/actionquake/distrib/raw/main/build/linux/integrations/discord_game_sdk.so
+        sha256: f52f9a7f9358f07a18e65a9e26a2943caf73cd681b2fea015c95a32e4239eb17
+    build-commands:
+      - mv discord_game_sdk.so /app/lib/discord_game_sdk.so
+
   - name: q2pro  # Credit to fishxz - https://github.com/flathub/com.github.skullernet.q2pro
     buildsystem: meson
     builddir: true
@@ -73,7 +83,8 @@ modules:
         - -Dwerror=false
         - -Daqtion-build=true
         - -Ddiscord-sdk=true
-        - -Dhomedir=~/.var/app/com.aqtiongame.aqtion/data/aqtion/
+        - -Ddatadir=~/.var/app/com.aqtiongame.aqtion/data/aqtion
+        - -Dhomedir=~/.var/app/com.aqtiongame.aqtion/data/aqtion
         - -Dwindows-crash-dumps=disabled
         - -Dwayland=disabled
         - -Dwrap_mode=nofallback
@@ -100,10 +111,12 @@ modules:
         dest-filename: flatpak-wrapper
         commands:
           - for i in {0..9}; do test -S $XDG_RUNTIME_DIR/discord-ipc-$i || ln -sf {app/com.discordapp.Discord,$XDG_RUNTIME_DIR}/discord-ipc-$i; done
-          - if [ ! -f ${XDG_DATA_HOME}/baseaq/pak0.pak ];
-            then echo "Game files not found, downloading...";
-            wget -q -O --show-progress aqtion-content.zip https://github.com/actionquake/distrib/releases/download/v1.3.5-rc6/aqtion-v1.3.5-rc6-content-only.zip && tar xfz --strip-components=1 aqtion-content.zip -d $XDG_DATA_HOME/;
-            wget -q -O /app/lib/discord_game_sdk.so https://github.com/actionquake/distrib/raw/main/build/linux/integrations/discord_game_sdk.so;
-            mv $XDG_DATA_HOME/aqtion/baseaq/* /app/share/q2pro/baseaq/
+          - if [ ! -f ~/.var/app/com.aqtiongame.aqtion/data/aqtion/baseaq/pak0.pkz ]; then
+            echo "Downloading the latest game files, please wait...";
+            echo "This will only happen the first time you launch this Flatpak.";
+            wget -q -O content.zip https://github.com/actionquake/distrib/releases/download/v1.3.5-rc6/aqtion-v1.3.5-rc6-content-only.zip;
+            unzip -o content.zip -d ~/.var/app/com.aqtiongame.aqtion/data/;
+            rm -rf content.zip || true;
+            /app/bin/q2pro "$@";
             else /app/bin/q2pro "$@";
             fi
