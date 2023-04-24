@@ -11,7 +11,7 @@ env:
 name: Distribution Release
 
 jobs:
-  content_only:
+  content_data:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout distrib
@@ -52,6 +52,35 @@ jobs:
       #   working-directory: ${{ env.DIST_DIR }}/action
       #   run: |
       #     find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
+
+      - name: Copy content
+        run: |
+          cp ${{ env.DIST_DIR }}/LICENSE ${{ env.AQTION_DIR }}
+          cp -r ${{ env.DIST_DIR }}/baseaq/* aqtion/baseaq/
+          cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
+
+      - name: Upload aqtion content artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: aqtion-${{github.ref_name}}-content-data
+          path: |
+            ${{ env.AQTION_DIR }}
+
+  content_only:
+    needs: content_data
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout distrib
+        uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.DIST_DIR }}
+
+      - name: Get aqtion-content
+        uses: actions/download-artifact@v3
+        with:
+          name: aqtion-${{github.ref_name}}-content-data
+          path: ${{ env.AQTION_DIR }}
 
       - name: Download all library files for Windows, Linux and Linux ARM
         run: |
@@ -139,7 +168,7 @@ jobs:
             aqtion-${{github.ref_name}}-linux-x86_64.deb
 
   win_x86_64_dist:
-    needs: content_only
+    needs: content_data
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -150,8 +179,16 @@ jobs:
       - name: Get aqtion-content
         uses: actions/download-artifact@v3
         with:
-          name: aqtion-${{github.ref_name}}-content-only
+          name: aqtion-${{github.ref_name}}-content-data
           path: ${{ env.AQTION_DIR }}
+
+      - name: Download library files for Windows
+        run: |
+          for FILE in tng-win-64; \
+          do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip \
+          && unzip -o ${FILE}.zip -d ${{ env.AQTION_DIR }}/baseaq/ \
+          && unzip -o ${FILE}.zip -d ${{ env.AQTION_DIR }}/action/; \
+          rm -rf ${FILE}.zip; done
 
       - name: Download and extract latest Windows Q2Pro Release
         run: |
@@ -189,7 +226,7 @@ jobs:
             aqtion-${{github.ref_name}}-windows-x86_64.zip
 
   lin_x86_64_dist:
-    needs: content_only
+    needs: content_data
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -200,8 +237,21 @@ jobs:
       - name: Get aqtion-content
         uses: actions/download-artifact@v3
         with:
-          name: aqtion-${{github.ref_name}}-content-only
+          name: aqtion-${{github.ref_name}}-content-data
           path: ${{ env.AQTION_DIR }}
+
+      - name: Download library files for Linux x86_64
+        run: |
+          for FILE in tng-lin-x86_64; \
+          do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip \
+          && unzip -o ${FILE}.zip -d ${{ env.AQTION_DIR }}/baseaq/ \
+          && unzip -o ${FILE}.zip -d ${{ env.AQTION_DIR }}/action/; \
+          rm -rf ${FILE}.zip; done
+
+      - name: Make all libraries executable
+        run: |
+          chmod +x ${{ env.AQTION_DIR }}/baseaq/game*
+          chmod +x ${{ env.AQTION_DIR }}/action/game*
 
       - name: Download and extract latest Linux x64 Q2Pro Release
         run: |
@@ -244,7 +294,7 @@ jobs:
             aqtion-${{github.ref_name}}-linux-x86_64.zip
 
   lin_arm64_dist:
-    needs: content_only
+    needs: content_data
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -255,8 +305,21 @@ jobs:
       - name: Get aqtion-content
         uses: actions/download-artifact@v3
         with:
-          name: aqtion-${{github.ref_name}}-content-only
+          name: aqtion-${{github.ref_name}}-content-data
           path: ${{ env.AQTION_DIR }}
+
+      - name: Download all library files for Linux ARM
+        run: |
+          for FILE in tng-lin-arm64; \
+          do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip \
+          && unzip -o ${FILE}.zip -d ${{ env.AQTION_DIR }}/baseaq/ \
+          && unzip -o ${FILE}.zip -d ${{ env.AQTION_DIR }}/action/; \
+          rm -rf ${FILE}.zip; done
+
+      - name: Make all libraries executable
+        run: |
+          chmod +x ${{ env.AQTION_DIR }}/baseaq/game*
+          chmod +x ${{ env.AQTION_DIR }}/action/game*
 
       - name: Download and extract latest Linux arm64 Q2Pro Release
         run: |
@@ -295,7 +358,7 @@ jobs:
             aqtion-${{github.ref_name}}-linux-arm64.zip
 
   mac_dist:
-    needs: content_only
+    needs: content_data
     runs-on: macos-latest
     steps:
       - name: Checkout distrib
@@ -307,8 +370,21 @@ jobs:
       - name: Get aqtion-content
         uses: actions/download-artifact@v3
         with:
-          name: aqtion-${{github.ref_name}}-content-only
+          name: aqtion-${{github.ref_name}}-content-data
           path: ${{ env.AQTION_DIR }}
+
+      - name: Download all library files for Mac
+        run: |
+          for FILE in tng-darwin-x86_64 tng-darwin-arm64; \
+          do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip \
+          && unzip -o ${FILE}.zip -d ${{ env.AQTION_DIR }}/baseaq/ \
+          && unzip -o ${FILE}.zip -d ${{ env.AQTION_DIR }}/action/; \
+          rm -rf ${FILE}.zip; done
+
+      - name: Make all libraries executable
+        run: |
+          chmod +x ${{ env.AQTION_DIR }}/baseaq/game*
+          chmod +x ${{ env.AQTION_DIR }}/action/game*
 
       - name: Download and extract latest Mac x86_64 Q2Pro
         run: |
