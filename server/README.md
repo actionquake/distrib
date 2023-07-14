@@ -56,4 +56,4 @@ Use the following Docker images
     * `docker-compose up -d`
 1. Try connecting to your server from your client in the console
     * `connect your.server.ip.address:27910`
-1. If your server doesn't come up or you see errors and you don't know what's wrong, come ask for some help in **#configs** in our [Discord channel](https://discord.aq2world.com)
+1. If your server doesn't come up or you see errors and you don't know what's wrong, come ask for some help in **#troubleshooting** in our [Discord channel](https://discord.aq2world.com)
