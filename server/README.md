@@ -17,7 +17,8 @@ Great!  Hosting a server is a great way to contribute to the community and helps
     * Unknown but probably work fine
         * CentOS/Fedora
 * A recent or latest version of Docker and Docker-Compose
-* Reasonable bandwidth (10MBit+)
+* Reasonable bandwidth (10MBit+) and access to the Internet
+    * If Internet access is not possible, please contact us in in **#troubleshooting** in our [Discord channel](https://discord.aq2world.com) for ways to distribute files to clients
 * Ability to open UDP port 27910 (and more if hosting multiple) to the Internet (TCP on the same port to support remote GTV/MVD)
 * Suggested providers:
     * [DigitalOcean](https://www.digitalocean.com) (relatively inexpensive)
