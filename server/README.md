@@ -17,7 +17,8 @@ Great!  Hosting a server is a great way to contribute to the community and helps
     * Unknown but probably work fine
         * CentOS/Fedora
 * A recent or latest version of Docker and Docker-Compose
-* Reasonable bandwidth (10MBit+)
+* Reasonable bandwidth (10MBit+) and access to the Internet
+    * If Internet access is not possible, please contact us in in **#troubleshooting** in our [Discord channel](https://discord.aq2world.com) for ways to distribute files to clients
 * Ability to open UDP port 27910 (and more if hosting multiple) to the Internet (TCP on the same port to support remote GTV/MVD)
 * Suggested providers:
     * [DigitalOcean](https://www.digitalocean.com) (relatively inexpensive)
@@ -32,10 +33,10 @@ Great!  Hosting a server is a great way to contribute to the community and helps
 ### Step by step
 
 Use the following Docker images
-* Official: `aqtiongame/server:v42`
+* Official: `aqtiongame/server:v43`
 * Espionage: `aqtiongame/espionage:v27`
-* ARM64 / Rasp Pi: `aqtiongame/server:v42`
-* ARM32 / Rasp Pi: `aqtiongame/server:v42`
+* ARM64 / Rasp Pi: `aqtiongame/server:v43-arm64`
+* ARM32 / Rasp Pi: `aqtiongame/server:v43-arm32`
 
 1. If you have docker and docker-compose already, skip to step 3
 1. Upon logging into the VPS/instance (ssh, console or otherwise) gaining access to the shell, install `docker` and `docker-compose`
@@ -56,4 +57,4 @@ Use the following Docker images
     * `docker-compose up -d`
 1. Try connecting to your server from your client in the console
     * `connect your.server.ip.address:27910`
-1. If your server doesn't come up or you see errors and you don't know what's wrong, come ask for some help in **#configs** in our [Discord channel](https://discord.aq2world.com)
+1. If your server doesn't come up or you see errors and you don't know what's wrong, come ask for some help in **#troubleshooting** in our [Discord channel](https://discord.aq2world.com)
