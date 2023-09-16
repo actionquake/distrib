@@ -1,0 +1,120 @@
+on:  
+  push:
+    tags:
+      - 'v*'
+
+env:
+  AQTION_DIR: aqtion
+  DIST_DIR: config
+  GIT_TAG: ${{github.ref_name}}
+
+name: Distribution Release
+
+jobs:
+  content_only:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout distrib
+        uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.DIST_DIR }}
+
+      - name: Fetch additional history
+        working-directory: ${{ env.DIST_DIR }}
+        run: |
+          # Set up partial clone support
+          git config remote.origin.promisor true
+          git config remote.origin.partialclonefilter blob:none
+          # Now fetches history (but not blobs!)
+          git fetch --unshallow
+
+      - name: Generate directory structure
+        run: |
+          mkdir -p ${{ env.AQTION_DIR }}/baseaq
+          mkdir -p ${{ env.AQTION_DIR }}/action
+
+      - name: Zip game content to pkz
+        working-directory: ${{ env.DIST_DIR }}/baseaq
+        run: |
+          for makepkz in pak0 pak1; do
+            cd ${makepkz}
+            python $GITHUB_WORKSPACE/${{ env.DIST_DIR }}/scripts/pkz/pkz.py ../${makepkz}.pkz * && cd ..
+            rm -rf ${makepkz}/
+          done
+
+      - name: Copy premade pkz's into action
+        working-directory: ${{ env.DIST_DIR }}
+        run: |
+          mv paks/zz_billboard_textures.pkz action/zz_billboard_textures.pkz
+      
+      - name: Download all library files for Windows, Linux and Linux ARM
+        run: |
+          for FILE in tng-lin-x86_64; \
+          do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip \
+          && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/baseaq/ \
+          && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/action/; \
+          rm -rf ${FILE}.zip; done
+
+      - name: Make all libraries executable
+        run: |
+          chmod +x ${{ env.DIST_DIR }}/baseaq/game*
+          chmod +x ${{ env.DIST_DIR }}/action/game*
+
+      - name: Copy content
+        run: |
+          cp ${{ env.DIST_DIR }}/LICENSE ${{ env.AQTION_DIR }}
+          cp -r ${{ env.DIST_DIR }}/baseaq/* aqtion/baseaq/
+          cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
+
+      - name: Upload aqtion content artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: aqtion-${{github.ref_name}}-content-only
+          path: |
+            ${{ env.AQTION_DIR }}
+
+      - name: Generate release artifact
+        run: |
+          zip -r aqtion-${{github.ref_name}}-content-only.zip ${{ env.AQTION_DIR }}
+
+      - name: Upload dist tarball to release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          body_path: 
+          tag_name: ${{github.ref_name}}
+          files: |
+            aqtion-${{github.ref_name}}-content-only.zip
+
+
+
+  lin_x86_64_flatpak:
+    name: "Linux x86_64 Flatpak"
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-44
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: actionquake/distrib
+          path: ${{ env.DIST_DIR }}
+
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@v6.1
+        working-directory: ${{ env.DIST_DIR }}/scripts/flatpak/
+        with:
+          bundle: aqtion-${{github.ref_name}}-linux_x86_64.flatpak
+          manifest-path: com.aqtiongame.aqtion.yml
+          cache-key: flatpak-builder-${{ github.sha }}
+
+      # - name: Upload dist flatpak to release
+      #   uses: softprops/action-gh-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ github.token }}
+      #   with:
+      #     body_path: 
+      #     tag_name: ${{github.ref_name}}
+      #     files: |
+      #       ${{ env.DIST_DIR }}/scripts/flatpak/aqtion-${{github.ref_name}}-linux_x86_64.flatpak
