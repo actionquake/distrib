@@ -1,4 +1,4 @@
-[ IMPORTANT ]
+## IMPORTANT
 
 These pkz files is distributed together with AQtion (aqtiongame.com)
 Any changes you make to this file might be overwritten in future updates
@@ -8,7 +8,9 @@ it along these.
 
 pkz files are simply .zip files renamed with the pkz extension.
 
-[ PROVIDED PKZ FILES ]
+
+## PROVIDED PKZ FILES
 
 pak0.pkz -> Main game content
 pak1.pkz -> Default game configs
+2023_summer_mapjam.pkz -> 2023 Summer Mapjam Contest Entries
