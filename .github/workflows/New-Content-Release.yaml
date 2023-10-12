@@ -41,6 +41,13 @@ jobs:
         run: |
           mv paks/zz_billboard_textures.pkz action/zz_billboard_textures.pkz
 
+      - name: Copy remote pkz's into baseaq
+        working-directory: ${{ env.DIST_DIR }}
+        run: |
+          for DOWNLOADLINK in $(cat scripts/map_packs); do
+            wget -qnv ${DOWNLOADLINK} -P baseaq/
+          done
+
       - name: Download all library files for Windows, Linux and Linux ARM
         run: |
           for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64 tng-darwin-x86_64 tng-darwin-arm64; \
