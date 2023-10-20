@@ -13,4 +13,4 @@ pkz files are simply .zip files renamed with the pkz extension.
 
 pak0.pkz -> Main game content
 pak1.pkz -> Default game configs
-2023_summer_mapjam.pkz -> 2023 Summer Mapjam Contest Entries
+2023_25thAnniversary_mapjam.pkz -> 2023 25th Anniversary Mapjam Contest Entries
