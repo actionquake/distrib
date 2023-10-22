@@ -33,10 +33,10 @@ Great!  Hosting a server is a great way to contribute to the community and helps
 ### Step by step
 
 Use the following Docker images
-* Official: `aqtiongame/server:v43`
+* Official: `aqtiongame/server:v45`
 * Espionage: `aqtiongame/espionage:v27`
-* ARM64 / Rasp Pi: `aqtiongame/server:v43-arm64`
-* ARM32 / Rasp Pi: `aqtiongame/server:v43-arm32`
+* ARM64 / Rasp Pi: `aqtiongame/server:v45-arm64`
+* ARM32 / Rasp Pi: `aqtiongame/server:v45-arm32`
 
 1. If you have docker and docker-compose already, skip to step 3
 1. Upon logging into the VPS/instance (ssh, console or otherwise) gaining access to the shell, install `docker` and `docker-compose`
@@ -58,3 +58,26 @@ Use the following Docker images
 1. Try connecting to your server from your client in the console
     * `connect your.server.ip.address:27910`
 1. If your server doesn't come up or you see errors and you don't know what's wrong, come ask for some help in **#troubleshooting** in our [Discord channel](https://discord.aq2world.com)
+
+### Server operations / FAQ
+
+#### Can I use a different port?
+* Yes!  Suggested ports begin at 27910 and +1 for every server you plan to host (27911, 27912, etc..)  If you are opening ports on a firewall/ACL, this port is listening on the **UDP** protocol, but we suggest opening both **UDP** and **TCP** as any incoming MVD viewers would observe a match over TCP.
+
+#### How do I get my server listed in the server browser?
+* Ensure your server is connectable by testing out a client connection yourself, and that your `MASTER` environment variable is set to default.  Your server should appear in the server browser / master list during its next scan cycle which tends to be about 2-5 minutes.  Naming it to something relatively unique will help it stand out if you are looking for it.
+
+#### Can I use DNS instead of IPs for my server?
+* Yes!  But, do not use a CNAME, as this will cause issues with clients connecting.  Use an A record instead.  Also, do not _proxy_ behind services like Cloudflare; the master servers will not be able to list your server in the server browser, and clients will have difficulty connecting to it.
+
+#### Which cloud provider should I use?
+* This is up to your regional preference, your budget and how many servers you want to run.  Generally, AWS pings the best and is very easy to setup.  Gravitron servers tend to be half the price of normal x86 servers, so you can host a server for very cheap.
+
+#### How do I get all of the maps?
+* Your server will automatically download each map as set in your `ROTATION` env var, or if you set `FULLMAPS=TRUE` as an environment variable, it will download every single map.  This is recommended only if you intend to use all of them as they take up 1GB of space.  Clients will automatically download the maps and assets from the downloadserver, assuming you have not changed this setting from default (or if you know what you are doing, hosting one yourself)
+
+#### How do I change the map rotation?
+* Your `ROTATION` env var is a comma-delimited list of maps, ensure there are no spaces in this list, and double-check your spelling.  If you want to add a map, just add it to the list, and it will be downloaded automatically on container restart.  If you want to remove a map, just remove it from the list, and it will be removed from the server on container restart.  If you want to change the order of the maps, just change the order in the list and restart the container.
+
+#### What if I have more questions?
+* Visit us in Discord in **#troubleshooting** in our [Discord channel](https://discord.aq2world.com) and we'll be happy to help you out.
