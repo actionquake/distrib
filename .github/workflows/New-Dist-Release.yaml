@@ -80,7 +80,7 @@ jobs:
           cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
 
       - name: Upload aqtion content artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-content-only
           path: |
@@ -91,7 +91,7 @@ jobs:
           zip -r aqtion-${{github.ref_name}}-content-only.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -121,21 +121,21 @@ jobs:
           mv aqtion-${{github.ref_name}}-linux-* ../../../
 
       - name: Generate Linux x86_64 deb archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: linux-${{github.ref_name}}-x86_64-deb
           path: |
             aqtion-${{github.ref_name}}-linux-x86_64.deb 
 
       - name: Generate Linux ARM64 deb archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: linux-${{github.ref_name}}-arm64-deb
           path: |
             aqtion-${{github.ref_name}}-linux-arm64.deb
 
       - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -176,7 +176,7 @@ jobs:
       #     md5sum ${{ env.AQTION_DIR }}/action/gamex*
 
       - name: Upload aqtion-windows-x86_64 archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-windows-x86_64
           path: |
@@ -187,7 +187,7 @@ jobs:
           zip -r aqtion-${{github.ref_name}}-windows-x86_64.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -232,7 +232,7 @@ jobs:
       #     md5sum ${{ env.AQTION_DIR }}/action/gamex*
 
       - name: Upload aqtion-linux-x86_64 archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-linux-x86_64
           path: |
@@ -243,7 +243,7 @@ jobs:
           zip -r aqtion-${{github.ref_name}}-linux-x86_64.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -284,7 +284,7 @@ jobs:
       #     md5sum ${{ env.AQTION_DIR }}/action/gamex*
 
       - name: Upload aqtion-linux-arm64 archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-linux-arm64
           path: |
@@ -295,7 +295,7 @@ jobs:
           zip -r aqtion-${{github.ref_name}}-linux-arm64.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -339,7 +339,7 @@ jobs:
       #     bash -x package_mac.sh standalone
 
       # - name: Generate Universal Standalone DMG artifact
-      #   uses: actions/upload-artifact@v3
+      #   uses: actions/upload-artifact@v4
       #   with:
       #     name: aqtion-${{github.ref_name}}-mac-universal
       #     path: |
@@ -368,7 +368,7 @@ jobs:
       #   run: bash -x package_mac.sh steam
 
       - name: Generate Universal Steam zip artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-mac-universal
           path: |
@@ -379,7 +379,7 @@ jobs:
           zip -r aqtion-${{github.ref_name}}-mac-universal.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -449,7 +449,7 @@ jobs:
   #         ls -l
 
   #     - name: Upload dist tarball to release
-  #       uses: softprops/action-gh-release@v1
+  #       uses: softprops/action-gh-release@v2
   #       env:
   #         GITHUB_TOKEN: ${{ github.token }}
   #       with:

@@ -68,7 +68,7 @@ jobs:
           cd ${{ env.DIST_DIR }} && zip -r aqtion-content.zip versions baseaq/ action/
 
       - name: Generate archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: aq-content-only
           path: |
