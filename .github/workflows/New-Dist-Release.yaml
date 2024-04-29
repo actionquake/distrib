@@ -12,7 +12,7 @@ name: Distribution Release
 
 jobs:
   content_only:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout distrib
         uses: actions/checkout@v4
@@ -60,18 +60,18 @@ jobs:
       #   run: |
       #     find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
 
-      - name: Download all library files for Windows, Linux and Linux ARM
-        run: |
-          for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64 tng-darwin-x86_64 tng-darwin-arm64; \
-          do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip \
-          && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/baseaq/ \
-          && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/action/; \
-          rm -rf ${FILE}.zip; done
+      # - name: Download all library files for Windows, Linux and Linux ARM
+      #   run: |
+      #     for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64 tng-darwin-x86_64 tng-darwin-arm64; \
+      #     do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip \
+      #     && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/baseaq/ \
+      #     && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/action/; \
+      #     rm -rf ${FILE}.zip; done
 
-      - name: Make all libraries executable
-        run: |
-          chmod +x ${{ env.DIST_DIR }}/baseaq/game*
-          chmod +x ${{ env.DIST_DIR }}/action/game*
+      # - name: Make all libraries executable
+      #   run: |
+      #     chmod +x ${{ env.DIST_DIR }}/baseaq/game*
+      #     chmod +x ${{ env.DIST_DIR }}/action/game*
 
       - name: Copy content
         run: |
@@ -101,7 +101,7 @@ jobs:
             aqtion-${{github.ref_name}}-content-only.zip
 
   linux_deb:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -147,7 +147,7 @@ jobs:
 
   win_x86_64_dist:
     needs: content_only
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -164,6 +164,7 @@ jobs:
         run: |
           wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-msvc-x64.zip
           unzip q2pro-msvc-x64.zip -d ${{ env.AQTION_DIR }}
+          mv ${{ env.AQTION_DIR }}/gamex86_64.dll ${{ env.AQTION_DIR }}/action/gamex86_64.dll
 
       - name: Copy external libraries for Q2Pro
         run: |
@@ -197,7 +198,7 @@ jobs:
 
   lin_x86_64_dist:
     needs: content_only
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -218,6 +219,7 @@ jobs:
           unzip -o wayland/q2pro-lin-wayland-gcc.zip -d ${{ env.AQTION_DIR }}
           mv ${{ env.AQTION_DIR }}/q2pro ${{ env.AQTION_DIR }}/q2pro-wayland
           unzip -o x11/q2pro-lin-gcc.zip -d ${{ env.AQTION_DIR }}
+          mv ${{ env.AQTION_DIR }}/gamex86_64.so ${{ env.AQTION_DIR }}/action/gamex86_64.so
           chmod +x ${{ env.AQTION_DIR }}/q2pro*
 
       - name: Copy external libraries for Q2Pro
@@ -252,7 +254,7 @@ jobs:
 
   lin_arm64_dist:
     needs: content_only
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -269,7 +271,8 @@ jobs:
         run: |
           wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-arm64.zip
           unzip q2pro-lin-arm64.zip -d ${{ env.AQTION_DIR }}
-          chmod +x ${{ env.AQTION_DIR }}/q2pro*
+          mv ${{ env.AQTION_DIR }}/gamearm64.so ${{ env.AQTION_DIR }}/action/gamearm64.so
+          chmod +x ${{ env.AQTION_DIR }}/q2pro* ${{ env.AQTION_DIR }}/q2pro*/action/gamearm64.so
 
       - name: Copy external libraries for Q2Pro
         run: |
@@ -347,12 +350,13 @@ jobs:
         run: |
           lipo -create -output ${{ env.AQTION_DIR }}/q2pro x86_64/q2pro arm64/q2pro
           lipo -create -output ${{ env.AQTION_DIR }}/q2proded x86_64/q2proded arm64/q2proded
-          lipo -create -output ${{ env.AQTION_DIR }}/gamex86_64.dylib x86_64/gamex86_64.dylib arm64/gamex86_64.dylib
           cp ${{ env.DIST_DIR }}/build/mac/q2probuilds/universal/aqtion ${{ env.AQTION_DIR }}/aqtion
           install_name_tool -change '@rpath/discord_game_sdk.dylib' '@loader_path/discord_game_sdk.dylib' ${{ env.AQTION_DIR }}/q2pro
 
       - name: Copy the libraries and startup script
         run: |
+          install x86_64/gamex86_64.dylib ${{ env.AQTION_DIR }}/action/gamex86_64.dylib
+          install arm64/gamearm64.dylib ${{ env.AQTION_DIR }}/action/gamearm64.dylib
           install ${{ env.DIST_DIR }}/build//mac/steam/libsteam_api.dylib ${{ env.AQTION_DIR }}/libsteam_api.dylib
           install ${{ env.DIST_DIR }}/build//mac/steam/steam_appid.txt ${{ env.AQTION_DIR }}/steam_appid.txt
           install ${{ env.DIST_DIR }}/build//mac/q2probuilds/universal/libs/discord_game_sdk.dylib ${{ env.AQTION_DIR }}/discord_game_sdk.dylib
