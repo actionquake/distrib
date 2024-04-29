@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout distrib
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
@@ -103,7 +103,7 @@ jobs:
   linux_deb:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
@@ -149,7 +149,7 @@ jobs:
     needs: content_only
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
@@ -199,7 +199,7 @@ jobs:
     needs: content_only
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
@@ -254,7 +254,7 @@ jobs:
     needs: content_only
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
@@ -306,7 +306,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout distrib
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
@@ -347,6 +347,7 @@ jobs:
         run: |
           lipo -create -output ${{ env.AQTION_DIR }}/q2pro x86_64/q2pro arm64/q2pro
           lipo -create -output ${{ env.AQTION_DIR }}/q2proded x86_64/q2proded arm64/q2proded
+          lipo -create -output ${{ env.AQTION_DIR }}/gamex86_64.dylib x86_64/gamex86_64.dylib arm64/gamex86_64.dylib
           cp ${{ env.DIST_DIR }}/build/mac/q2probuilds/universal/aqtion ${{ env.AQTION_DIR }}/aqtion
           install_name_tool -change '@rpath/discord_game_sdk.dylib' '@loader_path/discord_game_sdk.dylib' ${{ env.AQTION_DIR }}/q2pro
 
@@ -386,7 +387,7 @@ jobs:
 
   push_to_release:
     needs: ["mac_dist", "lin_x86_64_dist", "win_x86_64_dist", "lin_arm64_dist", "linux_deb", "content_only"]
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Update Vercel download links
         run: curl -X POST ${{ secrets.DEPLOY_API_URL }}
