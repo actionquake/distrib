@@ -89,7 +89,7 @@ jobs:
           cp ${{ env.CFG_WORKING_DIR }}/scripts/steam/*.vdf .
 
       - name: Upload All Builds
-        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build /home/dino/actions-runner/_work/distrib/distrib/${{ inputs.steam_branch }}.vdf +quit
+        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build /home/dino/actions-runner/_work/distrib/distrib/scripts/steam/${{ inputs.steam_branch }}.vdf +quit
         env:
           STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
           STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}
