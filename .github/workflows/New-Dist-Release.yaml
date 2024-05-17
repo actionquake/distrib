@@ -2,6 +2,8 @@ on:
   push:
     tags:
       - 'v*'
+  release:
+    types: [created]
 
 env:
   AQTION_DIR: aqtion
@@ -155,7 +157,7 @@ jobs:
           path: ${{ env.DIST_DIR }}
 
       - name: Get aqtion-content
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
@@ -206,7 +208,7 @@ jobs:
           path: ${{ env.DIST_DIR }}
 
       - name: Get aqtion-content
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
@@ -262,7 +264,7 @@ jobs:
           path: ${{ env.DIST_DIR }}
 
       - name: Get aqtion-content
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
@@ -315,7 +317,7 @@ jobs:
           path: ${{ env.DIST_DIR }}
 
       - name: Get aqtion-content
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
