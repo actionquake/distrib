@@ -216,11 +216,11 @@ jobs:
       - name: Download and extract latest Linux x64 Q2Pro Release
         run: |
           mkdir -p wayland x11
-          wget -P x11 -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-gcc.zip
-          wget -P wayland -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-wayland-gcc.zip
-          unzip -o wayland/q2pro-lin-wayland-gcc.zip -d ${{ env.AQTION_DIR }}
+          wget -P x11 -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-gcc-x86_64.zip
+          wget -P wayland -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-wayland-gcc-x86_64.zip
+          unzip -o wayland/q2pro-lin-wayland-gcc-x86_64.zip -d ${{ env.AQTION_DIR }}
           mv ${{ env.AQTION_DIR }}/q2pro ${{ env.AQTION_DIR }}/q2pro-wayland
-          unzip -o x11/q2pro-lin-gcc.zip -d ${{ env.AQTION_DIR }}
+          unzip -o x11/q2pro-lin-gcc-x86_64.zip -d ${{ env.AQTION_DIR }}
           mv ${{ env.AQTION_DIR }}/gamex86_64.so ${{ env.AQTION_DIR }}/action/gamex86_64.so
           chmod +x ${{ env.AQTION_DIR }}/q2pro*
 
