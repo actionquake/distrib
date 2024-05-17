@@ -274,7 +274,7 @@ jobs:
           wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-arm64.zip
           unzip q2pro-lin-arm64.zip -d ${{ env.AQTION_DIR }}
           mv ${{ env.AQTION_DIR }}/gamearm64.so ${{ env.AQTION_DIR }}/action/gamearm64.so
-          chmod +x ${{ env.AQTION_DIR }}/q2pro* ${{ env.AQTION_DIR }}/q2pro*/action/gamearm64.so
+          chmod +x ${{ env.AQTION_DIR }}/q2pro* ${{ env.AQTION_DIR }}/action/gamearm64.so
 
       - name: Copy external libraries for Q2Pro
         run: |
