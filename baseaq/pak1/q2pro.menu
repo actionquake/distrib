@@ -379,9 +379,13 @@ begin mouse
     background mouse_bkgd
     title "Mouse Setup"
     pairs "invert mouse" m_pitch "no" "0.022" "yes" "-0.022"
-    field --numeric --width 8 "mouse sens" sensitivity
+    field --numeric --width 8 "mouse sensitivity" sensitivity
     toggle "auto scale zoom sensitivity" m_autosens
     toggle "mouse filter" m_filter
+    blank
+    field --numeric --width 8 "2x zoom sensitivity" cl_zoom_2x
+    field --numeric --width 8 "4x zoom sensitivity" cl_zoom_4x
+    field --numeric --width 8 "6x zoom sensitivity" cl_zoom_6x
     blank
     action "choose crosshair" "pushmenu chsetup"
     blank
