@@ -2,9 +2,6 @@ on:
   push:
     tags:
       - 'v*'
-  release:
-    types: [created]
-
 env:
   AQTION_DIR: aqtion
   DIST_DIR: config
