@@ -53,6 +53,19 @@ jobs:
           for DOWNLOADLINK in $(cat scripts/map_packs); do
             wget -qnv ${DOWNLOADLINK} -P baseaq/
           done
+
+      - name: Copy remote files into action
+        working-directory: ${{ env.DIST_DIR}}
+        run: |
+          for DOWNLOADLINK in $(cat scripts/s3); do
+            wget -qnv ${DOWNLOADLINK}
+          done
+
+      - name: Extract bots + navmesh files
+        working-directory: ${{ env.DIST_DIR}}
+        run: |
+          unzip -oq navmesh.zip -d action/
+          rm -rf navmesh.zip
       
       # - name: Generate checksum file
       #   working-directory: ${{ env.DIST_DIR }}/action
