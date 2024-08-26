@@ -48,6 +48,19 @@ jobs:
             wget -qnv ${DOWNLOADLINK} -P baseaq/
           done
 
+      - name: Copy remote files into action
+        working-directory: ${{ env.DIST_DIR}}
+        run: |
+          for DOWNLOADLINK in $(cat scripts/s3); do
+            wget -qnv ${DOWNLOADLINK}
+          done
+
+      - name: Extract bots + navmesh files
+        working-directory: ${{ env.DIST_DIR}}
+        run: |
+          unzip -oq navmesh.zip -d action/
+          rm -rf navmesh.zip
+
       - name: Download all library files for Windows, Linux and Linux ARM
         run: |
           for FILE in q2pro-darwin-arm64 q2pro-lin-arm64 q2pro-lin-gcc-x86_64 q2pro-msvc-x64; \
