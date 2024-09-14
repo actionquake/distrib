@@ -33,7 +33,7 @@ jobs:
           ls -la ./
 
       - name: Checkout distrib
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: actionquake/distrib
           path: ${{ env.CFG_WORKING_DIR }}
@@ -76,20 +76,13 @@ jobs:
           unzip aqtion-${{ inputs.release_tag }}-windows-x86_64.zip -d ${{ env.WIN64_DIST_DIR }}/
           unzip aqtion-${{ inputs.release_tag }}-mac-universal.zip -d ${{ env.MAC_DIST_DIR }}/
 
-      - name: Look around
-        run: |
-          ls -l
-          ls -l ${{ env.LIN64_DIST_DIR }}/
-          ls -l ${{ env.WIN64_DIST_DIR }}/
-          ls -l ${{ env.MAC_DIST_DIR }}/
-
       ## Upload to Steam
       - name: Copy VDF scripts
         run: |
           cp ${{ env.CFG_WORKING_DIR }}/scripts/steam/*.vdf .
 
       - name: Upload All Builds
-        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build /home/dino/actions-runner/_work/distrib/distrib/${{ inputs.steam_branch }}.vdf +quit
+        run: steamcmd +login ${STEAM_LOGIN_NAME} ${STEAM_LOGIN_PASSWORD} +run_app_build /opt/actions-runner/_work/distrib/distrib/${{ inputs.steam_branch }}.vdf +quit
         env:
           STEAM_LOGIN_NAME: ${{ secrets.STEAM_LOGIN_NAME }}
           STEAM_LOGIN_PASSWORD: ${{ secrets.STEAM_LOGIN_PASSWORD }}

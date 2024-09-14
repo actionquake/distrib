@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout distrib
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
@@ -50,10 +50,12 @@ jobs:
 
       - name: Download all library files for Windows, Linux and Linux ARM
         run: |
-          for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64 tng-darwin-x86_64 tng-darwin-arm64; \
+          for FILE in q2pro-darwin-arm64 q2pro-lin-arm64 q2pro-lin-gcc-x86_64 q2pro-msvc-x64; \
           do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip \
           && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/baseaq/ \
           && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/action/ \
+          && rm -rf ${{ env.DIST_DIR }}/baseaq/q2pro* \
+          && rm -rf ${{ env.DIST_DIR }}/action/q2pro* \
           ; done
 
       - name: Make all libraries executable
@@ -66,7 +68,7 @@ jobs:
           cd ${{ env.DIST_DIR }} && zip -r aqtion-content.zip versions baseaq/ action/
 
       - name: Generate archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: aq-content-only
           path: |

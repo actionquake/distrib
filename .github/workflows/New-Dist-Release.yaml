@@ -2,7 +2,6 @@ on:
   push:
     tags:
       - 'v*'
-
 env:
   AQTION_DIR: aqtion
   DIST_DIR: config
@@ -12,10 +11,10 @@ name: Distribution Release
 
 jobs:
   content_only:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout distrib
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
@@ -60,18 +59,18 @@ jobs:
       #   run: |
       #     find -type f \( -not -name "checksums" \) -exec md5sum '{}' \; > checksums
 
-      - name: Download all library files for Windows, Linux and Linux ARM
-        run: |
-          for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64 tng-darwin-x86_64 tng-darwin-arm64; \
-          do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip \
-          && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/baseaq/ \
-          && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/action/; \
-          rm -rf ${FILE}.zip; done
+      # - name: Download all library files for Windows, Linux and Linux ARM
+      #   run: |
+      #     for FILE in tng-win-64 tng-lin-x86_64 tng-lin-arm64 tng-darwin-x86_64 tng-darwin-arm64; \
+      #     do wget -qnv https://github.com/actionquake/aq2-tng/releases/latest/download/${FILE}.zip \
+      #     && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/baseaq/ \
+      #     && unzip -o ${FILE}.zip -d ${{ env.DIST_DIR }}/action/; \
+      #     rm -rf ${FILE}.zip; done
 
-      - name: Make all libraries executable
-        run: |
-          chmod +x ${{ env.DIST_DIR }}/baseaq/game*
-          chmod +x ${{ env.DIST_DIR }}/action/game*
+      # - name: Make all libraries executable
+      #   run: |
+      #     chmod +x ${{ env.DIST_DIR }}/baseaq/game*
+      #     chmod +x ${{ env.DIST_DIR }}/action/game*
 
       - name: Copy content
         run: |
@@ -80,7 +79,7 @@ jobs:
           cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
 
       - name: Upload aqtion content artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-content-only
           path: |
@@ -91,7 +90,7 @@ jobs:
           zip -r aqtion-${{github.ref_name}}-content-only.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -101,9 +100,9 @@ jobs:
             aqtion-${{github.ref_name}}-content-only.zip
 
   linux_deb:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
@@ -121,21 +120,21 @@ jobs:
           mv aqtion-${{github.ref_name}}-linux-* ../../../
 
       - name: Generate Linux x86_64 deb archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: linux-${{github.ref_name}}-x86_64-deb
           path: |
             aqtion-${{github.ref_name}}-linux-x86_64.deb 
 
       - name: Generate Linux ARM64 deb archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: linux-${{github.ref_name}}-arm64-deb
           path: |
             aqtion-${{github.ref_name}}-linux-arm64.deb
 
       - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -147,15 +146,15 @@ jobs:
 
   win_x86_64_dist:
     needs: content_only
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
 
       - name: Get aqtion-content
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
@@ -164,6 +163,7 @@ jobs:
         run: |
           wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-msvc-x64.zip
           unzip q2pro-msvc-x64.zip -d ${{ env.AQTION_DIR }}
+          mv ${{ env.AQTION_DIR }}/gamex86_64.dll ${{ env.AQTION_DIR }}/action/gamex86_64.dll
 
       - name: Copy external libraries for Q2Pro
         run: |
@@ -175,7 +175,7 @@ jobs:
       #     md5sum ${{ env.AQTION_DIR }}/action/gamex*
 
       - name: Upload aqtion-windows-x86_64 archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-windows-x86_64
           path: |
@@ -186,7 +186,7 @@ jobs:
           zip -r aqtion-${{github.ref_name}}-windows-x86_64.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -197,15 +197,15 @@ jobs:
 
   lin_x86_64_dist:
     needs: content_only
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
 
       - name: Get aqtion-content
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
@@ -213,11 +213,12 @@ jobs:
       - name: Download and extract latest Linux x64 Q2Pro Release
         run: |
           mkdir -p wayland x11
-          wget -P x11 -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-gcc.zip
-          wget -P wayland -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-wayland-gcc.zip
-          unzip -o wayland/q2pro-lin-wayland-gcc.zip -d ${{ env.AQTION_DIR }}
+          wget -P x11 -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-gcc-x86_64.zip
+          wget -P wayland -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-wayland-gcc-x86_64.zip
+          unzip -o wayland/q2pro-lin-wayland-gcc-x86_64.zip -d ${{ env.AQTION_DIR }}
           mv ${{ env.AQTION_DIR }}/q2pro ${{ env.AQTION_DIR }}/q2pro-wayland
-          unzip -o x11/q2pro-lin-gcc.zip -d ${{ env.AQTION_DIR }}
+          unzip -o x11/q2pro-lin-gcc-x86_64.zip -d ${{ env.AQTION_DIR }}
+          mv ${{ env.AQTION_DIR }}/gamex86_64.so ${{ env.AQTION_DIR }}/action/gamex86_64.so
           chmod +x ${{ env.AQTION_DIR }}/q2pro*
 
       - name: Copy external libraries for Q2Pro
@@ -230,7 +231,7 @@ jobs:
       #     md5sum ${{ env.AQTION_DIR }}/action/gamex*
 
       - name: Upload aqtion-linux-x86_64 archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-linux-x86_64
           path: |
@@ -241,7 +242,7 @@ jobs:
           zip -r aqtion-${{github.ref_name}}-linux-x86_64.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -252,15 +253,15 @@ jobs:
 
   lin_arm64_dist:
     needs: content_only
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
 
       - name: Get aqtion-content
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
@@ -269,7 +270,8 @@ jobs:
         run: |
           wget -qnv https://github.com/actionquake/q2pro/releases/latest/download/q2pro-lin-arm64.zip
           unzip q2pro-lin-arm64.zip -d ${{ env.AQTION_DIR }}
-          chmod +x ${{ env.AQTION_DIR }}/q2pro*
+          mv ${{ env.AQTION_DIR }}/gamearm64.so ${{ env.AQTION_DIR }}/action/gamearm64.so
+          chmod +x ${{ env.AQTION_DIR }}/q2pro* ${{ env.AQTION_DIR }}/action/gamearm64.so
 
       - name: Copy external libraries for Q2Pro
         run: |
@@ -281,7 +283,7 @@ jobs:
       #     md5sum ${{ env.AQTION_DIR }}/action/gamex*
 
       - name: Upload aqtion-linux-arm64 archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-linux-arm64
           path: |
@@ -292,7 +294,7 @@ jobs:
           zip -r aqtion-${{github.ref_name}}-linux-arm64.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -306,13 +308,13 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout distrib
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: actionquake/distrib
           path: ${{ env.DIST_DIR }}
 
       - name: Get aqtion-content
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-content-only
           path: ${{ env.AQTION_DIR }}
@@ -336,7 +338,7 @@ jobs:
       #     bash -x package_mac.sh standalone
 
       # - name: Generate Universal Standalone DMG artifact
-      #   uses: actions/upload-artifact@v3
+      #   uses: actions/upload-artifact@v4
       #   with:
       #     name: aqtion-${{github.ref_name}}-mac-universal
       #     path: |
@@ -352,6 +354,8 @@ jobs:
 
       - name: Copy the libraries and startup script
         run: |
+          install x86_64/gamex86_64.dylib ${{ env.AQTION_DIR }}/action/gamex86_64.dylib
+          install arm64/gamearm64.dylib ${{ env.AQTION_DIR }}/action/gamearm64.dylib
           install ${{ env.DIST_DIR }}/build//mac/steam/libsteam_api.dylib ${{ env.AQTION_DIR }}/libsteam_api.dylib
           install ${{ env.DIST_DIR }}/build//mac/steam/steam_appid.txt ${{ env.AQTION_DIR }}/steam_appid.txt
           install ${{ env.DIST_DIR }}/build//mac/q2probuilds/universal/libs/discord_game_sdk.dylib ${{ env.AQTION_DIR }}/discord_game_sdk.dylib
@@ -363,7 +367,7 @@ jobs:
       #   run: bash -x package_mac.sh steam
 
       - name: Generate Universal Steam zip artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: aqtion-${{github.ref_name}}-mac-universal
           path: |
@@ -374,7 +378,7 @@ jobs:
           zip -r aqtion-${{github.ref_name}}-mac-universal.zip ${{ env.AQTION_DIR }}
 
       - name: Upload dist tarball to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -386,7 +390,7 @@ jobs:
 
   push_to_release:
     needs: ["mac_dist", "lin_x86_64_dist", "win_x86_64_dist", "lin_arm64_dist", "linux_deb", "content_only"]
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Update Vercel download links
         run: curl -X POST ${{ secrets.DEPLOY_API_URL }}
@@ -444,7 +448,7 @@ jobs:
   #         ls -l
 
   #     - name: Upload dist tarball to release
-  #       uses: softprops/action-gh-release@v1
+  #       uses: softprops/action-gh-release@v2
   #       env:
   #         GITHUB_TOKEN: ${{ github.token }}
   #       with:
