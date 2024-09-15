@@ -91,6 +91,39 @@ jobs:
           cp -r ${{ env.DIST_DIR }}/baseaq/* aqtion/baseaq/
           cp -r ${{ env.DIST_DIR }}/action/* aqtion/action/
 
+      - name: Upload pak0.pkz to S3
+        uses: hkusu/s3-upload-action@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY}}
+          aws-region: 'us-east-1'
+          aws-bucket: ${{ secrets.AWS_BUCKET }}
+          file-path: 'baseaq/pak0.pkz'
+          destination-dir: 'action/aqtion/'
+          bucket-root: '/'
+
+      - name: Upload pak1.pkz to S3
+        uses: hkusu/s3-upload-action@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY}}
+          aws-region: 'us-east-1'
+          aws-bucket: ${{ secrets.AWS_BUCKET }}
+          file-path: 'baseaq/pak1.pkz'
+          destination-dir: 'action/aqtion/'
+          bucket-root: '/'
+
+      - name: Upload Billboards pkz to S3
+        uses: hkusu/s3-upload-action@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY}}
+          aws-region: 'us-east-1'
+          aws-bucket: ${{ secrets.AWS_BUCKET }}
+          file-path: 'action/zz_billboard_textures.pkz'
+          destination-dir: 'action/aqtion/'
+          bucket-root: '/'
+
       - name: Upload aqtion content artifact
         uses: actions/upload-artifact@v4
         with:
