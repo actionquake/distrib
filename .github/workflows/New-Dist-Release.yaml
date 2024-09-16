@@ -98,7 +98,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY}}
           aws-region: 'us-east-1'
           aws-bucket: ${{ secrets.AWS_BUCKET }}
-          file-path: 'baseaq/pak0.pkz'
+          file-path: '${{ env.DIST_DIR }}/baseaq/pak0.pkz'
           destination-dir: 'action/aqtion/'
           bucket-root: '/'
 
@@ -109,7 +109,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY}}
           aws-region: 'us-east-1'
           aws-bucket: ${{ secrets.AWS_BUCKET }}
-          file-path: 'baseaq/pak1.pkz'
+          file-path: '${{ env.DIST_DIR }}/baseaq/pak1.pkz'
           destination-dir: 'action/aqtion/'
           bucket-root: '/'
 
