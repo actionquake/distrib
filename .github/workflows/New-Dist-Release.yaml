@@ -120,7 +120,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY}}
           aws-region: 'us-east-1'
           aws-bucket: ${{ secrets.AWS_BUCKET }}
-          file-path: 'action/zz_billboard_textures.pkz'
+          file-path: '${{ env.DIST_DIR }}/action/zz_billboard_textures.pkz'
           destination-dir: 'action/aqtion/'
           bucket-root: '/'
 
