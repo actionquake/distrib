@@ -1,0 +1,54 @@
+// ===========================
+// Diablo like prefix
+// ===========================
+Dark
+Red
+Cold
+Eye of
+Ancient
+Winged
+The
+Elder
+Grand
+Elite
+Strong
+Fast
+Sharp
+Cursed
+Champion
+Thief
+Ghostly
+Fanatical
+Berserk
+Possessed
+Stoneskin
+Demon
+Flying
+Undead
+Vile
+Vampire
+Gloomy
+Dire
+Black
+Star
+Seething
+Ash
+Blade
+Steel
+Stone
+Rusty
+Moldy
+Rotting
+Mage
+Skeleton
+Wild
+Riftwing
+Vilehand
+Flamefinger
+Sparkfist
+Icefist
+Voidfinger
+Dragonhand
+WoodFist
+Unleashed
+Crawler

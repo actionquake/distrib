@@ -1,0 +1,718 @@
+// ===========================
+// Homage and Credits
+// ===========================
+// XoXus - Creator and programmer of Quake II Dronebot 1998 (some of this code found its way into LTK by way of RiEvEr) - https://theoldnet.com/get?decode=false&scripts=false&timestamp=20021113173826&url=http://www.planetquake.com/dronebot/credits.htm
+XoXus
+// [TRB]_ReKTeK - Directing manager and second owner (after XoXus retired) of Quake II Dronebot 1998 - https://theoldnet.com/get?decode=false&scripts=false&timestamp=20021113173826&url=http://www.planetquake.com/dronebot/credits.htm
+ReKTeK
+// RiEvEr (Connor "RiEvEr" Caple) - Programmer for Dronebot & Creator of Action Quake 2 bot LTK (License to Kill) - https://www.moddb.com/mods/action-quake-2-bot
+RiEvEr
+// Stress - Web site designer for Quake II Dronebot 1998 - https://theoldnet.com/get?decode=false&scripts=false&timestamp=20021113173826&url=http://www.planetquake.com/dronebot/credits.htm
+Stress
+// Fizzgig - Web site designer for Quake II Dronebot 1998 - https://theoldnet.com/get?decode=false&scripts=false&timestamp=20021113173826&url=http://www.planetquake.com/dronebot/credits.htm
+Fizzgig
+// Muzman - Sound and audio engineer for Quake II Dronebot 1998 - https://theoldnet.com/get?decode=false&scripts=false&timestamp=20021113173826&url=http://www.planetquake.com/dronebot/credits.htm
+Muzman
+// RiNgMaStEr - Testing Levels and mapping for Quake II Dronebot 1998 - https://theoldnet.com/get?decode=false&scripts=false&timestamp=20021113173826&url=http://www.planetquake.com/dronebot/credits.htm
+RiNgMaStEr
+// Steve 'Meat' Yeager - Creator of Quake II bot ACE Bot 1998 (some of this code found its way into LTK)
+Steve Yeager
+// Fredrick - Contributor (5th? author) of Action Quake 2 & LTK (License to Kill) - https://www.moddb.com/mods/action-quake-2-bot
+Fred
+// Paril - Contributor of Action Quake 2 & LTK (License to Kill)
+Paril
+// WereWolf - Contributor of Action Quake 2 & LTK (License to Kill) and NewLtk bot
+WereWolf
+// Raptor007 - Contributor of Action Quake 2 & LTK - https://github.com/Raptor007/aq2-tng/
+Raptor007
+// mSparks (Mark Parker) - Creator of LTKTBM (license to kill the borg matrix) - https://www.moddb.com/games/ltktbm
+mSparks
+// DondeQ2 - Archiving the history of Quake 2 - https://dondeq2.com/ - https://www.youtube.com/@DondeQ2/videos
+DondeQ2
+// ===========================
+// iD Software and Quake 2
+// ===========================
+John Carmack
+John Romero
+Michael Abrash
+Sandy Petersen
+Kevin Cloud
+Adrian Carmack
+American Mcgee
+Tim Willits
+Sonic Mayhem
+Trent Reznor
+NiN
+Scourge of Armagon
+Dissolution of Eternity
+The Reckoning
+Ground Zero
+Enforcer
+Gunner
+Berserker
+Iron Maiden
+Gladiator
+Medic
+Technician
+Icarus
+Tank
+Makron
+Quad Machine
+Cerberon
+Strogg
+// ===========================
+// Quake 3 bots
+// ===========================
+Bitterman
+Crash
+Ranger
+Phobos
+Mynx
+Orbb
+Sarge
+Grunt
+Hossman
+Daemia
+Hunter
+Angel
+Gorre
+Klesk
+Slash
+Wrack
+Biker
+Lucy
+Patriot
+Tank Jr
+Anarki
+Stripe
+Razor
+Keel
+Visor
+Uriel
+Bones
+Cadaver
+Sorlag
+Doom
+Major
+Xaero
+// ===========================
+// Other bot names
+// ===========================
+Ratbot
+HAL-9000
+// ===========================
+// Firearm Experts
+// ===========================
+// Brandon Herrera - https://www.youtube.com/@BrandonHerrera
+Brandon Herrera
+// ===========================
+// Action hero characters (male) http://www.theshiznit.co.uk/feature/the-definitive-list-of-ridiculous-action-hero-character-names.php
+// ===========================
+John Conner
+Terminator
+T-800
+T-1000
+Anakin Skywalker
+Short Round
+Barney Ross
+The Boss
+Dean Stevens
+The Dean
+Jake Malloy
+Joe Tanto
+Kit Latura
+Robert Rath
+Judge Joseph Dredd
+Ray Quick
+John Spartan
+Gabe Walker
+Angelo Provolone
+Snaps
+Lt Raymond Tango
+Lincoln Hawk
+Lieutenant Marion Cobretti
+Cobra
+John Rambo
+Captain Robert Hatch
+Deke DaSilva
+Cosmo Carboni
+Johnny Kovac
+Rocky Balboa
+Elmore Caddo
+Rocky
+Machine Gun Joe Viterbo
+Jerry Savage
+Stud
+Trench
+Gordy Brewer
+Jericho Cane
+Dr Victor Fries
+U.S. Marshal John Kruger
+The Eraser
+Harry Tasker
+Jack Slater
+Capt. Ivan Danko
+Dutch
+Mark Kaminsky
+Joseph P. Brenner
+John Matrix
+Kalidor
+Conan
+Handsome Stranger
+Muscleman
+Joe Santo
+Church
+Dink Heimowitz
+Mr Suave
+Frank Moses
+Harrison Hill
+Col. Doug Masterson
+Mr Goodkat
+Sonny Truelove
+Lieutenant AK Waters
+Jimmy Tudeski
+The Tulip
+Trey Kincaid
+Major General William Deveraux
+Harry Stamper
+Korben Dallas
+Muddy Grimes
+Butch Coolidge
+Det. Tom Hardy
+Hudson Hawk 
+James Urbanski
+Tom Mix
+Lee Christmas
+Jensen Ames
+Terry Leather
+Farmer the farmer
+Chev Chelios
+Handsome Rob
+Monk
+MVA Agent Evan Funsch
+Sgt Jericho Butler
+Turkish
+Bacon
+Jean Vilain
+Samson Gaul
+Tiano
+Vincent Brazil
+Frenchy
+Jack Robideaux
+Phillip Sauvage
+Ben Archer
+Jacques Kristoff
+Rudy Cafmeyer
+Charles Le Vaillaint
+Replicant
+Edward Garrotte
+Alain Moreau
+Mikhail Suverov
+Darren McCord
+Colonel William F. Guile
+Chance Boudreaux
+Luc Deveraux
+Alex Wagner
+Chad Wagner
+Gibson Rickenbacker
+Frank Dux
+Ivan Kraschinsky
+Booker
+John Shepherd
+Joshua McCord
+Jake Fallon
+McKenna
+Jake Wilder
+Frank Shatter
+Capt. Ranger Cordell Walker
+Matt Hunter
+JJ McQuade
+Lone Wolf
+Sean Kane
+John T. Booker
+Chuck Slaughter
+Colt
+Gunner Jensen
+Max Gatling
+The German
+Dr. Sage Mennox
+Edward Genn
+Icarus
+Mike Riggins
+Ryder
+Xander Ronson
+Brixos
+Nikolai Cherenko
+Lance Rockford
+Sgt. Frank Gannon
+Sam Decker
+Warchild
+Major Frank Cross
+Waxman
+Michael Dane
+Nick Gunar
+Wellman Anthony Santee
+Det. Jack Caine
+Lt. Nikolai Rachenko
+Ivan Drago
+Venz
+Tom Steele
+Elijah Kane
+Rogelio Torrez
+Samuel Axel
+Ruslan
+Tao
+Cock Puncher
+Simon Ballister
+Commander Marshall Lawson
+Jonathan Cold
+Harlan Banks
+Travis Hunter
+William Lansing
+Professor Robert Burns
+Sasha Petrosevitch
+Frank Glass
+Orin Boyd
+Lt. Colonel Austin Travis
+Forrest Taft
+Casey Ryback
+Detective Gino Felino
+Mason Storm
+General Hugh McKraken
+Chief Benjamin Benson
+Freddie Wiseman
+Dr. Artimus Snodgrass
+General Skyler
+Adam Beaudreaux
+Billy Smith
+Hurricane
+Colonel Carl Brewster
+Kyle Western
+Sgt. Jericho Jackson
+Action Jackson
+Cullen Monroe
+Lieutenant Harry Braker
+Sundog
+Dreamer Tatum
+Bateman Hooks
+Apollo Creed
+Jack Hopper
+Yarbro
+Hambone
+Bad Sam
+Clint Armstrong
+Not Hasselhoff
+Little G
+JD Gold
+Strom
+Leland Duvall
+Warden Pitt
+Joe Joiner
+Huck Finney
+Lt. Col. 'Mac' Miller
+Jack Saxon
+Arklon
+Jack Maxwell
+Van Vandameer
+Victor Lundgren
+Alriss Ryder
+Di Nardo
+Carpenter
+John Luger
+Sam Striker
+Capt. Alvin Luther Regency
+Wilson Mahood
+Jimmy Jo Walker
+Lieutenant Byrd
+Stoney Cooper
+Reddog
+Ramrod
+Kimbo Slice
+// ===========================
+// World War II names
+// ===========================
+Boy
+Gung Ho
+Mincer
+Major Pain
+Jonny Rambone
+Dominator
+Noogie
+Cruton
+Heljay
+Mongrel
+Private Brown
+Brown Steel
+Doctor Deathwish
+Stainmaster B
+Kippy
+Gyngemaster2000
+Helmut
+SGT CAPPA
+Saboy
+Chipee McSpray
+Himdar
+Vedro
+Icexo
+Tahlkora
+Bolund
+Ellanil
+Galul
+Mindelos
+Ostmor
+Sagel
+Thalath
+Dharmesh
+Aegarond
+Havo
+Jarno
+Leiruth
+Edoli
+Edwig
+Faden
+Skorgan
+Walter
+Fred
+Morgan
+Lawrence
+Richard
+Michael
+Brad
+George
+Anton
+Monty
+Bean
+Sean
+Backfire
+Halfwit
+Halfbaked
+Fullmonty
+Nohope
+Hitnrun
+Missnrun
+Oysterhead
+Fullthrottle
+NoAmmo
+Bullseye
+Aimless
+Blackadder
+Newbie
+Cledus
+Chimichanga
+Razor
+Tanz
+Vic
+Malin
+Thor
+Grog
+Drago
+Stinger
+Tarnok
+Wens
+Brohn
+Ivor
+Gordac
+Bortack
+Morgriff
+Kole
+Garbok
+Korv
+Vokur
+Gali
+Beelz
+CraigChrist
+WhittlinMan
+SpecialEd
+Flint
+Argo
+Milius
+Vera
+Merki
+Tarnen
+Royen
+Kaolin
+Nandet
+Nundak
+Ryver
+Mungri
+Chan
+Amadi
+Zarna
+PillowPants
+ListerFiend
+Ilikechocmilk
+Andromeed
+Cybr
+Applee
+uzayTron
+[Corrus]
+[Mee2]
+GreZZer
+Drillbit
+Ant__Dog
+Si
+Tille-Teh-Black
+itiXOID
+Blythe
+**Viander**
+wysyyy
+hozef-8
+ActioN-ReactioN
+VeY
+Dolin
+Vanoss
+Imentu
+T_bon
+cook did it
+Panther.Killian
+Chess
+Dragoooon
+Hammerhead
+Bright GhOst
+CowChop
+Bob Ross
+Nibbler
+Private Ryan
+GhOstBl4de
+_*NiXXy*_
+_*PixxY*_
+D3c3ptiv3 Jo3
+Merry Christmas
+Merry Yeetus
+NinjaMantis
+SteamPug
+TheWay
+Scary_Kitty
+Mr.Badger
+Cannon Balls Of Steel
+_Gholem_
+_The Medic_
+VenoM
+Broz
+Himself
+The Only
+Way Of The
+_GLiCH
+Hecker
+ParaDox
+Two Four Eight
+Bilbo T-Bagger
+PewDiePie
+Jinx
+JohnShnowden
+Heckin Heck
+Why Me?
+Why are we here?
+Where's Mark Hunt?
+Hell-oKitteh
+Slice
+BroFist
+Bad JuJu
+Return of the Byeah
+Po-Tay-Toe
+Lemmie
+Wreckage
+Butter Jelly
+tatu
+Major Major
+Digz
+Figgz
+Eggcecutioner
+MoreEggcellent
+C-Lion
+attractiveCow
+Grimm
+D is for Digger!
+Professor Jones
+{itzChamp}
+Sigil
+Willitz**
+Chickenn...!
+Evo89
+John Romero
+=WhiteBeard=
+CitizenKane
+chipp_
+^^ChoppY^^
+Dr.Jay
+Fexel
+FXguy
+Teabag
+Gigavoltz
+gogman
+GuN
+JC Denton
+deUSvauLT
+exBEE
+JCe
+Joce
+Marku
+Pyro Yetti
+SergeantBuck
+2DCitizen
+Amu
+BVe
+BigMack
+doc
+Doctor Doom
+FUNKANIK
+GreetingzGentlemen
+Jarvis
+kuri
+Kor
+Kermit D Frog
+Jazz
+MannY
+Hellhound
+ApeM
+~Shadowfax~
+Socks
+Spocket
+Spar
+// ===========================
+// Mortal Kombat names
+// ===========================
+Johnny Cage
+Kano
+Liu Kang
+Raiden
+Reptile
+Scorpion
+Shang Tsung
+Sonya Blade
+Sub-Zero
+Baraka
+Jade
+Jax
+Kintaro
+Kitana
+Kung Lao
+Mileena
+Noob Saibot
+Shao Kahn
+Smoke
+Chameleon
+Cyrax
+Ermac
+Kabal
+Khameleon
+Motaro
+Nightwolf
+Rain
+Sektor
+Sheeva
+Sindel
+Stryker
+Fujin
+Quan Chi
+Sareena
+Shinnok
+Jarek
+Kai
+Meat
+Reiko
+Tanya
+Tremor
+Blaze
+Bo' Rai Cho
+Drahmin
+Frost
+Hsu Hao
+Kenshi
+Li Mei
+Mavado
+Mokap
+Moloch
+Nitara
+Ashrah
+Dairou
+Darrius
+Havik
+Hotaru
+Kira
+Kobra
+Onaga
+Shujinko
+Daegon
+Taven
+Dark Kahn
+Skarlet
+Cassie Cage
+D'Vorah
+Erron Black
+Ferra/Torr
+Jacqui Briggs
+Kotal Kahn
+Kung Jin
+Takeda Takahashi
+Triborg
+Cetrion
+Geras
+Kollector
+Kronika
+Belokk
+// ===========================
+// Misc names
+// ===========================
+AqtionWoman
+AqtionLLama
+// ===========================
+// Diablo2 names
+// ===========================
+Bishibosh
+Bonebreak
+Coldcrow
+Rakanishu
+Treehead
+Griswold
+Countess
+Pitspawn Fouldog
+Flamespike
+Boneash
+Radament
+Bloodwitch
+Fangskin
+Beetleburst
+Leatherarm
+Coldworm
+Summoner
+Kaa
+Smithy
+Witch Doctor
+Stormtree
+Sarina
+Icehawk
+Ismail
+Geleb
+Bremm
+Toorc
+Wyand
+Endugu
+Maffer
+Death
+Tormentor
+Taintbreeder
+Riftwraith
+Infector of Souls
+Lord De Seis
+Vizier
+Cow King
+Corpsefire
+Feature Creep
+Siege
+Barbarian
+Axe Dweller
+Bonesaw Breaker
+Dac Farren
+Megaflow Rectifier
+Eyeback
+Threash
+Pindleskin
+Snapchip Shatter
+Anodized
+Vinvear Molech
+Tooth Sayer
+Magma Torquer
+Blaze Ripper
+Frozenstein
+Nihlathak
