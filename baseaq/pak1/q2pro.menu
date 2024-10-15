@@ -107,13 +107,13 @@ begin credits
     action "For continuing the legacy: The TNG Team" ""
     action "For awesome game modes: The AQDT" ""
     blank
-    action "For Q2Pro: Skuller (https://skuller.net/q2pro)" ""
-    action "For TNG support: Raptor007, hifi and Reki" ""
+    action "For Q2Pro: Skuller (https://github.com/skullernet/q2pro)" ""
+    action "For TNG support: Raptor007, hifi, Reki and ReKTeK" ""
     blank
-    action " Discord Mod Team" ""
-    action "bAron - darksaint - dmc - dox - FragBait" ""
+    action " AQ2World Team" ""
+    action "bAron - darksaint - dox - FragBait" ""
     action "KaniZ - keffo - matic - QuimBy - Rezet" ""
-    action "Royce - stan0x - TgT - vrol - ReKTeK" ""
+    action "Royce - TgT - vrol - ReKTeK" ""
     blank
     action "And you, for playing with us!" ""
 end
@@ -176,8 +176,7 @@ end
 begin dm_botmenu
     title "Deathmatch"
     strings "map" nextserver $com_maplist
-    range "bot skill" ltk_skill 0 10 1
-    range "bot count" am_botcount 0 10 1
+    range "bot count" bot_playercount 0 10 1
     blank
     toggle "spawn with all weapons" allweapon
     toggle "spawn with all items" allitem
@@ -189,15 +188,14 @@ begin dm_botmenu
     blank
     action " Additional Game Settings " pushmenu gameflags
     blank
-    action --align " Play" "forcemenuoff;set ltk_loadbots 1;set am 2; set maxclients 16; set teamplay 0; set dm_choose 0;set dm_shield 30;set allweapon $allweapon;set allitem $allitem; map $nextserver force"
+    action --align " Play" "forcemenuoff;set bot_enable 1; set maxclients 16; set teamplay 0; set dm_choose $dm_choose;set dm_shield $dm_shield;set allweapon $allweapon;set allitem $allitem; map $nextserver force"
 end
 
 begin team_botmenu
     title "Team Games"
     strings "map" nextserver $com_maplist
-    values --status "Team Deathmatch or Round-based Teamplay" "TeamDM or Teamplay" teamdm tdm teamplay
-    range "bot skill" ltk_skill 0 10 1
-    range "bot count" am_botcount 0 10 1
+    values --status "Team Deathmatch or Round-based Teamplay" "TeamDM or Teamplay" teammode tdm teamplay
+    range "bot count" bot_playercount 0 10 1
     blank
     toggle "spawn with all weapons" allweapon
     toggle "spawn with all items" allitem
@@ -206,7 +204,7 @@ begin team_botmenu
     blank
     action " Additional Game Settings " pushmenu gameflags
     blank
-    action --align " Play" "forcemenuoff;set ltk_loadbots 1;set am 2; set maxclients 16;if $teammode == 1 then teamdm 0 else teamdm 1;set allweapon $allweapon;set allitem $allitem; map $nextserver force"
+    action --align " Play" "forcemenuoff;set bot_enable 1; set maxclients 16;if $teammode == 1 then exec tdm_bots.cfg else exec tp_bots.cfg;set allweapon $allweapon;set allitem $allitem; map $nextserver force"
 end
 
 begin gameflags
