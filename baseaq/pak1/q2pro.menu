@@ -287,7 +287,7 @@ begin a_video
     pairs "celshading" gl_celshading none 0 basic 1 strong 2 full 3
     blank
     toggle "screen warping" gl_waterwarp
-    toggle --status "changes how gl_modulate, gl_brightness and intensity parameters work to prevent §washed out colors" "GLSL Rendering" gl_shaders legacy shaders
+    toggle --status "changes how gl_modulate, gl_brightness and intensity parameters work to prevent washed out colors" "GLSL Rendering" gl_shaders legacy shaders
     toggle --status "Toggles color adjustments when events trigger screen flashes" Polyblend gl_polyblend
     toggle "hardware gamma" vid_hwgamma
     blank
