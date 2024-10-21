@@ -386,6 +386,7 @@ begin mouse
     field --numeric --width 8 "6x zoom sensitivity" cl_zoom_6x
     blank
     action "choose crosshair" "pushmenu chsetup"
+    toggle "draw normal crosshair when zoomed in" ch_hide_while_zoomed
     blank
     range "crosshair red" ch_red 0.0 1.0
     range "crosshair green" ch_green 0.0 1.0
