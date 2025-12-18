@@ -45,14 +45,14 @@ jobs:
         working-directory: ${{ env.DIST_DIR }}
         run: |
           for DOWNLOADLINK in $(cat scripts/map_packs); do
-            wget -qnv ${DOWNLOADLINK} -P baseaq/
+            wget ${DOWNLOADLINK} -P baseaq/
           done
 
       - name: Copy remote files into action
         working-directory: ${{ env.DIST_DIR}}
         run: |
           for DOWNLOADLINK in $(cat scripts/s3); do
-            wget -qnv ${DOWNLOADLINK}
+            wget ${DOWNLOADLINK}
           done
 
       - name: Extract bots + navmesh files
