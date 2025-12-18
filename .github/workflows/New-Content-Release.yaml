@@ -44,12 +44,12 @@ jobs:
       - name: Copy remote pkz's into baseaq
         working-directory: ${{ env.DIST_DIR }}
         run: |
-          for DOWNLOADLINK in $(cat scripts/map_packs); do wget ${DOWNLOADLINK} -P baseaq/; done
+          cd baseaq/ && wget https://gameassets.aq2world.com/action/2023_25thAnniversary_mapjam.pkz
 
       - name: Copy remote files into action
         working-directory: ${{ env.DIST_DIR}}
         run: |
-          for DOWNLOADLINK in $(cat scripts/s3); do wget ${DOWNLOADLINK}; done
+          cd action/ && wget http://gameassets.aqtiongame.com/action/bots/navmesh.zip
 
       - name: Extract bots + navmesh files
         working-directory: ${{ env.DIST_DIR}}
