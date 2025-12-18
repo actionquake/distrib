@@ -50,16 +50,12 @@ jobs:
       - name: Copy remote pkz's into baseaq
         working-directory: ${{ env.DIST_DIR }}
         run: |
-          for DOWNLOADLINK in $(cat scripts/map_packs); do
-            wget -qnv ${DOWNLOADLINK} -P baseaq/
-          done
+          for DOWNLOADLINK in $(cat scripts/map_packs); do wget -qnv --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64)" ${DOWNLOADLINK} -P baseaq/; done
 
       - name: Copy remote files into action
         working-directory: ${{ env.DIST_DIR}}
         run: |
-          for DOWNLOADLINK in $(cat scripts/s3); do
-            wget -qnv ${DOWNLOADLINK}
-          done
+          for DOWNLOADLINK in $(cat scripts/s3); do wget --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64)" -qnv ${DOWNLOADLINK}; done
 
       - name: Extract bots + navmesh files
         working-directory: ${{ env.DIST_DIR}}
