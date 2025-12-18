@@ -211,10 +211,10 @@ begin gameflags
     title "Game Flags"
     toggle --status "Toggles falling damage" "falling damage" dmflags ~3
     toggle --status "Forces players to respawn" "force respawn" dmflags 10
-    toggle --status "Infite ammo" "infinite ammo" dmflags 13
+    toggle --status "Infinite ammo" "infinite ammo" dmflags 13
     toggle --status "Players with same skin are teamed up" "Teams by skin" dmflags 6
     toggle --status "Players with same model are teamed up" "Teams by model" dmflags 7
-    toggle --status "Immediatly respawn when dying" "Force respawn" dmflags 10
+    toggle --status "Immediately respawn when dying" "Force respawn" dmflags 10
     toggle --status "Enable/disable weapon dropping" "Weapons stay after dropping" dmflags 2
 end
 
